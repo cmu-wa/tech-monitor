@@ -1,0 +1,41 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "news"
+    label: "الأخبار"
+    folder: "content/news"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "الترتيب", name: "order", widget: "number", default: 0}
+      - {label: "عنوان الخبر (عربي)", name: "title_ar", widget: "string"}
+      - {label: "عنوان الخبر (English)", name: "title_en", widget: "string"}
+      - {label: "مقتطف الخبر (عربي)", name: "excerpt_ar", widget: "text"}
+      - {label: "مقتطف الخبر (English)", name: "excerpt_en", widget: "text"}
+      - {label: "المحتوى الكامل (عربي)", name: "content_ar", widget: "markdown"}
+      - {label: "المحتوى الكامل (English)", name: "content_en", widget: "markdown"}
+      - {label: "رابط الصورة", name: "image", widget: "image"}
+      - label: "التصنيف"
+        name: "category"
+        widget: "select"
+        options:
+          - {label: "الأمن السيبراني", value: "cyber"}
+          - {label: "الاستخبارات الرقمية", value: "intel"}
+          - {label: "التقنية العالمية", value: "tech"}
+      - label: "مستوى التهديد (Threat Level)"
+        name: "threat_level"
+        widget: "select"
+        options:
+          - {label: "منخفض", value: "low"}
+          - {label: "متوسط", value: "medium"}
+          - {label: "مرتفع", value: "high"}
+          - {label: "حرج", value: "critical"}
+      - {label: "المصدر (عربي)", name: "source_ar", widget: "string", default: "الهكر الهزبري"}
+      - {label: "المصدر (English)", name: "source_en", widget: "string", default: "Al-Hazbri Hacker"}
+      - {label: "تاريخ النشر", name: "date", widget: "datetime"}
+      - {label: "خبر عاجل (Featured)", name: "featured", widget: "boolean", default: false}
