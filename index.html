@@ -5,45 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الرصد التقني - Tech Monitor</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        onyx: { 900:'#060a12', 800:'#0a1020', 700:'#0f1a2e', 600:'#152238', 500:'#1c2d48' },
-                        emerald: { 400:'#34d399', 500:'#10b981', 600:'#059669', 700:'#047857' }
-                    },
-                    fontFamily: { cairo:['Cairo','sans-serif'], inter:['Inter','sans-serif'] }
-                }
-            }
-        }
+        tailwind.config={theme:{extend:{colors:{onyx:{900:'#060a12',800:'#0a1020',700:'#0f1a2e',600:'#152238',500:'#1c2d48'},emerald:{400:'#34d399',500:'#10b981',600:'#059669',700:'#047857'}},fontFamily:{cairo:['Cairo','sans-serif'],inter:['Inter','sans-serif']}}}}
     </script>
     <style>
-        :root {
-            --bg:#060a12; --bg2:#0a1020; --bg3:#0f1a2e; --bg4:#152238;
-            --accent:#10b981; --accent-light:#34d399; --accent-glow:rgba(16,185,129,0.15);
-            --text:#e2e8f0; --text-muted:#64748b; --border:#1e293b;
-            --danger:#ef4444; --warn:#f59e0b; --info:#3b82f6;
-        }
+        :root{--bg:#060a12;--bg2:#0a1020;--bg3:#0f1a2e;--bg4:#152238;--accent:#10b981;--accent-light:#34d399;--accent-glow:rgba(16,185,129,0.15);--text:#e2e8f0;--text-muted:#64748b;--border:#1e293b;--danger:#ef4444;--warn:#f59e0b;}
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
         body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
         [dir="ltr"] body{font-family:'Inter',sans-serif;}
         .bg-grid{background-image:linear-gradient(rgba(16,185,129,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,0.03) 1px,transparent 1px);background-size:60px 60px;}
-        .bg-glow{position:fixed;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(16,185,129,0.08),transparent 70%);pointer-events:none;z-index:0;animation:glowFloat 20s ease-in-out infinite;}
-        .bg-glow-2{position:fixed;bottom:-200px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.05),transparent 70%);pointer-events:none;z-index:0;animation:glowFloat 25s ease-in-out infinite reverse;}
-        @keyframes glowFloat{0%,100%{transform:translate(0,0);}50%{transform:translate(80px,60px);}}
+        .bg-glow{position:fixed;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(16,185,129,0.08),transparent 70%);pointer-events:none;z-index:0;animation:gf 20s ease-in-out infinite;}
+        .bg-glow-2{position:fixed;bottom:-200px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.05),transparent 70%);pointer-events:none;z-index:0;animation:gf 25s ease-in-out infinite reverse;}
+        @keyframes gf{0%,100%{transform:translate(0,0);}50%{transform:translate(80px,60px);}}
         .top-bar{background:linear-gradient(90deg,var(--accent),#059669);color:#fff;font-size:0.8rem;font-weight:600;padding:6px 0;overflow:hidden;}
         .ticker-wrap{overflow:hidden;white-space:nowrap;}
-        .ticker-content{display:inline-block;animation:ticker 40s linear infinite;}
-        @keyframes ticker{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
-        [dir="ltr"] .ticker-content{animation:tickerLTR 40s linear infinite;}
-        @keyframes tickerLTR{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+        .ticker-content{display:inline-block;animation:tk 40s linear infinite;}
+        @keyframes tk{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+        [dir="ltr"] .ticker-content{animation:tkl 40s linear infinite;}
+        @keyframes tkl{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
         .navbar{background:rgba(10,16,32,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;transition:all 0.3s ease;}
         .navbar.scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.5);}
-        .logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--accent),#047857);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px var(--accent-glow);position:relative;overflow:hidden;}
+        .logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--accent),#047857);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px var(--accent-glow);overflow:hidden;position:relative;}
         .logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.15));}
         .cat-btn{padding:8px 18px;border-radius:8px;font-size:0.85rem;font-weight:600;border:1px solid transparent;cursor:pointer;transition:all 0.3s ease;background:transparent;color:var(--text-muted);}
         .cat-btn:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-glow);}
@@ -54,33 +39,29 @@
         .hero-slide img{width:100%;height:100%;object-fit:cover;}
         .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,10,18,0.98) 0%,rgba(6,10,18,0.6) 40%,rgba(6,10,18,0.3) 100%);}
         .hero-content{position:absolute;bottom:0;left:0;right:0;padding:40px;z-index:2;}
-        .breaking-badge{display:inline-flex;align-items:center;gap:8px;background:var(--danger);color:#fff;padding:6px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;animation:breakPulse 2s ease-in-out infinite;}
-        @keyframes breakPulse{0%,100%{opacity:1;}50%{opacity:0.7;}}
-        .breaking-dot{width:8px;height:8px;background:#fff;border-radius:50%;animation:dotBlink 1s infinite;}
-        @keyframes dotBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+        .breaking-badge{display:inline-flex;align-items:center;gap:8px;background:var(--danger);color:#fff;padding:6px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;animation:bp 2s ease-in-out infinite;}
+        @keyframes bp{0%,100%{opacity:1;}50%{opacity:0.7;}}
+        .breaking-dot{width:8px;height:8px;background:#fff;border-radius:50%;animation:db 1s infinite;}
+        @keyframes db{0%,100%{opacity:1;}50%{opacity:0;}}
         .hero-dots{display:flex;gap:8px;}
         .hero-dot{width:32px;height:4px;border-radius:2px;background:rgba(255,255,255,0.3);cursor:pointer;transition:all 0.4s ease;}
         .hero-dot.active{background:var(--accent);width:48px;}
-        .news-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;}
+        .news-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);}
         .news-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 30px var(--accent-glow);}
         .news-card-img{position:relative;overflow:hidden;height:200px;}
         .news-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
         .news-card:hover .news-card-img img{transform:scale(1.08);}
         .news-card-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,var(--bg2),transparent);}
         .threat-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:700;}
-        .threat-low{background:rgba(16,185,129,0.15);color:#34d399;}
-        .threat-medium{background:rgba(245,158,11,0.15);color:#fbbf24;}
-        .threat-high{background:rgba(239,68,68,0.15);color:#f87171;}
-        .threat-critical{background:rgba(239,68,68,0.25);color:#ef4444;animation:critPulse 2s infinite;}
-        @keyframes critPulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.3);}50%{box-shadow:0 0 10px 3px rgba(239,68,68,0.2);}}
+        .threat-low{background:rgba(16,185,129,0.15);color:#34d399;}.threat-medium{background:rgba(245,158,11,0.15);color:#fbbf24;}.threat-high{background:rgba(239,68,68,0.15);color:#f87171;}.threat-critical{background:rgba(239,68,68,0.25);color:#ef4444;animation:cp 2s infinite;}
+        @keyframes cp{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.3);}50%{box-shadow:0 0 10px 3px rgba(239,68,68,0.2);}}
         .cat-label{display:inline-block;padding:2px 10px;border-radius:4px;font-size:0.7rem;font-weight:700;background:var(--accent-glow);color:var(--accent);}
+        .source-label{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:4px;font-size:0.65rem;font-weight:600;background:rgba(59,130,246,0.1);color:#60a5fa;}
         .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.4s ease;padding:20px;}
         .modal-overlay.active{opacity:1;visibility:visible;}
         .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:18px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(40px) scale(0.95);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);}
         .modal-overlay.active .modal-box{transform:translateY(0) scale(1);}
-        .modal-box::-webkit-scrollbar{width:6px;}
-        .modal-box::-webkit-scrollbar-track{background:var(--bg);}
-        .modal-box::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+        .modal-box::-webkit-scrollbar{width:6px;}.modal-box::-webkit-scrollbar-track{background:var(--bg);}.modal-box::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
         .lang-toggle{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
         .lang-btn{padding:6px 14px;font-size:0.75rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;border:none;background:transparent;color:var(--text-muted);}
         .lang-btn.active{background:var(--accent);color:#fff;}
@@ -92,14 +73,13 @@
         .back-to-top{position:fixed;bottom:30px;right:30px;z-index:150;width:48px;height:48px;border-radius:12px;background:var(--accent);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(20px);transition:all 0.3s ease;box-shadow:0 4px 20px var(--accent-glow);}
         [dir="ltr"] .back-to-top{right:auto;left:30px;}
         .back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0);}
-        .back-to-top:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(16,185,129,0.3);}
+        .back-to-top:hover{transform:translateY(-3px);}
         .mobile-menu{position:fixed;inset:0;background:rgba(6,10,18,0.98);z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;opacity:0;visibility:hidden;transition:all 0.4s ease;}
         .mobile-menu.active{opacity:1;visibility:visible;}
         .card-meta{display:flex;align-items:center;gap:12px;font-size:0.75rem;color:var(--text-muted);flex-wrap:wrap;}
-        .scan-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:scanDown 4s linear infinite;opacity:0.3;}
-        @keyframes scanDown{0%{top:0;}100%{top:100%;}}
+        .scan-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:sl 4s linear infinite;opacity:0.3;}
+        @keyframes sl{0%{top:0;}100%{top:100%;}}
         .data-status{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:60px 20px;text-align:center;}
-        .data-status i{font-size:3rem;color:var(--text-muted);}
         .data-status .spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
         @keyframes spin{to{transform:rotate(360deg);}}
         .retry-btn{padding:10px 24px;border-radius:10px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-weight:700;font-family:inherit;font-size:0.9rem;transition:all 0.2s ease;}
@@ -111,15 +91,14 @@
 </head>
 <body class="bg-grid">
     <div class="loading-bar" id="loadingBar" style="width:0%"></div>
-    <div class="bg-glow"></div>
-    <div class="bg-glow-2"></div>
+    <div class="bg-glow"></div><div class="bg-glow-2"></div>
 
     <div class="top-bar"><div class="flex items-center gap-3 px-4"><span class="breaking-badge" style="animation:none;background:rgba(255,255,255,0.2);padding:2px 10px;font-size:0.7rem;"><i class="fas fa-bolt"></i></span><div class="ticker-wrap flex-1"><div class="ticker-content" id="tickerContent"></div></div></div></div>
 
     <nav class="navbar" id="navbar">
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 no-underline">
-                <div class="logo-icon"><svg width="26" height="26" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" stroke="white" stroke-width="3" fill="none"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5" fill="none"/><circle cx="50" cy="50" r="10" fill="white"/><path d="M12 50 L0 50" stroke="white" stroke-width="2.5"/><path d="M88 50 L100 50" stroke="white" stroke-width="2.5"/><path d="M50 12 L50 0" stroke="white" stroke-width="2.5"/><path d="M50 88 L50 100" stroke="white" stroke-width="2.5"/><polygon points="50,6 53,14 47,14" fill="white" opacity="0.6"/></svg></div>
+                <div class="logo-icon"><svg width="26" height="26" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" stroke="white" stroke-width="3" fill="none"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5" fill="none"/><circle cx="50" cy="50" r="10" fill="white"/><path d="M12 50 L0 50" stroke="white" stroke-width="2.5"/><path d="M88 50 L100 50" stroke="white" stroke-width="2.5"/><path d="M50 12 L50 0" stroke="white" stroke-width="2.5"/><path d="M50 88 L50 100" stroke="white" stroke-width="2.5"/></svg></div>
                 <div><h1 class="text-lg font-black leading-tight" style="color:var(--accent)" data-i18n="siteName">الرصد التقني</h1><span class="text-xs" style="color:var(--text-muted)" data-i18n="siteAuthor">بوابة الهكر الهزبري</span></div>
             </a>
             <div class="hidden md:flex items-center gap-6">
@@ -136,7 +115,7 @@
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
-        <button onclick="toggleMobile()" style="position:absolute;top:20px;right:20px;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer;" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+        <button onclick="toggleMobile()" style="position:absolute;top:20px;right:20px;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer;"><i class="fas fa-times"></i></button>
         <a href="#hero" onclick="toggleMobile()" class="text-2xl font-bold hover:text-emerald-400 transition no-underline" style="color:var(--text)" data-i18n="navHome">الرئيسية</a>
         <a href="#news" onclick="toggleMobile()" class="text-2xl font-bold hover:text-emerald-400 transition no-underline" style="color:var(--text)" data-i18n="navNews">الأخبار</a>
         <a href="#about" onclick="toggleMobile()" class="text-2xl font-bold hover:text-emerald-400 transition no-underline" style="color:var(--text)" data-i18n="navAbout">عن الموقع</a>
@@ -169,8 +148,8 @@
                     </div>
                 </div>
                 <div class="relative">
-                    <div class="rounded-2xl overflow-hidden" style="border:1px solid var(--border);"><img src="https://picsum.photos/seed/cyberops/600/400.jpg" alt="Cyber Operations" class="w-full h-80 object-cover" loading="lazy"></div>
-                    <div class="absolute -bottom-4 -right-4 p-4 rounded-xl" style="background:var(--bg2);border:1px solid var(--accent);box-shadow:0 0 30px var(--accent-glow);"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-emerald-500" style="animation:dotBlink 1s infinite;"></div><span class="text-sm font-bold" data-i18n="liveStatus">رصد مباشر</span></div></div>
+                    <div class="rounded-2xl overflow-hidden" style="border:1px solid var(--border);"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop" alt="Cyber Operations" class="w-full h-80 object-cover" loading="lazy"></div>
+                    <div class="absolute -bottom-4 -right-4 p-4 rounded-xl" style="background:var(--bg2);border:1px solid var(--accent);box-shadow:0 0 30px var(--accent-glow);"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-emerald-500" style="animation:db 1s infinite;"></div><span class="text-sm font-bold" data-i18n="liveStatus">رصد مباشر</span></div></div>
                 </div>
             </div>
         </section>
@@ -190,195 +169,195 @@
     <div class="modal-overlay" id="newsModal" onclick="if(event.target===this)closeModal()"><div class="modal-box" role="dialog" aria-modal="true"><div id="modalContent"></div></div></div>
     <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})" aria-label="العودة للأعلى"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- ⭐ تحميل المنطق المشترك + إعدادات GitHub -->
     <script src="github-logic.js"></script>
     <script>
-    /* ======================================================
-       ⭐ إعدادات GitHub — غيّرها إلى بياناتك الحقيقية
-    ====================================================== */
-    const GITHUB_CONFIG = {
-        /* اسم المستودع بصيغة: اسمالمستخدم/اسمالمستودع */
-        repo: 'hazpry/hazpry-news',
-        /* مسار ملف البيانات داخل المستودع */
-        path: 'data.json'
-    };
+    /* ⭐ غيّر هذه القيم إلى بياناتك */
+    const GITHUB_CONFIG = { repo: 'hazpry/hazpry-news', path: 'data.json' };
 
-    /* ======================================================
-       البيانات الافتراضية (بذرة)
-    ====================================================== */
-    const DEFAULT_NEWS = [
-        {id:1,title_ar:"كشف شبكة تجسس دولية تستهدف البنية التحتية للطاقة في الشرق الأوسط",title_en:"International Spy Network Targeting Energy Infrastructure in the Middle East Uncovered",excerpt_ar:"كشفت تقارير استخبارية عن شبكة متقدمة تعمل على اختراق أنظمة التحكم الصناعي SCADA التابعة لمحطات الطاقة في عدة دول بالمنطقة.",excerpt_en:"Intelligence reports revealed an advanced network infiltrating SCADA industrial control systems at power stations across multiple regional countries.",content_ar:"كشفت تقارير استخبارية متقدمة عن شبكة تجسس دولية تعمل بشكل منهجي على اختراق البنية التحتية للطاقة في الشرق الأوسط. التحقيقات الأولية تشير إلى أن المجموعة تستخدم تقنيات اختراق متقدمة تستهدف أنظمة التحكم الصناعي SCADA في محطات توليد الطاقة الكهربائية ومحطات تحلية المياه.\n\nالتحليل التقني أظهر أن المهاجمين استخدموا ثغرات Zero-Day غير مكتشفة في بروتوكولات الاتصال الصناعي، مما مكنهم من الوصول إلى أنظمة التحكم دون تفعيل أنظمة الإنذار المعتادة.\n\nتوصية الأمن السيبراني: يجب على جميع المنشآت الحيوية تحديث بروتوكولات الحماية وتبني نموذج الأمان الصفري بشكل عاجل.",content_en:"Advanced intelligence reports have uncovered an international spy network systematically targeting energy infrastructure across the Middle East. Preliminary investigations indicate the group employs sophisticated intrusion techniques targeting SCADA industrial control systems.\n\nTechnical analysis revealed the attackers utilized undocumented Zero-Day vulnerabilities in industrial communication protocols, enabling access to control systems without triggering conventional alert systems.\n\nCybersecurity Recommendation: All critical facilities must urgently update protection protocols and adopt a Zero Trust security model.",image:"https://picsum.photos/seed/cybergrid/900/500.jpg",category:"cyber",threat_level:"critical",source_ar:"وحدة الاستخبارات السيبرانية",source_en:"Cyber Intelligence Unit",date:"2025-01-15",featured:true},
-        {id:2,title_ar:"تقنية جديدة لتجاوز أنظمة المراقبة بالذكاء الاصطناعي تعيد تعريف الخصوصية الرقمية",title_en:"New AI-Powered Surveillance Bypass Technology Redefines Digital Privacy",excerpt_ar:"طور باحثون مستقلون أداة مفتوحة المصدر تستخدم نماذج تعلم عميق لإرباك أنظمة التعرف على الوجوه بنسبة نجاح تتجاوز 94%.",excerpt_en:"Independent researchers developed an open-source tool using deep learning models to confuse facial recognition systems with a success rate exceeding 94%.",content_ar:"في تطوير مثير للجدل، أعلن فريق من الباحثين الأمنيين المستقلين عن تطوير أداة مفتوحة المصدر قادرة على التلاعب بالنماذج البصرية لأنظمة المراقبة. الأداة التي سُميت 'ShadowMask' تستخدم تقنيات الخصومة لتوليد أنماط بصرية غير مرئية للعين البشرية لكنها تُربك خوارزميات التعرف على الوجوه.\n\nالاختبارات الميدانية أظهرت فعالية بنسبة 94.7% ضد أنظمة المراقبة الصينية والروسية والأمريكية.",content_en:"A team of independent security researchers announced 'ShadowMask', an open-source tool using Adversarial ML techniques to generate visual patterns invisible to the human eye but designed to confuse facial recognition algorithms.\n\nField testing showed 94.7% effectiveness against Chinese, Russian, and American surveillance systems.",image:"https://picsum.photos/seed/aiprivacy/900/500.jpg",category:"intel",threat_level:"high",source_ar:"مختبر الأبحاث السيبرانية",source_en:"Cyber Research Lab",date:"2025-01-12",featured:true},
-        {id:3,title_ar:"تحذير عاجل: ثغرة حرجة في معالجات Intel تسمح بتنفيذ كود عن بُعد",title_en:"Urgent Warning: Critical Intel Processor Vulnerability Enables Remote Code Execution",excerpt_ar:"اكتشف باحثون ثغرة في معالجات Intel من الجيل الثالث عشر فما فوق تسمح بتنفيذ كود خبيث على مستوى النواة.",excerpt_en:"Researchers discovered a vulnerability in 13th gen+ Intel processors allowing malicious code execution at kernel level.",content_ar:"أصدرت فرق الاستجابة للطوارئ السيبرانية تحذيراً عاجلاً بشأن ثغرة 'Downfall-X' في معالجات Intel التي تستغل آلية التنفيذ التخميني لاستخراج بيانات حساسة.\n\nIntel أصدرت تحديث مايكروكود يتضمن إصلاحاً جزئياً مع انخفاض أداء 5-15%.",content_en:"Cyber emergency teams issued an urgent warning about 'Downfall-X' exploiting speculative execution in Intel processors.\n\nIntel released a microcode update with a partial fix causing 5-15% performance degradation.",image:"https://picsum.photos/seed/intelchip/900/500.jpg",category:"tech",threat_level:"critical",source_ar:"فريق الاستجابة السريعة CERT",source_en:"CERT Rapid Response Team",date:"2025-01-10",featured:false},
-        {id:4,title_ar:"حملة 'الشبح الرقمي': اختراق منظومتي اتصالات في أوروبا الشرقية",title_en:"'Digital Phantom' Campaign: Two European Communication Systems Breached",excerpt_ar:"نسبت حملة إلكترونية واسعة إلى جهة فاعلة حكومية نجحت في اختراق منظومتي اتصالات رئيسيتين لمدة 8 أشهر.",excerpt_en:"A large-scale cyber campaign attributed to a state actor breached two major communication systems for 8 months undetected.",content_ar:"كشفت تحقيقات مشتركة عن حملة 'الشبح الرقمي' استهدفت منظومتي اتصالات في أوروبا الشرقية لمدة 8 أشهر دون اكتشاف باستخدام تقنيات تخفي متقدمة.",content_en:"Joint investigations uncovered 'Digital Phantom' targeting communication systems in Eastern Europe for 8 months undetected using advanced stealth.",image:"https://picsum.photos/seed/digitalphantom/900/500.jpg",category:"intel",threat_level:"high",source_ar:"التحالف الأمني السيبراني الأوروبي",source_en:"European Cyber Security Alliance",date:"2025-01-08",featured:true},
-        {id:5,title_ar:"نموذج جديد لحماية البنية التحتية الحيوية يعتمد على التشابك الكمي",title_en:"New Critical Infrastructure Protection Model Based on Quantum Entanglement",excerpt_ar:"باحثون يطرحون نموذجاً ثورياً 'Q-Shield' يستخدم التشابك الكمي اللاتواصلي لضمان أمان مطلق.",excerpt_en:"Researchers propose 'Q-Shield' using non-communicating quantum entanglement for absolute industrial network security.",content_ar:"طرح فريق من MIT نموذجاً يعتمد على التشابك الكمي اللاتواصلي لإنشاء قنوات اتصال يستحيل اعتراضها مع اكتشاف اختراق بنسبة 100% وزمن استجابة أقل من ملي ثانية.",content_en:"MIT team proposed a model using non-communicating quantum entanglement for interception-proof channels with 100% detection rate.",image:"https://picsum.photos/seed/quantumshield/900/500.jpg",category:"tech",threat_level:"low",source_ar:"معهد MIT للتقنيات المتقدمة",source_en:"MIT Advanced Technologies Institute",date:"2025-01-05",featured:false}
+    /* ⭐ مصادر RSS لأخبار سيبرانية حقيقية */
+    const RSS_FEEDS = [
+        { url:'https://feeds.feedburner.com/TheHackersNews', lang:'en', cat:'cyber', source:'The Hacker News' },
+        { url:'https://www.darkreading.com/rss.xml', lang:'en', cat:'cyber', source:'Dark Reading' },
+        { url:'https://krebsonsecurity.com/feed/', lang:'en', cat:'cyber', source:'Krebs on Security' },
+        { url:'https://feeds.arstechnica.com/arstechnica/security', lang:'en', cat:'tech', source:'Ars Technica' }
     ];
 
-    /* ======================================================
-       الترجمات
-    ====================================================== */
-    const TRANSLATIONS = {
-        ar:{siteName:"الرصد التقني",siteAuthor:"بوابة الهكر الهزبري",navHome:"الرئيسية",navNews:"الأخبار",navAbout:"عن الموقع",latestNews:"أحدث التقارير",latestNewsDesc:"تقارير استخبارية تقنية محللة وموثقة",allCats:"الكل",catCyber:"الأمن السيبراني",catIntel:"الاستخبارات الرقمية",catTech:"التقنية العالمية",breaking:"عاجل",readMore:"اقرأ المزيد",close:"إغلاق",source:"المصدر",date:"التاريخ",threatLevel:"مستوى التهديد",threatLow:"منخفض",threatMedium:"متوسط",threatHigh:"مرتفع",threatCritical:"حرج",noResults:"لا توجد نتائج لهذا التصنيف",aboutLabel:"من نحن",aboutTitle:"الرصد التقني\nعينك على العالم الرقمي",aboutDesc:"منصة استخبارية تقنية متخصصة في رصد وتحليل التهديدات السيبرانية المتقدمة.",statReports:"تقرير",statCountries:"دولة",statMonitor:"رصد",liveStatus:"رصد مباشر",footerDesc:"منصة استخبارية تقنية مستقلة. لا تنتمي لأي جهة حكومية أو مؤسسية.",footerLinks:"روابط سريعة",footerCategories:"التصنيفات",footerRights:"جميع الحقوق محفوظة",fullReport:"التقرير الكامل",securityClearance:"التصنيف الأمني",loadingData:"جاري تحميل البيانات...",loadError:"فشل تحميل البيانات",loadRetry:"إعادة المحاولة"},
-        en:{siteName:"Tech Monitor",siteAuthor:"By: Al-Hazbri Hacker",navHome:"Home",navNews:"News",navAbout:"About",latestNews:"Latest Reports",latestNewsDesc:"Analyzed and verified intelligence reports",allCats:"All",catCyber:"Cyber Security",catIntel:"Digital Intelligence",catTech:"Global Tech",breaking:"BREAKING",readMore:"Read More",close:"Close",source:"Source",date:"Date",threatLevel:"Threat Level",threatLow:"Low",threatMedium:"Medium",threatHigh:"High",threatCritical:"Critical",noResults:"No results found for this category",aboutLabel:"About Us",aboutTitle:"Tech Monitor\nYour Eye on the Digital World",aboutDesc:"A specialized intelligence platform for monitoring and analyzing advanced cyber threats.",statReports:"Reports",statCountries:"Countries",statMonitor:"Monitoring",liveStatus:"Live Monitoring",footerDesc:"An independent cyber intelligence platform. Not affiliated with any government entity.",footerLinks:"Quick Links",footerCategories:"Categories",footerRights:"All Rights Reserved",fullReport:"Full Report",securityClearance:"Security Clearance",loadingData:"Loading data...",loadError:"Failed to load data",loadRetry:"Retry"}
+    /* صور حقيقية لكل تصنيف */
+    const CAT_IMAGES = {
+        cyber: [
+            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&h=500&fit=crop'
+        ],
+        intel: [
+            'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?w=900&h=500&fit=crop'
+        ],
+        tech: [
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&h=500&fit=crop'
+        ]
     };
 
-    /* ======================================================
-       الحالة
-    ====================================================== */
-    let currentLang = localStorage.getItem('tm_lang') || 'ar';
-    let currentCategory = 'all';
-    let heroIndex = 0;
-    let heroInterval = null;
-    let newsData = [];
+    /* بيانات افتراضية */
+    const DEFAULT_NEWS = [];
 
-    /* ======================================================
-       التهيئة
-    ====================================================== */
-    async function init() {
+    /* ترجمات */
+    const I18N = {
+        ar:{siteName:"الرصد التقني",siteAuthor:"بوابة الهكر الهزبري",navHome:"الرئيسية",navNews:"الأخبار",navAbout:"عن الموقع",latestNews:"أحدث التقارير",latestNewsDesc:"تقارير استخبارية تقنية محللة وموثقة",allCats:"الكل",catCyber:"الأمن السيبراني",catIntel:"الاستخبارات الرقمية",catTech:"التقنية العالمية",breaking:"عاجل",readMore:"اقرأ المزيد",close:"إغلاق",source:"المصدر",date:"التاريخ",threatLow:"منخفض",threatMedium:"متوسط",threatHigh:"مرتفع",threatCritical:"حرج",noResults:"لا توجد نتائج",aboutLabel:"من نحن",aboutTitle:"الرصد التقني\nعينك على العالم الرقمي",aboutDesc:"منصة استخبارية تقنية متخصصة في رصد وتحليل التهديدات السيبرانية المتقدمة.",statReports:"تقرير",statCountries:"دولة",statMonitor:"رصد",liveStatus:"رصد مباشر",footerDesc:"منصة استخبارية تقنية مستقلة.",footerLinks:"روابط سريعة",footerCategories:"التصنيفات",footerRights:"جميع الحقوق محفوظة",fullReport:"التقرير الكامل",securityClearance:"التصنيف الأمني",loadingData:"جاري تحميل البيانات...",loadError:"فشل تحميل البيانات",loadRetry:"إعادة المحاولة",externalSource:"مصدر خارجي",localSource:"تقرير محلي"},
+        en:{siteName:"Tech Monitor",siteAuthor:"By: Al-Hazbri Hacker",navHome:"Home",navNews:"News",navAbout:"About",latestNews:"Latest Reports",latestNewsDesc:"Analyzed and verified intelligence reports",allCats:"All",catCyber:"Cyber Security",catIntel:"Digital Intelligence",catTech:"Global Tech",breaking:"BREAKING",readMore:"Read More",close:"Close",source:"Source",date:"Date",threatLow:"Low",threatMedium:"Medium",threatHigh:"High",threatCritical:"Critical",noResults:"No results found",aboutLabel:"About Us",aboutTitle:"Tech Monitor\nYour Eye on the Digital World",aboutDesc:"A specialized intelligence platform for monitoring and analyzing advanced cyber threats.",statReports:"Reports",statCountries:"Countries",statMonitor:"Monitoring",liveStatus:"Live Monitoring",footerDesc:"An independent cyber intelligence platform.",footerLinks:"Quick Links",footerCategories:"Categories",footerRights:"All Rights Reserved",fullReport:"Full Report",securityClearance:"Security Clearance",loadingData:"Loading data...",loadError:"Failed to load data",loadRetry:"Retry",externalSource:"External Source",localSource:"Local Report"}
+    };
+
+    let currentLang=localStorage.getItem('tm_lang')||'ar';
+    let currentCategory='all';
+    let heroIndex=0,heroInterval=null;
+    let newsData=[];
+
+    async function init(){
         applyLang(currentLang);
         simulateLoading();
         setupScrollEffects();
         await loadData();
     }
 
-    /* ======================================================
-       تحميل البيانات: GitHub Raw ← localStorage ← بذرة
-    ====================================================== */
-    async function loadData() {
-        const statusEl = document.getElementById('dataStatus');
-        const gridEl = document.getElementById('newsGrid');
-        statusEl.style.display = 'flex'; gridEl.style.display = 'none';
+    /* ============================================
+       تحميل: GitHub ← RSS ← localStorage ← فارغ
+    ============================================ */
+    async function loadData(){
+        const st=document.getElementById('dataStatus'),gr=document.getElementById('newsGrid');
+        st.style.display='flex';gr.style.display='none';
 
-        /* 1) محاولة قراءة من GitHub Raw */
-        try {
-            const data = await GHLogic.fetchPublicData(GITHUB_CONFIG.repo, GITHUB_CONFIG.path);
-            if (Array.isArray(data) && data.length > 0) {
-                newsData = data;
-                localStorage.setItem('tm_news', JSON.stringify(newsData));
-                onDataReady(true); return;
-            }
-        } catch(e) { /* GitHub غير متاح — نكمل */ }
+        /* 1) GitHub data.json */
+        try{
+            const d=await GHLogic.fetchPublicData(GITHUB_CONFIG.repo,GITHUB_CONFIG.path);
+            if(Array.isArray(d)&&d.length>0){newsData=d;localStorage.setItem('tm_news',JSON.stringify(newsData));onReady(true);return;}
+        }catch(e){console.log('GitHub fetch failed, trying RSS...');}
 
-        /* 2) localStorage */
-        const stored = localStorage.getItem('tm_news');
-        if (stored) {
-            try { const d = JSON.parse(stored); if (Array.isArray(d) && d.length > 0) { newsData = d; onDataReady(true); return; } } catch(e) {}
+        /* 2) RSS feeds (أخبار حقيقية) */
+        try{
+            const rss=await fetchRSS();
+            if(rss.length>0){newsData=rss;onReady(true);return;}
+        }catch(e){console.log('RSS failed, trying localStorage...');}
+
+        /* 3) localStorage */
+        const s=localStorage.getItem('tm_news');
+        if(s){try{const d=JSON.parse(s);if(Array.isArray(d)&&d.length>0){newsData=d;onReady(true);return;}}catch(e){}}
+
+        /* 4) لا شيء */
+        newsData=[];onReady(true);
+    }
+
+    /* ============================================
+       قراءة RSS عبر AllOrigins (CORS proxy مجاني)
+    ============================================ */
+    async function fetchRSS(){
+        const allItems=[];
+        for(const feed of RSS_FEEDS){
+            try{
+                const proxy=`https://api.allorigins.win/raw?url=${encodeURIComponent(feed.url)}`;
+                const resp=await fetch(proxy);
+                if(!resp.ok) continue;
+                const text=await resp.text();
+                const parser=new DOMParser();
+                const xml=parser.parseFromString(text,'text/xml');
+                const items=xml.querySelectorAll('item');
+                items.forEach((item,i)=>{
+                    if(i>=3) return; /* 3 أخبار فقط من كل مصدر */
+                    const title=item.querySelector('title')?.textContent||'';
+                    const link=item.querySelector('link')?.textContent||'#';
+                    const desc=item.querySelector('description')?.textContent||'';
+                    const pubDate=item.querySelector('pubDate')?.textContent||new Date().toISOString();
+                    const cleanDesc=desc.replace(/<[^>]*>/g,'').substring(0,300);
+                    const imgs=CAT_IMAGES[feed.cat]||CAT_IMAGES.cyber;
+                    const img=imgs[i%imgs.length];
+                    const date=new Date(pubDate);
+                    const dateStr=date.toISOString().slice(0,10);
+                    const isFeatured=i===0;
+
+                    allItems.push({
+                        id:Date.now()+Math.random(),
+                        title_ar:title,
+                        title_en:title,
+                        excerpt_ar:cleanDesc,
+                        excerpt_en:cleanDesc,
+                        content_ar:cleanDesc+'<br><br><a href="'+link+'" target="_blank" style="color:var(--accent);">'+(feed.lang==='ar'?'اقرأ المقال الكامل':'Read full article')+'</a>',
+                        content_en:cleanDesc+'<br><br><a href="'+link+'" target="_blank" style="color:var(--accent);">Read full article</a>',
+                        image:img,
+                        category:feed.cat,
+                        threat_level:['critical','high','medium','low'][i%4],
+                        source_ar:feed.source,
+                        source_en:feed.source,
+                        date:dateStr,
+                        featured:isFeatured,
+                        isExternal:true,
+                        externalLink:link
+                    });
+                });
+            }catch(e){console.log('RSS error:',feed.url,e);}
         }
-
-        /* 3) بذرة */
-        newsData = [...DEFAULT_NEWS];
-        localStorage.setItem('tm_news', JSON.stringify(newsData));
-        onDataReady(true);
+        /* ترتيب بالأحدث */
+        allItems.sort((a,b)=>new Date(b.date)-new Date(a.date));
+        return allItems;
     }
 
-    function showDataError() {
-        document.getElementById('dataStatus').innerHTML = `<i class="fas fa-exclamation-triangle" style="color:var(--danger);"></i><p style="color:var(--text-muted)">${t('loadError')}</p><button class="retry-btn" onclick="loadData()">${t('loadRetry')}</button>`;
+    function showDataError(){document.getElementById('dataStatus').innerHTML=`<i class="fas fa-exclamation-triangle" style="color:var(--danger);font-size:3rem;"></i><p style="color:var(--text-muted)">${t('loadError')}</p><button class="retry-btn" onclick="loadData()">${t('loadRetry')}</button>`;}
+    function onReady(ok){document.getElementById('dataStatus').style.display='none';if(!ok){showDataError();return;}document.getElementById('newsGrid').style.display='';buildTicker();buildHero();buildCategoryFilters();renderNews();startHeroSlider();}
+    function simulateLoading(){const b=document.getElementById('loadingBar');b.style.width='30%';setTimeout(()=>b.style.width='70%',200);setTimeout(()=>b.style.width='100%',500);setTimeout(()=>{b.style.opacity='0';setTimeout(()=>b.style.display='none',300);},800);}
+
+    /* لغة */
+    function switchLang(l){if(l===currentLang)return;document.body.classList.add('fade-out');setTimeout(()=>{currentLang=l;localStorage.setItem('tm_lang',l);applyLang(l);if(newsData.length>0){buildTicker();buildHero();buildCategoryFilters();renderNews();}document.body.classList.remove('fade-out');},300);}
+    function applyLang(l){const h=document.documentElement;h.lang=l;h.dir=l==='ar'?'rtl':'ltr';document.body.style.fontFamily=l==='ar'?"'Cairo',sans-serif":"'Inter',sans-serif";document.getElementById('btnAR').classList.toggle('active',l==='ar');document.getElementById('btnEN').classList.toggle('active',l==='en');document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(I18N[l]&&I18N[l][k])el.textContent=I18N[l][k];});document.title=l==='ar'?'الرصد التقني - Tech Monitor':'Tech Monitor - الرصد التقني';}
+    function t(k){return I18N[currentLang][k]||k;}
+
+    /* عاجل */
+    function buildTicker(){const el=document.getElementById('tickerContent');const f=newsData.filter(n=>n.featured);const tx=f.length>0?f.map(n=>(currentLang==='ar'?'عاجل: ':'BREAKING: ')+(currentLang==='ar'?n.title_ar:n.title_en)):[currentLang==='ar'?'الرصد التقني — عينك على العالم الرقمي':'Tech Monitor — Your Eye on the Digital World'];const s='  \u25C6  ';el.textContent=tx.join(s)+s+tx.join(s);}
+
+    /* هيرو */
+    function buildHero(){const f=newsData.filter(n=>n.featured);if(!f.length){document.getElementById('heroSlides').innerHTML='';return;}document.getElementById('heroSlides').innerHTML=f.map((n,i)=>`<div class="hero-slide ${i===0?'active':''}"><img src="${n.image}" alt="" loading="${i===0?'eager':'lazy'}"></div>`).join('');updateHC(f[0]);document.getElementById('heroDots').innerHTML=f.map((_,i)=>`<div class="hero-dot ${i===0?'active':''}" onclick="goSlide(${i})"></div>`).join('');heroIndex=0;}
+    function updateHC(item){const l=currentLang,title=l==='ar'?item.title_ar:item.title_en,exc=l==='ar'?item.excerpt_ar:item.excerpt_en,ext=item.isExternal?`<a href="${item.externalLink}" target="_blank" class="source-label"><i class="fas fa-external-link-alt"></i> ${t('externalSource')}: ${l==='ar'?item.source_ar:item.source_en}</a>`:'';document.getElementById('heroContent').innerHTML=`<div class="flex flex-wrap items-center gap-3 mb-4"><span class="breaking-badge"><span class="breaking-dot"></span> ${t('breaking')}</span>${ext}<span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span><span class="cat-label">${gCT(item.category)}</span></div><h2 class="text-2xl md:text-4xl font-black leading-tight max-w-3xl" style="text-shadow:0 2px 20px rgba(0,0,0,0.8);">${title}</h2><p class="mt-3 text-sm md:text-base max-w-2xl leading-relaxed" style="color:rgba(255,255,255,0.7);">${exc}</p><button onclick="${item.isExternal?`window.open('${item.externalLink}','_blank')`:`openModal(${item.id})`}" class="mt-5 px-6 py-3 rounded-lg font-bold text-sm transition-all hover:scale-105" style="background:var(--accent);color:#fff;box-shadow:0 0 20px var(--accent-glow);">${t('readMore')} <i class="fas fa-arrow-${l==='ar'?'left':'right'} mr-2"></i></button>`;}
+    function goSlide(i){const f=newsData.filter(n=>n.featured);if(i<0||i>=f.length)return;document.querySelectorAll('.hero-slide').forEach((s,x)=>s.classList.toggle('active',x===i));document.querySelectorAll('.hero-dot').forEach((d,x)=>d.classList.toggle('active',x===i));heroIndex=i;updateHC(f[i]);resetHI();}
+    function startHI(){heroInterval=setInterval(()=>{const f=newsData.filter(n=>n.featured);if(f.length<=1)return;goSlide((heroIndex+1)%f.length);},6000);}
+    function resetHI(){clearInterval(heroInterval);startHI();}
+
+    /* فلاتر */
+    function buildCF(){const c=[{key:'all',label:t('allCats')},{key:'cyber',label:t('catCyber')},{key:'intel',label:t('catIntel')},{key:'tech',label:t('catTech')}];document.getElementById('catFilters').innerHTML=c.map(x=>`<button class="cat-btn ${currentCategory===x.key?'active':''}" onclick="filterCat('${x.key}')">${x.label}</button>`).join('');}
+    function filterCat(c){currentCategory=c;buildCF();renderNews();}
+
+    /* بطاقات */
+    function renderNews(){
+        const fl=currentCategory==='all'?newsData:newsData.filter(n=>n.category===currentCategory);
+        const gr=document.getElementById('newsGrid'),nr=document.getElementById('noResults');
+        if(!fl.length){gr.innerHTML='';nr.style.display='block';return;}nr.style.display='none';
+        gr.innerHTML=fl.map((item,idx)=>{const l=currentLang,title=l==='ar'?item.title_ar:item.title_en,exc=l==='ar'?item.excerpt_ar:item.excerpt_en,src=l==='ar'?item.source_ar:item.source_en,extBadge=item.isExternal?`<span class="source-label"><i class="fas fa-external-link-alt"></i> ${t('externalSource')}</span>`:'';
+        return`<article class="news-card reveal" style="transition-delay:${idx*80}ms" onclick="${item.isExternal?`window.open('${item.externalLink}','_blank')`:`openModal(${item.id})`}"><div class="news-card-img"><img src="${item.image}" alt="" loading="lazy"><div class="absolute top-3 ${l==='ar'?'right-3':'left-3'} z-10">${extBadge}</div><div class="absolute top-3 ${l==='ar'?'left-3':'right-3'} z-10"><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span></div></div><div class="p-5"><span class="cat-label mb-2 inline-block">${gCT(item.category)}</span><h3 class="font-bold text-base leading-snug" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${title}</h3><p class="mt-2 text-sm leading-relaxed" style="color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${exc}</p><div class="card-meta mt-4 pt-3" style="border-top:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${src}</span><span><i class="fas fa-calendar text-xs"></i> ${fmtD(item.date)}</span></div></div></article>`;}).join('');
+        requestAnimationFrame(()=>document.querySelectorAll('.news-card.reveal').forEach(el=>rObs.observe(el)));
     }
 
-    function onDataReady(ok) {
-        document.getElementById('dataStatus').style.display = 'none';
-        if (!ok) { showDataError(); return; }
-        document.getElementById('newsGrid').style.display = '';
-        buildTicker(); buildHero(); buildCategoryFilters(); renderNews(); startHeroSlider();
-    }
-
-    function simulateLoading() {
-        const bar = document.getElementById('loadingBar'); bar.style.width='30%';
-        setTimeout(()=>bar.style.width='70%',200);
-        setTimeout(()=>bar.style.width='100%',500);
-        setTimeout(()=>{bar.style.opacity='0';setTimeout(()=>bar.style.display='none',300);},800);
-    }
-
-    /* ======================================================
-       تبديل اللغة
-    ====================================================== */
-    function switchLang(lang) {
-        if(lang===currentLang) return;
-        document.body.classList.add('fade-out');
-        setTimeout(()=>{currentLang=lang;localStorage.setItem('tm_lang',lang);applyLang(lang);if(newsData.length>0){buildTicker();buildHero();buildCategoryFilters();renderNews();}document.body.classList.remove('fade-out');},300);
-    }
-    function applyLang(lang) {
-        const html=document.documentElement;html.lang=lang;html.dir=lang==='ar'?'rtl':'ltr';
-        document.body.style.fontFamily=lang==='ar'?"'Cairo', sans-serif":"'Inter', sans-serif";
-        document.getElementById('btnAR').classList.toggle('active',lang==='ar');
-        document.getElementById('btnEN').classList.toggle('active',lang==='en');
-        document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(TRANSLATIONS[lang][k])el.textContent=TRANSLATIONS[lang][k];});
-        document.title=lang==='ar'?'الرصد التقني - Tech Monitor':'Tech Monitor - الرصد التقني';
-    }
-    function t(key){return TRANSLATIONS[currentLang][key]||key;}
-
-    /* ======================================================
-       شريط عاجل
-    ====================================================== */
-    function buildTicker() {
-        const el=document.getElementById('tickerContent');
-        const f=newsData.filter(n=>n.featured);
-        const texts=f.length>0?f.map(n=>(currentLang==='ar'?'عاجل: ':'BREAKING: ')+(currentLang==='ar'?n.title_ar:n.title_en)):[currentLang==='ar'?'الرصد التقني — عينك على العالم الرقمي':'Tech Monitor — Your Eye on the Digital World'];
-        const sep='  \u25C6  ';el.textContent=texts.join(sep)+sep+texts.join(sep);
-    }
-
-    /* ======================================================
-       هيرو
-    ====================================================== */
-    function buildHero() {
-        const f=newsData.filter(n=>n.featured);if(f.length===0){document.getElementById('heroSlides').innerHTML='';return;}
-        document.getElementById('heroSlides').innerHTML=f.map((n,i)=>`<div class="hero-slide ${i===0?'active':''}"><img src="${n.image}" alt="${currentLang==='ar'?n.title_ar:n.title_en}" loading="${i===0?'eager':'lazy'}"></div>`).join('');
-        updateHeroContent(f[0]);
-        document.getElementById('heroDots').innerHTML=f.map((_,i)=>`<div class="hero-dot ${i===0?'active':''}" onclick="goToSlide(${i})"></div>`).join('');
-        heroIndex=0;
-    }
-    function updateHeroContent(item) {
-        const l=currentLang,title=l==='ar'?item.title_ar:item.title_en,excerpt=l==='ar'?item.excerpt_ar:item.excerpt_en;
-        document.getElementById('heroContent').innerHTML=`<div class="flex flex-wrap items-center gap-3 mb-4"><span class="breaking-badge"><span class="breaking-dot"></span> ${t('breaking')}</span><span class="threat-badge ${getThreatClass(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${getThreatText(item.threat_level)}</span><span class="cat-label">${getCatText(item.category)}</span></div><h2 class="text-2xl md:text-4xl font-black leading-tight max-w-3xl" style="text-shadow:0 2px 20px rgba(0,0,0,0.8);">${title}</h2><p class="mt-3 text-sm md:text-base max-w-2xl leading-relaxed" style="color:rgba(255,255,255,0.7);">${excerpt}</p><button onclick="openModal(${item.id})" class="mt-5 px-6 py-3 rounded-lg font-bold text-sm transition-all hover:scale-105" style="background:var(--accent);color:#fff;box-shadow:0 0 20px var(--accent-glow);">${t('readMore')} <i class="fas fa-arrow-${l==='ar'?'left':'right'} mr-2"></i></button>`;
-    }
-    function goToSlide(i) { const f=newsData.filter(n=>n.featured);if(i<0||i>=f.length)return;document.querySelectorAll('.hero-slide').forEach((s,x)=>s.classList.toggle('active',x===i));document.querySelectorAll('.hero-dot').forEach((d,x)=>d.classList.toggle('active',x===i));heroIndex=i;updateHeroContent(f[i]);resetHeroInterval(); }
-    function startHeroSlider(){heroInterval=setInterval(()=>{const f=newsData.filter(n=>n.featured);if(f.length<=1)return;goToSlide((heroIndex+1)%f.length);},6000);}
-    function resetHeroInterval(){clearInterval(heroInterval);startHeroSlider();}
-
-    /* ======================================================
-       فلاتر
-    ====================================================== */
-    function buildCategoryFilters(){const c=[{key:'all',label:t('allCats')},{key:'cyber',label:t('catCyber')},{key:'intel',label:t('catIntel')},{key:'tech',label:t('catTech')}];document.getElementById('catFilters').innerHTML=c.map(x=>`<button class="cat-btn ${currentCategory===x.key?'active':''}" onclick="filterCategory('${x.key}')">${x.label}</button>`).join('');}
-    function filterCategory(cat){currentCategory=cat;buildCategoryFilters();renderNews();}
-
-    /* ======================================================
-       بطاقات الأخبار
-    ====================================================== */
-    function renderNews() {
-        const filtered=currentCategory==='all'?newsData:newsData.filter(n=>n.category===currentCategory);
-        const grid=document.getElementById('newsGrid'),nr=document.getElementById('noResults');
-        if(filtered.length===0){grid.innerHTML='';nr.style.display='block';return;}nr.style.display='none';
-        grid.innerHTML=filtered.map((item,idx)=>{const l=currentLang,title=l==='ar'?item.title_ar:item.title_en,excerpt=l==='ar'?item.excerpt_ar:item.excerpt_en,source=l==='ar'?item.source_ar:item.source_en;return`<article class="news-card reveal" style="transition-delay:${idx*80}ms" onclick="openModal(${item.id})"><div class="news-card-img"><img src="${item.image}" alt="${title}" loading="lazy"><div class="absolute top-3 ${l==='ar'?'right-3':'left-3'} z-10"><span class="cat-label">${getCatText(item.category)}</span></div><div class="absolute top-3 ${l==='ar'?'left-3':'right-3'} z-10"><span class="threat-badge ${getThreatClass(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${getThreatText(item.threat_level)}</span></div></div><div class="p-5"><h3 class="font-bold text-base leading-snug" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${title}</h3><p class="mt-2 text-sm leading-relaxed" style="color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${excerpt}</p><div class="card-meta mt-4 pt-3" style="border-top:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${source}</span><span><i class="fas fa-calendar text-xs"></i> ${formatDate(item.date)}</span></div></div></article>`;}).join('');
-        requestAnimationFrame(()=>document.querySelectorAll('.news-card.reveal').forEach(el=>revealObserver.observe(el)));
-    }
-
-    /* ======================================================
-       مودال
-    ====================================================== */
-    function openModal(id) {
-        const item=newsData.find(n=>n.id===id);if(!item)return;const l=currentLang,title=l==='ar'?item.title_ar:item.title_en,content=(l==='ar'?item.content_ar:item.content_en).replace(/\n/g,'<br>'),source=l==='ar'?item.source_ar:item.source_en;
-        document.getElementById('modalContent').innerHTML=`<div class="relative"><img src="${item.image}" alt="${title}" class="w-full h-64 object-cover rounded-t-2xl"><div class="absolute inset-0 rounded-t-2xl" style="background:linear-gradient(to top,var(--bg2),transparent 60%);"></div><button onclick="closeModal()" class="absolute top-4 ${l==='ar'?'left-4':'right-4'} w-10 h-10 rounded-full flex items-center justify-center transition hover:scale-110" style="background:rgba(0,0,0,0.6);color:#fff;border:none;cursor:pointer;" aria-label="${t('close')}"><i class="fas fa-times"></i></button></div><div class="p-6 md:p-8"><div class="flex flex-wrap items-center gap-3 mb-4"><span class="cat-label">${getCatText(item.category)}</span><span class="threat-badge ${getThreatClass(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${getThreatText(item.threat_level)}</span></div><h2 class="text-xl md:text-2xl font-black leading-tight">${title}</h2><div class="card-meta mt-4 pb-4" style="border-bottom:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${t('source')}: ${source}</span><span><i class="fas fa-calendar text-xs"></i> ${formatDate(item.date)}</span><span><i class="fas fa-user-shield text-xs"></i> ${t('securityClearance')}: ${getThreatText(item.threat_level)}</span></div><div class="mt-6 text-sm" style="color:var(--text);line-height:2;">${content}</div><div class="mt-8 pt-4 flex justify-end" style="border-top:1px solid var(--border);"><span class="text-xs" style="color:var(--text-muted)">الهكر الهزبري — ${t('fullReport')}</span></div></div>`;
-        document.getElementById('newsModal').classList.add('active');document.body.style.overflow='hidden';
-    }
+    /* مودال */
+    function openModal(id){const item=newsData.find(n=>n.id===id);if(!item)return;if(item.isExternal){window.open(item.externalLink,'_blank');return;}const l=currentLang,title=l==='ar'?item.title_ar:item.title_en,content=(l==='ar'?item.content_ar:item.content_en).replace(/\n/g,'<br>'),src=l==='ar'?item.source_ar:item.source_en;document.getElementById('modalContent').innerHTML=`<div class="relative"><img src="${item.image}" alt="" class="w-full h-64 object-cover rounded-t-2xl"><div class="absolute inset-0 rounded-t-2xl" style="background:linear-gradient(to top,var(--bg2),transparent 60%);"></div><button onclick="closeModal()" class="absolute top-4 ${l==='ar'?'left-4':'right-4'} w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(0,0,0,0.6);color:#fff;border:none;cursor:pointer;"><i class="fas fa-times"></i></button></div><div class="p-6 md:p-8"><div class="flex flex-wrap items-center gap-3 mb-4"><span class="cat-label">${gCT(item.category)}</span><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span></div><h2 class="text-xl md:text-2xl font-black leading-tight">${title}</h2><div class="card-meta mt-4 pb-4" style="border-bottom:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${t('source')}: ${src}</span><span><i class="fas fa-calendar text-xs"></i> ${fmtD(item.date)}</span></div><div class="mt-6 text-sm" style="color:var(--text);line-height:2;">${content}</div><div class="mt-8 pt-4 flex justify-end" style="border-top:1px solid var(--border);"><span class="text-xs" style="color:var(--text-muted)">الهكر الهزبري — ${t('fullReport')}</span></div></div>`;document.getElementById('newsModal').classList.add('active');document.body.style.overflow='hidden';}
     function closeModal(){document.getElementById('newsModal').classList.remove('active');document.body.style.overflow='';}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-    /* ======================================================
-       أدوات
-    ====================================================== */
-    function getThreatClass(l){return({low:'threat-low',medium:'threat-medium',high:'threat-high',critical:'threat-critical'})[l]||'threat-low';}
-    function getThreatText(l){return t('threat'+l.charAt(0).toUpperCase()+l.slice(1));}
-    function getCatText(c){return({cyber:t('catCyber'),intel:t('catIntel'),tech:t('catTech')})[c]||c;}
-    function formatDate(d){try{return new Date(d).toLocaleDateString(currentLang==='ar'?'ar-EG':'en-US',{year:'numeric',month:'short',day:'numeric'});}catch(e){return d;}}
+    /* أدوات */
+    function gTC(l){return({low:'threat-low',medium:'threat-medium',high:'threat-high',critical:'threat-critical'})[l]||'threat-low';}
+    function gTT(l){return t('threat'+l.charAt(0).toUpperCase()+l.slice(1));}
+    function gCT(c){return({cyber:t('catCyber'),intel:t('catIntel'),tech:t('catTech')})[c]||c;}
+    function fmtD(d){try{return new Date(d).toLocaleDateString(currentLang==='ar'?'ar-EG':'en-US',{year:'numeric',month:'short',day:'numeric'});}catch(e){return d;}}
 
-    /* ======================================================
-       تمرير
-    ====================================================== */
-    const revealObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObserver.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-    function setupScrollEffects(){const nb=document.getElementById('navbar'),bt=document.getElementById('backToTop');window.addEventListener('scroll',()=>{nb.classList.toggle('scrolled',window.scrollY>50);bt.classList.toggle('visible',window.scrollY>500);},{passive:true});document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));}
+    /* تمرير */
+    const rObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');rObs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+    function setupScrollEffects(){const nb=document.getElementById('navbar'),bt=document.getElementById('backToTop');window.addEventListener('scroll',()=>{nb.classList.toggle('scrolled',window.scrollY>50);bt.classList.toggle('visible',window.scrollY>500);},{passive:true});document.querySelectorAll('.reveal').forEach(el=>rObs.observe(el));}
     function toggleMobile(){const m=document.getElementById('mobileMenu'),i=document.getElementById('menuIcon');m.classList.toggle('active');i.classList.toggle('fa-bars');i.classList.toggle('fa-times');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
 
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded',init);
     </script>
 </body>
 </html>
