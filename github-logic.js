@@ -1,11 +1,14 @@
 /**
- * github-logic.js — منطق GitHub API مشترك
+ * github-logic.js — منطق GitHub API + كاش ذكي
  * الهكر الهزبري — الرصد التقني
  */
 const GHLogic = (() => {
     const LS_TOKEN = 'tm_gh_token';
     const LS_REPO  = 'tm_gh_repo';
     const LS_PATH  = 'tm_gh_path';
+    const LS_CACHE = 'tm_data_cache';
+    const LS_CTIME = 'tm_cache_time';
+    const CACHE_TTL = 5 * 60 * 1000; /* 5 دقائق فقط */
 
     function getConfig() {
         return {
@@ -30,16 +33,40 @@ const GHLogic = (() => {
     }
     function extractUser(repo) { return repo.split('/')[0] || ''; }
 
-    /* قراءة عامة بدون توكن (Raw URL + cache busting) */
-    async function fetchPublicData(repo, path) {
-        const user = extractUser(repo);
-        const url = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}?t=${Date.now()}`;
-        const resp = await fetch(url);
-        if (!resp.ok) throw new Error('Raw fetch failed: ' + resp.status);
-        return await resp.json();
+    /* كاش ذكي: لا يجدد إلا بعد انتهاء الصلاحية */
+    function getCachedData() {
+        const time = parseInt(localStorage.getItem(LS_CTIME) || '0');
+        const now = Date.now();
+        if (now - time < CACHE_TTL) {
+            const raw = localStorage.getItem(LS_CACHE);
+            if (raw) {
+                try { return { data: JSON.parse(raw), fresh: false }; }
+                catch(e) {}
+            }
+        }
+        return null;
+    }
+    function setCachedData(data) {
+        localStorage.setItem(LS_CACHE, JSON.stringify(data));
+        localStorage.setItem(LS_CTIME, Date.now().toString());
     }
 
-    /* قراءة عبر API (يحتاج توكن) */
+    /* قراءة عامة مع كاش — لا طلب unless منتهي الصلاحية */
+    async function fetchPublicData(repo, path, forceRefresh) {
+        if (!forceRefresh) {
+            const cached = getCachedData();
+            if (cached) return { data: cached.data, fromCache: true };
+        }
+        const user = extractUser(repo);
+        const url = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}`;
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error('Raw fetch: ' + resp.status);
+        const data = await resp.json();
+        setCachedData(data);
+        return { data: data, fromCache: false };
+    }
+
+    /* قراءة عبر API */
     async function fetchFileData(repo, path, token) {
         const url = `https://api.github.com/repos/${repo}/contents/${path}`;
         const resp = await fetch(url, {
@@ -50,23 +77,18 @@ const GHLogic = (() => {
         });
         if (!resp.ok) {
             if (resp.status === 404) return { sha: null, content: null, exists: false };
-            throw new Error('API fetch failed: ' + resp.status);
+            throw new Error('API: ' + resp.status);
         }
-        const data = await resp.json();
-        return { sha: data.sha, content: atob(data.content), exists: true };
+        const d = await resp.json();
+        return { sha: d.sha, content: atob(d.content), exists: true };
     }
 
-    /* كتابة ملف عبر API */
+    /* كتابة ملف + تحديث الكاش فوراً */
     async function pushFile(repo, path, token, content, sha, message) {
         const url = `https://api.github.com/repos/${repo}/contents/${path}`;
         const encoded = btoa(unescape(encodeURIComponent(content)));
-        const body = {
-            message: message || 'Update via Tech Monitor Admin',
-            content: encoded,
-            branch: 'main'
-        };
+        const body = { message: message || 'Update via Tech Monitor', content: encoded, branch: 'main' };
         if (sha) body.sha = sha;
-
         const resp = await fetch(url, {
             method: 'PUT',
             headers: {
@@ -78,15 +100,17 @@ const GHLogic = (() => {
         });
         if (!resp.ok) {
             const err = await resp.json().catch(() => ({}));
-            throw new Error(err.message || 'Push failed: ' + resp.status);
+            throw new Error(err.message || 'Push: ' + resp.status);
         }
+        /* نجاح — حدّث الكاش مباشرة بدون انتظار */
+        try { setCachedData(JSON.parse(content)); } catch(e) {}
         return await resp.json();
     }
 
     /* النشر الكامل */
     async function publish(data) {
         const config = getConfig();
-        if (!config.token || !config.repo) throw new Error('GitHub not configured');
+        if (!config.token || !config.repo) throw new Error('Not configured');
         const current = await fetchFileData(config.repo, config.path, config.token);
         const jsonStr = JSON.stringify(data, null, 2);
         return await pushFile(
