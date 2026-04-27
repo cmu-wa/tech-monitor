@@ -1,0 +1,35 @@
+name: Update Cyber Intelligence Feed
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # يومياً الساعة 6 صباحاً UTC
+  workflow_dispatch:       # يدوي عند الحاجة
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: pip install feedparser requests
+
+      - name: Scrape RSS Feeds
+        run: python .github/scripts/scraper.py
+
+      - name: Commit Updated Data
+        run: |
+          git config user.name "Cyber Feed Bot"
+          git config user.email "bot@cyber-surveillance.local"
+      git add news-data.json
+          git diff --cached --quiet || git commit -m "feat: تحديث تلقائي للتقارير الاستخباراتية — $(date +%Y-%m-%d)"
+          git push
