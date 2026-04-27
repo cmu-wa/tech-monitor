@@ -56,7 +56,6 @@
         .threat-low{background:rgba(16,185,129,0.15);color:#34d399;}.threat-medium{background:rgba(245,158,11,0.15);color:#fbbf24;}.threat-high{background:rgba(239,68,68,0.15);color:#f87171;}.threat-critical{background:rgba(239,68,68,0.25);color:#ef4444;animation:cp 2s infinite;}
         @keyframes cp{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.3);}50%{box-shadow:0 0 10px 3px rgba(239,68,68,0.2);}}
         .cat-label{display:inline-block;padding:2px 10px;border-radius:4px;font-size:0.7rem;font-weight:700;background:var(--accent-glow);color:var(--accent);}
-        .source-label{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:4px;font-size:0.65rem;font-weight:600;background:rgba(59,130,246,0.1);color:#60a5fa;}
         .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.4s ease;padding:20px;}
         .modal-overlay.active{opacity:1;visibility:visible;}
         .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:18px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(40px) scale(0.95);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);}
@@ -84,6 +83,8 @@
         @keyframes spin{to{transform:rotate(360deg);}}
         .retry-btn{padding:10px 24px;border-radius:10px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-weight:700;font-family:inherit;font-size:0.9rem;transition:all 0.2s ease;}
         .retry-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px var(--accent-glow);}
+        .empty-state i{font-size:4rem;color:var(--bg4);margin-bottom:16px;}
+        .empty-state p{color:var(--text-muted);max-width:400px;line-height:1.8;}
         @media(max-width:768px){.hero-section{height:55vh;min-height:380px;}.hero-content{padding:20px;}.news-card-img{height:160px;}}
         @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
         ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:4px;}::-webkit-scrollbar-thumb:hover{background:var(--accent);}
@@ -132,6 +133,11 @@
             </div>
             <div class="data-status" id="dataStatus"><div class="spinner"></div><p style="color:var(--text-muted)" data-i18n="loadingData">جاري تحميل البيانات...</p></div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="newsGrid" style="display:none;"></div>
+            <div class="empty-state text-center" id="emptyState" style="display:none;padding:80px 20px;">
+                <i class="fas fa-satellite-dish"></i>
+                <p data-i18n="emptyMsg">لا توجد أخبار حالياً. استخدم لوحة التحكم لإضافة تقارير ونشرها.</p>
+                <a href="admin.html" class="retry-btn inline-block mt-4" style="text-decoration:none;" data-i18n="goToAdmin">لوحة التحكم</a>
+            </div>
             <div class="text-center mt-10" id="noResults" style="display:none;"><i class="fas fa-search text-4xl mb-4" style="color:var(--text-muted)"></i><p class="text-lg" style="color:var(--text-muted)" data-i18n="noResults">لا توجد نتائج لهذا التصنيف</p></div>
         </section>
 
@@ -140,7 +146,7 @@
                 <div>
                     <span class="cat-label mb-4 inline-block" data-i18n="aboutLabel">من نحن</span>
                     <h2 class="text-3xl font-black mt-3 leading-tight" data-i18n="aboutTitle">الرصد التقني<br>عينك على العالم الرقمي</h2>
-                    <p class="mt-5 leading-relaxed" style="color:var(--text-muted)" data-i18n="aboutDesc">منصة استخبارية تقنية متخصصة في رصد وتحليل التهديدات السيبرانية المتقدمة. نقدم تقارير ميدانية موثوقة حول أمن البنية التحتية الرقمية، حرب المعلومات، والتطورات التقنية المؤثرة على الأمن القومي.</p>
+                    <p class="mt-5 leading-relaxed" style="color:var(--text-muted)" data-i18n="aboutDesc">منصة استخبارية تقنية متخصصة في رصد وتحليل التهديدات السيبرانية المتقدمة.</p>
                     <div class="grid grid-cols-3 gap-4 mt-8">
                         <div class="text-center p-4 rounded-xl" style="background:var(--bg2);border:1px solid var(--border);"><div class="text-2xl font-black" style="color:var(--accent)">150+</div><div class="text-xs mt-1" style="color:var(--text-muted)" data-i18n="statReports">تقرير</div></div>
                         <div class="text-center p-4 rounded-xl" style="background:var(--bg2);border:1px solid var(--border);"><div class="text-2xl font-black" style="color:var(--accent)">40+</div><div class="text-xs mt-1" style="color:var(--text-muted)" data-i18n="statCountries">دولة</div></div>
@@ -158,7 +164,7 @@
     <footer class="relative z-10">
         <div class="max-w-7xl mx-auto px-4 py-10">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div><div class="flex items-center gap-2 mb-4"><div class="logo-icon" style="width:36px;height:36px;border-radius:8px;"><svg width="20" height="20" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" stroke="white" stroke-width="3" fill="none"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5" fill="none"/><circle cx="50" cy="50" r="10" fill="white"/></svg></div><span class="font-black" style="color:var(--accent)" data-i18n="siteName">الرصد التقني</span></div><p class="text-sm leading-relaxed" style="color:var(--text-muted)" data-i18n="footerDesc">منصة استخبارية تقنية مستقلة. لا تنتمي لأي جهة حكومية أو مؤسسية. تهدف لنشر الوعي السيبراني.</p></div>
+                <div><div class="flex items-center gap-2 mb-4"><div class="logo-icon" style="width:36px;height:36px;border-radius:8px;"><svg width="20" height="20" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" stroke="white" stroke-width="3" fill="none"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5" fill="none"/><circle cx="50" cy="50" r="10" fill="white"/></svg></div><span class="font-black" style="color:var(--accent)" data-i18n="siteName">الرصد التقني</span></div><p class="text-sm leading-relaxed" style="color:var(--text-muted)" data-i18n="footerDesc">منصة استخبارية تقنية مستقلة.</p></div>
                 <div><h3 class="font-bold mb-4" data-i18n="footerLinks">روابط سريعة</h3><div class="flex flex-col gap-2"><a href="#hero" class="text-sm hover:text-emerald-400 transition no-underline" style="color:var(--text-muted)" data-i18n="navHome">الرئيسية</a><a href="#news" class="text-sm hover:text-emerald-400 transition no-underline" style="color:var(--text-muted)" data-i18n="navNews">الأخبار</a><a href="admin.html" class="text-sm hover:text-emerald-400 transition no-underline" style="color:var(--text-muted)">Admin Panel</a></div></div>
                 <div><h3 class="font-bold mb-4" data-i18n="footerCategories">التصنيفات</h3><div class="flex flex-col gap-2"><span class="text-sm" style="color:var(--text-muted)" data-i18n="catCyber">الأمن السيبراني</span><span class="text-sm" style="color:var(--text-muted)" data-i18n="catIntel">الاستخبارات الرقمية</span><span class="text-sm" style="color:var(--text-muted)" data-i18n="catTech">التقنية العالمية</span></div></div>
             </div>
@@ -171,57 +177,20 @@
 
     <script src="github-logic.js"></script>
     <script>
-    /* ⭐ غيّر هذه القيم إلى بياناتك */
+    /* ⭐ غيّر هذه إلى بيانات مستودعك */
     const GITHUB_CONFIG = { repo: 'hazpry/hazpry-news', path: 'data.json' };
 
-    /* ⭐ مصادر RSS لأخبار سيبرانية حقيقية */
-    const RSS_FEEDS = [
-        { url:'https://feeds.feedburner.com/TheHackersNews', lang:'en', cat:'cyber', source:'The Hacker News' },
-        { url:'https://www.darkreading.com/rss.xml', lang:'en', cat:'cyber', source:'Dark Reading' },
-        { url:'https://krebsonsecurity.com/feed/', lang:'en', cat:'cyber', source:'Krebs on Security' },
-        { url:'https://feeds.arstechnica.com/arstechnica/security', lang:'en', cat:'tech', source:'Ars Technica' }
-    ];
-
-    /* صور حقيقية لكل تصنيف */
-    const CAT_IMAGES = {
-        cyber: [
-            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&h=500&fit=crop'
-        ],
-        intel: [
-            'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?w=900&h=500&fit=crop'
-        ],
-        tech: [
-            'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&h=500&fit=crop'
-        ]
-    };
-
-    /* بيانات افتراضية */
-    const DEFAULT_NEWS = [];
-
-    /* ترجمات */
     const I18N = {
-        ar:{siteName:"الرصد التقني",siteAuthor:"بوابة الهكر الهزبري",navHome:"الرئيسية",navNews:"الأخبار",navAbout:"عن الموقع",latestNews:"أحدث التقارير",latestNewsDesc:"تقارير استخبارية تقنية محللة وموثقة",allCats:"الكل",catCyber:"الأمن السيبراني",catIntel:"الاستخبارات الرقمية",catTech:"التقنية العالمية",breaking:"عاجل",readMore:"اقرأ المزيد",close:"إغلاق",source:"المصدر",date:"التاريخ",threatLow:"منخفض",threatMedium:"متوسط",threatHigh:"مرتفع",threatCritical:"حرج",noResults:"لا توجد نتائج",aboutLabel:"من نحن",aboutTitle:"الرصد التقني\nعينك على العالم الرقمي",aboutDesc:"منصة استخبارية تقنية متخصصة في رصد وتحليل التهديدات السيبرانية المتقدمة.",statReports:"تقرير",statCountries:"دولة",statMonitor:"رصد",liveStatus:"رصد مباشر",footerDesc:"منصة استخبارية تقنية مستقلة.",footerLinks:"روابط سريعة",footerCategories:"التصنيفات",footerRights:"جميع الحقوق محفوظة",fullReport:"التقرير الكامل",securityClearance:"التصنيف الأمني",loadingData:"جاري تحميل البيانات...",loadError:"فشل تحميل البيانات",loadRetry:"إعادة المحاولة",externalSource:"مصدر خارجي",localSource:"تقرير محلي"},
-        en:{siteName:"Tech Monitor",siteAuthor:"By: Al-Hazbri Hacker",navHome:"Home",navNews:"News",navAbout:"About",latestNews:"Latest Reports",latestNewsDesc:"Analyzed and verified intelligence reports",allCats:"All",catCyber:"Cyber Security",catIntel:"Digital Intelligence",catTech:"Global Tech",breaking:"BREAKING",readMore:"Read More",close:"Close",source:"Source",date:"Date",threatLow:"Low",threatMedium:"Medium",threatHigh:"High",threatCritical:"Critical",noResults:"No results found",aboutLabel:"About Us",aboutTitle:"Tech Monitor\nYour Eye on the Digital World",aboutDesc:"A specialized intelligence platform for monitoring and analyzing advanced cyber threats.",statReports:"Reports",statCountries:"Countries",statMonitor:"Monitoring",liveStatus:"Live Monitoring",footerDesc:"An independent cyber intelligence platform.",footerLinks:"Quick Links",footerCategories:"Categories",footerRights:"All Rights Reserved",fullReport:"Full Report",securityClearance:"Security Clearance",loadingData:"Loading data...",loadError:"Failed to load data",loadRetry:"Retry",externalSource:"External Source",localSource:"Local Report"}
+        ar:{siteName:"الرصد التقني",siteAuthor:"بوابة الهكر الهزبري",navHome:"الرئيسية",navNews:"الأخبار",navAbout:"عن الموقع",latestNews:"أحدث التقارير",latestNewsDesc:"تقارير استخبارية تقنية محللة وموثقة",allCats:"الكل",catCyber:"الأمن السيبراني",catIntel:"الاستخبارات الرقمية",catTech:"التقنية العالمية",breaking:"عاجل",readMore:"اقرأ المزيد",close:"إغلاق",source:"المصدر",date:"التاريخ",threatLow:"منخفض",threatMedium:"متوسط",threatHigh:"مرتفع",threatCritical:"حرج",noResults:"لا توجد نتائج",aboutLabel:"من نحن",aboutTitle:"الرصد التقني\nعينك على العالم الرقمي",aboutDesc:"منصة استخبارية تقنية متخصصة في رصد وتحليل التهديدات السيبرانية المتقدمة.",statReports:"تقرير",statCountries:"دولة",statMonitor:"رصد",liveStatus:"رصد مباشر",footerDesc:"منصة استخبارية تقنية مستقلة.",footerLinks:"روابط سريعة",footerCategories:"التصنيفات",footerRights:"جميع الحقوق محفوظة",fullReport:"التقرير الكامل",securityClearance:"التصنيف الأمني",loadingData:"جاري تحميل البيانات...",loadError:"فشل تحميل البيانات من GitHub",loadRetry:"إعادة المحاولة",emptyMsg:"لا توجد أخبار حالياً. استخدم لوحة التحكم لإضافة تقارير ونشرها.",goToAdmin:"لوحة التحكم"},
+        en:{siteName:"Tech Monitor",siteAuthor:"By: Al-Hazbri Hacker",navHome:"Home",navNews:"News",navAbout:"About",latestNews:"Latest Reports",latestNewsDesc:"Analyzed and verified intelligence reports",allCats:"All",catCyber:"Cyber Security",catIntel:"Digital Intelligence",catTech:"Global Tech",breaking:"BREAKING",readMore:"Read More",close:"Close",source:"Source",date:"Date",threatLow:"Low",threatMedium:"Medium",threatHigh:"High",threatCritical:"Critical",noResults:"No results found",aboutLabel:"About Us",aboutTitle:"Tech Monitor\nYour Eye on the Digital World",aboutDesc:"A specialized intelligence platform for monitoring and analyzing advanced cyber threats.",statReports:"Reports",statCountries:"Countries",statMonitor:"Monitoring",liveStatus:"Live Monitoring",footerDesc:"An independent cyber intelligence platform.",footerLinks:"Quick Links",footerCategories:"Categories",footerRights:"All Rights Reserved",fullReport:"Full Report",securityClearance:"Security Clearance",loadingData:"Loading data...",loadError:"Failed to load data from GitHub",loadRetry:"Retry",emptyMsg:"No news yet. Use the admin panel to add reports and publish them.",goToAdmin:"Admin Panel"}
     };
 
-    let currentLang=localStorage.getItem('tm_lang')||'ar';
-    let currentCategory='all';
-    let heroIndex=0,heroInterval=null;
-    let newsData=[];
+    let currentLang = localStorage.getItem('tm_lang') || 'ar';
+    let currentCategory = 'all';
+    let heroIndex = 0, heroInterval = null;
+    let newsData = [];
 
-    async function init(){
+    async function init() {
         applyLang(currentLang);
         simulateLoading();
         setupScrollEffects();
@@ -229,135 +198,153 @@
     }
 
     /* ============================================
-       تحميل: GitHub ← RSS ← localStorage ← فارغ
+       تحميل: كاش ← GitHub ← خطأ
+       طلب واحد فقط. بدون RSS. بدون proxy.
     ============================================ */
-    async function loadData(){
-        const st=document.getElementById('dataStatus'),gr=document.getElementById('newsGrid');
-        st.style.display='flex';gr.style.display='none';
+    async function loadData() {
+        const st = document.getElementById('dataStatus');
+        const gr = document.getElementById('newsGrid');
+        const em = document.getElementById('emptyState');
+        st.style.display = 'flex'; gr.style.display = 'none'; em.style.display = 'none';
 
-        /* 1) GitHub data.json */
-        try{
-            const d=await GHLogic.fetchPublicData(GITHUB_CONFIG.repo,GITHUB_CONFIG.path);
-            if(Array.isArray(d)&&d.length>0){newsData=d;localStorage.setItem('tm_news',JSON.stringify(newsData));onReady(true);return;}
-        }catch(e){console.log('GitHub fetch failed, trying RSS...');}
-
-        /* 2) RSS feeds (أخبار حقيقية) */
-        try{
-            const rss=await fetchRSS();
-            if(rss.length>0){newsData=rss;onReady(true);return;}
-        }catch(e){console.log('RSS failed, trying localStorage...');}
-
-        /* 3) localStorage */
-        const s=localStorage.getItem('tm_news');
-        if(s){try{const d=JSON.parse(s);if(Array.isArray(d)&&d.length>0){newsData=d;onReady(true);return;}}catch(e){}}
-
-        /* 4) لا شيء */
-        newsData=[];onReady(true);
-    }
-
-    /* ============================================
-       قراءة RSS عبر AllOrigins (CORS proxy مجاني)
-    ============================================ */
-    async function fetchRSS(){
-        const allItems=[];
-        for(const feed of RSS_FEEDS){
-            try{
-                const proxy=`https://api.allorigins.win/raw?url=${encodeURIComponent(feed.url)}`;
-                const resp=await fetch(proxy);
-                if(!resp.ok) continue;
-                const text=await resp.text();
-                const parser=new DOMParser();
-                const xml=parser.parseFromString(text,'text/xml');
-                const items=xml.querySelectorAll('item');
-                items.forEach((item,i)=>{
-                    if(i>=3) return; /* 3 أخبار فقط من كل مصدر */
-                    const title=item.querySelector('title')?.textContent||'';
-                    const link=item.querySelector('link')?.textContent||'#';
-                    const desc=item.querySelector('description')?.textContent||'';
-                    const pubDate=item.querySelector('pubDate')?.textContent||new Date().toISOString();
-                    const cleanDesc=desc.replace(/<[^>]*>/g,'').substring(0,300);
-                    const imgs=CAT_IMAGES[feed.cat]||CAT_IMAGES.cyber;
-                    const img=imgs[i%imgs.length];
-                    const date=new Date(pubDate);
-                    const dateStr=date.toISOString().slice(0,10);
-                    const isFeatured=i===0;
-
-                    allItems.push({
-                        id:Date.now()+Math.random(),
-                        title_ar:title,
-                        title_en:title,
-                        excerpt_ar:cleanDesc,
-                        excerpt_en:cleanDesc,
-                        content_ar:cleanDesc+'<br><br><a href="'+link+'" target="_blank" style="color:var(--accent);">'+(feed.lang==='ar'?'اقرأ المقال الكامل':'Read full article')+'</a>',
-                        content_en:cleanDesc+'<br><br><a href="'+link+'" target="_blank" style="color:var(--accent);">Read full article</a>',
-                        image:img,
-                        category:feed.cat,
-                        threat_level:['critical','high','medium','low'][i%4],
-                        source_ar:feed.source,
-                        source_en:feed.source,
-                        date:dateStr,
-                        featured:isFeatured,
-                        isExternal:true,
-                        externalLink:link
-                    });
-                });
-            }catch(e){console.log('RSS error:',feed.url,e);}
+        /* محاولة واحدة فقط من GitHub مع كاش */
+        try {
+            const result = await GHLogic.fetchPublicData(GITHUB_CONFIG.repo, GITHUB_CONFIG.path);
+            if (result.data && Array.isArray(result.data) && result.data.length > 0) {
+                newsData = result.data;
+                onReady(true);
+                return;
+            }
+        } catch(e) {
+            console.log('GitHub unavailable:', e.message);
         }
-        /* ترتيب بالأحدث */
-        allItems.sort((a,b)=>new Date(b.date)-new Date(a.date));
-        return allItems;
+
+        /* فشل — اعرض حالة فارغة */
+        newsData = [];
+        onReady(true);
     }
 
-    function showDataError(){document.getElementById('dataStatus').innerHTML=`<i class="fas fa-exclamation-triangle" style="color:var(--danger);font-size:3rem;"></i><p style="color:var(--text-muted)">${t('loadError')}</p><button class="retry-btn" onclick="loadData()">${t('loadRetry')}</button>`;}
-    function onReady(ok){document.getElementById('dataStatus').style.display='none';if(!ok){showDataError();return;}document.getElementById('newsGrid').style.display='';buildTicker();buildHero();buildCategoryFilters();renderNews();startHeroSlider();}
-    function simulateLoading(){const b=document.getElementById('loadingBar');b.style.width='30%';setTimeout(()=>b.style.width='70%',200);setTimeout(()=>b.style.width='100%',500);setTimeout(()=>{b.style.opacity='0';setTimeout(()=>b.style.display='none',300);},800);}
+    function showDataError() {
+        document.getElementById('dataStatus').innerHTML =
+            `<i class="fas fa-exclamation-triangle" style="color:var(--danger);font-size:3rem;"></i>
+             <p style="color:var(--text-muted);max-width:400px;">${t('loadError')}</p>
+             <button class="retry-btn" onclick="loadData()">${t('loadRetry')}</button>`;
+    }
+
+    function onReady(ok) {
+        document.getElementById('dataStatus').style.display = 'none';
+        if (!ok) { showDataError(); return; }
+        document.getElementById('newsGrid').style.display = '';
+
+        if (newsData.length === 0) {
+            document.getElementById('newsGrid').style.display = 'none';
+            document.getElementById('emptyState').style.display = 'block';
+        }
+
+        buildTicker();
+        buildHero();
+        buildCategoryFilters();
+        renderNews();
+        if (newsData.filter(n => n.featured).length > 0) startHI();
+    }
+
+    function simulateLoading() {
+        const b = document.getElementById('loadingBar');
+        b.style.width = '30%';
+        setTimeout(() => b.style.width = '70%', 200);
+        setTimeout(() => b.style.width = '100%', 500);
+        setTimeout(() => { b.style.opacity = '0'; setTimeout(() => b.style.display = 'none', 300); }, 800);
+    }
 
     /* لغة */
-    function switchLang(l){if(l===currentLang)return;document.body.classList.add('fade-out');setTimeout(()=>{currentLang=l;localStorage.setItem('tm_lang',l);applyLang(l);if(newsData.length>0){buildTicker();buildHero();buildCategoryFilters();renderNews();}document.body.classList.remove('fade-out');},300);}
-    function applyLang(l){const h=document.documentElement;h.lang=l;h.dir=l==='ar'?'rtl':'ltr';document.body.style.fontFamily=l==='ar'?"'Cairo',sans-serif":"'Inter',sans-serif";document.getElementById('btnAR').classList.toggle('active',l==='ar');document.getElementById('btnEN').classList.toggle('active',l==='en');document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(I18N[l]&&I18N[l][k])el.textContent=I18N[l][k];});document.title=l==='ar'?'الرصد التقني - Tech Monitor':'Tech Monitor - الرصد التقني';}
-    function t(k){return I18N[currentLang][k]||k;}
+    function switchLang(l) {
+        if (l === currentLang) return;
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+            currentLang = l; localStorage.setItem('tm_lang', l); applyLang(l);
+            if (newsData.length > 0) { buildTicker(); buildHero(); buildCategoryFilters(); renderNews(); }
+            document.body.classList.remove('fade-out');
+        }, 300);
+    }
+    function applyLang(l) {
+        const h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+        document.body.style.fontFamily = l === 'ar' ? "'Cairo',sans-serif" : "'Inter',sans-serif";
+        document.getElementById('btnAR').classList.toggle('active', l === 'ar');
+        document.getElementById('btnEN').classList.toggle('active', l === 'en');
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const k = el.getAttribute('data-i18n');
+            if (I18N[l] && I18N[l][k]) el.textContent = I18N[l][k];
+        });
+        document.title = l === 'ar' ? 'الرصد التقني - Tech Monitor' : 'Tech Monitor - الرصد التقني';
+    }
+    function t(k) { return I18N[currentLang][k] || k; }
 
     /* عاجل */
-    function buildTicker(){const el=document.getElementById('tickerContent');const f=newsData.filter(n=>n.featured);const tx=f.length>0?f.map(n=>(currentLang==='ar'?'عاجل: ':'BREAKING: ')+(currentLang==='ar'?n.title_ar:n.title_en)):[currentLang==='ar'?'الرصد التقني — عينك على العالم الرقمي':'Tech Monitor — Your Eye on the Digital World'];const s='  \u25C6  ';el.textContent=tx.join(s)+s+tx.join(s);}
+    function buildTicker() {
+        const el = document.getElementById('tickerContent');
+        const f = newsData.filter(n => n.featured);
+        const tx = f.length > 0
+            ? f.map(n => (currentLang === 'ar' ? 'عاجل: ' : 'BREAKING: ') + (currentLang === 'ar' ? n.title_ar : n.title_en))
+            : [currentLang === 'ar' ? 'الرصد التقني — عينك على العالم الرقمي' : 'Tech Monitor — Your Eye on the Digital World'];
+        const s = '  \u25C6  ';
+        el.textContent = tx.join(s) + s + tx.join(s);
+    }
 
     /* هيرو */
-    function buildHero(){const f=newsData.filter(n=>n.featured);if(!f.length){document.getElementById('heroSlides').innerHTML='';return;}document.getElementById('heroSlides').innerHTML=f.map((n,i)=>`<div class="hero-slide ${i===0?'active':''}"><img src="${n.image}" alt="" loading="${i===0?'eager':'lazy'}"></div>`).join('');updateHC(f[0]);document.getElementById('heroDots').innerHTML=f.map((_,i)=>`<div class="hero-dot ${i===0?'active':''}" onclick="goSlide(${i})"></div>`).join('');heroIndex=0;}
-    function updateHC(item){const l=currentLang,title=l==='ar'?item.title_ar:item.title_en,exc=l==='ar'?item.excerpt_ar:item.excerpt_en,ext=item.isExternal?`<a href="${item.externalLink}" target="_blank" class="source-label"><i class="fas fa-external-link-alt"></i> ${t('externalSource')}: ${l==='ar'?item.source_ar:item.source_en}</a>`:'';document.getElementById('heroContent').innerHTML=`<div class="flex flex-wrap items-center gap-3 mb-4"><span class="breaking-badge"><span class="breaking-dot"></span> ${t('breaking')}</span>${ext}<span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span><span class="cat-label">${gCT(item.category)}</span></div><h2 class="text-2xl md:text-4xl font-black leading-tight max-w-3xl" style="text-shadow:0 2px 20px rgba(0,0,0,0.8);">${title}</h2><p class="mt-3 text-sm md:text-base max-w-2xl leading-relaxed" style="color:rgba(255,255,255,0.7);">${exc}</p><button onclick="${item.isExternal?`window.open('${item.externalLink}','_blank')`:`openModal(${item.id})`}" class="mt-5 px-6 py-3 rounded-lg font-bold text-sm transition-all hover:scale-105" style="background:var(--accent);color:#fff;box-shadow:0 0 20px var(--accent-glow);">${t('readMore')} <i class="fas fa-arrow-${l==='ar'?'left':'right'} mr-2"></i></button>`;}
-    function goSlide(i){const f=newsData.filter(n=>n.featured);if(i<0||i>=f.length)return;document.querySelectorAll('.hero-slide').forEach((s,x)=>s.classList.toggle('active',x===i));document.querySelectorAll('.hero-dot').forEach((d,x)=>d.classList.toggle('active',x===i));heroIndex=i;updateHC(f[i]);resetHI();}
-    function startHI(){heroInterval=setInterval(()=>{const f=newsData.filter(n=>n.featured);if(f.length<=1)return;goSlide((heroIndex+1)%f.length);},6000);}
-    function resetHI(){clearInterval(heroInterval);startHI();}
+    function buildHero() {
+        const f = newsData.filter(n => n.featured);
+        if (!f.length) { document.getElementById('heroSlides').innerHTML = ''; document.getElementById('heroContent').innerHTML = `<h2 class="text-2xl font-black" style="color:var(--accent);">${currentLang==='ar'?'الرصد التقني':'Tech Monitor'}</h2><p class="mt-2" style="color:var(--text-muted);">${currentLang==='ar'?'بوابة الهكر الهزبري':'By: Al-Hazbri Hacker'}</p>`; return; }
+        document.getElementById('heroSlides').innerHTML = f.map((n, i) => `<div class="hero-slide ${i === 0 ? 'active' : ''}"><img src="${n.image}" alt="" loading="${i === 0 ? 'eager' : 'lazy'}"></div>`).join('');
+        updateHC(f[0]);
+        document.getElementById('heroDots').innerHTML = f.map((_, i) => `<div class="hero-dot ${i === 0 ? 'active' : ''}" onclick="goSlide(${i})"></div>`).join('');
+        heroIndex = 0;
+    }
+    function updateHC(item) {
+        const l = currentLang, title = l === 'ar' ? item.title_ar : item.title_en, exc = l === 'ar' ? item.excerpt_ar : item.excerpt_en;
+        document.getElementById('heroContent').innerHTML = `<div class="flex flex-wrap items-center gap-3 mb-4"><span class="breaking-badge"><span class="breaking-dot"></span> ${t('breaking')}</span><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span><span class="cat-label">${gCT(item.category)}</span></div><h2 class="text-2xl md:text-4xl font-black leading-tight max-w-3xl" style="text-shadow:0 2px 20px rgba(0,0,0,0.8);">${title}</h2><p class="mt-3 text-sm md:text-base max-w-2xl leading-relaxed" style="color:rgba(255,255,255,0.7);">${exc}</p><button onclick="openModal(${item.id})" class="mt-5 px-6 py-3 rounded-lg font-bold text-sm transition-all hover:scale-105" style="background:var(--accent);color:#fff;box-shadow:0 0 20px var(--accent-glow);">${t('readMore')} <i class="fas fa-arrow-${l === 'ar' ? 'left' : 'right'} mr-2"></i></button>`;
+    }
+    function goSlide(i) { const f = newsData.filter(n => n.featured); if (i < 0 || i >= f.length) return; document.querySelectorAll('.hero-slide').forEach((s, x) => s.classList.toggle('active', x === i)); document.querySelectorAll('.hero-dot').forEach((d, x) => d.classList.toggle('active', x === i)); heroIndex = i; updateHC(f[i]); resetHI(); }
+    function startHI() { heroInterval = setInterval(() => { const f = newsData.filter(n => n.featured); if (f.length <= 1) return; goSlide((heroIndex + 1) % f.length); }, 6000); }
+    function resetHI() { clearInterval(heroInterval); startHI(); }
 
     /* فلاتر */
-    function buildCF(){const c=[{key:'all',label:t('allCats')},{key:'cyber',label:t('catCyber')},{key:'intel',label:t('catIntel')},{key:'tech',label:t('catTech')}];document.getElementById('catFilters').innerHTML=c.map(x=>`<button class="cat-btn ${currentCategory===x.key?'active':''}" onclick="filterCat('${x.key}')">${x.label}</button>`).join('');}
-    function filterCat(c){currentCategory=c;buildCF();renderNews();}
+    function buildCF() { const c = [{ key: 'all', label: t('allCats') }, { key: 'cyber', label: t('catCyber') }, { key: 'intel', label: t('catIntel') }, { key: 'tech', label: t('catTech') }]; document.getElementById('catFilters').innerHTML = c.map(x => `<button class="cat-btn ${currentCategory === x.key ? 'active' : ''}" onclick="filterCat('${x.key}')">${x.label}</button>`).join(''); }
+    function filterCat(c) { currentCategory = c; buildCF(); renderNews(); }
 
     /* بطاقات */
-    function renderNews(){
-        const fl=currentCategory==='all'?newsData:newsData.filter(n=>n.category===currentCategory);
-        const gr=document.getElementById('newsGrid'),nr=document.getElementById('noResults');
-        if(!fl.length){gr.innerHTML='';nr.style.display='block';return;}nr.style.display='none';
-        gr.innerHTML=fl.map((item,idx)=>{const l=currentLang,title=l==='ar'?item.title_ar:item.title_en,exc=l==='ar'?item.excerpt_ar:item.excerpt_en,src=l==='ar'?item.source_ar:item.source_en,extBadge=item.isExternal?`<span class="source-label"><i class="fas fa-external-link-alt"></i> ${t('externalSource')}</span>`:'';
-        return`<article class="news-card reveal" style="transition-delay:${idx*80}ms" onclick="${item.isExternal?`window.open('${item.externalLink}','_blank')`:`openModal(${item.id})`}"><div class="news-card-img"><img src="${item.image}" alt="" loading="lazy"><div class="absolute top-3 ${l==='ar'?'right-3':'left-3'} z-10">${extBadge}</div><div class="absolute top-3 ${l==='ar'?'left-3':'right-3'} z-10"><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span></div></div><div class="p-5"><span class="cat-label mb-2 inline-block">${gCT(item.category)}</span><h3 class="font-bold text-base leading-snug" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${title}</h3><p class="mt-2 text-sm leading-relaxed" style="color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${exc}</p><div class="card-meta mt-4 pt-3" style="border-top:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${src}</span><span><i class="fas fa-calendar text-xs"></i> ${fmtD(item.date)}</span></div></div></article>`;}).join('');
-        requestAnimationFrame(()=>document.querySelectorAll('.news-card.reveal').forEach(el=>rObs.observe(el)));
+    function renderNews() {
+        const fl = currentCategory === 'all' ? newsData : newsData.filter(n => n.category === currentCategory);
+        const gr = document.getElementById('newsGrid'), nr = document.getElementById('noResults');
+        if (!fl.length) { gr.innerHTML = ''; nr.style.display = 'block'; return; } nr.style.display = 'none';
+        gr.innerHTML = fl.map((item, idx) => {
+            const l = currentLang, title = l === 'ar' ? item.title_ar : item.title_en, exc = l === 'ar' ? item.excerpt_ar : item.excerpt_en, src = l === 'ar' ? item.source_ar : item.source_en;
+            return `<article class="news-card reveal" style="transition-delay:${idx * 80}ms" onclick="openModal(${item.id})"><div class="news-card-img"><img src="${item.image}" alt="" loading="lazy"><div class="absolute top-3 ${l === 'ar' ? 'right-3' : 'left-3'} z-10"><span class="cat-label">${gCT(item.category)}</span></div><div class="absolute top-3 ${l === 'ar' ? 'left-3' : 'right-3'} z-10"><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span></div></div><div class="p-5"><h3 class="font-bold text-base leading-snug" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${title}</h3><p class="mt-2 text-sm leading-relaxed" style="color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${exc}</p><div class="card-meta mt-4 pt-3" style="border-top:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${src}</span><span><i class="fas fa-calendar text-xs"></i> ${fmtD(item.date)}</span></div></div></article>`;
+        }).join('');
+        requestAnimationFrame(() => document.querySelectorAll('.news-card.reveal').forEach(el => rObs.observe(el)));
     }
 
     /* مودال */
-    function openModal(id){const item=newsData.find(n=>n.id===id);if(!item)return;if(item.isExternal){window.open(item.externalLink,'_blank');return;}const l=currentLang,title=l==='ar'?item.title_ar:item.title_en,content=(l==='ar'?item.content_ar:item.content_en).replace(/\n/g,'<br>'),src=l==='ar'?item.source_ar:item.source_en;document.getElementById('modalContent').innerHTML=`<div class="relative"><img src="${item.image}" alt="" class="w-full h-64 object-cover rounded-t-2xl"><div class="absolute inset-0 rounded-t-2xl" style="background:linear-gradient(to top,var(--bg2),transparent 60%);"></div><button onclick="closeModal()" class="absolute top-4 ${l==='ar'?'left-4':'right-4'} w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(0,0,0,0.6);color:#fff;border:none;cursor:pointer;"><i class="fas fa-times"></i></button></div><div class="p-6 md:p-8"><div class="flex flex-wrap items-center gap-3 mb-4"><span class="cat-label">${gCT(item.category)}</span><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span></div><h2 class="text-xl md:text-2xl font-black leading-tight">${title}</h2><div class="card-meta mt-4 pb-4" style="border-bottom:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${t('source')}: ${src}</span><span><i class="fas fa-calendar text-xs"></i> ${fmtD(item.date)}</span></div><div class="mt-6 text-sm" style="color:var(--text);line-height:2;">${content}</div><div class="mt-8 pt-4 flex justify-end" style="border-top:1px solid var(--border);"><span class="text-xs" style="color:var(--text-muted)">الهكر الهزبري — ${t('fullReport')}</span></div></div>`;document.getElementById('newsModal').classList.add('active');document.body.style.overflow='hidden';}
-    function closeModal(){document.getElementById('newsModal').classList.remove('active');document.body.style.overflow='';}
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+    function openModal(id) {
+        const item = newsData.find(n => n.id === id); if (!item) return;
+        const l = currentLang, title = l === 'ar' ? item.title_ar : item.title_en, content = (l === 'ar' ? item.content_ar : item.content_en).replace(/\n/g, '<br>'), src = l === 'ar' ? item.source_ar : item.source_en;
+        document.getElementById('modalContent').innerHTML = `<div class="relative"><img src="${item.image}" alt="" class="w-full h-64 object-cover rounded-t-2xl"><div class="absolute inset-0 rounded-t-2xl" style="background:linear-gradient(to top,var(--bg2),transparent 60%);"></div><button onclick="closeModal()" class="absolute top-4 ${l === 'ar' ? 'left-4' : 'right-4'} w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(0,0,0,0.6);color:#fff;border:none;cursor:pointer;"><i class="fas fa-times"></i></button></div><div class="p-6 md:p-8"><div class="flex flex-wrap items-center gap-3 mb-4"><span class="cat-label">${gCT(item.category)}</span><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span></div><h2 class="text-xl md:text-2xl font-black leading-tight">${title}</h2><div class="card-meta mt-4 pb-4" style="border-bottom:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${t('source')}: ${src}</span><span><i class="fas fa-calendar text-xs"></i> ${fmtD(item.date)}</span></div><div class="mt-6 text-sm" style="color:var(--text);line-height:2;">${content}</div><div class="mt-8 pt-4 flex justify-end" style="border-top:1px solid var(--border);"><span class="text-xs" style="color:var(--text-muted)">الهكر الهزبري — ${t('fullReport')}</span></div></div>`;
+        document.getElementById('newsModal').classList.add('active'); document.body.style.overflow = 'hidden';
+    }
+    function closeModal() { document.getElementById('newsModal').classList.remove('active'); document.body.style.overflow = ''; }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     /* أدوات */
-    function gTC(l){return({low:'threat-low',medium:'threat-medium',high:'threat-high',critical:'threat-critical'})[l]||'threat-low';}
-    function gTT(l){return t('threat'+l.charAt(0).toUpperCase()+l.slice(1));}
-    function gCT(c){return({cyber:t('catCyber'),intel:t('catIntel'),tech:t('catTech')})[c]||c;}
-    function fmtD(d){try{return new Date(d).toLocaleDateString(currentLang==='ar'?'ar-EG':'en-US',{year:'numeric',month:'short',day:'numeric'});}catch(e){return d;}}
+    function gTC(l) { return ({ low: 'threat-low', medium: 'threat-medium', high: 'threat-high', critical: 'threat-critical' })[l] || 'threat-low'; }
+    function gTT(l) { return t('threat' + l.charAt(0).toUpperCase() + l.slice(1)); }
+    function gCT(c) { return ({ cyber: t('catCyber'), intel: t('catIntel'), tech: t('catTech') })[c] || c; }
+    function fmtD(d) { try { return new Date(d).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' }); } catch (e) { return d; } }
 
     /* تمرير */
-    const rObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');rObs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-    function setupScrollEffects(){const nb=document.getElementById('navbar'),bt=document.getElementById('backToTop');window.addEventListener('scroll',()=>{nb.classList.toggle('scrolled',window.scrollY>50);bt.classList.toggle('visible',window.scrollY>500);},{passive:true});document.querySelectorAll('.reveal').forEach(el=>rObs.observe(el));}
-    function toggleMobile(){const m=document.getElementById('mobileMenu'),i=document.getElementById('menuIcon');m.classList.toggle('active');i.classList.toggle('fa-bars');i.classList.toggle('fa-times');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
+    const rObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); rObs.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    function setupScrollEffects() { const nb = document.getElementById('navbar'), bt = document.getElementById('backToTop'); window.addEventListener('scroll', () => { nb.classList.toggle('scrolled', window.scrollY > 50); bt.classList.toggle('visible', window.scrollY > 500); }, { passive: true }); document.querySelectorAll('.reveal').forEach(el => rObs.observe(el)); }
+    function toggleMobile() { const m = document.getElementById('mobileMenu'), i = document.getElementById('menuIcon'); m.classList.toggle('active'); i.classList.toggle('fa-bars'); i.classList.toggle('fa-times'); document.body.style.overflow = m.classList.contains('active') ? 'hidden' : ''; }
 
-    document.addEventListener('DOMContentLoaded',init);
+    document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
