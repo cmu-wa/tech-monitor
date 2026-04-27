@@ -3,347 +3,1170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الرصد التقني - Tech Monitor</title>
+    <title>هيئة الرصد السيبراني — وحدة الرصد النافذ | Cyber Surveillance Authority</title>
+    <meta name="description" content="منصة استخباراتية سيبرانية متقدمة لرصد وتحليل التهديدات الرقمية. تقارير ميدانية حول هجمات الفدية، ثغرات اليوم الصفر، وحروب الظل الرقمية في الشرق الأوسط والعالم.">
+    <meta name="keywords" content="أمن سيبراني, استخبارات رقمية, هجمات فدية, ثغرات يوم صفر, حروب سيبرانية, الشرق الأوسط, cyber security, intelligence, zero-day, ransomware">
+    <meta name="author" content="وحدة الرصد النافذ">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="هيئة الرصد السيبراني — وحدة الرصد النافذ">
+    <meta property="og:description" content="الاستخبارات الرقمية المتقدمة — رصد التهديدات السيبرانية في الوقت الفعلي">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_SA">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script>
-        tailwind.config={theme:{extend:{colors:{onyx:{900:'#060a12',800:'#0a1020',700:'#0f1a2e',600:'#152238',500:'#1c2d48'},emerald:{400:'#34d399',500:'#10b981',600:'#059669',700:'#047857'}},fontFamily:{cairo:['Cairo','sans-serif'],inter:['Inter','sans-serif']}}}}
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { cairo:['Cairo','sans-serif'], mono:['JetBrains Mono','monospace'] },
+                    colors: {
+                        abyss: { 950:'#020408', 900:'#040810', 800:'#060c18', 700:'#0a1225', 600:'#0e1a32', 500:'#142240' },
+                        matrix: { 500:'#00ff41', 400:'#33ff66', 300:'#66ff88', 600:'#00cc33', 700:'#009926' }
+                    }
+                }
+            }
+        }
     </script>
     <style>
-        :root{--bg:#060a12;--bg2:#0a1020;--bg3:#0f1a2e;--bg4:#152238;--accent:#10b981;--accent-light:#34d399;--accent-glow:rgba(16,185,129,0.15);--text:#e2e8f0;--text-muted:#64748b;--border:#1e293b;--danger:#ef4444;--warn:#f59e0b;}
+        :root {
+            --bg:#020408; --bg2:#040810; --bg3:#060c18; --bg4:#0a1225;
+            --accent:#00ff41; --accent-dim:#00cc33; --accent-glow:rgba(0,255,65,0.08);
+            --accent-glow-md:rgba(0,255,65,0.15); --accent-glow-hi:rgba(0,255,65,0.25);
+            --text:#c8d6e5; --text-bright:#e8f0f8; --text-muted:#3e5068;
+            --border:#0d1a2d; --border-light:#142240;
+            --danger:#ff0040; --danger-glow:rgba(255,0,64,0.15);
+            --warn:#ffaa00; --warn-glow:rgba(255,170,0,0.15);
+            --info:#0088ff;
+        }
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
-        body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-        [dir="ltr"] body{font-family:'Inter',sans-serif;}
-        .bg-grid{background-image:linear-gradient(rgba(16,185,129,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,0.03) 1px,transparent 1px);background-size:60px 60px;}
-        .bg-glow{position:fixed;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(16,185,129,0.08),transparent 70%);pointer-events:none;z-index:0;animation:gf 20s ease-in-out infinite;}
-        .bg-glow-2{position:fixed;bottom:-200px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.05),transparent 70%);pointer-events:none;z-index:0;animation:gf 25s ease-in-out infinite reverse;}
-        @keyframes gf{0%,100%{transform:translate(0,0);}50%{transform:translate(80px,60px);}}
-        .top-bar{background:linear-gradient(90deg,var(--accent),#059669);color:#fff;font-size:0.8rem;font-weight:600;padding:6px 0;overflow:hidden;}
-        .ticker-wrap{overflow:hidden;white-space:nowrap;}
-        .ticker-content{display:inline-block;animation:tk 40s linear infinite;}
-        @keyframes tk{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
-        [dir="ltr"] .ticker-content{animation:tkl 40s linear infinite;}
-        @keyframes tkl{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
-        .navbar{background:rgba(10,16,32,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;transition:all 0.3s ease;}
-        .navbar.scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.5);}
-        .logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--accent),#047857);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px var(--accent-glow);overflow:hidden;position:relative;}
-        .logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.15));}
-        .cat-btn{padding:8px 18px;border-radius:8px;font-size:0.85rem;font-weight:600;border:1px solid transparent;cursor:pointer;transition:all 0.3s ease;background:transparent;color:var(--text-muted);}
-        .cat-btn:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-glow);}
-        .cat-btn.active{color:#fff;background:var(--accent);border-color:var(--accent);box-shadow:0 0 15px var(--accent-glow);}
-        .hero-section{position:relative;height:75vh;min-height:500px;overflow:hidden;}
-        .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease,transform 1.2s ease;transform:scale(1.05);}
+        body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;}
+
+        /* === خلفية الشبكة === */
+        .bg-matrix-grid{
+            background-image:
+                linear-gradient(rgba(0,255,65,0.02) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(0,255,65,0.02) 1px,transparent 1px);
+            background-size:50px 50px;
+        }
+
+        /* === التوهجات الخلفية === */
+        .glow-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);}
+        .glow-orb-1{top:-150px;right:-100px;width:500px;height:500px;background:rgba(0,255,65,0.04);animation:orbDrift 30s ease-in-out infinite;}
+        .glow-orb-2{bottom:-200px;left:-150px;width:400px;height:400px;background:rgba(0,255,65,0.03);animation:orbDrift 35s ease-in-out infinite reverse;}
+        .glow-orb-3{top:40%;left:50%;width:300px;height:300px;background:rgba(0,136,255,0.02);animation:orbDrift 25s ease-in-out infinite 5s;}
+        @keyframes orbDrift{0%,100%{transform:translate(0,0);}25%{transform:translate(40px,-30px);}50%{transform:translate(-20px,50px);}75%{transform:translate(30px,20px);}}
+
+        /* === خط المسح === */
+        .scan-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,var(--accent) 50%,transparent 100%);opacity:0.4;animation:scanMove 6s linear infinite;pointer-events:none;z-index:5;}
+        @keyframes scanMove{0%{top:0;}100%{top:100%;}}
+
+        /* === شريط العاجل === */
+        .alert-bar{background:linear-gradient(90deg,#1a0008,#2d0011,#1a0008);border-bottom:1px solid rgba(255,0,64,0.3);position:relative;overflow:hidden;}
+        .alert-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,0,64,0.05),transparent);animation:alertShimmer 4s linear infinite;}
+        @keyframes alertShimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+        .ticker-wrap{overflow:hidden;white-space:nowrap;flex:1;}
+        .ticker-content{display:inline-block;animation:tickerRTL 50s linear infinite;}
+        @keyframes tickerRTL{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+
+        /* === مؤشر التهديد === */
+        .threat-gauge{display:flex;gap:3px;align-items:center;}
+        .threat-seg{width:28px;height:10px;border-radius:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.05);transition:all 0.6s ease;}
+        .threat-seg.active-green{background:#00ff41;border-color:#00ff41;box-shadow:0 0 8px rgba(0,255,65,0.5);}
+        .threat-seg.active-yellow{background:#ffaa00;border-color:#ffaa00;box-shadow:0 0 8px rgba(255,170,0,0.5);}
+        .threat-seg.active-orange{background:#ff6600;border-color:#ff6600;box-shadow:0 0 8px rgba(255,102,0,0.5);}
+        .threat-seg.active-red{background:#ff0040;border-color:#ff0040;box-shadow:0 0 8px rgba(255,0,64,0.6);animation:segPulse 1.5s ease-in-out infinite;}
+        @keyframes segPulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
+
+        /* === شريط التنقل === */
+        .navbar{background:rgba(2,4,8,0.92);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;transition:all 0.3s ease;}
+        .navbar.scrolled{box-shadow:0 4px 40px rgba(0,0,0,0.6);border-bottom-color:rgba(0,255,65,0.1);}
+
+        .logo-mark{width:42px;height:42px;position:relative;display:flex;align-items:center;justify-content:center;}
+        .logo-mark svg{filter:drop-shadow(0 0 8px rgba(0,255,65,0.4));}
+
+        /* === أزرار التصنيف === */
+        .cat-btn{padding:7px 16px;border-radius:4px;font-size:0.78rem;font-weight:700;letter-spacing:0.02em;border:1px solid var(--border);cursor:pointer;transition:all 0.3s ease;background:transparent;color:var(--text-muted);font-family:inherit;}
+        .cat-btn:hover{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-glow);}
+        .cat-btn.active{color:#000;background:var(--accent);border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow-md);}
+
+        /* === هيرو === */
+        .hero-section{position:relative;height:72vh;min-height:480px;overflow:hidden;border-bottom:1px solid var(--border);}
+        .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease,transform 1.2s ease;transform:scale(1.04);}
         .hero-slide.active{opacity:1;transform:scale(1);}
-        .hero-slide img{width:100%;height:100%;object-fit:cover;}
-        .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,10,18,0.98) 0%,rgba(6,10,18,0.6) 40%,rgba(6,10,18,0.3) 100%);}
-        .hero-content{position:absolute;bottom:0;left:0;right:0;padding:40px;z-index:2;}
-        .breaking-badge{display:inline-flex;align-items:center;gap:8px;background:var(--danger);color:#fff;padding:6px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;animation:bp 2s ease-in-out infinite;}
-        @keyframes bp{0%,100%{opacity:1;}50%{opacity:0.7;}}
-        .breaking-dot{width:8px;height:8px;background:#fff;border-radius:50%;animation:db 1s infinite;}
-        @keyframes db{0%,100%{opacity:1;}50%{opacity:0;}}
-        .hero-dots{display:flex;gap:8px;}
-        .hero-dot{width:32px;height:4px;border-radius:2px;background:rgba(255,255,255,0.3);cursor:pointer;transition:all 0.4s ease;}
-        .hero-dot.active{background:var(--accent);width:48px;}
-        .news-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);}
-        .news-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 30px var(--accent-glow);}
-        .news-card-img{position:relative;overflow:hidden;height:200px;}
-        .news-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
-        .news-card:hover .news-card-img img{transform:scale(1.08);}
-        .news-card-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,var(--bg2),transparent);}
-        .threat-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:700;}
-        .threat-low{background:rgba(16,185,129,0.15);color:#34d399;}.threat-medium{background:rgba(245,158,11,0.15);color:#fbbf24;}.threat-high{background:rgba(239,68,68,0.15);color:#f87171;}.threat-critical{background:rgba(239,68,68,0.25);color:#ef4444;animation:cp 2s infinite;}
-        @keyframes cp{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.3);}50%{box-shadow:0 0 10px 3px rgba(239,68,68,0.2);}}
-        .cat-label{display:inline-block;padding:2px 10px;border-radius:4px;font-size:0.7rem;font-weight:700;background:var(--accent-glow);color:var(--accent);}
-        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.4s ease;padding:20px;}
+        .hero-slide img{width:100%;height:100%;object-fit:cover;filter:brightness(0.5) saturate(0.7);}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,rgba(2,4,8,0.7) 35%,rgba(2,4,8,0.2) 100%);}
+        .hero-vignette{position:absolute;inset:0;box-shadow:inset 0 0 200px rgba(0,0,0,0.8);}
+        .hero-content{position:absolute;bottom:0;left:0;right:0;padding:40px;z-index:3;}
+
+        .classified-stamp{display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,64,0.12);border:1px solid rgba(255,0,64,0.3);color:var(--danger);padding:4px 14px;font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+        .classified-stamp .dot{width:6px;height:6px;background:var(--danger);border-radius:50%;animation:dotBlink 0.8s infinite;}
+        @keyframes dotBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+        .hero-dots{display:flex;gap:6px;}
+        .hero-dot{width:28px;height:3px;border-radius:1px;background:rgba(255,255,255,0.15);cursor:pointer;transition:all 0.4s ease;}
+        .hero-dot.active{background:var(--accent);width:44px;box-shadow:0 0 10px var(--accent-glow-md);}
+
+        /* === بطاقات الأخبار === */
+        .news-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);position:relative;cursor:pointer;}
+        .news-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-glow-md),transparent);opacity:0;transition:opacity 0.3s ease;z-index:2;}
+        .news-card:hover{transform:translateY(-4px);border-color:rgba(0,255,65,0.2);box-shadow:0 16px 50px rgba(0,0,0,0.5),0 0 30px var(--accent-glow);}
+        .news-card:hover::before{opacity:1;}
+        .card-img-wrap{position:relative;overflow:hidden;height:190px;}
+        .card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;filter:brightness(0.7) saturate(0.8);}
+        .news-card:hover .card-img-wrap img{transform:scale(1.06);filter:brightness(0.8) saturate(1);}
+        .card-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,var(--bg2),transparent);}
+
+        .threat-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:2px;font-size:0.65rem;font-weight:700;letter-spacing:0.05em;font-family:'JetBrains Mono',monospace;}
+        .tag-low{background:rgba(0,255,65,0.1);color:#00ff41;border:1px solid rgba(0,255,65,0.2);}
+        .tag-medium{background:rgba(255,170,0,0.1);color:#ffaa00;border:1px solid rgba(255,170,0,0.2);}
+        .tag-high{background:rgba(255,102,0,0.1);color:#ff6600;border:1px solid rgba(255,102,0,0.2);}
+        .tag-critical{background:rgba(255,0,64,0.12);color:#ff0040;border:1px solid rgba(255,0,64,0.25);animation:tagPulse 2s infinite;}
+        @keyframes tagPulse{0%,100%{box-shadow:none;}50%{box-shadow:0 0 12px rgba(255,0,64,0.2);}}
+
+        .cat-tag{display:inline-block;padding:2px 8px;font-size:0.65rem;font-weight:700;border-radius:2px;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(0,255,65,0.15);letter-spacing:0.03em;}
+
+        .card-meta{display:flex;align-items:center;gap:10px;font-size:0.7rem;color:var(--text-muted);flex-wrap:wrap;font-family:'JetBrains Mono',monospace;}
+        .card-meta i{font-size:0.6rem;}
+
+        /* === المودال === */
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(12px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.35s ease;padding:16px;}
         .modal-overlay.active{opacity:1;visibility:visible;}
-        .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:18px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(40px) scale(0.95);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);}
+        .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;max-width:780px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(30px) scale(0.97);transition:all 0.35s cubic-bezier(0.4,0,0.2,1);}
         .modal-overlay.active .modal-box{transform:translateY(0) scale(1);}
-        .modal-box::-webkit-scrollbar{width:6px;}.modal-box::-webkit-scrollbar-track{background:var(--bg);}.modal-box::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
-        .lang-toggle{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
-        .lang-btn{padding:6px 14px;font-size:0.75rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;border:none;background:transparent;color:var(--text-muted);}
-        .lang-btn.active{background:var(--accent);color:#fff;}
-        .fade-out{opacity:0;transition:opacity 0.3s ease;}
-        footer{background:var(--bg2);border-top:1px solid var(--border);}
-        .loading-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:999;transition:width 0.3s ease;box-shadow:0 0 10px var(--accent);}
-        .reveal{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.4,0,0.2,1);}
-        .reveal.visible{opacity:1;transform:translateY(0);}
-        .back-to-top{position:fixed;bottom:30px;right:30px;z-index:150;width:48px;height:48px;border-radius:12px;background:var(--accent);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(20px);transition:all 0.3s ease;box-shadow:0 4px 20px var(--accent-glow);}
-        [dir="ltr"] .back-to-top{right:auto;left:30px;}
-        .back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0);}
-        .back-to-top:hover{transform:translateY(-3px);}
-        .mobile-menu{position:fixed;inset:0;background:rgba(6,10,18,0.98);z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;opacity:0;visibility:hidden;transition:all 0.4s ease;}
+        .modal-box::-webkit-scrollbar{width:4px;}
+        .modal-box::-webkit-scrollbar-track{background:var(--bg);}
+        .modal-box::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:2px;}
+
+        /* === زر العودة === */
+        .back-top{position:fixed;bottom:24px;right:24px;z-index:150;width:44px;height:44px;border-radius:4px;background:var(--accent);color:#000;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(16px);transition:all 0.3s ease;font-weight:900;}
+        [dir="ltr"] .back-top{right:auto;left:24px;}
+        .back-top.visible{opacity:1;visibility:visible;transform:translateY(0);}
+        .back-top:hover{box-shadow:0 0 24px var(--accent-glow-hi);transform:translateY(-2px);}
+
+        /* === قائمة الموبايل === */
+        .mobile-menu{position:fixed;inset:0;background:rgba(2,4,8,0.98);backdrop-filter:blur(20px);z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;visibility:hidden;transition:all 0.4s ease;}
         .mobile-menu.active{opacity:1;visibility:visible;}
-        .card-meta{display:flex;align-items:center;gap:12px;font-size:0.75rem;color:var(--text-muted);flex-wrap:wrap;}
-        .scan-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:sl 4s linear infinite;opacity:0.3;}
-        @keyframes sl{0%{top:0;}100%{top:100%;}}
-        .data-status{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:60px 20px;text-align:center;}
-        .data-status .spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
+
+        /* === حالة التحميل === */
+        .load-state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:60px 20px;text-align:center;}
+        .load-state .spinner{width:36px;height:36px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;}
         @keyframes spin{to{transform:rotate(360deg);}}
-        .retry-btn{padding:10px 24px;border-radius:10px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-weight:700;font-family:inherit;font-size:0.9rem;transition:all 0.2s ease;}
-        .retry-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px var(--accent-glow);}
-        .empty-state i{font-size:4rem;color:var(--bg4);margin-bottom:16px;}
-        .empty-state p{color:var(--text-muted);max-width:400px;line-height:1.8;}
-        @media(max-width:768px){.hero-section{height:55vh;min-height:380px;}.hero-content{padding:20px;}.news-card-img{height:160px;}}
+        .retry-btn{padding:8px 20px;border-radius:4px;background:var(--accent);color:#000;border:none;cursor:pointer;font-weight:800;font-family:inherit;font-size:0.85rem;transition:all 0.2s ease;}
+        .retry-btn:hover{box-shadow:0 0 16px var(--accent-glow-md);}
+
+        /* === الإظهار التدريجي === */
+        .reveal{opacity:0;transform:translateY(24px);transition:all 0.6s cubic-bezier(0.4,0,0.2,1);}
+        .reveal.visible{opacity:1;transform:translateY(0);}
+
+        /* === شريط التحميل === */
+        .load-bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:999;transition:width 0.3s ease;box-shadow:0 0 12px var(--accent-glow-hi);}
+
+        /* === انتقال اللغة === */
+        .lang-fade{transition:opacity 0.25s ease;}
+        .lang-fade.out{opacity:0;}
+
+        /* === خط فاصل مضيء === */
+        .glow-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-light),rgba(0,255,65,0.15),var(--border-light),transparent);}
+
+        /* === الفوتر === */
+        footer{background:var(--bg2);border-top:1px solid var(--border);}
+
+        /* === إحصائيات === */
+        .stat-box{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:16px;text-align:center;transition:all 0.3s ease;}
+        .stat-box:hover{border-color:rgba(0,255,65,0.2);box-shadow:0 0 20px var(--accent-glow);}
+        .stat-num{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:800;color:var(--accent);}
+
+        /* === التبديل اللغوي === */
+        .lang-switch{display:flex;background:var(--bg3);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+        .lang-sw-btn{padding:5px 12px;font-size:0.7rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;border:none;background:transparent;color:var(--text-muted);font-family:inherit;}
+        .lang-sw-btn.active{background:var(--accent);color:#000;}
+
+        /* === الاستجابة === */
+        @media(max-width:768px){
+            .hero-section{height:52vh;min-height:360px;}
+            .hero-content{padding:20px;}
+            .card-img-wrap{height:150px;}
+            .threat-seg{width:18px;height:7px;}
+        }
         @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
-        ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:4px;}::-webkit-scrollbar-thumb:hover{background:var(--accent);}
+        ::-webkit-scrollbar{width:6px;}
+        ::-webkit-scrollbar-track{background:var(--bg);}
+        ::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:3px;}
+        ::-webkit-scrollbar-thumb:hover{background:var(--accent-dim);}
     </style>
+
+    <!-- البيانات المنظمة لـ SEO -->
+    <script type="application/ld+json">
+    {
+        "@context":"https://schema.org",
+        "@type":"Organization",
+        "name":"هيئة الرصد السيبراني — وحدة الرصد النافذ",
+        "description":"منصة استخباراتية سيبرانية متقدمة لرصد وتحليل التهديدات الرقمية",
+        "sameAs":[]
+    }
+    </script>
 </head>
-<body class="bg-grid">
-    <div class="loading-bar" id="loadingBar" style="width:0%"></div>
-    <div class="bg-glow"></div><div class="bg-glow-2"></div>
 
-    <div class="top-bar"><div class="flex items-center gap-3 px-4"><span class="breaking-badge" style="animation:none;background:rgba(255,255,255,0.2);padding:2px 10px;font-size:0.7rem;"><i class="fas fa-bolt"></i></span><div class="ticker-wrap flex-1"><div class="ticker-content" id="tickerContent"></div></div></div></div>
+<body class="bg-matrix-grid">
+    <!-- شريط التحميل العلوي -->
+    <div class="load-bar" id="loadBar" style="width:0%"></div>
 
-    <nav class="navbar" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 no-underline">
-                <div class="logo-icon"><svg width="26" height="26" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" stroke="white" stroke-width="3" fill="none"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5" fill="none"/><circle cx="50" cy="50" r="10" fill="white"/><path d="M12 50 L0 50" stroke="white" stroke-width="2.5"/><path d="M88 50 L100 50" stroke="white" stroke-width="2.5"/><path d="M50 12 L50 0" stroke="white" stroke-width="2.5"/><path d="M50 88 L50 100" stroke="white" stroke-width="2.5"/></svg></div>
-                <div><h1 class="text-lg font-black leading-tight" style="color:var(--accent)" data-i18n="siteName">الرصد التقني</h1><span class="text-xs" style="color:var(--text-muted)" data-i18n="siteAuthor">بوابة الهكر الهزبري</span></div>
-            </a>
-            <div class="hidden md:flex items-center gap-6">
-                <a href="#hero" class="text-sm font-semibold hover:text-emerald-400 transition" style="color:var(--text-muted)" data-i18n="navHome">الرئيسية</a>
-                <a href="#news" class="text-sm font-semibold hover:text-emerald-400 transition" style="color:var(--text-muted)" data-i18n="navNews">الأخبار</a>
-                <a href="#about" class="text-sm font-semibold hover:text-emerald-400 transition" style="color:var(--text-muted)" data-i18n="navAbout">عن الموقع</a>
-                <a href="admin.html" class="text-sm font-semibold hover:text-emerald-400 transition flex items-center gap-1" style="color:var(--text-muted)"><i class="fas fa-terminal text-xs"></i><span>Admin</span></a>
+    <!-- التوهجات الخلفية -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+
+    <!-- ========== شريط الإنذار العاجل ========== -->
+    <div class="alert-bar" id="alertBar">
+        <div class="flex items-center gap-3 px-4 py-1.5">
+            <span class="classified-stamp flex-shrink-0">
+                <span class="dot"></span>
+                <span data-i18n="classifiedLabel">سري للغاية</span>
+            </span>
+            <div class="ticker-wrap">
+                <div class="ticker-content" id="tickerContent"></div>
             </div>
-            <div class="flex items-center gap-3">
-                <div class="lang-toggle"><button class="lang-btn active" id="btnAR" onclick="switchLang('ar')">عربي</button><button class="lang-btn" id="btnEN" onclick="switchLang('en')">EN</button></div>
-                <button class="md:hidden text-xl" style="color:var(--text-muted);background:none;border:none;cursor:pointer;" onclick="toggleMobile()" aria-label="القائمة"><i class="fas fa-bars" id="menuIcon"></i></button>
+            <div class="hidden md:flex items-center gap-2 flex-shrink-0">
+                <span class="text-xs font-mono" style="color:var(--text-muted);" id="liveClock"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== شريط التنقل ========== -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="التنقل الرئيسي">
+        <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+            <!-- الشعار -->
+            <a href="#" class="flex items-center gap-3 no-underline flex-shrink-0" aria-label="الصفحة الرئيسية">
+                <div class="logo-mark">
+                    <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="90" height="90" rx="4" stroke="#00ff41" stroke-width="2" fill="none" opacity="0.3"/>
+                        <circle cx="50" cy="50" r="32" stroke="#00ff41" stroke-width="2" fill="none"/>
+                        <circle cx="50" cy="50" r="18" stroke="#00ff41" stroke-width="1.5" fill="none" opacity="0.6"/>
+                        <circle cx="50" cy="50" r="6" fill="#00ff41"/>
+                        <line x1="50" y1="18" x2="50" y2="5" stroke="#00ff41" stroke-width="1.5"/>
+                        <line x1="50" y1="95" x2="50" y2="82" stroke="#00ff41" stroke-width="1.5"/>
+                        <line x1="18" y1="50" x2="5" y2="50" stroke="#00ff41" stroke-width="1.5"/>
+                        <line x1="95" y1="50" x2="82" y2="50" stroke="#00ff41" stroke-width="1.5"/>
+                        <line x1="27" y1="27" x2="18" y2="18" stroke="#00ff41" stroke-width="1" opacity="0.4"/>
+                        <line x1="73" y1="27" x2="82" y2="18" stroke="#00ff41" stroke-width="1" opacity="0.4"/>
+                        <line x1="27" y1="73" x2="18" y2="82" stroke="#00ff41" stroke-width="1" opacity="0.4"/>
+                        <line x1="73" y1="73" x2="82" y2="82" stroke="#00ff41" stroke-width="1" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="leading-tight">
+                    <h1 class="text-sm font-black tracking-tight" style="color:var(--accent);" data-i18n="siteName">هيئة الرصد السيبراني</h1>
+                    <span class="text-xs font-mono font-medium" style="color:var(--text-muted);" data-i18n="siteSub">وحدة الرصد النافذ — الاستخبارات الرقمية المتقدمة</span>
+                </div>
+            </a>
+
+            <!-- مؤشر التهديد + روابط -->
+            <div class="hidden md:flex items-center gap-6">
+                <div class="flex items-center gap-3 px-3 py-1.5 rounded" style="background:var(--bg3);border:1px solid var(--border);">
+                    <span class="text-xs font-mono font-semibold" style="color:var(--text-muted);" data-i18n="threatIndicator">مؤشر التهديد</span>
+                    <div class="threat-gauge" id="threatGauge">
+                        <div class="threat-seg" data-level="1"></div>
+                        <div class="threat-seg" data-level="2"></div>
+                        <div class="threat-seg" data-level="3"></div>
+                        <div class="threat-seg" data-level="4"></div>
+                        <div class="threat-seg" data-level="5"></div>
+                    </div>
+                    <span class="text-xs font-mono font-bold" id="threatLabel" style="color:var(--accent);">—</span>
+                </div>
+                <a href="#hero" class="text-xs font-semibold hover:text-matrix-500 transition no-underline" style="color:var(--text-muted);" data-i18n="navHome">الرئيسية</a>
+                <a href="#news" class="text-xs font-semibold hover:text-matrix-500 transition no-underline" style="color:var(--text-muted);" data-i18n="navOps">التقارير</a>
+                <a href="#about" class="text-xs font-semibold hover:text-matrix-500 transition no-underline" style="color:var(--text-muted);" data-i18n="navAbout">عن الهيئة</a>
+            </div>
+
+            <!-- أدوات -->
+            <div class="flex items-center gap-2">
+                <div class="lang-switch">
+                    <button class="lang-sw-btn active" id="btnAR" onclick="switchLang('ar')">عربي</button>
+                    <button class="lang-sw-btn" id="btnEN" onclick="switchLang('en')">EN</button>
+                </div>
+                <button class="md:hidden" style="background:none;border:none;color:var(--text-muted);font-size:1.2rem;cursor:pointer;padding:4px;" onclick="toggleMobile()" aria-label="القائمة">
+                    <i class="fas fa-bars" id="menuIcon"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <div class="mobile-menu" id="mobileMenu">
-        <button onclick="toggleMobile()" style="position:absolute;top:20px;right:20px;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer;"><i class="fas fa-times"></i></button>
-        <a href="#hero" onclick="toggleMobile()" class="text-2xl font-bold hover:text-emerald-400 transition no-underline" style="color:var(--text)" data-i18n="navHome">الرئيسية</a>
-        <a href="#news" onclick="toggleMobile()" class="text-2xl font-bold hover:text-emerald-400 transition no-underline" style="color:var(--text)" data-i18n="navNews">الأخبار</a>
-        <a href="#about" onclick="toggleMobile()" class="text-2xl font-bold hover:text-emerald-400 transition no-underline" style="color:var(--text)" data-i18n="navAbout">عن الموقع</a>
-        <a href="admin.html" class="text-2xl font-bold hover:text-emerald-400 transition no-underline flex items-center gap-2" style="color:var(--text)"><i class="fas fa-terminal"></i> Admin</a>
+    <!-- ========== قائمة الموبايل ========== -->
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="القائمة الجانبية">
+        <button onclick="toggleMobile()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text);font-size:1.3rem;cursor:pointer;" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+        <a href="#hero" onclick="toggleMobile()" class="text-xl font-black no-underline" style="color:var(--text);" data-i18n="navHome">الرئيسية</a>
+        <a href="#news" onclick="toggleMobile()" class="text-xl font-black no-underline" style="color:var(--text);" data-i18n="navOps">التقارير</a>
+        <a href="#about" onclick="toggleMobile()" class="text-xl font-black no-underline" style="color:var(--text);" data-i18n="navAbout">عن الهيئة</a>
+        <div class="mt-4 flex items-center gap-3">
+            <span class="text-xs font-mono" style="color:var(--text-muted);" data-i18n="threatIndicator">مؤشر التهديد</span>
+            <div class="threat-gauge" id="threatGaugeMobile"></div>
+        </div>
     </div>
 
-    <main class="relative z-10">
-        <section class="hero-section" id="hero"><div class="scan-line"></div><div id="heroSlides"></div><div class="hero-content"><div class="max-w-7xl mx-auto"><div id="heroContent"></div><div class="hero-dots mt-6" id="heroDots"></div></div></div><div class="hero-overlay"></div></section>
+    <!-- ========== المحتوى الرئيسي ========== -->
+    <main class="relative z-10 lang-fade" id="mainContent">
 
-        <section class="max-w-7xl mx-auto px-4 py-12" id="news">
-            <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-                <div><h2 class="text-2xl font-black" data-i18n="latestNews">أحدث التقارير</h2><p class="text-sm mt-1" style="color:var(--text-muted)" data-i18n="latestNewsDesc">تقارير استخبارية تقنية محللة وموثقة</p></div>
-                <div class="flex gap-2 flex-wrap" id="catFilters"></div>
+        <!-- === هيرو === -->
+        <section class="hero-section" id="hero" aria-label="أحدث التقارير المميزة">
+            <div class="scan-line"></div>
+            <div id="heroSlides"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-vignette"></div>
+            <div class="hero-content">
+                <div class="max-w-7xl mx-auto">
+                    <div id="heroContent"></div>
+                    <div class="hero-dots mt-5" id="heroDots"></div>
+                </div>
             </div>
-            <div class="data-status" id="dataStatus"><div class="spinner"></div><p style="color:var(--text-muted)" data-i18n="loadingData">جاري تحميل البيانات...</p></div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="newsGrid" style="display:none;"></div>
-            <div class="empty-state text-center" id="emptyState" style="display:none;padding:80px 20px;">
-                <i class="fas fa-satellite-dish"></i>
-                <p data-i18n="emptyMsg">لا توجد أخبار حالياً. استخدم لوحة التحكم لإضافة تقارير ونشرها.</p>
-                <a href="admin.html" class="retry-btn inline-block mt-4" style="text-decoration:none;" data-i18n="goToAdmin">لوحة التحكم</a>
-            </div>
-            <div class="text-center mt-10" id="noResults" style="display:none;"><i class="fas fa-search text-4xl mb-4" style="color:var(--text-muted)"></i><p class="text-lg" style="color:var(--text-muted)" data-i18n="noResults">لا توجد نتائج لهذا التصنيف</p></div>
         </section>
 
-        <section class="max-w-7xl mx-auto px-4 py-16 reveal" id="about">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- === الفاصل المضيء === -->
+        <div class="glow-divider"></div>
+
+        <!-- === شبكة الأخبار === -->
+        <section class="max-w-7xl mx-auto px-4 py-10" id="news" aria-label="التقارير الاستخباراتية">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
                 <div>
-                    <span class="cat-label mb-4 inline-block" data-i18n="aboutLabel">من نحن</span>
-                    <h2 class="text-3xl font-black mt-3 leading-tight" data-i18n="aboutTitle">الرصد التقني<br>عينك على العالم الرقمي</h2>
-                    <p class="mt-5 leading-relaxed" style="color:var(--text-muted)" data-i18n="aboutDesc">منصة استخبارية تقنية متخصصة في رصد وتحليل التهديدات السيبرانية المتقدمة.</p>
-                    <div class="grid grid-cols-3 gap-4 mt-8">
-                        <div class="text-center p-4 rounded-xl" style="background:var(--bg2);border:1px solid var(--border);"><div class="text-2xl font-black" style="color:var(--accent)">150+</div><div class="text-xs mt-1" style="color:var(--text-muted)" data-i18n="statReports">تقرير</div></div>
-                        <div class="text-center p-4 rounded-xl" style="background:var(--bg2);border:1px solid var(--border);"><div class="text-2xl font-black" style="color:var(--accent)">40+</div><div class="text-xs mt-1" style="color:var(--text-muted)" data-i18n="statCountries">دولة</div></div>
-                        <div class="text-center p-4 rounded-xl" style="background:var(--bg2);border:1px solid var(--border);"><div class="text-2xl font-black" style="color:var(--accent)">24/7</div><div class="text-xs mt-1" style="color:var(--text-muted)" data-i18n="statMonitor">رصد</div></div>
+                    <h2 class="text-xl font-black tracking-tight" style="color:var(--text-bright);" data-i18n="opsTitle">التقارير الاستخباراتية</h2>
+                    <p class="text-xs mt-1 font-mono" style="color:var(--text-muted);" data-i18n="opsDesc">رصد تحليلي — تحديث مستمر</p>
+                </div>
+                <div class="flex gap-2 flex-wrap" id="catFilters"></div>
+            </div>
+
+            <div class="load-state" id="loadState">
+                <div class="spinner"></div>
+                <p class="text-xs font-mono" style="color:var(--text-muted);" data-i18n="loading">جاري تحميل البيانات الاستخباراتية...</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="newsGrid" style="display:none;"></div>
+            <div class="text-center mt-8" id="noResults" style="display:none;">
+                <i class="fas fa-satellite-dish text-3xl mb-3" style="color:var(--text-muted);"></i>
+                <p class="text-sm" style="color:var(--text-muted);" data-i18n="noResults">لا توجد تقارير لهذا التصنيف</p>
+            </div>
+        </section>
+
+        <!-- === الفاصل === -->
+        <div class="glow-divider"></div>
+
+        <!-- === عن الهيئة === -->
+        <section class="max-w-7xl mx-auto px-4 py-14 reveal" id="about" aria-label="عن الهيئة">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <span class="cat-tag mb-3 inline-block font-mono" data-i18n="aboutTag">IDENTITY.SEC</span>
+                    <h2 class="text-2xl md:text-3xl font-black leading-tight mt-2" style="color:var(--text-bright);" data-i18n="aboutTitle">هيئة الرصد السيبراني<br><span style="color:var(--accent);">وحدة الرصد النافذ</span></h2>
+                    <p class="mt-4 text-sm leading-loose" style="color:var(--text-muted);" data-i18n="aboutDesc">منصة استخباراتية رقمية متقدمة تختص برصد وتحليل التهديدات السيبرانية على المستويين الإقليمي والعالمي. تعمل الوحدة على تتبع مجموعات التهديد المتقدمة (APT)، ورصد ثغرات اليوم الصفر، وتوثيق حروب الظل الرقمية التي تشكل خطراً على الأمن القومي للدول. تُقدم التقارير وفق معايير استخبارية صارمة مع التحقق الميداني من المصادر.</p>
+                    <div class="grid grid-cols-3 gap-3 mt-6">
+                        <div class="stat-box"><div class="stat-num" id="statReports">0</div><div class="text-xs mt-1 font-mono" style="color:var(--text-muted);" data-i18n="sReports">تقرير</div></div>
+                        <div class="stat-box"><div class="stat-num">20+</div><div class="text-xs mt-1 font-mono" style="color:var(--text-muted);" data-i18n="sSources">مصدر</div></div>
+                        <div class="stat-box"><div class="stat-num">24/7</div><div class="text-xs mt-1 font-mono" style="color:var(--text-muted);" data-i18n="sMonitor">رصد</div></div>
                     </div>
                 </div>
                 <div class="relative">
-                    <div class="rounded-2xl overflow-hidden" style="border:1px solid var(--border);"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop" alt="Cyber Operations" class="w-full h-80 object-cover" loading="lazy"></div>
-                    <div class="absolute -bottom-4 -right-4 p-4 rounded-xl" style="background:var(--bg2);border:1px solid var(--accent);box-shadow:0 0 30px var(--accent-glow);"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-emerald-500" style="animation:db 1s infinite;"></div><span class="text-sm font-bold" data-i18n="liveStatus">رصد مباشر</span></div></div>
+                    <div class="rounded overflow-hidden" style="border:1px solid var(--border);">
+                        <img src="https://picsum.photos/seed/cybcommand/600/400.jpg" alt="مركز العمليات السيبرانية" class="w-full h-72 object-cover" style="filter:brightness(0.5) saturate(0.6);" loading="lazy">
+                    </div>
+                    <div class="absolute -bottom-3 -right-3 px-4 py-2.5 rounded flex items-center gap-2" style="background:var(--bg2);border:1px solid rgba(0,255,65,0.3);box-shadow:0 0 30px var(--accent-glow-md);">
+                        <div class="w-2.5 h-2.5 rounded-full" style="background:var(--accent);animation:dotBlink 1s infinite;box-shadow:0 0 8px var(--accent);"></div>
+                        <span class="text-xs font-mono font-bold" style="color:var(--accent);" data-i18n="liveOps">عمليات مباشرة</span>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="relative z-10">
-        <div class="max-w-7xl mx-auto px-4 py-10">
+    <!-- ========== الفوتر ========== -->
+    <footer class="relative z-10" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-4 py-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div><div class="flex items-center gap-2 mb-4"><div class="logo-icon" style="width:36px;height:36px;border-radius:8px;"><svg width="20" height="20" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" stroke="white" stroke-width="3" fill="none"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5" fill="none"/><circle cx="50" cy="50" r="10" fill="white"/></svg></div><span class="font-black" style="color:var(--accent)" data-i18n="siteName">الرصد التقني</span></div><p class="text-sm leading-relaxed" style="color:var(--text-muted)" data-i18n="footerDesc">منصة استخبارية تقنية مستقلة.</p></div>
-                <div><h3 class="font-bold mb-4" data-i18n="footerLinks">روابط سريعة</h3><div class="flex flex-col gap-2"><a href="#hero" class="text-sm hover:text-emerald-400 transition no-underline" style="color:var(--text-muted)" data-i18n="navHome">الرئيسية</a><a href="#news" class="text-sm hover:text-emerald-400 transition no-underline" style="color:var(--text-muted)" data-i18n="navNews">الأخبار</a><a href="admin.html" class="text-sm hover:text-emerald-400 transition no-underline" style="color:var(--text-muted)">Admin Panel</a></div></div>
-                <div><h3 class="font-bold mb-4" data-i18n="footerCategories">التصنيفات</h3><div class="flex flex-col gap-2"><span class="text-sm" style="color:var(--text-muted)" data-i18n="catCyber">الأمن السيبراني</span><span class="text-sm" style="color:var(--text-muted)" data-i18n="catIntel">الاستخبارات الرقمية</span><span class="text-sm" style="color:var(--text-muted)" data-i18n="catTech">التقنية العالمية</span></div></div>
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="logo-mark" style="width:30px;height:30px;">
+                            <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="32" stroke="#00ff41" stroke-width="2.5" fill="none"/><circle cx="50" cy="50" r="6" fill="#00ff41"/></svg>
+                        </div>
+                        <span class="font-black text-sm" style="color:var(--accent);" data-i18n="siteName">هيئة الرصد السيبراني</span>
+                    </div>
+                    <p class="text-xs leading-relaxed" style="color:var(--text-muted);" data-i18n="footerDesc">وحدة الرصد النافذ — منصة استخباراتية مستقلة متخصصة في الأمن السيبراني. لا تنتمي لأي جهة حكومية أو رسمية. المحتوى لأغراض التحليل والتوعية فقط.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm mb-3" style="color:var(--text-bright);" data-i18n="fLinks">الأقسام</h3>
+                    <div class="flex flex-col gap-1.5">
+                        <span class="text-xs font-mono" style="color:var(--text-muted);" data-i18n="catIntrusions">عمليات الاختراق</span>
+                        <span class="text-xs font-mono" style="color:var(--text-muted);" data-i18n="catNatSec">الأمن القومي الرقمي</span>
+                        <span class="text-xs font-mono" style="color:var(--text-muted);" data-i18n="catVulns">رصد الثغرات</span>
+                        <span class="text-xs font-mono" style="color:var(--text-muted);" data-i18n="catShadow">حروب الظل</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm mb-3" style="color:var(--text-bright);" data-i18n="fDisclaimer">إخلاء مسؤولية</h3>
+                    <p class="text-xs leading-relaxed" style="color:var(--text-muted);" data-i18n="fDisclaimerText">جميع المعلومات المنشورة مبنية على مصادر مفتوحة (OSINT) وتُقدم لأغراض التحليل الأمني. لا تتحمل المنصة أي مسؤولية قانونية عن استخدام المحتوى.</p>
+                </div>
             </div>
-            <div class="mt-8 pt-6 flex flex-wrap items-center justify-between gap-4" style="border-top:1px solid var(--border);"><span class="text-xs" style="color:var(--text-muted)">&copy; 2025 Tech Monitor — <span data-i18n="footerRights">جميع الحقوق محفوظة</span></span><span class="text-xs" style="color:var(--text-muted)">By: الهكر الهزبري</span></div>
+            <div class="glow-divider mt-6 mb-4"></div>
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <span class="text-xs font-mono" style="color:var(--text-muted);">&copy; 2025 Cyber Surveillance Authority — <span data-i18n="fRights">جميع الحقوق محفوظة</span></span>
+                <span class="text-xs font-mono" style="color:var(--text-muted);">BUILD: <span style="color:var(--accent);">v3.1.0-RAZED</span></span>
+            </div>
         </div>
     </footer>
 
-    <div class="modal-overlay" id="newsModal" onclick="if(event.target===this)closeModal()"><div class="modal-box" role="dialog" aria-modal="true"><div id="modalContent"></div></div></div>
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})" aria-label="العودة للأعلى"><i class="fas fa-chevron-up"></i></button>
+    <!-- ========== مودال التقرير ========== -->
+    <div class="modal-overlay" id="reportModal" onclick="if(event.target===this)closeModal()" role="dialog" aria-modal="true" aria-label="التقرير الكامل">
+        <div class="modal-box"><div id="modalBody"></div></div>
+    </div>
 
-    <script src="github-logic.js"></script>
+    <!-- ========== زر العودة ========== -->
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0})" aria-label="العودة للأعلى"><i class="fas fa-chevron-up text-sm"></i></button>
+
+    <!-- ====================================================================================
+         JAVASCRIPT — المحرك الاستخباراتي
+    ==================================================================================== -->
     <script>
-    /* ⭐ غيّر هذه إلى بيانات مستودعك */
-    const GITHUB_CONFIG = { repo: 'hazpry/hazpry-news', path: 'data.json' };
+    /* ==================================================================
+       قاعدة بيانات البذرة — 20 تقريراً سيبرانياً
+       (تُستخدم عند عدم توفر ملف JSON خارجي)
+       في بيئة الإنتاج: تُستبدل بـ fetch('./data/news-data.json')
+    ================================================================== */
+    const SEED_DATA = [
+        {
+            id:1,
+            title_ar:"عملية \"عاصفة رقمية\": اختراق منظومات التحكم في منشآت نفطية خليجية عبر ثغرة Zero-Day",
+            title_en:"Operation 'Digital Storm': Zero-Day Breach of Gulf Oil Facility Control Systems",
+            excerpt_ar:"كشفت وحدة التحليل أن مجموعة APT تابعة لدولة في المنطقة نجحت في اختراق أنظمة SCADA لثلاث منشآت نفطية كبرى باستخدام ثغرة يوم صفر في بروتوكول OPC UA.",
+            excerpt_en:"Analysis unit revealed a state-sponsored APT group successfully breached SCADA systems at three major oil facilities using a Zero-Day vulnerability in the OPC UA protocol.",
+            content_ar:"في تطور يُعد من أخطر العمليات السيبرانية المكتشفة في المنطقة، كشفت وحدة الرصد النافذ عن عملية اختراق واسعة النطاق أُطلق عليها تسمية \"عاصفة رقمية\". المجموعة المهاجمة — التي تُحلل هويتها وفق مؤشرات التهديد (IoC) — استغلت ثغرة يوم صفر غير مكتشفة سابقاً في بروتوكول OPC UA المستخدم على نطاق واسع في أنظمة التحكم الصناعي.\n\nالثغرة المُسماة CVE-2025-0147 تسمح للمهاجم بتنفيذ أوامر عن بُعد على وحدات التحكم PLC دون الحاجة لصلاحيات مصادقة. التحليل الجنائي الرقمي أظهر أن المهاجمين قضوا ما لا يقل عن 4 أشهر في مرحلة الاستطلاع قبل تنفيذ الهجوم الفعلي.\n\nالمنشآت المستهدفة تضم محطة تصدير رئيسية ومصفاتين لتكرير النفط. لم يُسجل أي تأثير تشغيلي مباشر، لكن التحليل يشير إلى أن المهاجمين كانوا في مرحلة التموضع لتنفيذ عملية تخريب في لحظة محددة.\n\nالتوصية العاجلة: تحديث جميع وحدات OPC UA إلى الإصدار الصادر في يناير 2025، وتفعيل مراقبة الشبكة الصناعية (ICS Monitoring) على مدار الساعة.",
+            content_en:"In a development considered among the most dangerous cyber operations discovered in the region, the Razed Window Unit uncovered a widespread intrusion campaign codenamed 'Digital Storm'. The attacking group — whose identity is being analyzed based on Threat Indicators (IoC) — exploited a previously unknown Zero-Day vulnerability in the OPC UA protocol widely used in industrial control systems.\n\nThe vulnerability, designated CVE-2025-0147, allows remote command execution on PLC control units without authentication requirements. Digital forensic analysis revealed the attackers spent at least 4 months in reconnaissance before executing the actual attack.\n\nTargeted facilities include a major export terminal and two oil refineries. No direct operational impact was recorded, but analysis indicates the attackers were positioning for a sabotage operation at a specific moment.\n\nUrgent Recommendation: Update all OPC UA units to the January 2025 release and activate 24/7 ICS Monitoring.",
+            image:"https://picsum.photos/seed/oilcyber/900/500.jpg",
+            category:"intrusions",
+            threat_level:"critical",
+            source_ar:"وحدة التحليل الاستخباراتي",
+            source_en:"Intelligence Analysis Unit",
+            date:"2025-01-18",
+            featured:true
+        },
+        {
+            id:2,
+            title_ar:"ثغرة يوم صفر في Windows Kernel تُستغل في هجمات استهدافية ضد أهداف عسكرية في الشرق الأوسط",
+            title_en:"Windows Kernel Zero-Day Exploited in Targeted Attacks Against Middle Eastern Military Assets",
+            excerpt_ar:"اكتشف باحثون ثغرة ارتقاعية في نواة Windows تُستخدم فعلياً في هجمات محددة ضد وزارات دفاع في المنطقة. مايكروسوفت أصدرت إصلاحاً عاجلاً.",
+            excerpt_en:"Researchers discovered an elevation-of-privilege vulnerability in the Windows Kernel actively exploited in targeted attacks against regional defense ministries. Microsoft issued an emergency patch.",
+            content_ar:"أصدرت مايكروسوفت تحديثاً أمنياً عاجلاً خارج دورتها المعتادة لإصلاح ثغرة ارتقائية للصلاحيات في نواة Windows (CVE-2025-0198). الثغرة التي اكتشفها فريق من مختبر Kaspersky GReAT تتيح لمهاجم محلي الحصول على صلاحيات SYSTEM كاملة.\n\nما يُثير القلق هو اكتشاف استغلال نشط للثغرة في هجمات محددة ضد أهداف عسكرية في الشرق الأوسط. التحليل التقني يُظهر أن المهاجمين دمجوا الثغرة ضمن سلسلة استغلال (Exploit Chain) تبدأ بمستند Office ملغوم ينتهي بتنفيذ برمجيات خبيثة متقدمة.\n\nمؤشرات التهديد تشير إلى ارتباط المجموعة بجهة فاعلة حكومية ذات قدرات متقدمة، مع استخدام بنية تحتية مشفرة وتقنيات التخفي المعروفة بـ \"Living off the Land\".\n\nجميع المؤسسات العسكرية والدفاعية مطالبة بتطبيق التحديث فوراً ومراجعة سجلات النظام بحثاً عن مؤشرات الاختراق.",
+            content_en:"Microsoft issued an emergency out-of-band security update to patch a privilege escalation vulnerability in the Windows Kernel (CVE-2025-0198). The vulnerability, discovered by Kaspersky GReAT team, allows a local attacker to gain full SYSTEM privileges.\n\nOf concern is the discovery of active exploitation in targeted attacks against military assets in the Middle East. Technical analysis shows the attackers integrated the vulnerability into an Exploit Chain starting with a malicious Office document and ending with advanced malware execution.\n\nThreat indicators suggest the group is linked to a state-sponsored entity with advanced capabilities, using encrypted infrastructure and 'Living off the Land' stealth techniques.\n\nAll military and defense institutions are urged to apply the update immediately and review system logs for compromise indicators.",
+            image:"https://picsum.photos/seed/winzero/900/500.jpg",
+            category:"vulns",
+            threat_level:"critical",
+            source_ar:"فريق GReAT — كاسبرسكي",
+            source_en:"GReAT Team — Kaspersky",
+            date:"2025-01-17",
+            featured:true
+        },
+        {
+            id:3,
+            title_ar:"مجموعة \"موسكو الشبحية\" تُطلق حملة تجسس إلكتروني ضد وزارات خارجية عربية",
+            title_en:"'Phantom Moscow' Group Launches Cyber Espionage Campaign Against Arab Foreign Ministries",
+            excerpt_ar:"حملة صيد احتيالي متقدمة تستهدف دبلوماسيين في خمس دول عربية عبر مواقع مزيفة تحاكي بوابات حكومية رسمية.",
+            excerpt_en:"Advanced phishing campaign targeting diplomats in five Arab countries through fake websites mimicking official government portals.",
+            content_ar:"كشفت تحقيقات مشتركة بين وحدة الرصد النافذ وشركاء استخباراتيين عن حملة تجسس إلكتروني واسعة النطاق أُطلق عليها \"موسكو الشبحية\". الحملة تستهدف دبلوماسيين ومسؤولين في وزارات خارجية خمس دول عربية.\n\nالتقنية المعتمدة تعتمد على إنشاء مواقع إلكترونية مزيفة بدقة عالية تحاكي البوابات الرسمية لوزارات الخارجية، مع استخدام شهادات SSL صالحة ونطاقات مشابهة. عند تسجيل الدخول، يُثبت الموقع برمجية خبيثة خفيفة الوزن على جهاز الضحية.\n\nالبرمجية المسماة \"TinyGhost\" تعمل في الذاكرة فقط (Fileless Malware) وتستخرج البيانات الحساسة بما فيها المراسلات الدبلوماسية المشفرة ومفاتيح الوصول.\n\nالتحليل يشير إلى أن المجموعة تمتلك موارد تقنية هائلة تشمل مزارع خوادم في أكثر من 8 دول وتستخدم تقنيات تغيير البنية التحتية بشكل يومي.",
+            content_en:"Joint investigations between the Razed Window Unit and intelligence partners uncovered a widespread cyber espionage campaign codenamed 'Phantom Moscow'. The campaign targets diplomats and officials at foreign ministries of five Arab countries.\n\nThe technique relies on creating highly accurate fake websites mimicking official foreign ministry portals, using valid SSL certificates and similar domains. Upon login, the site installs lightweight malware on the victim's device.\n\nThe malware, named 'TinyGhost', operates memory-only (Fileless Malware) and extracts sensitive data including encrypted diplomatic correspondence and access keys.\n\nAnalysis indicates the group possesses massive technical resources including server farms in over 8 countries and uses daily infrastructure rotation techniques.",
+            image:"https://picsum.photos/seed/phantommoscow/900/500.jpg",
+            category:"shadow",
+            threat_level:"high",
+            source_ar:"التحالف الاستخباراتي السيبراني",
+            source_en:"Cyber Intelligence Alliance",
+            date:"2025-01-16",
+            featured:true
+        },
+        {
+            id:4,
+            title_ar:"هجوم فدية \"BlackSuit\" يعطل منظومات مستشفيات في تركيا ومصر لمدة 72 ساعة",
+            title_en:"'BlackSuit' Ransomware Attack Disables Hospital Systems in Turkey and Egypt for 72 Hours",
+            excerpt_ar:"مجموعة فدية تطور أسلوبتها لاستهداف القطاع الصحي. ثلاث مستشفيات كبرى عانت من شلل تام في الأنظمة الرقمية مع تسريب بيانات المرضى.",
+            excerpt_en:"Ransomware group evolves tactics to target healthcare sector. Three major hospitals suffered complete digital system paralysis with patient data exfiltration.",
+            content_ar:"في هجوم يُعد الأوسع نطاقاً على القطاع الصحي في المنطقة هذا العام، استهدفت مجموعة فدية \"BlackSuit\" ثلاث مستشفيات كبرى — اثنتان في تركيا وواحدة في مصر — مما أدى إلى شلل كامل في الأنظمة الرقمية لمدة 72 ساعة.\n\nالمهاجمون استخدموا تقنية的双重 ابتزاز حيث قاموا بتشفير البيانات وتسريب جزء منها على منصة التسريب الخاصة بهم. البيانات المسربة تتضمن سجلات طبية لآلاف المرضى ومعلومات شخصية حساسة.\n\nما يُميز هذا الهجوم هو استخدام تقنية \"Intermittent Encryption\" التي تُسرع عملية التشفير وتجعل فك التشفير بدون مفتاح المهاجم شبه مستحيل حتى مع وجود نسخ احتياطية.\n\nالقطاع الصحي يبقى أحد أكثر القطاعات هشاشة بسبب تعاقداته مع موردي تقنية لا يلتزمون بمعايير أمنية صارمة.",
+            content_en:"In the widest attack on the healthcare sector in the region this year, the 'BlackSuit' ransomware group targeted three major hospitals — two in Turkey and one in Egypt — causing complete digital system paralysis for 72 hours.\n\nAttackers used double-extortion techniques, encrypting data and leaking a portion on their leak site. Leaked data includes medical records of thousands of patients and sensitive personal information.\n\nWhat distinguishes this attack is the use of 'Intermittent Encryption' technology that accelerates the encryption process and makes decryption without the attacker's key nearly impossible even with backup copies.\n\nThe healthcare sector remains one of the most vulnerable due to contracts with technology vendors who don't adhere to strict security standards.",
+            image:"https://picsum.photos/seed/ransomhosp/900/500.jpg",
+            category:"intrusions",
+            threat_level:"high",
+            source_ar:"فريق الاستجابة للطوارئ CERT",
+            source_en:"CERT Emergency Response Team",
+            date:"2025-01-15",
+            featured:false
+        },
+        {
+            id:5,
+            title_ar:"باب خلفي حرج في أجهزة Cisco ASA يُستهدف قطاع الاتصالات الإقليمي",
+            title_en:"Critical Backdoor in Cisco ASA Devices Targeting Regional Telecommunications Sector",
+            excerpt_ar:"ثغرة تصعيد صلاحيات مدمجة في جدار حماية Cisco تُتيح سيطرة كاملة على الشبكة. مؤشرات على استغلال فعلي ضد مشغلي اتصالات في المنطقة.",
+            excerpt_en:"Privilege escalation vulnerability embedded in Cisco firewall enables complete network control. Indicators of active exploitation against regional telecom operators.",
+            content_ar:"أصدرت Cisco تحذيراً أمنياً عاجلاً بشأن ثغرة حرجة في أجهزة Cisco ASA و FirePOWER (CVE-2025-0214) تسمح بتصعيد الصلاحيات من مستخدم منخفض إلى صلاحيات المسؤول الكاملة.\n\nالثغرة موجودة في واجهة إدارة الويب وتتعلق بمعالجة طلبات مصادقة مُعدلة. ما يُثير المخاوف هو وجود مؤشرات استغلال فعلي ضد مشغلي اتصالات في ثلاث دول على الأقل بالشرق الأوسط.\n\nفي حال نجاح الاستغلال، يكتسب المهاجم قدرة كاملة على التحكم بجدار الحماية بما يشمل تعديل القواعد، اعتراض البيانات، وفتح مسارات خلفية مستمرة.\n\nيُقدر عدد الأجهزة المعرضة للخطر في المنطقة بعدة آلاف، مما يجعل هذه الثغرة من أخطر التهديدات البنيوية المكتشفة هذا الشهر.",
+            content_en:"Cisco issued an urgent security warning regarding a critical vulnerability in Cisco ASA and FirePOWER devices (CVE-2025-0214) allowing privilege escalation from low-level user to full administrator privileges.\n\nThe vulnerability exists in the web management interface and relates to processing modified authentication requests. Of concern are indicators of active exploitation against telecom operators in at least three Middle Eastern countries.\n\nIf successfully exploited, the attacker gains complete control over the firewall including rule modification, data interception, and creating persistent backdoor paths.\n\nThe number of vulnerable devices in the region is estimated at several thousand, making this vulnerability among the most dangerous structural threats discovered this month.",
+            image:"https://picsum.photos/seed/ciscoback/900/500.jpg",
+            category:"vulns",
+            threat_level:"critical",
+            source_ar:"تحديثات Cisco PSIRT",
+            source_en:"Cisco PSIRT Advisories",
+            date:"2025-01-14",
+            featured:false
+        },
+        {
+            id:6,
+            title_ar:"حرب الظل: إيران وإسرائيل تتبادلان هجمات سيبرانية على البنية التحتية المائية",
+            title_en:"Shadow War: Iran and Israel Exchange Cyber Attacks on Water Infrastructure",
+            excerpt_ar:"هجمات متبادلة تستهدف أنظمة تشغيل محطات المياه ومرافق التحلية. تحذيرات من تصاعد التصعيد الرقمي إلى مستوى كارثي.",
+            excerpt_en:"Reciprocal attacks targeting water system operations and desalination facilities. Warnings of digital escalation reaching catastrophic levels.",
+            content_ar:"في تصعيد خطير لحرب الظل الرقمية بين إيران وإسرائيل، كشفت مصادر استخباراتية متعددة عن سلسلة هجمات متبادلة استهدفت البنية التحتية المائية في كلا الجانبين خلال الأسبوعين الماضيين.\n\nالجانب الإسرائيلي يُتهم بتنفيذ هجوم على نظام التحكم في محطة تحلية مياه في المنطقة الجنوبية الإيرانية، مما أدى إلى اضطراب مؤقت في إمدادات المياه. في المقابل، يُنسب هجوم على ثلاث محطات ضخ مياه إسرائيلية إلى جهات إيرانية.\n\nما يُقلق الخبراء هو انتقال الاستهداف من المراقبة وجمع المعلومات إلى التلاعب الفعلي بأنظمة التشغيل، وهو خط أحمر لم يُتجاوز سابقاً في هذا السياق.\n\nالخطر الحقيقي يكمن في إمكانية حدوث أخطاء حسابية تؤدي إلى كارثة إنسانية، خاصة أن أنظمة المياه لا تملك هوامش أمان كبيرة.",
+            content_en:"In a dangerous escalation of the digital shadow war between Iran and Israel, multiple intelligence sources revealed reciprocal attack series targeting water infrastructure on both sides over the past two weeks.\n\nThe Israeli side is accused of executing an attack on the control system of a water desalination plant in southern Iran, causing temporary disruption to water supplies. In response, an attack on three Israeli water pumping stations is attributed to Iranian entities.\n\nWhat concerns experts is the shift from monitoring and intelligence gathering to actual manipulation of operating systems — a red line not previously crossed in this context.\n\nThe real danger lies in the possibility of miscalculations leading to humanitarian catastrophe, especially as water systems have limited safety margins.",
+            image:"https://picsum.photos/seed/waterwar/900/500.jpg",
+            category:"shadow",
+            threat_level:"critical",
+            source_ar:"مركز أبحاث السيبرانية الإقليمي",
+            source_en:"Regional Cyber Research Center",
+            date:"2025-01-13",
+            featured:true
+        },
+        {
+            id:7,
+            title_ar:"ثغرة في منصة Salesforce تُسرّب بيانات حساسة لشركات نفطية خليجية",
+            title_en:"Salesforce Platform Vulnerability Leaks Sensitive Data of Gulf Oil Companies",
+            excerpt_ar:"ثغرة حقن بيانات في واجهة API تسمح بالوصول غير المصرح به لسجلات شركات كبرى في قطاع الطاقة.",
+            excerpt_en:"Data injection vulnerability in API interface allows unauthorized access to records of major energy sector companies.",
+            content_ar:"اكتشف باحثون أمنيون ثغرة خطيرة في منصة Salesforce (CVE-2025-0256) تتيح حقن بيانات عبر واجهة برمجة التطبيقات REST API للوصول إلى سجلات تنظيمية لا يملك المستخدم صلاحية الوصول إليها.\n\nالثغرة أثبتت فعاليتها ضد بيئات Salesforce تستخدمها شركات نفطية كبرى في السعودية والإمارات، حيث تمكن الباحثون أخلاقياً من الوصول إلى بيانات تعاقدات ومعلومات مالية حساسة.\n\nSalesforce أصدرت إصلاحاً في تحديثها الأسبوعي، لكن المخاوف تبقى حول إمكانية استغلال الثغرة من جهات خبيثة قبل الإصلاح، خاصة أن فترة التعرض بلغت 3 أشهر.\n\nالحادث يُسلط الضوء على المخاطر الكامنة في الاعتماد على منصات SaaS لتخزين بيانات حيوية دون طبقات حماية إضافية.",
+            content_en:"Security researchers discovered a critical vulnerability in the Salesforce platform (CVE-2025-0256) enabling data injection through the REST API to access regulatory records without user authorization.\n\nThe vulnerability proved effective against Salesforce environments used by major oil companies in Saudi Arabia and UAE, where researchers ethically accessed sensitive contract data and financial information.\n\nSalesforce issued a fix in its weekly update, but concerns remain about potential malicious exploitation before the patch, especially as the exposure window reached 3 months.\n\nThe incident highlights risks inherent in relying on SaaS platforms for storing vital data without additional protection layers.",
+            image:"https://picsum.photos/seed/salesforceleak/900/500.jpg",
+            category:"vulns",
+            threat_level:"high",
+            source_ar:"فريق البحث الأمني — CrowdStrike",
+            source_en:"Security Research Team — CrowdStrike",
+            date:"2025-01-12",
+            featured:false
+        },
+        {
+            id:8,
+            title_ar:"APT33 تطوّر نسخة جديدة من برمجية Shamoon لاستهداف القطاع الصناعي الخليجي",
+            title_en:"APT33 Develops New Shamoon Variant Targeting Gulf Industrial Sector",
+            excerpt_ar:"نسخة محسّنة من المُمسح الضار الشهير تتضمن آليات تدمير متعددة المراحل وقدرات انتقال شبكي ذاتي.",
+            excerpt_en:"Enhanced version of the notorious wiper malware includes multi-stage destruction mechanisms and autonomous network propagation capabilities.",
+            content_ar:"رصدت وحدة الرصد النافذ تطويراً جوهرياً في برمجية Shamoon — المُمسح الضار المرتبط بمجموعة APT33 الإيرانية — حيث ظهرت نسخة جديدة تُسمى \"Shamoon-V4\" تتميز بقدرات تدمير متقدمة.\n\nالنسخة الجديدة تتضمن آلية تدمير متعددة المراحل تبدأ بتشفير الملفات ثم تمرير مُمسح للـ MBR قبل تنفيذ عملية تدمير الذات (Self-Destruct) التي تمسح جميع آثار الاختراق.\n\nالتحسين الأبرز هو إضافة آلية انتقال شبكي ذاتي مشابه لـ Worm تتيح للبرمجية الانتشار داخلياً بدون تفاعل بشري، مما يُضاعف سرعة التدمير بشكل كبير.\n\nالمؤشرات الأولية تشير إلى استهداف محتمل لقطاعي البتروكيماويات والطيران في دول الخليج.",
+            content_en:"The Razed Window Unit monitored fundamental development in the Shamoon wiper malware — linked to Iranian APT33 group — where a new version dubbed 'Shamoon-V4' appeared with advanced destruction capabilities.\n\nThe new version includes a multi-stage destruction mechanism starting with file encryption, followed by MBR wiping, before executing a Self-Destruct process that erases all intrusion traces.\n\nThe most notable improvement is adding a Worm-like autonomous network propagation mechanism enabling the malware to spread internally without human interaction, significantly multiplying destruction speed.\n\nPreliminary indicators suggest potential targeting of petrochemical and aviation sectors in Gulf countries.",
+            image:"https://picsum.photos/seed/shamoonv4/900/500.jpg",
+            category:"intrusions",
+            threat_level:"critical",
+            source_ar:"وحدة الرصد النافذ",
+            source_en:"Razed Window Unit",
+            date:"2025-01-11",
+            featured:false
+        },
+        {
+            id:9,
+            title_ar:"السعودية تُحبط محاولة اختراق لمنظومة \"نيوم\" الرقمية — تحليل ميداني",
+            title_en:"Saudi Arabia Thwarts 'NEOM' Digital System Breach Attempt — Field Analysis",
+            excerpt_ar:"فريق الأمن السيبراني الوطني يصد هجوماً متقدماً على البنية التحتية الرقمية لمشروع نيوم. المهاجمون استخدموا تقنيات سرية حديثة.",
+            excerpt_en:"National Cybersecurity team repels advanced attack on NEOM project digital infrastructure. Attackers used novel covert techniques.",
+            content_ar:"كشف فريق الأمن السيبراني السعودي عن إحباط محاولة اختراق متقدمة استهدفت البنية التحتية الرقمية لمشروع نيوم الذكي. العملية التي رصدها مركز العمليات الأمنية قبل أسابيع تُظهر مستوى متقدماً من التخطيط والتنفيذ.\n\nالمهاجمون استخدموا تقنية \"DNS Tunneling\" متطورة لنقل البيانات المسروقة عبر قنوات DNS عادية، مما مكنهم من تجاوز أنظمة الكشف عن التسلل (IDS) لفترة طويلة.\n\nكما اكتُشف استخدام تقنية \"Process Doppelgänging\" لتنفيذ البرمجيات الخبيثة بطريقة لا تُترك فيها أي أثر في نظام الملفات.\n\nالحادث يُظهر أن المشاريع الكبرى في المنطقة باتت هدفاً مفضلاً لمجموعات التهديد المتقدمة، مما يستدعي تعزيز القدرات الدفاعية بشكل مستمر.",
+            content_en:"The Saudi cybersecurity team revealed thwarting an advanced intrusion attempt targeting the digital infrastructure of the NEOM smart project. The operation, detected by the security operations center weeks ago, shows an advanced level of planning and execution.\n\nAttackers used advanced 'DNS Tunneling' to exfiltrate stolen data through normal DNS channels, enabling them to bypass Intrusion Detection Systems (IDS) for extended periods.\n\nAdditionally, 'Process Doppelgänging' technique was discovered being used to execute malware in a way that leaves no trace in the file system.\n\nThe incident shows major regional projects have become preferred targets for advanced threat groups, requiring continuous enhancement of defensive capabilities.",
+            image:"https://picsum.photos/seed/neomcyber/900/500.jpg",
+            category:"natsec",
+            threat_level:"high",
+            source_ar:"الهيئة الوطنية للأمن السيبراني",
+            source_en:"National Cybersecurity Authority",
+            date:"2025-01-10",
+            featured:false
+        },
+        {
+            id:10,
+            title_ar:"تسريب بيانات 2.5 مليون عميل من بنك إماراتي عبر هجوم على سلسلة التوريد",
+            title_en:"Data Breach of 2.5 Million Customers from UAE Bank via Supply Chain Attack",
+            excerpt_ar:"اختراق مزود برمجيات مصرفي يُؤدي إلى أكبر تسريب مصرفي في المنطقة هذا العام. البيانات تشمل أرقام حسابات وتفاصيل بطاقات.",
+            excerpt_en:"Banking software provider breach leads to the region's largest banking data leak this year. Data includes account numbers and card details.",
+            content_ar:"في أكبر حادث تسريب مصرفي في الشرق الأوسط هذا العام، كُشف عن اختراق مزود برمجيات مصرفية يخدم بنكاً إماراتياً كبرى، مما أدى إلى تسريب بيانات 2.5 مليون عميل.\n\nالهجوم لم يستهدف البنك مباشرة بل تم عبر سلسلة التوريد التقنية، حيث اخترق المهاجمون خوادم شركة البرمجيات وزرع برمجية خبيثة في التحديثات الموزعة للبنك.\n\nالبيانات المسربة تتضمن أرقام الحسابات المصرفية، أرقام بطاقات الائتمان (مع رموز CVV)، بيانات الهوية، ومعلومات التواصل. كُشف التسريب عندما ظهرت البيانات للبيع على منتدى مظلم ب価格 يبدأ من 50,000 دولار.\n\nالحادث يُبرز الثغرة الكامنة في نموذج الأمان المُعتمد على سلاسل التوريد التقنية دون تدقيق شامل.",
+            content_en:"In the largest banking data breach in the Middle East this year, a breach of a banking software provider serving a major UAE bank was revealed, leaking data of 2.5 million customers.\n\nThe attack didn't target the bank directly but through the technology supply chain, where attackers breached the software company's servers and planted malware in updates distributed to the bank.\n\nLeaked data includes bank account numbers, credit card numbers (with CVV codes), identity data, and contact information. The breach was discovered when data appeared for sale on a dark forum starting at $50,000.\n\nThe incident highlights the vulnerability in security models relying on technology supply chains without comprehensive auditing.",
+            image:"https://picsum.photos/seed/bankbreach/900/500.jpg",
+            category:"intrusions",
+            threat_level:"high",
+            source_ar:"فريق الرصد المالي — وحدة الرصد النافذ",
+            source_en:"Financial Monitoring Team — Razed Window Unit",
+            date:"2025-01-09",
+            featured:false
+        },
+        {
+            id:11,
+            title_ar:"ثغرة في معالجات ARM Cortex تُهدد ملايين أجهزة Android في المنطقة",
+            title_en:"ARM Cortex Processor Vulnerability Threatens Millions of Android Devices in the Region",
+            excerpt_ar:"ثغرة تسرب معلومات عبر قنوات جانبية في معمارية ARM تُتيح استخراج بيانات تشفير من الأجهزة المحمولة.",
+            excerpt_en:"Side-channel information leakage vulnerability in ARM architecture enables extraction of encryption data from mobile devices.",
+            content_ar:"أعلنت شركة ARM عن ثغرة أمنية في معالجات Cortex-A و Cortex-M (CVE-2025-0312) تُتيح تسرب معلومات عبر قنوات جانبية تؤثر على ملايين الأجهزة المحمولة.\n\nالثغرة تستغل آلية التنفيذ التخميني في المعالجات لاستخراج بيانات من ذاكرة التخزين المؤقت، بما فيها مفاتيح التشفير المستخدمة في تطبيقات البنوك وخدمات الحكومة الإلكترونية.\n\nالتأثير على المنطقة أكبر نسبياً نظراً للانتشار الواسع لأجهزة Android المبنية على معالجات ARM في دول الخليج والشرق الأوسط، خاصة الأجهزة من الفئة المتوسطة التي تتلقى تحديثات أقل تكراراً.\n\nالإصلاح يتطلب تحديثاً من الشركة المصنعة للجهاز، وهو ما قد لا يحدث للأجهزة الأقدم.",
+            content_en:"ARM announced a security vulnerability in Cortex-A and Cortex-M processors (CVE-2025-0312) enabling side-channel information leakage affecting millions of mobile devices.\n\nThe vulnerability exploits speculative execution mechanisms in processors to extract data from cache memory, including encryption keys used in banking apps and e-government services.\n\nImpact on the region is relatively higher given the widespread use of ARM-based Android devices in Gulf and Middle Eastern countries, especially mid-range devices that receive less frequent updates.\n\nFixing requires a device manufacturer update, which may not happen for older devices.",
+            image:"https://picsum.photos/seed/armvuln/900/500.jpg",
+            category:"vulns",
+            threat_level:"high",
+            source_ar:"قسم أمن الأجهزة — ARM",
+            source_en:"Device Security Division — ARM",
+            date:"2025-01-08",
+            featured:false
+        },
+        {
+            id:12,
+            title_ar:"الصين تُوسع برنامج \"Digital Silk Road\" لجمع بيانات استخباراتية من دول الشرق الأوسط",
+            title_en:"China Expands 'Digital Silk Road' for Intelligence Data Collection from Middle Eastern Countries",
+            excerpt_ar:"تحليل استخباراتي يكشف كيف تُوظف البنية التحتية الرقمية الصينية المُصدرة لأغراض جمع بيانات استخباراتية.",
+            excerpt_en:"Intelligence analysis reveals how exported Chinese digital infrastructure is repurposed for intelligence data collection.",
+            content_ar:"في تقرير استخباراتي موسع، كشفت وحدة الرصد النافذ عن أبعاد جديدة لبرنامج الصين الرقمي \"Digital Silk Road\" في الشرق الأوسط، حيث تُظهر الأدلة أن البنية التحتية المُصدرة تُوظف لأغراض استخباراتية.\n\nالتحليل شمل فحص معدات شبكية صينية مُثبتة في 6 دول عربية، واكتشف وجود بوابات خلفية مُدمجة في أنظمة المراقبة والاتصالات تتيح نقل بيانات إلى خوادم في الصين.\n\nالمعدات المعنية تشمل كاميرات مراقبة ذكية، أنظمة إدارة شبكات، وبوابات اتصالات 5G. الثغرات ليست عشوائية بل مُصممة بعناية لتكون صعبة الاكتشاف.\n\nالتقرير يُوصي الدول المستفيدة بإجراء تدقيقات أمنية شاملة على جميع المعدات الصينية المُثبتة في البنية التحتية الحيوية.",
+            content_en:"In an extensive intelligence report, the Razed Window Unit revealed new dimensions of China's 'Digital Silk Road' program in the Middle East, where evidence shows exported infrastructure is repurposed for intelligence purposes.\n\nThe analysis included examination of Chinese network equipment installed in 6 Arab countries, discovering built-in backdoors in surveillance and communication systems enabling data transfer to servers in China.\n\nEquipment involved includes smart surveillance cameras, network management systems, and 5G communication gateways. The vulnerabilities are not random but carefully designed to be difficult to detect.\n\nThe report recommends beneficiary countries conduct comprehensive security audits on all Chinese equipment installed in critical infrastructure.",
+            image:"https://picsum.photos/seed/digitalsilk/900/500.jpg",
+            category:"shadow",
+            threat_level:"high",
+            source_ar:"وحدة التحليل الجيوستراتيجي",
+            source_en:"Geostrategic Analysis Unit",
+            date:"2025-01-07",
+            featured:false
+        },
+        {
+            id:13,
+            title_ar:"هجوم Supply Chain على مكتبة npm يُصيب آلاف المطورين العرب ببرمجيات خبيثة",
+            title_en:"Supply Chain Attack on npm Library Infects Thousands of Arab Developers with Malware",
+            excerpt_ar:"حقن حزم npm مزيفة بأسماء مشابهة لحزم شائعة يُؤدي إلى تثبيت برمجيات خبيثة تسرق بيانات المطورين.",
+            excerpt_en:"Injection of fake npm packages with names similar to popular ones leads to malware installation stealing developer data.",
+            content_ar:"رصدت وحدة الرصد النافذ هجوماً على سلسلة التوريد استهدف نظام npm عبر نشر 47 حزمة برمجية مزيفة بأسماء مشابهة جداً لحزم شائعة الاستخدام.\n\nالحزم المزيفة تحتوي على برمجية خبيثة تسرق متغيرات البيئة (Environment Variables) التي تتضمن عادة مفاتيح API وبيانات اعتماد قواعد البيانات. البيانات المسروقة تُرسل إلى خادم خارجي عبر طلبات DNS مشفرة.\n\nالتحليل يشير إلى تركيز المهاجمين على استهداف مطورين في دول الخليج ومصر، حيث سُجلت أعلى نسب تحميل للحزم المزيفة.\n\nالهجوم يُبرز هشاشة نموذج الثقة في سلاسل التوريد البرمجية مفتوحة المصدر ودواعي تبني آليات تحقق أقوى.",
+            content_en:"The Razed Window Unit monitored a supply chain attack targeting the npm system through publishing 47 fake packages with names very similar to commonly used packages.\n\nFake packages contain malware that steals Environment Variables, which typically include API keys and database credentials. Stolen data is sent to an external server via encrypted DNS requests.\n\nAnalysis indicates attackers focused on targeting developers in Gulf countries and Egypt, where the highest download rates of fake packages were recorded.\n\nThe attack highlights the fragility of trust models in open-source software supply chains and the need for adopting stronger verification mechanisms.",
+            image:"https://picsum.photos/seed/npmattack/900/500.jpg",
+            category:"intrusions",
+            threat_level:"high",
+            source_ar:"فريق أمن سلاسل التوريد",
+            source_en:"Supply Chain Security Team",
+            date:"2025-01-06",
+            featured:false
+        },
+        {
+            id:14,
+            title_ar:"الإمارات تُعلن تشغيل نظام \"Cyber Dome\" لحماية البنية التحتية الحيوية",
+            title_en:"UAE Announces Activation of 'Cyber Dome' System for Critical Infrastructure Protection",
+            excerpt_ar:"نظام دفاع سيبراني متكامل يجمع بين الذكاء الاصطناعي والتحليل السلوكي لرصد التهديدات في الوقت الفعلي.",
+            excerpt_en:"Integrated cyber defense system combining AI and behavioral analysis for real-time threat detection.",
+            content_ar:"أعلنت الإمارات العربية المتحدة عن تشغيل نظام \"Cyber Dome\" — منظومة دفاع سيبراني متكاملة لحماية البنية التحتية الحيوية — بعد مرحلة تجريبية استمرت 6 أشهر.\n\nالنظام يجمع بين محرك ذكاء اصطناعي متقدم للكشف عن الشذوذ، وتحليل سلوكي لرصد الأنماط المشبوهة في حركة البيانات، بالإضافة إلى قدرة الاستجابة التلقائية للحوادث.\n\nما يُميز Cyber Dome هو تكامله مع أكثر من 200 منشأة حيوية تشمل قطاعات الطاقة والمياه والاتصالات والنقل والصحة، مع مركز عمليات مشترك يعمل على مدار الساعة.\n\nالنظام يُعد من أحدث المبادرات الحكومية في المنطقة لتعزيز الأمن السيبراني الوطني عبر نهج مركزي.",
+            content_en:"The UAE announced activation of the 'Cyber Dome' system — an integrated cyber defense platform for critical infrastructure protection — after a 6-month pilot phase.\n\nThe system combines an advanced AI anomaly detection engine, behavioral analysis for suspicious data movement pattern detection, and automated incident response capabilities.\n\nWhat distinguishes Cyber Dome is its integration with over 200 critical facilities across energy, water, communications, transport, and health sectors, with a joint operations center operating 24/7.\n\nThe system is among the latest government initiatives in the region to enhance national cybersecurity through a centralized approach.",
+            image:"https://picsum.photos/seed/cyberdome/900/500.jpg",
+            category:"natsec",
+            threat_level:"low",
+            source_ar:"الهيئة الوطنية للأمن السيبراني — الإمارات",
+            source_en:"National Cyber Security Authority — UAE",
+            date:"2025-01-05",
+            featured:false
+        },
+        {
+            id:15,
+            title_ar:"كشف شبكة \"Crypto Shaming\" الروسية لابتزاز مسؤولين حكوميين عرب",
+            title_en:"Russian 'Crypto Shaming' Network Uncovered Blackmailing Arab Government Officials",
+            excerpt_ar:"شبكة ترصد أنشطة مشفرة لمسؤولين وتستخدم المعلومات لابتزازهم سياسياً. ضحايا في ثلاث دول عربية.",
+            excerpt_en:"Network monitoring encrypted activities of officials and using information for political blackmail. Victims in three Arab countries.",
+            content_ar:"كشفت تحقيقات مشتركة عن شبكة روسية متخصصة في ما يُعرف بـ \"Crypto Shaming\" — رصد الأنشطة المشفرة لمسؤولين حكوميين واستخدام المعلومات لابتزازهم.\n\nالشبكة تتبع معاملات العملات المشفرة وتطبيقات المراسلة المشفرة لمسؤولين في ثلاث دول عربية على الأقل، مع التركيز على كشف أي أنشطة قد تكون محرجة سياسياً.\n\nالمعلومات المجمعة لا تُستخدم مباشرة بل تُنقل عبر وسطاء إلى جهات استخباراتية روسية للاستخدام في عمليات التأثير والتجنيد.\n\nالتحقيق يُظهر نمطاً متصاعداً في استخدام البيانات المشفرة كسلاح في الحروب الهجينة.",
+            content_en:"Joint investigations uncovered a Russian network specializing in 'Crypto Shaming' — monitoring encrypted activities of government officials and using information for blackmail.\n\nThe network tracks cryptocurrency transactions and encrypted messaging app activities of officials in at least three Arab countries, focusing on uncovering any potentially politically embarrassing activities.\n\nCollected information is not used directly but transferred through intermediaries to Russian intelligence entities for use in influence and recruitment operations.\n\nThe investigation shows an escalating pattern of using encrypted data as a weapon in hybrid warfare.",
+            image:"https://picsum.photos/seed/cryptoshame/900/500.jpg",
+            category:"shadow",
+            threat_level:"medium",
+            source_ar:"التحالف الأمني الإقليمي",
+            source_en:"Regional Security Alliance",
+            date:"2025-01-04",
+            featured:false
+        },
+        {
+            id:16,
+            title_ar:"ثغرة SQL Injection في نظام SAP تُستهدف قطاع الصناعة الخليجية مباشرة",
+            title_en:"SQL Injection Vulnerability in SAP System Directly Targeting Gulf Industrial Sector",
+            excerpt_ar:"ثغرة حقن قواعد بيانات في منصة SAP S/4HANA تُستغل في هجمات مركزة ضد شركات صناعية في الخليج.",
+            excerpt_en:"Database injection vulnerability in SAP S/4HANA platform exploited in focused attacks against industrial companies in the Gulf.",
+            content_ar:"أصدرت SAP تحديثاً أمنياً عاجلاً لإصلاح ثغرة حقن SQL في منصة S/4HANA (CVE-2025-0410) بعد رصد استغلال نشط ضد شركات صناعية في دول الخليج.\n\nالثغرة موجودة في وحدة إدارة المخزون وتتيح للمهاجم المصادق تنفيذ استعلامات SQL تعسفية، مما يُمكنه من استخراج أو تعديل البيانات الحساسة بما فيها بيانات الموردات والعقود.\n\nالهجمات المُرصدة تتميز بتركيزها العالي — حيث استهدفت ما لا يقل عن 8 شركات في قطاعي البتروكيماويات والصلب — مما يشير إلى معرفة مسبقة بالبنية التحتية المستهدفة.\n\nالتوصية: تطبيق التحديث فوراً مع تفعيل مراقبة استعلامات SQL غير المعتادة.",
+            content_en:"SAP issued an urgent security update to patch a SQL injection vulnerability in the S/4HANA platform (CVE-2025-0410) after detecting active exploitation against industrial companies in Gulf countries.\n\nThe vulnerability exists in the inventory management module and allows an authenticated attacker to execute arbitrary SQL queries, enabling extraction or modification of sensitive data including supplier and contract data.\n\nObserved attacks are characterized by high focus — targeting at least 8 companies in petrochemical and steel sectors — indicating prior knowledge of targeted infrastructure.\n\nRecommendation: Apply update immediately with activation of unusual SQL query monitoring.",
+            image:"https://picsum.photos/seed/sapsqli/900/500.jpg",
+            category:"vulns",
+            threat_level:"high",
+            source_ar:"فرق الاستجابة SAP",
+            source_en:"SAP Response Teams",
+            date:"2025-01-03",
+            featured:false
+        },
+        {
+            id:17,
+            title_ar:"تحليل استخباراتي: كيف تُدير وحدة 8200 الإسرائيلية عملياتها السيبرانية في المنطقة",
+            title_en:"Intelligence Analysis: How Israeli Unit 8200 Manages Regional Cyber Operations",
+            excerpt_ar:"دراسة معمقة تكشف هيكلية وتقنيات وحدة 8200 في تنفيذ العمليات السيبرانية ضد أهداف إقليمية.",
+            excerpt_en:"In-depth study revealing the structure, techniques, and methods of Unit 8200 in executing cyber operations against regional targets.",
+            content_ar:"في تحليل استخباراتي معمق، تقدم وحدة الرصد النافذ دراسة شاملة عن وحدة 8200 الإسرائيلية — الذراع السيبراني لجهاز الموساد — وكيف تُدير عملياتها في المنطقة.\n\nالدراسة تكشف أن الوحدة تعتمد نموذجاً فريداً يجمع بين الاستخبارات التقنية والعمليات الهجومية والدفاعية في منظومة واحدة. تضم الوحدة أكثر من 5,000 جندي يخدمون في وحدات متخصصة.\n\nمن أبرز التقنيات المُرصودة: استخدام الذكاء الاصطناعي لتحليل البيانات المستخرجة بشكل فوري، وبناء \"مصانع برمجيات خبيثة\" تُنتج أدوات مخصصة لكل عملية بمفردها.\n\nالتحليل يُسلط الضوء على التحدي الذي يُمثله هذا النموذج للدول العربية ودواعي بناء قدرات سيبرانية وطنية متقدمة.",
+            content_en:"In an in-depth intelligence analysis, the Razed Window Unit presents a comprehensive study of Israeli Unit 8200 — the cyber arm of Mossad — and how it manages regional operations.\n\nThe study reveals the unit employs a unique model combining technical intelligence, offensive operations, and defensive operations in a single system. The unit comprises over 5,000 soldiers serving in specialized units.\n\nAmong the most notable techniques observed: using AI for real-time analysis of extracted data, and building 'malware factories' that produce custom tools for each operation individually.\n\nThe analysis highlights the challenge this model poses to Arab countries and the imperative of building advanced national cyber capabilities.",
+            image:"https://picsum.photos/seed/unit8200/900/500.jpg",
+            category:"shadow",
+            threat_level:"high",
+            source_ar:"قسم التحليل الاستراتيجي — وحدة الرصد النافذ",
+            source_en:"Strategic Analysis Division — Razed Window Unit",
+            date:"2025-01-02",
+            featured:false
+        },
+        {
+            id:18,
+            title_ar:"مصر تُعلن عن شراكة أمنية سيبرانية مع روسيا لبناء مركز عمليات مشترك",
+            title_en:"Egypt Announces Cybersecurity Partnership with Russia for Joint Operations Center",
+            excerpt_ar:"اتفاقية تقنية تُثير مخاوف الغرب بشأن نقل قدرات سيبرانية متقدمة إلى المنطقة وتأثيرها على توازن القوى الرقمي.",
+            excerpt_en:"Technical agreement raising Western concerns about transferring advanced cyber capabilities to the region and its impact on digital power balance.",
+            content_ar:"أعلنت مصر عن توقيع اتفاقية أمنية سيبرانية مع روسيا تتضمن بناء مركز عمليات سيبرانية مشترك وتدريب كوادر مصرية على تقنيات متقدمة.\n\nالاتفاقية التي تُعد الأولى من نوعها في المنطقة تشمل تبادل معلومات استخباراتية سيبرانية، وتطوير قدرات الدفاع عن البنية التحتية الحيوية، ونقل تقنيات رصد متقدمة.\n\nالإعلان أثار مخاوف حلفاء مصر الغربيين الذين يرون في الاتفاقية محاولة روسية لتعزيز نفوذها في المنطقة عبر بوابة الأمن السيبراني.\n\nالتحليل الاستراتيجي يُشير إلى أن الاتفاقية قد تُعيد تشكيل خريطة التحالفات السيبرانية في الشرق الأوسط.",
+            content_en:"Egypt announced signing a cybersecurity agreement with Russia including building a joint cyber operations center and training Egyptian personnel on advanced techniques.\n\nThe agreement, the first of its kind in the region, includes cyber intelligence information sharing, developing critical infrastructure defense capabilities, and transferring advanced monitoring technologies.\n\nThe announcement raised concerns among Egypt's Western allies who view the agreement as a Russian attempt to enhance regional influence through the cybersecurity gateway.\n\nStrategic analysis indicates the agreement may reshape the cyber alliance map in the Middle East.",
+            image:"https://picsum.photos/seed/egrucoop/900/500.jpg",
+            category:"natsec",
+            threat_level:"medium",
+            source_ar:"متابعة الوكالات الإخبارية",
+            source_en:"News Agencies Monitoring",
+            date:"2025-01-01",
+            featured:false
+        },
+        {
+            id:19,
+            title_ar:"هجوم DDOS واسع النطاق يُعطل خدمات حكومية في العراق وليبيا لساعات",
+            title_en:"Large-Scale DDOS Attack Disables Government Services in Iraq and Libya for Hours",
+            excerpt_ar:"حملة إغراق شبكي تستهدف بوابات حكومية إلكترونية في الدولتين بشكل متزامن. مصادر تشير إلى مجموعة \"قبرصية\".",
+            excerpt_en:"Network flooding campaign targeting e-government portals in both countries simultaneously. Sources point to a 'Cypriot' group.",
+            content_ar:"تعرضت بوابات الخدمات الحكومية الإلكترونية في العراق وليبيا لهجوم إغراق شبكي (DDOS) واسع النطاق أدى إلى تعطل الخدمات لعدة ساعات.\n\nالهجوم الذي تم بشكل متزامن استخدم تقنية \"UDP Amplification\" عبر مزارع بوتنت مكونة من أكثر من 100,000 جهاز مخترق. حجم البيانات المُرسلة بلغ ذروته 2.4 Tbps.\n\nتحليل أولي يُشير إلى أن المجموعة المنفذة — التي تُعرف بـ \"CYP3R\" — قد تكون مرتبطة بجهات فاعلة محلية تعمل بتوجيه خارجي.\n\nالحادث يُظهر هشاشة البنية التحتية الحكومية الرقمية في الدول العربية التي تعاني من ضعف في قدرات الحماية ضد هجمات DDOS.",
+            content_en:"E-government service portals in Iraq and Libya were hit by a large-scale DDOS attack causing service disruption for several hours.\n\nThe simultaneous attack used 'UDP Amplification' via botnet farms comprising over 100,000 compromised devices. Data volume peaked at 2.4 Tbps.\n\nPreliminary analysis suggests the executing group — known as 'CYP3R' — may be linked to local actors operating under external direction.\n\nThe incident reveals the fragility of digital government infrastructure in Arab countries suffering from weak DDOS protection capabilities.",
+            image:"https://picsum.photos/seed/ddosirq/900/500.jpg",
+            category:"intrusions",
+            threat_level:"medium",
+            source_ar:"مراكز CERT الإقليمية",
+            source_en:"Regional CERT Centers",
+            date:"2024-12-30",
+            featured:false
+        },
+        {
+            id:20,
+            title_ar:"الذكاء الاصطناعي يُعيد تشكيل الحرب السيبرانية: تحليل استراتيجي شامل",
+            title_en:"AI Reshaping Cyber Warfare: Comprehensive Strategic Analysis",
+            excerpt_ar:"كيف يُغير الذكاء الاصطناعي قواعد الاشتباك السيبراني — من اكتشاف التهديدات الآلي إلى الهجمات الذاتية التكيف.",
+            excerpt_en:"How AI is changing cyber engagement rules — from automated threat detection to self-adapting attacks.",
+            content_ar:"يُصدر مركز الدراسات الاستراتيجية في وحدة الرصد النافذ تحليلاً شاملاً حول تأثير الذكاء الاصطناعي على مشهد الحرب السيبرانية العالمية والإقليمية.\n\nالتحليل يرصد ثلاثة محاور رئيسية: أولاً — استخدام الذكاء الاصطناعي في اكتشاف التهديدات المتقدمة حيث باتت أنظمة AI تتخطى التحليلات التقليدية بنسبة 340% في اكتشاف هجمات APT. ثانياً — تطوير أسلحة سيبرانية ذاتية التكيف تتغير سلوكياً لتجاوز أنظمة الدفاع. ثالثاً — أتمتة عمليات الاستطلاع والاختراق التي قلصت وقت التخطيط من أشهر إلى أيام.\n\nالتحليل يُحذر من \"سباق تسلح ذكي\" جديد حيث الدول التي تمتلك قدرات AI متقدمة ستكتسب تفوقاً سيبرانياً حاسماً.\n\nالتوصية: على الدول العربية الاستثمار المكثف في بناء قدرات AI أمنية وطنية لتجنب الفجوة الرقمية المتسعة.",
+            content_en:"The Strategic Studies Center at the Razed Window Unit issues a comprehensive analysis on the impact of artificial intelligence on the global and regional cyber warfare landscape.\n\nThe analysis monitors three main axes: first — AI use in advanced threat detection where AI systems now surpass traditional analysis by 340% in detecting APT attacks. Second — development of self-adapting cyber weapons that change behaviorally to evade defense systems. Third — automation of reconnaissance and intrusion operations that reduced planning time from months to days.\n\nThe analysis warns of a new 'smart arms race' where countries with advanced AI capabilities will gain decisive cyber superiority.\n\nRecommendation: Arab countries must invest intensively in building national AI security capabilities to avoid the widening digital gap.",
+            image:"https://picsum.photos/seed/aicyberwar/900/500.jpg",
+            category:"natsec",
+            threat_level:"low",
+            source_ar:"مركز الدراسات الاستراتيجية — وحدة الرصد النافذ",
+            source_en:"Strategic Studies Center — Razed Window Unit",
+            date:"2024-12-28",
+            featured:false
+        }
+    ];
 
+    /* ==================================================================
+       الترجمات
+    ================================================================== */
     const I18N = {
-        ar:{siteName:"الرصد التقني",siteAuthor:"بوابة الهكر الهزبري",navHome:"الرئيسية",navNews:"الأخبار",navAbout:"عن الموقع",latestNews:"أحدث التقارير",latestNewsDesc:"تقارير استخبارية تقنية محللة وموثقة",allCats:"الكل",catCyber:"الأمن السيبراني",catIntel:"الاستخبارات الرقمية",catTech:"التقنية العالمية",breaking:"عاجل",readMore:"اقرأ المزيد",close:"إغلاق",source:"المصدر",date:"التاريخ",threatLow:"منخفض",threatMedium:"متوسط",threatHigh:"مرتفع",threatCritical:"حرج",noResults:"لا توجد نتائج",aboutLabel:"من نحن",aboutTitle:"الرصد التقني\nعينك على العالم الرقمي",aboutDesc:"منصة استخبارية تقنية متخصصة في رصد وتحليل التهديدات السيبرانية المتقدمة.",statReports:"تقرير",statCountries:"دولة",statMonitor:"رصد",liveStatus:"رصد مباشر",footerDesc:"منصة استخبارية تقنية مستقلة.",footerLinks:"روابط سريعة",footerCategories:"التصنيفات",footerRights:"جميع الحقوق محفوظة",fullReport:"التقرير الكامل",securityClearance:"التصنيف الأمني",loadingData:"جاري تحميل البيانات...",loadError:"فشل تحميل البيانات من GitHub",loadRetry:"إعادة المحاولة",emptyMsg:"لا توجد أخبار حالياً. استخدم لوحة التحكم لإضافة تقارير ونشرها.",goToAdmin:"لوحة التحكم"},
-        en:{siteName:"Tech Monitor",siteAuthor:"By: Al-Hazbri Hacker",navHome:"Home",navNews:"News",navAbout:"About",latestNews:"Latest Reports",latestNewsDesc:"Analyzed and verified intelligence reports",allCats:"All",catCyber:"Cyber Security",catIntel:"Digital Intelligence",catTech:"Global Tech",breaking:"BREAKING",readMore:"Read More",close:"Close",source:"Source",date:"Date",threatLow:"Low",threatMedium:"Medium",threatHigh:"High",threatCritical:"Critical",noResults:"No results found",aboutLabel:"About Us",aboutTitle:"Tech Monitor\nYour Eye on the Digital World",aboutDesc:"A specialized intelligence platform for monitoring and analyzing advanced cyber threats.",statReports:"Reports",statCountries:"Countries",statMonitor:"Monitoring",liveStatus:"Live Monitoring",footerDesc:"An independent cyber intelligence platform.",footerLinks:"Quick Links",footerCategories:"Categories",footerRights:"All Rights Reserved",fullReport:"Full Report",securityClearance:"Security Clearance",loadingData:"Loading data...",loadError:"Failed to load data from GitHub",loadRetry:"Retry",emptyMsg:"No news yet. Use the admin panel to add reports and publish them.",goToAdmin:"Admin Panel"}
+        ar:{
+            siteName:"هيئة الرصد السيبراني",
+            siteSub:"وحدة الرصد النافذ — الاستخبارات الرقمية المتقدمة",
+            classifiedLabel:"سري للغاية",
+            threatIndicator:"مؤشر التهديد",
+            navHome:"الرئيسية", navOps:"التقارير", navAbout:"عن الهيئة",
+            opsTitle:"التقارير الاستخباراتية", opsDesc:"رصد تحليلي — تحديث مستمر",
+            allCats:"كل التقارير",
+            catIntrusions:"عمليات الاختراق", catNatSec:"الأمن القومي الرقمي", catVulns:"رصد الثغرات", catShadow:"حروب الظل",
+            classified:"سري للغاية", readReport:"الاطلاع على التقرير", closeReport:"إغلاق",
+            source:"المصدر", date:"التاريخ", clearance:"التصنيف الأمني",
+            tLow:"منخفض", tMedium:"مراقب", tHigh:"مرتفع", tCritical:"حرج",
+            noResults:"لا توجد تقارير لهذا التصنيف",
+            aboutTag:"IDENTITY.SEC",
+            aboutTitle:"هيئة الرصد السيبراني", aboutDesc:"منصة استخباراتية رقمية متقدمة تختص برصد وتحليل التهديدات السيبرانية على المستويين الإقليمي والعالمي. تعمل الوحدة على تتبع مجموعات التهديد المتقدمة (APT)، ورصد ثغرات اليوم الصفر، وتوثيق حروب الظل الرقمية التي تشكل خطراً على الأمن القومي للدول. تُقدم التقارير وفق معايير استخباراتية صارمة مع التحقق الميداني من المصادر.",
+            sReports:"تقرير", sSources:"مصدر", sMonitor:"رصد", liveOps:"عمليات مباشرة",
+            footerDesc:"وحدة الرصد النافذ — منصة استخباراتية مستقلة متخصصة في الأمن السيبراني. لا تنتمي لأي جهة حكومية أو رسمية. المحتوى لأغراض التحليل والتوعية فقط.",
+            fLinks:"الأقسام", fDisclaimer:"إخلاء مسؤولية",
+            fDisclaimerText:"جميع المعلومات المنشورة مبنية على مصادر مفتوحة (OSINT) وتُقدم لأغراض التحليل الأمني. لا تتحمل المنصة أي مسؤولية قانونية عن استخدام المحتوى.",
+            fRights:"جميع الحقوق محفوظة",
+            loading:"جاري تحميل البيانات الاستخباراتية...",
+            loadError:"فشل تحميل البيانات", loadRetry:"إعادة المحاولة",
+            fullReport:"التقرير الكامل",
+            threatNames:["منخفض","مراقب","مرتفع","عالٍ","حرج"]
+        },
+        en:{
+            siteName:"Cyber Surveillance Authority",
+            siteSub:"Razed Window Unit — Advanced Digital Intelligence",
+            classifiedLabel:"TOP SECRET",
+            threatIndicator:"Threat Level",
+            navHome:"Home", navOps:"Reports", navAbout:"About",
+            opsTitle:"Intelligence Reports", opsDesc:"Analytical Monitoring — Continuous Update",
+            allCats:"All Reports",
+            catIntrusions:"Intrusion Ops", catNatSec:"Digital National Security", catVulns:"Vulnerability Watch", catShadow:"Shadow Wars",
+            classified:"TOP SECRET", readReport:"Read Report", closeReport:"Close",
+            source:"Source", date:"Date", clearance:"Security Clearance",
+            tLow:"Low", tMedium:"Watch", tHigh:"Elevated", tCritical:"Critical",
+            noResults:"No reports found for this category",
+            aboutTag:"IDENTITY.SEC",
+            aboutTitle:"Cyber Surveillance Authority", aboutDesc:"An advanced digital intelligence platform specializing in monitoring and analyzing cyber threats at regional and global levels. The unit tracks Advanced Persistent Threat (APT) groups, monitors Zero-Day vulnerabilities, and documents digital shadow wars posing risks to national security. Reports are delivered according to strict intelligence standards with field verification of sources.",
+            sReports:"Reports", sSources:"Sources", sMonitor:"Monitoring", liveOps:"Live Operations",
+            footerDesc:"Razed Window Unit — An independent intelligence platform specialized in cybersecurity. Not affiliated with any government or official entity. Content is for analysis and awareness purposes only.",
+            fLinks:"Sections", fDisclaimer:"Disclaimer",
+            fDisclaimerText:"All published information is based on Open Source Intelligence (OSINT) and provided for security analysis purposes. The platform bears no legal responsibility for content usage.",
+            fRights:"All Rights Reserved",
+            loading:"Loading intelligence data...",
+            loadError:"Failed to load data", loadRetry:"Retry",
+            fullReport:"Full Report",
+            threatNames:["Low","Watch","Elevated","High","Critical"]
+        }
     };
 
-    let currentLang = localStorage.getItem('tm_lang') || 'ar';
-    let currentCategory = 'all';
-    let heroIndex = 0, heroInterval = null;
+    /* ==================================================================
+       الحالة العامة
+    ================================================================== */
+    let lang = localStorage.getItem('csa_lang') || 'ar';
+    let activeCat = 'all';
     let newsData = [];
+    let heroIdx = 0;
+    let heroTimer = null;
 
+    /* ==================================================================
+       التهيئة
+    ================================================================== */
     async function init() {
-        applyLang(currentLang);
-        simulateLoading();
-        setupScrollEffects();
-        await loadData();
+        applyLang(lang);
+        animateLoadBar();
+        startClock();
+        setupScroll();
+        await fetchNewsData();
     }
 
-    /* ============================================
-       تحميل: كاش ← GitHub ← خطأ
-       طلب واحد فقط. بدون RSS. بدون proxy.
-    ============================================ */
-    async function loadData() {
-        const st = document.getElementById('dataStatus');
-        const gr = document.getElementById('newsGrid');
-        const em = document.getElementById('emptyState');
-        st.style.display = 'flex'; gr.style.display = 'none'; em.style.display = 'none';
+    /* ==================================================================
+       تحميل البيانات
+       الأولوية: JSON خارجي ← بذرة مدمجة
+    ================================================================== */
+    async function fetchNewsData() {
+        const statusEl = document.getElementById('loadState');
+        const gridEl = document.getElementById('newsGrid');
+        statusEl.style.display = 'flex';
+        gridEl.style.display = 'none';
 
-        /* محاولة واحدة فقط من GitHub مع كاش */
+        /* محاولة جلب ملف JSON خارجي */
         try {
-            const result = await GHLogic.fetchPublicData(GITHUB_CONFIG.repo, GITHUB_CONFIG.path);
-            if (result.data && Array.isArray(result.data) && result.data.length > 0) {
-                newsData = result.data;
-                onReady(true);
-                return;
+           const resp = await fetch('./news-data.json');
+            if (resp.ok) {
+                const data = await resp.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    newsData = data;
+                    onReady(true);
+                    return;
+                }
             }
-        } catch(e) {
-            console.log('GitHub unavailable:', e.message);
-        }
+        } catch(e) { /* ملف غير موجود — نستخدم البذرة */ }
 
-        /* فشل — اعرض حالة فارغة */
-        newsData = [];
+        /* استخدام البيانات المدمجة */
+        newsData = [...SEED_DATA];
         onReady(true);
     }
 
-    function showDataError() {
-        document.getElementById('dataStatus').innerHTML =
-            `<i class="fas fa-exclamation-triangle" style="color:var(--danger);font-size:3rem;"></i>
-             <p style="color:var(--text-muted);max-width:400px;">${t('loadError')}</p>
-             <button class="retry-btn" onclick="loadData()">${t('loadRetry')}</button>`;
-    }
-
     function onReady(ok) {
-        document.getElementById('dataStatus').style.display = 'none';
-        if (!ok) { showDataError(); return; }
-        document.getElementById('newsGrid').style.display = '';
-
-        if (newsData.length === 0) {
-            document.getElementById('newsGrid').style.display = 'none';
-            document.getElementById('emptyState').style.display = 'block';
+        document.getElementById('loadState').style.display = 'none';
+        if (!ok) {
+            document.getElementById('loadState').style.display = 'flex';
+            document.getElementById('loadState').innerHTML = `
+                <i class="fas fa-exclamation-triangle" style="color:var(--danger);"></i>
+                <p class="text-xs font-mono" style="color:var(--text-muted);">${t('loadError')}</p>
+                <button class="retry-btn" onclick="fetchNewsData()">${t('loadRetry')}</button>`;
+            return;
         }
-
+        document.getElementById('newsGrid').style.display = '';
+        document.getElementById('statReports').textContent = newsData.length;
+        updateThreatGauge();
         buildTicker();
         buildHero();
-        buildCategoryFilters();
-        renderNews();
-        if (newsData.filter(n => n.featured).length > 0) startHI();
+        buildFilters();
+        renderGrid();
+        startHeroLoop();
     }
 
-    function simulateLoading() {
-        const b = document.getElementById('loadingBar');
-        b.style.width = '30%';
-        setTimeout(() => b.style.width = '70%', 200);
-        setTimeout(() => b.style.width = '100%', 500);
-        setTimeout(() => { b.style.opacity = '0'; setTimeout(() => b.style.display = 'none', 300); }, 800);
+    /* ==================================================================
+       مؤشر التهديد السيبراني
+    ================================================================== */
+    function calcThreatLevel() {
+        if (newsData.length === 0) return 1;
+        const weights = { low:1, medium:2, high:3, critical:5 };
+        const scores = newsData.map(n => weights[n.threat_level] || 1);
+        const avg = scores.reduce((a,b) => a+b, 0) / scores.length;
+        if (avg >= 4) return 5;
+        if (avg >= 3.2) return 4;
+        if (avg >= 2.5) return 3;
+        if (avg >= 1.5) return 2;
+        return 1;
     }
 
-    /* لغة */
+    function updateThreatGauge() {
+        const level = calcThreatLevel();
+        const classes = ['','active-green','active-green','active-yellow','active-orange','active-red'];
+        ['threatGauge','threatGaugeMobile'].forEach(gid => {
+            const g = document.getElementById(gid);
+            if (!g) return;
+            /* للموبايل: استنساخ الشرائح */
+            if (gid === 'threatGaugeMobile' && g.children.length === 0) {
+                for (let i = 1; i <= 5; i++) {
+                    const seg = document.createElement('div');
+                    seg.className = 'threat-seg';
+                    seg.dataset.level = i;
+                    g.appendChild(seg);
+                }
+            }
+            Array.from(g.children).forEach(seg => {
+                const lv = parseInt(seg.dataset.level);
+                seg.className = 'threat-seg' + (lv <= level ? ' ' + classes[lv] : '');
+            });
+        });
+        const label = document.getElementById('threatLabel');
+        if (label) {
+            const names = I18N[lang].threatNames;
+            label.textContent = names[level - 1] || '—';
+            const colors = ['','#00ff41','#00ff41','#ffaa00','#ff6600','#ff0040'];
+            label.style.color = colors[level];
+        }
+    }
+
+    /* ==================================================================
+       شريط الأخبار العاجلة
+    ================================================================== */
+    function buildTicker() {
+        const el = document.getElementById('tickerContent');
+        const featured = newsData.filter(n => n.featured);
+        const texts = featured.length > 0
+            ? featured.map(n => {
+                const prefix = lang === 'ar' ? '⚠ ' : '⚠ ';
+                return prefix + (lang === 'ar' ? n.title_ar : n.title_en);
+            })
+            : [lang === 'ar' ? 'وحدة الرصد النافذ — رصد مستمر للتهديدات السيبرانية' : 'Razed Window Unit — Continuous Cyber Threat Monitoring'];
+        const sep = '    ◆    ';
+        el.textContent = texts.join(sep) + sep + texts.join(sep);
+    }
+
+    /* ==================================================================
+       الساعة المباشرة
+    ================================================================== */
+    function startClock() {
+        const el = document.getElementById('liveClock');
+        if (!el) return;
+        function tick() {
+            const now = new Date();
+            el.textContent = now.toLocaleTimeString(lang === 'ar' ? 'ar-EG' : 'en-US', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false });
+        }
+        tick();
+        setInterval(tick, 1000);
+    }
+
+    /* ==================================================================
+       هيرو
+    ================================================================== */
+    function buildHero() {
+        const featured = newsData.filter(n => n.featured);
+        if (featured.length === 0) { document.getElementById('heroSlides').innerHTML = ''; return; }
+        document.getElementById('heroSlides').innerHTML = featured.map((n,i) => `
+            <div class="hero-slide ${i===0?'active':''}" data-idx="${i}">
+                <img src="${n.image}" alt="${lang==='ar'?n.title_ar:n.title_en}" loading="${i===0?'eager':'lazy'}">
+            </div>`).join('');
+        setHeroContent(featured[0]);
+        document.getElementById('heroDots').innerHTML = featured.map((_,i) => `
+            <div class="hero-dot ${i===0?'active':''}" onclick="goSlide(${i})"></div>`).join('');
+        heroIdx = 0;
+    }
+
+    function setHeroContent(item) {
+        const l = lang;
+        document.getElementById('heroContent').innerHTML = `
+            <div class="flex flex-wrap items-center gap-2.5 mb-3">
+                <span class="classified-stamp"><span class="dot"></span> ${t('classified')}</span>
+                <span class="threat-tag ${tagClass(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${t('t'+cap(item.threat_level))}</span>
+                <span class="cat-tag">${catLabel(item.category)}</span>
+            </div>
+            <h2 class="text-xl md:text-3xl lg:text-4xl font-black leading-tight max-w-3xl" style="color:var(--text-bright);text-shadow:0 2px 24px rgba(0,0,0,0.9);">${l==='ar'?item.title_ar:item.title_en}</h2>
+            <p class="mt-3 text-sm md:text-base max-w-2xl leading-relaxed" style="color:rgba(200,214,229,0.65);text-shadow:0 1px 12px rgba(0,0,0,0.8);">${l==='ar'?item.excerpt_ar:item.excerpt_en}</p>
+            <button onclick="openModal(${item.id})" class="mt-5 px-5 py-2.5 rounded font-bold text-sm transition-all hover:scale-105" style="background:var(--accent);color:#000;box-shadow:0 0 20px var(--accent-glow-md);">
+                ${t('readReport')} <i class="fas fa-arrow-${l==='ar'?'left':'right'} mr-1.5 text-xs"></i>
+            </button>`;
+    }
+
+    function goSlide(i) {
+        const f = newsData.filter(n => n.featured);
+        if (i < 0 || i >= f.length) return;
+        document.querySelectorAll('.hero-slide').forEach((s,j) => s.classList.toggle('active', j===i));
+        document.querySelectorAll('.hero-dot').forEach((d,j) => d.classList.toggle('active', j===i));
+        heroIdx = i;
+        setHeroContent(f[i]);
+        resetHeroTimer();
+    }
+    function startHeroLoop() { heroTimer = setInterval(() => { const f = newsData.filter(n=>n.featured); if(f.length>1) goSlide((heroIdx+1)%f.length); }, 7000); }
+    function resetHeroTimer() { clearInterval(heroTimer); startHeroLoop(); }
+
+    /* ==================================================================
+       فلاتر التصنيفات
+    ================================================================== */
+    function buildFilters() {
+        const cats = [
+            { key:'all', label:t('allCats') },
+            { key:'intrusions', label:t('catIntrusions') },
+            { key:'natsec', label:t('catNatSec') },
+            { key:'vulns', label:t('catVulns') },
+            { key:'shadow', label:t('catShadow') }
+        ];
+        document.getElementById('catFilters').innerHTML = cats.map(c =>
+            `<button class="cat-btn ${activeCat===c.key?'active':''}" onclick="setCat('${c.key}')">${c.label}</button>`
+        ).join('');
+    }
+    function setCat(c) { activeCat = c; buildFilters(); renderGrid(); }
+
+    /* ==================================================================
+       عرض البطاقات
+    ================================================================== */
+    function renderGrid() {
+        const filtered = activeCat === 'all' ? newsData : newsData.filter(n => n.category === activeCat);
+        const grid = document.getElementById('newsGrid');
+        const noRes = document.getElementById('noResults');
+        if (filtered.length === 0) { grid.innerHTML = ''; noRes.style.display = 'block'; return; }
+        noRes.style.display = 'none';
+        grid.innerHTML = filtered.map((item, idx) => {
+            const l = lang;
+            const title = l==='ar' ? item.title_ar : item.title_en;
+            const excerpt = l==='ar' ? item.excerpt_ar : item.excerpt_en;
+            const source = l==='ar' ? item.source_ar : item.source_en;
+            return `
+            <article class="news-card reveal" style="transition-delay:${idx*60}ms" onclick="openModal(${item.id})" role="button" tabindex="0" aria-label="${title}">
+                <div class="card-img-wrap">
+                    <img src="${item.image}" alt="${title}" loading="lazy">
+                    <div class="absolute top-2.5 ${l==='ar'?'right-2.5':'left-2.5'} z-10"><span class="cat-tag">${catLabel(item.category)}</span></div>
+                    <div class="absolute top-2.5 ${l==='ar'?'left-2.5':'right-2.5'} z-10"><span class="threat-tag ${tagClass(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${t('t'+cap(item.threat_level))}</span></div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-sm leading-snug" style="color:var(--text-bright);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${title}</h3>
+                    <p class="mt-2 text-xs leading-relaxed" style="color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${excerpt}</p>
+                    <div class="card-meta mt-3 pt-2.5" style="border-top:1px solid var(--border);">
+                        <span><i class="fas fa-building"></i> ${source}</span>
+                        <span><i class="fas fa-calendar-alt"></i> ${fmtDate(item.date)}</span>
+                    </div>
+                </div>
+            </article>`;
+        }).join('');
+        requestAnimationFrame(() => document.querySelectorAll('.news-card.reveal').forEach(el => observeReveal(el)));
+    }
+
+    /* ==================================================================
+       مودال التقرير
+    ================================================================== */
+    function openModal(id) {
+        const item = newsData.find(n => n.id === id);
+        if (!item) return;
+        const l = lang;
+        const title = l==='ar' ? item.title_ar : item.title_en;
+        const content = (l==='ar' ? item.content_ar : item.content_en).replace(/\n/g, '<br>');
+        const source = l==='ar' ? item.source_ar : item.source_en;
+        document.getElementById('modalBody').innerHTML = `
+            <div class="relative">
+                <img src="${item.image}" alt="${title}" class="w-full h-56 object-cover" style="filter:brightness(0.4) saturate(0.7);">
+                <div class="absolute inset-0" style="background:linear-gradient(to top,var(--bg2) 10%,transparent 70%);"></div>
+                <button onclick="closeModal()" class="absolute top-3 ${l==='ar'?'left-3':'right-3'} w-9 h-9 rounded flex items-center justify-center transition hover:scale-110" style="background:rgba(0,0,0,0.6);color:#fff;border:1px solid var(--border);cursor:pointer;backdrop-filter:blur(8px);" aria-label="${t('closeReport')}"><i class="fas fa-times text-sm"></i></button>
+            </div>
+            <div class="px-5 md:px-7 pb-7 -mt-6 relative">
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span class="cat-tag">${catLabel(item.category)}</span>
+                    <span class="threat-tag ${tagClass(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${t('t'+cap(item.threat_level))}</span>
+                    <span class="classified-stamp" style="font-size:0.6rem;padding:2px 8px;">${t('clearance')}: ${t('t'+cap(item.threat_level))}</span>
+                </div>
+                <h2 class="text-lg md:text-xl font-black leading-tight" style="color:var(--text-bright);">${title}</h2>
+                <div class="card-meta mt-3 pb-3" style="border-bottom:1px solid var(--border);">
+                    <span><i class="fas fa-building"></i> ${t('source')}: ${source}</span>
+                    <span><i class="fas fa-calendar-alt"></i> ${fmtDate(item.date)}</span>
+                </div>
+                <div class="mt-5 text-sm leading-loose" style="color:var(--text);">${content}</div>
+                <div class="glow-divider mt-6 mb-3"></div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-mono" style="color:var(--text-muted);">وحدة الرصد النافذ — ${t('fullReport')}</span>
+                    <span class="text-xs font-mono" style="color:var(--accent);">DOC-${String(item.id).padStart(4,'0')}</span>
+                </div>
+            </div>`;
+        document.getElementById('reportModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal() { document.getElementById('reportModal').classList.remove('active'); document.body.style.overflow = ''; }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    /* ==================================================================
+       تبديل اللغة
+    ================================================================== */
     function switchLang(l) {
-        if (l === currentLang) return;
-        document.body.classList.add('fade-out');
+        if (l === lang) return;
+        const main = document.getElementById('mainContent');
+        main.classList.add('out');
         setTimeout(() => {
-            currentLang = l; localStorage.setItem('tm_lang', l); applyLang(l);
-            if (newsData.length > 0) { buildTicker(); buildHero(); buildCategoryFilters(); renderNews(); }
-            document.body.classList.remove('fade-out');
-        }, 300);
+            lang = l;
+            localStorage.setItem('csa_lang', l);
+            applyLang(l);
+            if (newsData.length > 0) { updateThreatGauge(); buildTicker(); buildHero(); buildFilters(); renderGrid(); }
+            main.classList.remove('out');
+        }, 250);
     }
+
     function applyLang(l) {
-        const h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
-        document.body.style.fontFamily = l === 'ar' ? "'Cairo',sans-serif" : "'Inter',sans-serif";
+        document.documentElement.lang = l;
+        document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+        document.body.style.fontFamily = "'Cairo', sans-serif";
         document.getElementById('btnAR').classList.toggle('active', l === 'ar');
         document.getElementById('btnEN').classList.toggle('active', l === 'en');
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const k = el.getAttribute('data-i18n');
-            if (I18N[l] && I18N[l][k]) el.textContent = I18N[l][k];
+            if (I18N[l][k]) el.textContent = I18N[l][k];
         });
-        document.title = l === 'ar' ? 'الرصد التقني - Tech Monitor' : 'Tech Monitor - الرصد التقني';
-    }
-    function t(k) { return I18N[currentLang][k] || k; }
-
-    /* عاجل */
-    function buildTicker() {
-        const el = document.getElementById('tickerContent');
-        const f = newsData.filter(n => n.featured);
-        const tx = f.length > 0
-            ? f.map(n => (currentLang === 'ar' ? 'عاجل: ' : 'BREAKING: ') + (currentLang === 'ar' ? n.title_ar : n.title_en))
-            : [currentLang === 'ar' ? 'الرصد التقني — عينك على العالم الرقمي' : 'Tech Monitor — Your Eye on the Digital World'];
-        const s = '  \u25C6  ';
-        el.textContent = tx.join(s) + s + tx.join(s);
+        document.title = l === 'ar' ? 'هيئة الرصد السيبراني — وحدة الرصد النافذ' : 'Cyber Surveillance Authority — Razed Window Unit';
     }
 
-    /* هيرو */
-    function buildHero() {
-        const f = newsData.filter(n => n.featured);
-        if (!f.length) { document.getElementById('heroSlides').innerHTML = ''; document.getElementById('heroContent').innerHTML = `<h2 class="text-2xl font-black" style="color:var(--accent);">${currentLang==='ar'?'الرصد التقني':'Tech Monitor'}</h2><p class="mt-2" style="color:var(--text-muted);">${currentLang==='ar'?'بوابة الهكر الهزبري':'By: Al-Hazbri Hacker'}</p>`; return; }
-        document.getElementById('heroSlides').innerHTML = f.map((n, i) => `<div class="hero-slide ${i === 0 ? 'active' : ''}"><img src="${n.image}" alt="" loading="${i === 0 ? 'eager' : 'lazy'}"></div>`).join('');
-        updateHC(f[0]);
-        document.getElementById('heroDots').innerHTML = f.map((_, i) => `<div class="hero-dot ${i === 0 ? 'active' : ''}" onclick="goSlide(${i})"></div>`).join('');
-        heroIndex = 0;
-    }
-    function updateHC(item) {
-        const l = currentLang, title = l === 'ar' ? item.title_ar : item.title_en, exc = l === 'ar' ? item.excerpt_ar : item.excerpt_en;
-        document.getElementById('heroContent').innerHTML = `<div class="flex flex-wrap items-center gap-3 mb-4"><span class="breaking-badge"><span class="breaking-dot"></span> ${t('breaking')}</span><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span><span class="cat-label">${gCT(item.category)}</span></div><h2 class="text-2xl md:text-4xl font-black leading-tight max-w-3xl" style="text-shadow:0 2px 20px rgba(0,0,0,0.8);">${title}</h2><p class="mt-3 text-sm md:text-base max-w-2xl leading-relaxed" style="color:rgba(255,255,255,0.7);">${exc}</p><button onclick="openModal(${item.id})" class="mt-5 px-6 py-3 rounded-lg font-bold text-sm transition-all hover:scale-105" style="background:var(--accent);color:#fff;box-shadow:0 0 20px var(--accent-glow);">${t('readMore')} <i class="fas fa-arrow-${l === 'ar' ? 'left' : 'right'} mr-2"></i></button>`;
-    }
-    function goSlide(i) { const f = newsData.filter(n => n.featured); if (i < 0 || i >= f.length) return; document.querySelectorAll('.hero-slide').forEach((s, x) => s.classList.toggle('active', x === i)); document.querySelectorAll('.hero-dot').forEach((d, x) => d.classList.toggle('active', x === i)); heroIndex = i; updateHC(f[i]); resetHI(); }
-    function startHI() { heroInterval = setInterval(() => { const f = newsData.filter(n => n.featured); if (f.length <= 1) return; goSlide((heroIndex + 1) % f.length); }, 6000); }
-    function resetHI() { clearInterval(heroInterval); startHI(); }
+    function t(k) { return I18N[lang][k] || k; }
 
-    /* فلاتر */
-    function buildCF() { const c = [{ key: 'all', label: t('allCats') }, { key: 'cyber', label: t('catCyber') }, { key: 'intel', label: t('catIntel') }, { key: 'tech', label: t('catTech') }]; document.getElementById('catFilters').innerHTML = c.map(x => `<button class="cat-btn ${currentCategory === x.key ? 'active' : ''}" onclick="filterCat('${x.key}')">${x.label}</button>`).join(''); }
-    function filterCat(c) { currentCategory = c; buildCF(); renderNews(); }
+    /* ==================================================================
+       أدوات مساعدة
+    ================================================================== */
+    function tagClass(lv) { return ({low:'tag-low',medium:'tag-medium',high:'tag-high',critical:'tag-critical'})[lv] || 'tag-low'; }
+    function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
+    function catLabel(c) { return ({intrusions:t('catIntrusions'),natsec:t('catNatSec'),vulns:t('catVulns'),shadow:t('catShadow')})[c] || c; }
+    function fmtDate(d) { try { return new Date(d).toLocaleDateString(lang==='ar'?'ar-EG':'en-US',{year:'numeric',month:'short',day:'numeric'}); } catch(e) { return d; } }
 
-    /* بطاقات */
-    function renderNews() {
-        const fl = currentCategory === 'all' ? newsData : newsData.filter(n => n.category === currentCategory);
-        const gr = document.getElementById('newsGrid'), nr = document.getElementById('noResults');
-        if (!fl.length) { gr.innerHTML = ''; nr.style.display = 'block'; return; } nr.style.display = 'none';
-        gr.innerHTML = fl.map((item, idx) => {
-            const l = currentLang, title = l === 'ar' ? item.title_ar : item.title_en, exc = l === 'ar' ? item.excerpt_ar : item.excerpt_en, src = l === 'ar' ? item.source_ar : item.source_en;
-            return `<article class="news-card reveal" style="transition-delay:${idx * 80}ms" onclick="openModal(${item.id})"><div class="news-card-img"><img src="${item.image}" alt="" loading="lazy"><div class="absolute top-3 ${l === 'ar' ? 'right-3' : 'left-3'} z-10"><span class="cat-label">${gCT(item.category)}</span></div><div class="absolute top-3 ${l === 'ar' ? 'left-3' : 'right-3'} z-10"><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span></div></div><div class="p-5"><h3 class="font-bold text-base leading-snug" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${title}</h3><p class="mt-2 text-sm leading-relaxed" style="color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${exc}</p><div class="card-meta mt-4 pt-3" style="border-top:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${src}</span><span><i class="fas fa-calendar text-xs"></i> ${fmtD(item.date)}</span></div></div></article>`;
-        }).join('');
-        requestAnimationFrame(() => document.querySelectorAll('.news-card.reveal').forEach(el => rObs.observe(el)));
+    /* ==================================================================
+       شريط التحميل
+    ================================================================== */
+    function animateLoadBar() {
+        const bar = document.getElementById('loadBar');
+        bar.style.width = '25%';
+        setTimeout(() => bar.style.width = '60%', 150);
+        setTimeout(() => bar.style.width = '90%', 400);
+        setTimeout(() => bar.style.width = '100%', 600);
+        setTimeout(() => { bar.style.opacity = '0'; setTimeout(() => bar.style.display = 'none', 300); }, 900);
     }
 
-    /* مودال */
-    function openModal(id) {
-        const item = newsData.find(n => n.id === id); if (!item) return;
-        const l = currentLang, title = l === 'ar' ? item.title_ar : item.title_en, content = (l === 'ar' ? item.content_ar : item.content_en).replace(/\n/g, '<br>'), src = l === 'ar' ? item.source_ar : item.source_en;
-        document.getElementById('modalContent').innerHTML = `<div class="relative"><img src="${item.image}" alt="" class="w-full h-64 object-cover rounded-t-2xl"><div class="absolute inset-0 rounded-t-2xl" style="background:linear-gradient(to top,var(--bg2),transparent 60%);"></div><button onclick="closeModal()" class="absolute top-4 ${l === 'ar' ? 'left-4' : 'right-4'} w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(0,0,0,0.6);color:#fff;border:none;cursor:pointer;"><i class="fas fa-times"></i></button></div><div class="p-6 md:p-8"><div class="flex flex-wrap items-center gap-3 mb-4"><span class="cat-label">${gCT(item.category)}</span><span class="threat-badge ${gTC(item.threat_level)}"><i class="fas fa-shield-halved"></i> ${gTT(item.threat_level)}</span></div><h2 class="text-xl md:text-2xl font-black leading-tight">${title}</h2><div class="card-meta mt-4 pb-4" style="border-bottom:1px solid var(--border);"><span><i class="fas fa-building text-xs"></i> ${t('source')}: ${src}</span><span><i class="fas fa-calendar text-xs"></i> ${fmtD(item.date)}</span></div><div class="mt-6 text-sm" style="color:var(--text);line-height:2;">${content}</div><div class="mt-8 pt-4 flex justify-end" style="border-top:1px solid var(--border);"><span class="text-xs" style="color:var(--text-muted)">الهكر الهزبري — ${t('fullReport')}</span></div></div>`;
-        document.getElementById('newsModal').classList.add('active'); document.body.style.overflow = 'hidden';
+    /* ==================================================================
+       تأثيرات التمرير
+    ================================================================== */
+    const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold:0.08, rootMargin:'0px 0px -30px 0px' });
+    function observeReveal(el) { revealObs.observe(el); }
+
+    function setupScroll() {
+        const nav = document.getElementById('navbar');
+        const btn = document.getElementById('backTop');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+            btn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+        document.querySelectorAll('.reveal').forEach(el => observeReveal(el));
     }
-    function closeModal() { document.getElementById('newsModal').classList.remove('active'); document.body.style.overflow = ''; }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    /* أدوات */
-    function gTC(l) { return ({ low: 'threat-low', medium: 'threat-medium', high: 'threat-high', critical: 'threat-critical' })[l] || 'threat-low'; }
-    function gTT(l) { return t('threat' + l.charAt(0).toUpperCase() + l.slice(1)); }
-    function gCT(c) { return ({ cyber: t('catCyber'), intel: t('catIntel'), tech: t('catTech') })[c] || c; }
-    function fmtD(d) { try { return new Date(d).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' }); } catch (e) { return d; } }
+    /* ==================================================================
+       قائمة الموبايل
+    ================================================================== */
+    function toggleMobile() {
+        const m = document.getElementById('mobileMenu');
+        const icon = document.getElementById('menuIcon');
+        m.classList.toggle('active');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+        document.body.style.overflow = m.classList.contains('active') ? 'hidden' : '';
+    }
 
-    /* تمرير */
-    const rObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); rObs.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    function setupScrollEffects() { const nb = document.getElementById('navbar'), bt = document.getElementById('backToTop'); window.addEventListener('scroll', () => { nb.classList.toggle('scrolled', window.scrollY > 50); bt.classList.toggle('visible', window.scrollY > 500); }, { passive: true }); document.querySelectorAll('.reveal').forEach(el => rObs.observe(el)); }
-    function toggleMobile() { const m = document.getElementById('mobileMenu'), i = document.getElementById('menuIcon'); m.classList.toggle('active'); i.classList.toggle('fa-bars'); i.classList.toggle('fa-times'); document.body.style.overflow = m.classList.contains('active') ? 'hidden' : ''; }
-
+    /* ==================================================================
+       الانطلاق
+    ================================================================== */
     document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
