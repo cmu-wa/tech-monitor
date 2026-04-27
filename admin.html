@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم — الرصد التقني</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>tailwind.config={theme:{extend:{colors:{onyx:{900:'#060a12',800:'#0a1020',700:'#0f1a2e',600:'#152238',500:'#1c2d48'},emerald:{400:'#34d399',500:'#10b981',600:'#059669'}}}}</script>
+    <style>
+        :root{--bg:#060a12;--bg2:#0a1020;--bg3:#0f1a2e;--bg4:#152238;--accent:#10b981;--accent-light:#34d399;--accent-glow:rgba(16,185,129,0.15);--text:#e2e8f0;--text-muted:#64748b;--border:#1e293b;--danger:#ef4444;--warn:#f59e0b;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+        [dir="ltr"] body{font-family:'Inter',sans-serif;}
+        .login-overlay{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity 0.6s ease,visibility 0.6s ease;}
+        .login-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+        .terminal-box{width:90%;max-width:600px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 0 60px rgba(16,185,129,0.05);}
+        .terminal-header{background:var(--bg3);padding:12px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);}
+        .terminal-dot{width:12px;height:12px;border-radius:50%;}
+        .terminal-body{padding:24px;font-family:'JetBrains Mono',monospace;min-height:280px;}
+        .terminal-line{margin-bottom:8px;font-size:0.85rem;line-height:1.6;opacity:0;animation:termFade 0.3s forwards;}
+        @keyframes termFade{to{opacity:1;}}
+        .terminal-prompt{color:var(--accent);}.terminal-error{color:var(--danger);}.terminal-success{color:var(--accent-light);}
+        .terminal-input-line{display:flex;align-items:center;gap:8px;margin-top:16px;}
+        .terminal-input{flex:1;background:transparent;border:none;outline:none;color:var(--accent-light);font-family:'JetBrains Mono',monospace;font-size:0.9rem;caret-color:var(--accent);}
+        .cursor-blink{display:inline-block;width:8px;height:16px;background:var(--accent);animation:blink 1s infinite;}
+        @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+        .admin-wrap{display:none;min-height:100vh;}.admin-wrap.active{display:block;}
+        .sidebar{position:fixed;top:0;right:0;width:260px;height:100vh;background:var(--bg2);border-left:1px solid var(--border);padding:24px 16px;z-index:50;display:flex;flex-direction:column;gap:4px;transition:transform 0.3s ease;}
+        [dir="ltr"] .sidebar{right:auto;left:0;border-left:none;border-right:1px solid var(--border);}
+        .sidebar-link{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;font-size:0.9rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all 0.2s ease;border:none;background:none;width:100%;text-align:inherit;}
+        .sidebar-link:hover{color:var(--text);background:var(--bg3);}
+        .sidebar-link.active{color:#fff;background:var(--accent);box-shadow:0 0 15px var(--accent-glow);}
+        .sidebar-link i{width:20px;text-align:center;}
+        .main-content{margin-right:260px;padding:24px;min-height:100vh;}
+        [dir="ltr"] .main-content{margin-right:0;margin-left:260px;}
+        .data-table{width:100%;border-collapse:separate;border-spacing:0;}
+        .data-table th{padding:12px 16px;text-align:right;font-size:0.75rem;font-weight:700;text-transform:uppercase;color:var(--text-muted);background:var(--bg3);border-bottom:1px solid var(--border);}
+        [dir="ltr"] .data-table th{text-align:left;}
+        .data-table td{padding:14px 16px;font-size:0.85rem;border-bottom:1px solid var(--border);vertical-align:middle;}
+        .data-table tr:hover td{background:var(--bg3);}
+        .threat-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:700;}
+        .threat-low{background:rgba(16,185,129,0.15);color:#34d399;}.threat-medium{background:rgba(245,158,11,0.15);color:#fbbf24;}.threat-high{background:rgba(239,68,68,0.15);color:#f87171;}.threat-critical{background:rgba(239,68,68,0.25);color:#ef4444;}
+        .form-group{margin-bottom:20px;}
+        .form-label{display:block;font-size:0.8rem;font-weight:700;margin-bottom:6px;color:var(--text-muted);}
+        .form-input{width:100%;padding:10px 14px;border-radius:10px;font-size:0.9rem;background:var(--bg3);border:1px solid var(--border);color:var(--text);outline:none;transition:all 0.2s ease;font-family:inherit;}
+        .form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
+        .form-input::placeholder{color:var(--text-muted);opacity:0.6;}
+        textarea.form-input{min-height:120px;resize:vertical;line-height:1.7;}
+        select.form-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;}
+        [dir="ltr"] select.form-input{background-position:right 14px center;}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;border:none;transition:all 0.2s ease;font-family:inherit;}
+        .btn:hover{transform:translateY(-1px);}
+        .btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 15px var(--accent-glow);}
+        .btn-primary:hover{box-shadow:0 0 25px rgba(16,185,129,0.3);}
+        .btn-danger{background:rgba(239,68,68,0.15);color:#f87171;}
+        .btn-ghost{background:var(--bg3);color:var(--text-muted);border:1px solid var(--border);}
+        .btn-ghost:hover{color:var(--text);border-color:var(--accent);}
+        .btn-sm{padding:6px 14px;font-size:0.75rem;border-radius:8px;}
+        .btn-publish{background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-size:1rem;padding:14px 28px;border-radius:12px;box-shadow:0 0 30px rgba(16,185,129,0.3);position:relative;overflow:hidden;}
+        .btn-publish:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(16,185,129,0.4);}
+        .btn-publish:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
+        .btn-publish .btn-progress{position:absolute;bottom:0;left:0;height:4px;background:rgba(255,255,255,0.4);width:0;transition:width 0.3s;}
+        .btn-publish:disabled .btn-progress{animation:progressPulse 1.5s ease-in-out infinite;}
+        @keyframes progressPulse{0%{width:0;}50%{width:100%;}100%{width:0;}}
+        .stat-card{padding:20px;border-radius:14px;background:var(--bg2);border:1px solid var(--border);transition:all 0.3s ease;}
+        .stat-card:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow);}
+        .toast-container{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;flex-direction:column;gap:8px;}
+        .toast{padding:12px 24px;border-radius:10px;font-size:0.85rem;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.4);animation:toastIn 0.4s ease forwards;display:flex;align-items:center;gap:10px;}
+        .toast.success{background:#065f46;color:#34d399;border:1px solid #10b981;}
+        .toast.error{background:#7f1d1d;color:#fca5a5;border:1px solid #ef4444;}
+        .toast.info{background:#1e3a5f;color:#93c5fd;border:1px solid #3b82f6;}
+        @keyframes toastIn{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+        @keyframes toastOut{from{opacity:1;}to{opacity:0;transform:translateY(-20px);}}
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.3s ease;padding:20px;}
+        .modal-overlay.active{opacity:1;visibility:visible;}
+        .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;max-width:440px;width:100%;padding:28px;transform:scale(0.95);transition:all 0.3s ease;}
+        .modal-overlay.active .modal-box{transform:scale(1);}
+        /* تحميل عام */
+        .publish-overlay{position:fixed;inset:0;background:rgba(6,10,18,0.92);backdrop-filter:blur(12px);z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;opacity:0;visibility:hidden;transition:all 0.4s ease;}
+        .publish-overlay.active{opacity:1;visibility:visible;}
+        .publish-spinner{width:60px;height:60px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
+        @keyframes spin{to{transform:rotate(360deg);}}
+        .publish-check{width:60px;height:60px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;animation:scaleIn 0.4s ease;}
+        @keyframes scaleIn{from{transform:scale(0);}to{transform:scale(1);}}
+        .gh-status{padding:14px 18px;border-radius:10px;font-size:0.8rem;display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+        .gh-status.ok{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);color:var(--accent-light);}
+        .gh-status.no{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:#fbbf24;}
+        ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px;}::-webkit-scrollbar-thumb:hover{background:var(--accent);}
+        .page-section{display:none;}.page-section.active{display:block;}
+        .mobile-toggle{display:none;position:fixed;top:16px;left:16px;z-index:60;width:40px;height:40px;border-radius:10px;background:var(--bg2);border:1px solid var(--border);color:var(--text);cursor:pointer;align-items:center;justify-content:center;}
+        @media(max-width:768px){.sidebar{transform:translateX(100%);}[dir="ltr"] .sidebar{transform:translateX(-100%);}.sidebar.open{transform:translateX(0);}.main-content{margin-right:0!important;margin-left:0!important;padding:16px;padding-top:60px;}.mobile-toggle{display:flex;}}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+    </style>
+</head>
+<body>
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- تحميل عام عند النشر -->
+<div class="publish-overlay" id="publishOverlay">
+    <div id="publishIcon"></div>
+    <p id="publishText" style="font-size:1.1rem;font-weight:700;"></p>
+    <p id="publishSubtext" style="color:var(--text-muted);font-size:0.85rem;"></p>
+</div>
+
+<!-- تسجيل الدخول -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="terminal-box">
+        <div class="terminal-header"><div class="terminal-dot" style="background:#ef4444;"></div><div class="terminal-dot" style="background:#f59e0b;"></div><div class="terminal-dot" style="background:#10b981;"></div><span style="flex:1;text-align:center;font-size:0.75rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">tech-monitor@admin ~ secured-session</span></div>
+        <div class="terminal-body" id="terminalBody">
+            <div class="terminal-line" style="animation-delay:0.1s;color:var(--text-muted);">> Tech Monitor Admin Console v4.0</div>
+            <div class="terminal-line" style="animation-delay:0.4s;color:var(--text-muted);">> Establishing secure connection...</div>
+            <div class="terminal-line" style="animation-delay:0.8s;color:var(--accent);">> Connection encrypted [AES-256-GCM]</div>
+            <div class="terminal-line" style="animation-delay:1.2s;color:var(--text-muted);">> Authentication required:</div>
+            <div class="terminal-input-line" style="animation-delay:1.6s;"><span class="terminal-prompt">admin@tm:~$</span><input type="password" class="terminal-input" id="loginInput" placeholder="password" autocomplete="off" autofocus><span class="cursor-blink"></span></div>
+            <div id="loginFeedback"></div>
+        </div>
+    </div>
+</div>
+
+<!-- لوحة التحكم -->
+<div class="admin-wrap" id="adminWrap">
+    <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="القائمة"><i class="fas fa-bars"></i></button>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="flex items-center gap-3 mb-8 px-2">
+            <div style="width:38px;height:38px;background:linear-gradient(135deg,var(--accent),#047857);border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" stroke="white" stroke-width="3" fill="none"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5" fill="none"/><circle cx="50" cy="50" r="10" fill="white"/></svg></div>
+            <div><div class="font-black text-sm" style="color:var(--accent)">الرصد التقني</div><div class="text-xs" style="color:var(--text-muted)">Admin Panel</div></div>
+        </div>
+        <button class="sidebar-link active" onclick="showPage('dashboard')" data-page="dashboard"><i class="fas fa-chart-line"></i><span data-i18n="sideDashboard">لوحة المعلومات</span></button>
+        <button class="sidebar-link" onclick="showPage('news-manage')" data-page="news-manage"><i class="fas fa-newspaper"></i><span data-i18n="sideNews">إدارة الأخبار</span></button>
+        <button class="sidebar-link" onclick="showPage('news-add')" data-page="news-add"><i class="fas fa-plus-circle"></i><span data-i18n="sideAdd">إضافة خبر</span></button>
+        <button class="sidebar-link" onclick="showPage('github-setup')" data-page="github-setup"><i class="fab fa-github"></i><span data-i18n="sideGitHub">ربط GitHub</span></button>
+        <div style="flex:1;"></div>
+        <div class="px-2 py-3 mt-4" style="border-top:1px solid var(--border);">
+            <div class="flex items-center gap-3 mb-3"><div style="width:34px;height:34px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;"><i class="fas fa-user-shield text-sm" style="color:var(--accent)"></i></div><div><div class="text-xs font-bold">الهكر الهزبري</div><div class="text-xs" style="color:var(--text-muted)">Super Admin</div></div></div>
+            <div class="flex gap-2">
+                <a href="index.html" class="btn btn-ghost btn-sm flex-1" style="text-decoration:none;justify-content:center;"><i class="fas fa-globe"></i> <span data-i18n="sidePortal">البوابة</span></a>
+                <a href="index.html" target="_blank" class="btn btn-ghost btn-sm flex-1" style="text-decoration:none;justify-content:center;"><i class="fas fa-external-link-alt"></i></a>
+                <button class="btn btn-danger btn-sm" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <!-- لوحة المعلومات -->
+        <div class="page-section active" id="page-dashboard">
+            <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+                <div><h2 class="text-xl font-black" data-i18n="dashTitle">لوحة المعلومات</h2><p class="text-sm" style="color:var(--text-muted)" data-i18n="dashDesc">نظرة عامة على محتوى المنصة</p></div>
+                <div class="flex items-center gap-2"><button class="btn btn-ghost btn-sm" onclick="switchAdminLang('ar')" id="adminBtnAR" style="font-size:0.7rem;">عربي</button><button class="btn btn-ghost btn-sm" onclick="switchAdminLang('en')" id="adminBtnEN" style="font-size:0.7rem;">EN</button></div>
+            </div>
+            <div class="gh-status no" id="ghStatusDash"><i class="fas fa-unlink"></i><span data-i18n="ghNotLinked">GitHub غير مربوط — اذهب لصفحة ربط GitHub</span></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="stat-card"><div class="flex items-center justify-between mb-3"><span class="text-xs font-bold" style="color:var(--text-muted)" data-i18n="statTotal">إجمالي الأخبار</span><div style="width:36px;height:36px;border-radius:10px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;"><i class="fas fa-newspaper text-sm" style="color:var(--accent)"></i></div></div><div class="text-3xl font-black" id="statTotal" style="color:var(--accent)">0</div></div>
+                <div class="stat-card"><div class="flex items-center justify-between mb-3"><span class="text-xs font-bold" style="color:var(--text-muted)" data-i18n="statFeatured">أخبار عاجلة</span><div style="width:36px;height:36px;border-radius:10px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-bolt text-sm" style="color:var(--danger)"></i></div></div><div class="text-3xl font-black" id="statFeatured" style="color:var(--danger)">0</div></div>
+                <div class="stat-card"><div class="flex items-center justify-between mb-3"><span class="text-xs font-bold" style="color:var(--text-muted)" data-i18n="statCritical">تهديدات حرجة</span><div style="width:36px;height:36px;border-radius:10px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-radiation text-sm" style="color:#f87171"></i></div></div><div class="text-3xl font-black" id="statCritical" style="color:#f87171">0</div></div>
+                <div class="stat-card"><div class="flex items-center justify-between mb-3"><span class="text-xs font-bold" style="color:var(--text-muted)" data-i18n="statCats">التصنيفات</span><div style="width:36px;height:36px;border-radius:10px;background:rgba(59,130,246,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-tags text-sm" style="color:#60a5fa"></i></div></div><div class="text-3xl font-black" id="statCats" style="color:#60a5fa">3</div></div>
+            </div>
+            <!-- زر النشر الكبير -->
+            <div class="stat-card mb-8 flex flex-wrap items-center justify-between gap-4" id="publishCard" style="border-color:var(--accent);background:linear-gradient(135deg,rgba(16,185,129,0.05),transparent);">
+                <div><h3 class="font-black text-lg" data-i18n="publishTitle">نشر الأخبار على GitHub</h3><p class="text-sm" style="color:var(--text-muted)" data-i18n="publishDesc">اضغط لنشر جميع الأخبار المحلية إلى ملف data.json على GitHub</p></div>
+                <button class="btn btn-publish" id="publishBtn" onclick="publishToGitHub()" disabled><i class="fab fa-github"></i> <span data-i18n="publishBtn">نشر الآن</span><div class="btn-progress"></div></button>
+            </div>
+            <div class="rounded-xl overflow-hidden" style="background:var(--bg2);border:1px solid var(--border);"><div class="p-4 flex items-center justify-between" style="border-bottom:1px solid var(--border);"><h3 class="font-bold text-sm" data-i18n="recentNews">آخر الأخبار</h3><button class="btn btn-ghost btn-sm" onclick="showPage('news-manage')" data-i18n="viewAll">عرض الكل</button></div><div class="overflow-x-auto"><table class="data-table"><thead><tr><th data-i18n="colTitle">العنوان</th><th data-i18n="colCategory">التصنيف</th><th data-i18n="colThreat">التهديد</th><th data-i18n="colDate">التاريخ</th></tr></thead><tbody id="dashTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- إدارة الأخبار -->
+        <div class="page-section" id="page-news-manage">
+            <div class="flex items-center justify-between mb-6 flex-wrap gap-4"><div><h2 class="text-xl font-black" data-i18n="manageTitle">إدارة الأخبار</h2><p class="text-sm" style="color:var(--text-muted)" data-i18n="manageDesc">عرض وتعديل وحذف التقارير</p></div><button class="btn btn-primary" onclick="showPage('news-add')"><i class="fas fa-plus"></i> <span data-i18n="addNew">إضافة جديد</span></button></div>
+            <div class="rounded-xl overflow-hidden" style="background:var(--bg2);border:1px solid var(--border);"><div class="overflow-x-auto"><table class="data-table"><thead><tr><th>#</th><th data-i18n="colTitle">العنوان</th><th data-i18n="colCategory">التصنيف</th><th data-i18n="colThreat">التهديد</th><th data-i18n="colDate">التاريخ</th><th data-i18n="colActions">الإجراءات</th></tr></thead><tbody id="manageTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- إضافة/تعديل -->
+        <div class="page-section" id="page-news-add">
+            <div class="mb-6"><h2 class="text-xl font-black" id="formTitle" data-i18n="addTitle">إضافة تقرير جديد</h2><p class="text-sm" style="color:var(--text-muted)" id="formDesc" data-i18n="addDesc">أدخل بيانات التقرير باللغتين</p></div>
+            <form id="newsForm" onsubmit="handleFormSubmit(event)" class="max-w-3xl">
+                <input type="hidden" id="editId" value="">
+                <div class="flex gap-2 mb-6"><button type="button" class="btn btn-sm" id="formTabAR" onclick="switchFormTab('ar')" style="background:var(--accent);color:#fff;">عربي</button><button type="button" class="btn btn-ghost btn-sm" id="formTabEN" onclick="switchFormTab('en')">English</button></div>
+                <div id="formFieldsAR">
+                    <div class="form-group"><label class="form-label">العنوان (عربي)</label><input type="text" class="form-input" id="titleAR" required></div>
+                    <div class="form-group"><label class="form-label">المقتطف (عربي)</label><input type="text" class="form-input" id="excerptAR"></div>
+                    <div class="form-group"><label class="form-label">المحتوى الكامل (عربي)</label><textarea class="form-input" id="contentAR"></textarea></div>
+                </div>
+                <div id="formFieldsEN" style="display:none;">
+                    <div class="form-group"><label class="form-label">Title (English)</label><input type="text" class="form-input" id="titleEN" required></div>
+                    <div class="form-group"><label class="form-label">Excerpt (English)</label><input type="text" class="form-input" id="excerptEN"></div>
+                    <div class="form-group"><label class="form-label">Full Content (English)</label><textarea class="form-input" id="contentEN"></textarea></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-group"><label class="form-label">رابط الصورة</label><input type="url" class="form-input" id="imageUrl" placeholder="https://..."></div>
+                    <div class="form-group"><label class="form-label" data-i18n="formCat">التصنيف</label><select class="form-input" id="newsCategory"><option value="cyber">الأمن السيبراني / Cyber Security</option><option value="intel">الاستخبارات الرقمية / Digital Intelligence</option><option value="tech">التقنية العالمية / Global Tech</option></select></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="form-group"><label class="form-label" data-i18n="formThreat">مستوى التهديد</label><select class="form-input" id="newsThreat"><option value="low">منخفض / Low</option><option value="medium">متوسط / Medium</option><option value="high">مرتفع / High</option><option value="critical">حرج / Critical</option></select></div>
+                    <div class="form-group"><label class="form-label" data-i18n="formDate">التاريخ</label><input type="date" class="form-input" id="newsDate"></div>
+                    <div class="form-group"><label class="form-label" data-i18n="formFeatured">عاجل</label><div class="flex items-center gap-3 mt-2"><label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="newsFeatured" class="w-4 h-4 accent-emerald-500"><span class="text-sm" style="color:var(--text-muted)" data-i18n="formFeaturedLabel">عرض في الهيرو</span></label></div></div>
+                </div>
+                <div class="flex gap-3 mt-6"><button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-i18n="formSave">حفظ التقرير</span></button><button type="button" class="btn btn-ghost" onclick="resetForm();showPage('news-manage');"><i class="fas fa-times"></i> <span data-i18n="formCancel">إلغاء</span></button></div>
+            </form>
+        </div>
+
+        <!-- ⭐ ربط GitHub -->
+        <div class="page-section" id="page-github-setup">
+            <div class="mb-6"><h2 class="text-xl font-black" data-i18n="ghTitle">ربط GitHub</h2><p class="text-sm" style="color:var(--text-muted)" data-i18n="ghDesc">أعدادات الاتصال بمستودع GitHub لنشر الأخبار مباشرة بضغطة زر</p></div>
+            <div class="max-w-3xl">
+                <div class="stat-card mb-6">
+                    <h3 class="font-bold mb-3" data-i18n="ghPATTitle">كيف تحصل على Personal Access Token؟</h3>
+                    <div style="color:var(--text-muted);font-size:0.82rem;line-height:2;">
+                        <p data-i18n="ghPAT1">1. اذهب إلى github.com/settings/tokens</p>
+                        <p data-i18n="ghPAT2">2. اضغط "Generate new token (classic)"</p>
+                        <p data-i18n="ghPAT3">3. أعطه اسماً مثل: tech-monitor</p>
+                        <p data-i18n="ghPAT4">4. اختر الصلاحية: repo (كاملة)</p>
+                        <p data-i18n="ghPAT5">5. اضغط Generate وانسخ التوكن</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-i18n="ghTokenLabel">Personal Access Token</label>
+                    <input type="password" class="form-input" id="ghTokenInput" placeholder="ghp_xxxxxxxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-i18n="ghRepoLabel">اسم المستودع</label>
+                    <input type="text" class="form-input" id="ghRepoInput" placeholder="hazpry/hazpry-news">
+                    <p class="text-xs mt-1" style="color:var(--text-muted)" data-i18n="ghRepoHint">الصيغة: اسمالمستخدم/اسمالمستودع</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-i18n="ghPathLabel">مسار ملف البيانات</label>
+                    <input type="text" class="form-input" id="ghPathInput" placeholder="data.json" value="data.json">
+                </div>
+                <div class="flex gap-3 mb-6">
+                    <button class="btn btn-primary" onclick="saveGHConfig()"><i class="fas fa-link"></i> <span data-i18n="ghSaveBtn">حفظ الإعدادات</span></button>
+                    <button class="btn btn-danger" onclick="clearGHConfig()"><i class="fas fa-unlink"></i> <span data-i18n="ghRemoveBtn">إزالة</span></button>
+                    <button class="btn btn-ghost" onclick="testGHConfig()"><i class="fas fa-vial"></i> <span data-i18n="ghTestBtn">اختبار الاتصال</span></button>
+                </div>
+                <div id="ghTestResult" style="display:none;" class="stat-card mb-6"></div>
+                <div class="stat-card">
+                    <h3 class="font-bold mb-3" data-i18n="ghHowTitle">كيف يعمل النشر؟</h3>
+                    <div style="color:var(--text-muted);font-size:0.82rem;line-height:2;">
+                        <p data-i18n="ghHow1">1. تضيف/تعديل الأخبار من لوحة التحكم (محلياً)</p>
+                        <p data-i18n="ghHow2">2. تضغط زر "نشر الآن" من لوحة المعلومات</p>
+                        <p data-i18n="ghHow3">3. البرنامج يرفع ملف data.json إلى مستودع GitHub تلقائياً</p>
+                        <p data-i18n="ghHow4">4. الصفحة الرئيسية تقرأ data.json وتعرض الأخبار للجميع</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- مودال الحذف -->
+<div class="modal-overlay" id="deleteModal" onclick="if(event.target===this)closeDeleteModal()">
+    <div class="modal-box"><div class="text-center"><div style="width:60px;height:60px;border-radius:50%;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;"><i class="fas fa-exclamation-triangle text-2xl" style="color:var(--danger)"></i></div><h3 class="text-lg font-bold mb-2" data-i18n="deleteConfirm">تأكيد الحذف</h3><p class="text-sm mb-6" style="color:var(--text-muted)" data-i18n="deleteMsg">هل أنت متأكد؟ لا يمكن التراجع.</p><div class="flex gap-3 justify-center"><button class="btn btn-danger" onclick="confirmDelete()"><i class="fas fa-trash"></i> <span data-i18n="deleteYes">حذف</span></button><button class="btn btn-ghost" onclick="closeDeleteModal()"><i class="fas fa-times"></i> <span data-i18n="deleteNo">إلغاء</span></button></div></div></div>
+</div>
+
+<!-- تحميل المنطق المشترك -->
+<script src="github-logic.js"></script>
+<script>
+/* ======================================================
+       ثوابت وبيانات
+====================================================== */
+const ADMIN_PASSWORD = 'hazbri2025';
+const LS_KEY = 'tm_news';
+
+const DEFAULT_NEWS = [
+    {id:1,title_ar:"كشف شبكة تجسس دولية تستهدف البنية التحتية للطاقة",title_en:"International Spy Network Targeting Energy Infrastructure",excerpt_ar:"كشفت تقارير استخبارية عن شبكة متقدمة تعمل على اختراق أنظمة SCADA.",excerpt_en:"Intelligence reports revealed an advanced network infiltrating SCADA systems.",content_ar:"كشفت تقارير استخبارية متقدمة عن شبكة تجسس دولية تستهدف البنية التحتية للطاقة باستخدام تقنيات Zero-Day.",content_en:"Advanced intelligence reports uncovered a spy network targeting energy infrastructure using Zero-Day techniques.",image:"https://picsum.photos/seed/cybergrid/900/500.jpg",category:"cyber",threat_level:"critical",source_ar:"وحدة الاستخبارات السيبرانية",source_en:"Cyber Intelligence Unit",date:"2025-01-15",featured:true},
+    {id:2,title_ar:"تقنية جديدة لتجاوز أنظمة المراقبة بالذكاء الاصطناعي",title_en:"New AI Surveillance Bypass Technology",excerpt_ar:"أداة مفتوحة المصدر تستخدم تعلم عميق لإرباك أنظمة التعرف على الوجوه بنسبة 94%.",excerpt_en:"Open-source tool using deep learning to confuse facial recognition with 94% success.",content_ar:"أداة ShadowMask تستخدم تقنيات الخصومة لتوليد أنماط بصرية تُربك خوارزميات التعرف.",content_en:"ShadowMask tool uses Adversarial ML to generate patterns confusing recognition algorithms.",image:"https://picsum.photos/seed/aiprivacy/900/500.jpg",category:"intel",threat_level:"high",source_ar:"مختبر الأبحاث السيبرانية",source_en:"Cyber Research Lab",date:"2025-01-12",featured:true},
+    {id:3,title_ar:"تحذير عاجل: ثغرة حرجة في معالجات Intel",title_en:"Critical Intel Processor Vulnerability",excerpt_ar:"ثغرة في معالجات Intel الجيل 13 تسمح بتنفيذ كود على مستوى النواة.",excerpt_en:"Vulnerability in 13th gen Intel processors allows kernel-level code execution.",content_ar:"ثغرة Downfall-X تستغل التنفيذ التخميني لاستخراج بيانات حساسة.",content_en:"Downfall-X vulnerability exploits speculative execution to extract sensitive data.",image:"https://picsum.photos/seed/intelchip/900/500.jpg",category:"tech",threat_level:"critical",source_ar:"فريق الاستجابة السريعة",source_en:"CERT Rapid Response Team",date:"2025-01-10",featured:false},
+    {id:4,title_ar:"حملة الشبح الرقمي: اختراق منظومتي اتصالات",title_en:"Digital Phantom Campaign Breaches Communication Systems",excerpt_ar:"حملة إلكترونية اخترقت منظومتي اتصالات في أوروبا لمدة 8 أشهر.",excerpt_en:"Cyber campaign breached two communication systems in Europe for 8 months.",content_ar:"حملة الشبح الرقمي استهدفت منظومتي اتصالات باستخدام تقنيات تخفي متقدمة.",content_en:"Digital Phantom campaign targeted communication systems using advanced stealth.",image:"https://picsum.photos/seed/digitalphantom/900/500.jpg",category:"intel",threat_level:"high",source_ar:"التحالف الأمني السيبراني",source_en:"European Cyber Security Alliance",date:"2025-01-08",featured:true},
+    {id:5,title_ar:"نموذج جديد لحماية البنية التحتية يعتمد على الكم",title_en:"New Quantum-Based Infrastructure Protection Model",excerpt_ar:"نموذج Q-Shield يستخدم التشابك الكمي لضمان أمان مطلق.",excerpt_en:"Q-Shield model uses quantum entanglement for absolute security.",content_ar:"نموذج Q-Shield من MIT يعتمد على التشابك الكمي اللاتواصلي.",content_en:"MIT Q-Shield model uses non-communicating quantum entanglement.",image:"https://picsum.photos/seed/quantumshield/900/500.jpg",category:"tech",threat_level:"low",source_ar:"معهد MIT للتقنيات المتقدمة",source_en:"MIT Advanced Technologies Institute",date:"2025-01-05",featured:false}
+];
+
+const ADMIN_I18N = {
+    ar:{sideDashboard:"لوحة المعلومات",sideNews:"إدارة الأخبار",sideAdd:"إضافة خبر",sideGitHub:"ربط GitHub",sidePortal:"البوابة",sideLogout:"خروج",dashTitle:"لوحة المعلومات",dashDesc:"نظرة عامة على محتوى المنصة",statTotal:"إجمالي الأخبار",statFeatured:"أخبار عاجلة",statCritical:"تهديدات حرجة",statCats:"التصنيفات",recentNews:"آخر الأخبار",viewAll:"عرض الكل",colTitle:"العنوان",colCategory:"التصنيف",colThreat:"التهديد",colDate:"التاريخ",colActions:"الإجراءات",manageTitle:"إدارة الأخبار",manageDesc:"عرض وتعديل وحذف التقارير",addNew:"إضافة جديد",addTitle:"إضافة تقرير جديد",addDesc:"أدخل بيانات التقرير باللغتين",editTitle:"تعديل التقرير",editDesc:"قم بتعديل بيانات التقرير",formCat:"التصنيف",formThreat:"مستوى التهديد",formDate:"التاريخ",formFeatured:"عاجل",formFeaturedLabel:"عرض في الهيرو",formSave:"حفظ التقرير",formCancel:"إلغاء",deleteConfirm:"تأكيد الحذف",deleteMsg:"هل أنت متأكد؟ لا يمكن التراجع.",deleteYes:"حذف",deleteNo:"إلغاء",toastSaved:"تم حفظ التقرير بنجاح",toastDeleted:"تم حذف التقرير بنجاح",toastLoginOk:"تم تسجيل الدخول بنجاح",toastLoginFail:"كلمة المرور غير صحيحة",catCyber:"الأمن السيبراني",catIntel:"الاستخبارات الرقمية",catTech:"التقنية العالمية",threatLow:"منخفض",threatMedium:"متوسط",threatHigh:"مرتفع",threatCritical:"حرج",btnEdit:"تعديل",btnDelete:"حذف",publishTitle:"نشر الأخبار على GitHub",publishDesc:"اضغط لنشر جميع الأخبار المحلية إلى ملف data.json على GitHub",publishBtn:"نشر الآن",publishLoading:"جاري النشر إلى GitHub...",publishSuccess:"تم النشر بنجاح!",publishSuccessSub:"التحديثات ظاهرة الآن لجميع الزوار",publishError:"فشل النشر",ghNotLinked:"GitHub غير مربوط — اذهب لصفحة ربط GitHub",ghLinked:"GitHub مربوط — جاهز للنشر",ghTitle:"ربط GitHub",ghDesc:"أعدادات الاتصال بمستودع GitHub لنشر الأخبار مباشرة بضغطة زر",ghPATTitle:"كيف تحصل على Personal Access Token؟",ghPAT1:"1. اذهب إلى github.com/settings/tokens",ghPAT2:"2. اضغط \"Generate new token (classic)\"",ghPAT3:"3. أعطه اسماً مثل: tech-monitor",ghPAT4:"4. اختر الصلاحية: repo (كاملة)",ghPAT5:"5. اضغط Generate وانسخ التوكن",ghTokenLabel:"Personal Access Token",ghRepoLabel:"اسم المستودع",ghRepoHint:"الصيغة: اسمالمستخدم/اسمالمستودع",ghPathLabel:"مسار ملف البيانات",ghSaveBtn:"حفظ الإعدادات",ghRemoveBtn:"إزالة",ghTestBtn:"اختبار الاتصال",ghHowTitle:"كيف يعمل النشر؟",ghHow1:"1. تضيف/تعديل الأخبار من لوحة التحكم (محلياً)",ghHow2:"2. تضغط زر \"نشر الآن\" من لوحة المعلومات",ghHow3:"3. البرنامج يرفع ملف data.json إلى مستودع GitHub تلقائياً",ghHow4:"4. الصفحة الرئيسية تقرأ data.json وتعرض الأخبار للجميع",ghTestOk:"الاتصال ناجح! يمكن قراءة وكتابة الملفات.",ghTestFail:"فشل الاتصال. تأكد من صحة التوكن واسم المستودع.",ghSaved:"تم حفظ إعدادات GitHub",ghRemoved:"تم إزالة إعدادات GitHub"},
+    en:{sideDashboard:"Dashboard",sideNews:"Manage News",sideAdd:"Add News",sideGitHub:"GitHub Setup",sidePortal:"Portal",sideLogout:"Logout",dashTitle:"Dashboard",dashDesc:"Overview of platform content",statTotal:"Total News",statFeatured:"Breaking News",statCritical:"Critical Threats",statCats:"Categories",recentNews:"Recent News",viewAll:"View All",colTitle:"Title",colCategory:"Category",colThreat:"Threat",colDate:"Date",colActions:"Actions",manageTitle:"Manage News",manageDesc:"View, edit and delete reports",addNew:"Add New",addTitle:"Add New Report",addDesc:"Enter report data in both languages",editTitle:"Edit Report",editDesc:"Modify report data",formCat:"Category",formThreat:"Threat Level",formDate:"Date",formFeatured:"Featured",formFeaturedLabel:"Show in hero",formSave:"Save Report",formCancel:"Cancel",deleteConfirm:"Confirm Deletion",deleteMsg:"Are you sure? This cannot be undone.",deleteYes:"Delete",deleteNo:"Cancel",toastSaved:"Report saved successfully",toastDeleted:"Report deleted successfully",toastLoginOk:"Login successful",toastLoginFail:"Incorrect password",catCyber:"Cyber Security",catIntel:"Digital Intelligence",catTech:"Global Tech",threatLow:"Low",threatMedium:"Medium",threatHigh:"High",threatCritical:"Critical",btnEdit:"Edit",btnDelete:"Delete",publishTitle:"Publish News to GitHub",publishDesc:"Click to push all local news to data.json on GitHub",publishBtn:"Publish Now",publishLoading:"Publishing to GitHub...",publishSuccess:"Published Successfully!",publishSuccessSub:"Updates are now visible to all visitors",publishError:"Publish Failed",ghNotLinked:"GitHub not linked — go to GitHub Setup page",ghLinked:"GitHub linked — ready to publish",ghTitle:"GitHub Setup",ghDesc:"Configure your GitHub repository to publish news with one click",ghPATTitle:"How to get a Personal Access Token?",ghPAT1:"1. Go to github.com/settings/tokens",ghPAT2:"2. Click \"Generate new token (classic)\"",ghPAT3:"3. Name it: tech-monitor",ghPAT4:"4. Select scope: repo (full)",ghPAT5:"5. Click Generate and copy the token",ghTokenLabel:"Personal Access Token",ghRepoLabel:"Repository Name",ghRepoHint:"Format: username/repository",ghPathLabel:"Data File Path",ghSaveBtn:"Save Settings",ghRemoveBtn:"Remove",ghTestBtn:"Test Connection",ghHowTitle:"How does publishing work?",ghHow1:"1. Add/edit news from the admin panel (locally)",ghHow2:"2. Click \"Publish Now\" from the dashboard",ghHow3:"3. The script pushes data.json to your GitHub repo automatically",ghHow4:"4. The public site reads data.json and shows news to everyone",ghTestOk:"Connection successful! Can read and write files.",ghTestFail:"Connection failed. Verify token and repository name.",ghSaved:"GitHub settings saved",ghRemoved:"GitHub settings removed"}
+};
+
+/* ======================================================
+       الحالة
+====================================================== */
+let adminLang = localStorage.getItem('tm_admin_lang') || 'ar';
+let newsData = [];
+let deleteTargetId = null;
+let currentFormTab = 'ar';
+
+/* ======================================================
+       التهيئة
+====================================================== */
+function initAdmin() {
+    applyAdminLang(adminLang);
+    setupLogin();
+    document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
+}
+
+/* ======================================================
+       تسجيل الدخول
+====================================================== */
+function setupLogin(){document.getElementById('loginInput').addEventListener('keydown',e=>{if(e.key==='Enter')attemptLogin();});document.getElementById('loginInput').focus();}
+function attemptLogin(){
+    const input=document.getElementById('loginInput'),fb=document.getElementById('loginFeedback');
+    if(input.value===ADMIN_PASSWORD){fb.innerHTML=`<div class="terminal-line terminal-success">> Access granted. Welcome, الهكر الهزبري</div><div class="terminal-line terminal-success">> Loading admin console...</div>`;setTimeout(()=>{document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('adminWrap').classList.add('active');loadAndRender();showToast(t('toastLoginOk'),'success');},1200);}
+    else{fb.innerHTML=`<div class="terminal-line terminal-error">> ACCESS DENIED: Invalid credentials</div>`;input.value='';setTimeout(()=>{fb.innerHTML='';},2000);}
+}
+function logout(){document.getElementById('adminWrap').classList.remove('active');document.getElementById('loginOverlay').classList.remove('hidden');document.getElementById('loginInput').value='';document.getElementById('loginFeedback').innerHTML='';setTimeout(()=>document.getElementById('loginInput').focus(),400);}
+
+/* ======================================================
+       تحميل البيانات
+====================================================== */
+function loadAndRender(){
+    const s=localStorage.getItem(LS_KEY);
+    if(s){try{newsData=JSON.parse(s);}catch(e){newsData=[...DEFAULT_NEWS];}}else{newsData=[...DEFAULT_NEWS];}
+    updateGHStatus();renderDashboard();renderManageTable();
+}
+
+/* ======================================================
+       ⭐ GitHub — الحالة والنشر
+====================================================== */
+function updateGHStatus(){
+    const el=document.getElementById('ghStatusDash'),btn=document.getElementById('publishBtn');
+    if(GHLogic.isConfigured()){el.className='gh-status ok';el.innerHTML=`<i class="fas fa-link"></i><span>${t('ghLinked')}</span>`;btn.disabled=false;}
+    else{el.className='gh-status no';el.innerHTML=`<i class="fas fa-unlink"></i><span>${t('ghNotLinked')}</span>`;btn.disabled=true;}
+}
+
+function loadGHSInputs(){
+    const c=GHLogic.getConfig();
+    document.getElementById('ghTokenInput').value=c.token;
+    document.getElementById('ghRepoInput').value=c.repo;
+    document.getElementById('ghPathInput').value=c.path;
+}
+
+function saveGHConfig(){
+    const token=document.getElementById('ghTokenInput').value.trim();
+    const repo=document.getElementById('ghRepoInput').value.trim();
+    const path=document.getElementById('ghPathInput').value.trim()||'data.json';
+    if(!token||!repo){showToast(adminLang==='ar'?'التوكن واسم المستودع مطلوبان':'Token and repo are required','error');return;}
+    GHLogic.setConfig(token,repo,path);
+    updateGHStatus();showToast(t('ghSaved'),'success');
+}
+
+function clearGHConfig(){
+    GHLogic.clearConfig();loadGHSInputs();updateGHStatus();showToast(t('ghRemoved'),'info');
+}
+
+async function testGHConfig(){
+    const token=document.getElementById('ghTokenInput').value.trim();
+    const repo=document.getElementById('ghRepoInput').value.trim();
+    const path=document.getElementById('ghPathInput').value.trim()||'data.json';
+    const res=document.getElementById('ghTestResult');
+    if(!token||!repo){showToast(adminLang==='ar'?'أدخل البيانات أولاً':'Enter data first','error');return;}
+    res.style.display='block';res.innerHTML=`<div class="flex items-center gap-3"><div style="width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;"></div><span style="color:var(--text-muted);font-size:0.85rem;">${adminLang==='ar'?'جاري الاختبار...':'Testing...'}</span></div>`;
+    try{
+        await GHLogic.fetchFileData(repo,path,token);
+        res.innerHTML=`<div class="flex items-center gap-3"><i class="fas fa-check-circle" style="color:var(--accent);font-size:1.2rem;"></i><span style="color:var(--accent-light);font-size:0.85rem;">${t('ghTestOk')}</span></div>`;
+        showToast(t('ghTestOk'),'success');
+    }catch(e){
+        res.innerHTML=`<div class="flex items-center gap-3"><i class="fas fa-times-circle" style="color:var(--danger);font-size:1.2rem;"></i><span style="color:#fca5a5;font-size:0.85rem;">${t('ghTestFail')} (${e.message})</span></div>`;
+        showToast(t('ghTestFail'),'error');
+    }
+}
+
+/* ⭐⭐⭐ النشر إلى GitHub — الوظيفة الرئيسية */
+async function publishToGitHub(){
+    if(!GHLogic.isConfigured())return;
+    const overlay=document.getElementById('publishOverlay');
+    const icon=document.getElementById('publishIcon');
+    const text=document.getElementById('publishText');
+    const sub=document.getElementById('publishSubtext');
+    const btn=document.getElementById('publishBtn');
+
+    /* إظهار التحميل */
+    overlay.classList.add('active');
+    icon.innerHTML='<div class="publish-spinner"></div>';
+    text.textContent=t('publishLoading');
+    sub.textContent='';
+    btn.disabled=true;
+
+    try{
+        const result = await GHLogic.publish(newsData);
+
+        /* نجاح */
+        icon.innerHTML='<div class="publish-check"><i class="fas fa-check text-2xl" style="color:#fff;"></i></div>';
+        text.textContent=t('publishSuccess');
+        sub.textContent=t('publishSuccessSub');
+
+        setTimeout(()=>{overlay.classList.remove('active');},3000);
+        showToast(t('publishSuccess'),'success');
+
+        /* مزامنة localStorage */
+        localStorage.setItem(LS_KEY,JSON.stringify(newsData));
+    }catch(e){
+        /* فشل */
+        icon.innerHTML='<div style="width:60px;height:60px;border-radius:50%;background:var(--danger);display:flex;align-items:center;justify-content:center;"><i class="fas fa-times text-2xl" style="color:#fff;"></i></div>';
+        text.textContent=t('publishError');
+        sub.textContent=e.message;
+
+        setTimeout(()=>{overlay.classList.remove('active');},4000);
+        showToast(t('publishError') + ': ' + e.message,'error');
+    }
+
+    btn.disabled=false;
+}
+
+/* ======================================================
+       لوحة المعلومات
+====================================================== */
+function renderDashboard(){
+    document.getElementById('statTotal').textContent=newsData.length;
+    document.getElementById('statFeatured').textContent=newsData.filter(n=>n.featured).length;
+    document.getElementById('statCritical').textContent=newsData.filter(n=>n.threat_level==='critical').length;
+    document.getElementById('statCats').textContent=new Set(newsData.map(n=>n.category)).size;
+    const tb=document.getElementById('dashTableBody');
+    const r=[...newsData].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
+    tb.innerHTML=r.map(n=>{const title=adminLang==='ar'?n.title_ar:n.title_en;return`<tr><td class="font-semibold" style="max-width:300px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${title}</td><td><span style="font-size:0.75rem;color:var(--accent);">${t('cat'+n.category.charAt(0).toUpperCase()+n.category.slice(1))}</span></td><td><span class="threat-badge threat-${n.threat_level}">${t('threat'+n.threat_level.charAt(0).toUpperCase()+n.threat_level.slice(1))}</span></td><td style="color:var(--text-muted);font-size:0.8rem;">${n.date}</td></tr>`;}).join('');
+}
+
+/* ======================================================
+       إدارة الأخبار
+====================================================== */
+function renderManageTable(){
+    const tb=document.getElementById('manageTableBody');
+    const s=[...newsData].sort((a,b)=>new Date(b.date)-new Date(a.date));
+    tb.innerHTML=s.map((n,i)=>{const title=adminLang==='ar'?n.title_ar:n.title_en;return`<tr><td style="color:var(--text-muted);font-size:0.8rem;">${i+1}</td><td class="font-semibold" style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${title}</td><td><span style="font-size:0.75rem;color:var(--accent);">${t('cat'+n.category.charAt(0).toUpperCase()+n.category.slice(1))}</span></td><td><span class="threat-badge threat-${n.threat_level}">${t('threat'+n.threat_level.charAt(0).toUpperCase()+n.threat_level.slice(1))}</span></td><td style="color:var(--text-muted);font-size:0.8rem;">${n.date}</td><td><div class="flex gap-2"><button class="btn btn-ghost btn-sm" onclick="editNews(${n.id})"><i class="fas fa-pen"></i> ${t('btnEdit')}</button><button class="btn btn-danger btn-sm" onclick="openDeleteModal(${n.id})"><i class="fas fa-trash"></i> ${t('btnDelete')}</button></div></td></tr>`;}).join('');
+}
+
+/* ======================================================
+       إضافة/تعديل
+====================================================== */
+function switchFormTab(tab){currentFormTab=tab;document.getElementById('formFieldsAR').style.display=tab==='ar'?'block':'none';document.getElementById('formFieldsEN').style.display=tab==='en'?'block':'none';document.getElementById('formTabAR').style.cssText=tab==='ar'?'background:var(--accent);color:#fff;':'';document.getElementById('formTabEN').style.cssText=tab==='en'?'background:var(--accent);color:#fff;':'';if(tab!=='ar')document.getElementById('formTabAR').className='btn btn-ghost btn-sm';if(tab!=='en')document.getElementById('formTabEN').className='btn btn-ghost btn-sm';}
+
+function handleFormSubmit(e){
+    e.preventDefault();const eid=document.getElementById('editId').value;
+    const item={id:eid?parseInt(eid):Date.now(),title_ar:document.getElementById('titleAR').value.trim(),title_en:document.getElementById('titleEN').value.trim(),excerpt_ar:document.getElementById('excerptAR').value.trim(),excerpt_en:document.getElementById('excerptEN').value.trim(),content_ar:document.getElementById('contentAR').value.trim(),content_en:document.getElementById('contentEN').value.trim(),image:document.getElementById('imageUrl').value.trim()||'https://picsum.photos/seed/'+Date.now()+'/900/500.jpg',category:document.getElementById('newsCategory').value,threat_level:document.getElementById('newsThreat').value,source_ar:"الهكر الهزبري",source_en:"Al-Hazbri Hacker",date:document.getElementById('newsDate').value,featured:document.getElementById('newsFeatured').checked};
+    if(!item.title_ar||!item.title_en){showToast(adminLang==='ar'?'العنوان مطلوب باللغتين':'Title required','error');return;}
+    if(eid){const idx=newsData.findIndex(n=>n.id===parseInt(eid));if(idx!==-1)newsData[idx]=item;}else{newsData.push(item);}
+    localStorage.setItem(LS_KEY,JSON.stringify(newsData));resetForm();showPage('news-manage');showToast(t('toastSaved'),'success');
+}
+
+function editNews(id){
+    const item=newsData.find(n=>n.id===id);if(!item)return;
+    document.getElementById('editId').value=item.id;document.getElementById('titleAR').value=item.title_ar;document.getElementById('titleEN').value=item.title_en;document.getElementById('excerptAR').value=item.excerpt_ar;document.getElementById('excerptEN').value=item.excerpt_en;document.getElementById('contentAR').value=item.content_ar;document.getElementById('contentEN').value=item.content_en;document.getElementById('imageUrl').value=item.image;document.getElementById('newsCategory').value=item.category;document.getElementById('newsThreat').value=item.threat_level;document.getElementById('newsDate').value=item.date;document.getElementById('newsFeatured').checked=item.featured;
+    document.getElementById('formTitle').removeAttribute('data-i18n');document.getElementById('formDesc').removeAttribute('data-i18n');
+    document.getElementById('formTitle').textContent=t('editTitle');document.getElementById('formDesc').textContent=t('editDesc');
+    switchFormTab('ar');showPage('news-add');
+}
+
+function resetForm(){document.getElementById('newsForm').reset();document.getElementById('editId').value='';document.getElementById('newsDate').value=new Date().toISOString().split('T')[0];document.getElementById('formTitle').setAttribute('data-i18n','addTitle');document.getElementById('formDesc').setAttribute('data-i18n','addDesc');document.getElementById('formTitle').textContent=t('addTitle');document.getElementById('formDesc').textContent=t('addDesc');switchFormTab('ar');}
+
+/* ======================================================
+       حذف
+====================================================== */
+function openDeleteModal(id){deleteTargetId=id;document.getElementById('deleteModal').classList.add('active');}
+function closeDeleteModal(){deleteTargetId=null;document.getElementById('deleteModal').classList.remove('active');}
+function confirmDelete(){if(deleteTargetId===null)return;newsData=newsData.filter(n=>n.id!==deleteTargetId);localStorage.setItem(LS_KEY,JSON.stringify(newsData));closeDeleteModal();renderDashboard();renderManageTable();showToast(t('toastDeleted'),'success');}
+
+/* ======================================================
+       التنقل
+====================================================== */
+function showPage(page){
+    document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));document.getElementById('page-'+page).classList.add('active');
+    document.querySelectorAll('.sidebar-link').forEach(l=>l.classList.toggle('active',l.getAttribute('data-page')===page));
+    if(page==='dashboard')renderDashboard();if(page==='news-manage')renderManageTable();if(page==='news-add'&&!document.getElementById('editId').value)resetForm();if(page==='github-setup')loadGHSInputs();
+    document.getElementById('sidebar').classList.remove('open');
+}
+
+/* ======================================================
+       لغة الأدمن
+====================================================== */
+function switchAdminLang(lang){adminLang=lang;localStorage.setItem('tm_admin_lang',lang);applyAdminLang(lang);renderDashboard();renderManageTable();}
+function applyAdminLang(lang){
+    const h=document.documentElement;h.lang=lang;h.dir=lang==='ar'?'rtl':'ltr';
+    document.body.style.fontFamily=lang==='ar'?"'Cairo', sans-serif":"'Inter', sans-serif";
+    document.getElementById('adminBtnAR').style.cssText=lang==='ar'?'background:var(--accent);color:#fff;font-size:0.7rem;':'font-size:0.7rem;';
+    document.getElementById('adminBtnEN').style.cssText=lang==='en'?'background:var(--accent);color:#fff;font-size:0.7rem;':'font-size:0.7rem;';
+    const mc=document.querySelector('.main-content');if(lang==='ar'){mc.style.marginRight='260px';mc.style.marginLeft='0';}else{mc.style.marginLeft='260px';mc.style.marginRight='0';}
+    document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(ADMIN_I18N[lang]&&ADMIN_I18N[lang][k])el.textContent=ADMIN_I18N[lang][k];});
+}
+function t(key){return ADMIN_I18N[adminLang]&&ADMIN_I18N[adminLang][key]?ADMIN_I18N[adminLang][key]:key;}
+
+/* ======================================================
+       متنوع
+====================================================== */
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');}
+function showToast(msg,type){const c=document.getElementById('toastContainer'),t=document.createElement('div');t.className='toast '+type;const i={success:'fa-check-circle',error:'fa-times-circle',info:'fa-info-circle'};t.innerHTML=`<i class="fas ${i[type]||i.info}"></i> ${msg}`;c.appendChild(t);setTimeout(()=>{t.style.animation='toastOut 0.3s ease forwards';setTimeout(()=>t.remove(),300);},3000);}
+document.addEventListener('DOMContentLoaded',initAdmin);
+</script>
+</body>
+</html>
