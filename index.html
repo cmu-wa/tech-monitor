@@ -19,28 +19,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script>
         tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { cairo:['Cairo','sans-serif'], mono:['JetBrains Mono','monospace'] },
-                    colors: {
-                        abyss: { 950:'#020408', 900:'#040810', 800:'#060c18', 700:'#0a1225', 600:'#0e1a32', 500:'#142240' },
-                        matrix: { 500:'#00ff41', 400:'#33ff66', 300:'#66ff88', 600:'#00cc33', 700:'#009926' }
-                    }
-                }
+    theme: {
+        extend: {
+            fontFamily: { 
+                cairo: ['Cairo', 'sans-serif'], 
+                inter: ['Inter', 'sans-serif'] 
+            },
+            colors: {
+                onyx: { 900:'#060a12', 800:'#0a1020', 700:'#0f1a2e', 600:'#152238', 500:'#1c2d48' },
+                emerald: { 400:'#34d399', 500:'#10b981', 600:'#059669', 700:'#047857' }
             }
         }
+    }
+}
     </script>
     <style>
-        :root {
-            --bg:#020408; --bg2:#040810; --bg3:#060c18; --bg4:#0a1225;
-            --accent:#00ff41; --accent-dim:#00cc33; --accent-glow:rgba(0,255,65,0.08);
-            --accent-glow-md:rgba(0,255,65,0.15); --accent-glow-hi:rgba(0,255,65,0.25);
-            --text:#c8d6e5; --text-bright:#e8f0f8; --text-muted:#3e5068;
-            --border:#0d1a2d; --border-light:#142240;
-            --danger:#ff0040; --danger-glow:rgba(255,0,64,0.15);
-            --warn:#ffaa00; --warn-glow:rgba(255,170,0,0.15);
-            --info:#0088ff;
-        }
+ :root {
+    /* ألوان الخلفية الجديدة - Onyx Palette */
+    --bg: #060a12; 
+    --bg2: #0a1020; 
+    --bg3: #0f1a2e; 
+    --bg4: #152238;
+    
+    /* اللون الأساسي المريح - Emerald Palette */
+    --accent: #10b981; 
+    --accent-light: #34d399; 
+    --accent-glow: rgba(16,185,129,0.15);
+    
+    /* ألوان النصوص والحدود */
+    --text: #e2e8f0; 
+    --text-muted: #64748b; 
+    --border: #1e293b;
+    
+    /* ألوان الحالة */
+    --danger: #ef4444; 
+    --warn: #f59e0b; 
+    --info: #3b82f6;
+}
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
         body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;}
@@ -71,7 +86,13 @@
         .ticker-wrap{overflow:hidden;white-space:nowrap;flex:1;}
         .ticker-content{display:inline-block;animation:tickerRTL 50s linear infinite;}
         @keyframes tickerRTL{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
-
+/* خط اسم الهيئة (حازم وهندسي) */
+h1[data-i18n="siteName"] {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900; /* أقصى درجات الحزم */
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 15px var(--accent-glow);
+}
         /* === مؤشر التهديد === */
         .threat-gauge{display:flex;gap:3px;align-items:center;}
         .threat-seg{width:28px;height:10px;border-radius:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.05);transition:all 0.6s ease;}
