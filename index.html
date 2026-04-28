@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>هيئة الرصد السيبراني — وحدة الرصد النافذ | Cyber Surveillance Authority</title>
     <meta name="description" content="منصة استخباراتية سيبرانية متقدمة لرصد وتحليل التهديدات الرقمية. تقارير ميدانية حول هجمات الفدية، ثغرات اليوم الصفر، وحروب الظل الرقمية في الشرق الأوسط والعالم.">
+    	<meta name="google-site-verification" content="6XzX5LrHUfgXzXZ6PGO9_lE2K3wYIgXCREtCzvi2Flo" />
     <meta name="keywords" content="أمن سيبراني, استخبارات رقمية, هجمات فدية, ثغرات يوم صفر, حروب سيبرانية, الشرق الأوسط, cyber security, intelligence, zero-day, ransomware">
     <meta name="author" content="وحدة الرصد النافذ">
     <meta name="robots" content="index, follow">
@@ -34,201 +35,159 @@
 }
     </script>
     <style>
- :root {
-    /* ألوان الخلفية الجديدة - Onyx Palette */
-    --bg: #060a12; 
-    --bg2: #0a1020; 
-    --bg3: #0f1a2e; 
-    --bg4: #152238;
-    
-    /* اللون الأساسي المريح - Emerald Palette */
-    --accent: #10b981; 
-    --accent-light: #34d399; 
-    --accent-glow: rgba(16,185,129,0.15);
-    
-    /* ألوان النصوص والحدود */
-    --text: #e2e8f0; 
-    --text-muted: #64748b; 
-    --border: #1e293b;
-    
-    /* ألوان الحالة */
-    --danger: #ef4444; 
-    --warn: #f59e0b; 
-    --info: #3b82f6;
-}
+        :root {
+            --bg:#f5f7fa; --bg2:#ffffff; --bg3:#eef2f6; --bg4:#e4e7ec;
+            --accent:#ce1126; --accent-dark:#a50d1f; --accent-light:#ffebee;
+            --green:#006633; --green-light:#e8f5e9;
+            --navy:#1a3b5d; --navy-dark:#0b1a2a; --navy-light:#f0f5ff;
+            --text:#1e293b; --text-bright:#0b1a2a; --text-muted:#64748b;
+            --border:#e4e7ec; --border-light:#edf2f7;
+            --danger:#ce1126; --warn:#f59e0b; --info:#3b82f6;
+        }
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
         body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;}
 
-        /* === خلفية الشبكة === */
-        .bg-matrix-grid{
-            background-image:
-                linear-gradient(rgba(0,255,65,0.02) 1px,transparent 1px),
-                linear-gradient(90deg,rgba(0,255,65,0.02) 1px,transparent 1px);
-            background-size:50px 50px;
+        /* === خلفية خفيفة === */
+        .bg-pattern{
+            background-image:radial-gradient(circle at 1px 1px, rgba(26,59,93,0.03) 1px, transparent 0);
+            background-size:40px 40px;
         }
 
-        /* === التوهجات الخلفية === */
-        .glow-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);}
-        .glow-orb-1{top:-150px;right:-100px;width:500px;height:500px;background:rgba(0,255,65,0.04);animation:orbDrift 30s ease-in-out infinite;}
-        .glow-orb-2{bottom:-200px;left:-150px;width:400px;height:400px;background:rgba(0,255,65,0.03);animation:orbDrift 35s ease-in-out infinite reverse;}
-        .glow-orb-3{top:40%;left:50%;width:300px;height:300px;background:rgba(0,136,255,0.02);animation:orbDrift 25s ease-in-out infinite 5s;}
-        @keyframes orbDrift{0%,100%{transform:translate(0,0);}25%{transform:translate(40px,-30px);}50%{transform:translate(-20px,50px);}75%{transform:translate(30px,20px);}}
-
-        /* === خط المسح === */
-        .scan-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,var(--accent) 50%,transparent 100%);opacity:0.4;animation:scanMove 6s linear infinite;pointer-events:none;z-index:5;}
-        @keyframes scanMove{0%{top:0;}100%{top:100%;}}
-
-        /* === شريط العاجل === */
-        .alert-bar{background:linear-gradient(90deg,#1a0008,#2d0011,#1a0008);border-bottom:1px solid rgba(255,0,64,0.3);position:relative;overflow:hidden;}
-        .alert-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,0,64,0.05),transparent);animation:alertShimmer 4s linear infinite;}
+        /* === تيكر العاجل === */
+        .alert-bar{background:var(--navy-dark);color:#fff;padding:8px 0;border-bottom:2px solid var(--accent);position:relative;overflow:hidden;}
+        .alert-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(206,17,38,0.06),transparent);animation:alertShimmer 5s linear infinite;}
         @keyframes alertShimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
         .ticker-wrap{overflow:hidden;white-space:nowrap;flex:1;}
         .ticker-content{display:inline-block;animation:tickerRTL 50s linear infinite;}
         @keyframes tickerRTL{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
-/* خط اسم الهيئة (حازم وهندسي) */
-h1[data-i18n="siteName"] {
-    font-family: 'Cairo', sans-serif;
-    font-weight: 900; /* أقصى درجات الحزم */
-    letter-spacing: -0.02em;
-    text-shadow: 0 0 15px var(--accent-glow);
-}
+
         /* === مؤشر التهديد === */
         .threat-gauge{display:flex;gap:3px;align-items:center;}
-        .threat-seg{width:28px;height:10px;border-radius:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.05);transition:all 0.6s ease;}
-        .threat-seg.active-green{background:#00ff41;border-color:#00ff41;box-shadow:0 0 8px rgba(0,255,65,0.5);}
-        .threat-seg.active-yellow{background:#ffaa00;border-color:#ffaa00;box-shadow:0 0 8px rgba(255,170,0,0.5);}
-        .threat-seg.active-orange{background:#ff6600;border-color:#ff6600;box-shadow:0 0 8px rgba(255,102,0,0.5);}
-        .threat-seg.active-red{background:#ff0040;border-color:#ff0040;box-shadow:0 0 8px rgba(255,0,64,0.6);animation:segPulse 1.5s ease-in-out infinite;}
+        .threat-seg{width:24px;height:8px;border-radius:2px;background:#e4e7ec;border:none;transition:all 0.5s ease;}
+        .threat-seg.active-green{background:#006633;box-shadow:0 1px 4px rgba(0,102,51,0.3);}
+        .threat-seg.active-yellow{background:#f59e0b;box-shadow:0 1px 4px rgba(245,158,11,0.3);}
+        .threat-seg.active-orange{background:#f97316;box-shadow:0 1px 4px rgba(249,115,22,0.3);}
+        .threat-seg.active-red{background:#ce1126;box-shadow:0 1px 6px rgba(206,17,38,0.4);animation:segPulse 1.5s ease-in-out infinite;}
         @keyframes segPulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
 
         /* === شريط التنقل === */
-        .navbar{background:rgba(2,4,8,0.92);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;transition:all 0.3s ease;}
-        .navbar.scrolled{box-shadow:0 4px 40px rgba(0,0,0,0.6);border-bottom-color:rgba(0,255,65,0.1);}
+        .navbar{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;transition:all 0.3s ease;box-shadow:0 1px 4px rgba(0,0,0,0.03);}
+        .navbar.scrolled{box-shadow:0 4px 20px rgba(0,0,0,0.08);}
 
-        .logo-mark{width:42px;height:42px;position:relative;display:flex;align-items:center;justify-content:center;}
-        .logo-mark svg{filter:drop-shadow(0 0 8px rgba(0,255,65,0.4));}
+        .logo-mark{width:40px;height:40px;position:relative;display:flex;align-items:center;justify-content:center;background:var(--navy);border-radius:10px;}
+        .logo-mark svg{filter:none;}
 
         /* === أزرار التصنيف === */
-        .cat-btn{padding:7px 16px;border-radius:4px;font-size:0.78rem;font-weight:700;letter-spacing:0.02em;border:1px solid var(--border);cursor:pointer;transition:all 0.3s ease;background:transparent;color:var(--text-muted);font-family:inherit;}
-        .cat-btn:hover{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-glow);}
-        .cat-btn.active{color:#000;background:var(--accent);border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow-md);}
+        .cat-btn{padding:6px 16px;border-radius:30px;font-size:0.82rem;font-weight:700;border:none;cursor:pointer;transition:all 0.2s ease;background:var(--bg3);color:var(--text-muted);font-family:inherit;}
+        .cat-btn:hover{background:var(--navy-light);color:var(--navy);}
+        .cat-btn.active{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(206,17,38,0.2);}
 
         /* === هيرو === */
-        .hero-section{position:relative;height:72vh;min-height:480px;overflow:hidden;border-bottom:1px solid var(--border);}
+        .hero-section{position:relative;height:70vh;min-height:460px;overflow:hidden;}
         .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease,transform 1.2s ease;transform:scale(1.04);}
         .hero-slide.active{opacity:1;transform:scale(1);}
-        .hero-slide img{width:100%;height:100%;object-fit:cover;filter:brightness(0.5) saturate(0.7);}
-        .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,rgba(2,4,8,0.7) 35%,rgba(2,4,8,0.2) 100%);}
-        .hero-vignette{position:absolute;inset:0;box-shadow:inset 0 0 200px rgba(0,0,0,0.8);}
-        .hero-content{position:absolute;bottom:0;left:0;right:0;padding:40px;z-index:3;}
+        .hero-slide img{width:100%;height:100%;object-fit:cover;}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--navy-dark) 0%,rgba(11,26,42,0.65) 40%,rgba(11,26,42,0.15) 100%);}
+        .hero-content{position:absolute;bottom:0;left:0;right:0;padding:36px;z-index:3;}
 
-        .classified-stamp{display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,64,0.12);border:1px solid rgba(255,0,64,0.3);color:var(--danger);padding:4px 14px;font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
-        .classified-stamp .dot{width:6px;height:6px;background:var(--danger);border-radius:50%;animation:dotBlink 0.8s infinite;}
+        .classified-stamp{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;padding:5px 14px;font-size:0.7rem;font-weight:800;letter-spacing:0.1em;border-radius:30px;font-family:'JetBrains Mono',monospace;}
+        .classified-stamp .dot{width:6px;height:6px;background:#fff;border-radius:50%;animation:dotBlink 0.8s infinite;}
         @keyframes dotBlink{0%,100%{opacity:1;}50%{opacity:0;}}
 
         .hero-dots{display:flex;gap:6px;}
-        .hero-dot{width:28px;height:3px;border-radius:1px;background:rgba(255,255,255,0.15);cursor:pointer;transition:all 0.4s ease;}
-        .hero-dot.active{background:var(--accent);width:44px;box-shadow:0 0 10px var(--accent-glow-md);}
+        .hero-dot{width:28px;height:3px;border-radius:2px;background:rgba(255,255,255,0.3);cursor:pointer;transition:all 0.4s ease;}
+        .hero-dot.active{background:#fff;width:44px;}
 
         /* === بطاقات الأخبار === */
-        .news-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);position:relative;cursor:pointer;}
-        .news-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-glow-md),transparent);opacity:0;transition:opacity 0.3s ease;z-index:2;}
-        .news-card:hover{transform:translateY(-4px);border-color:rgba(0,255,65,0.2);box-shadow:0 16px 50px rgba(0,0,0,0.5),0 0 30px var(--accent-glow);}
-        .news-card:hover::before{opacity:1;}
+        .news-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all 0.25s ease;box-shadow:0 3px 10px rgba(0,0,0,0.02);position:relative;cursor:pointer;display:flex;flex-direction:column;}
+        .news-card:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(0,0,0,0.08);}
         .card-img-wrap{position:relative;overflow:hidden;height:190px;}
-        .card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;filter:brightness(0.7) saturate(0.8);}
-        .news-card:hover .card-img-wrap img{transform:scale(1.06);filter:brightness(0.8) saturate(1);}
-        .card-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,var(--bg2),transparent);}
+        .card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;}
+        .news-card:hover .card-img-wrap img{transform:scale(1.05);}
+        .card-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(0,0,0,0.1),transparent);}
 
-        .threat-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:2px;font-size:0.65rem;font-weight:700;letter-spacing:0.05em;font-family:'JetBrains Mono',monospace;}
-        .tag-low{background:rgba(0,255,65,0.1);color:#00ff41;border:1px solid rgba(0,255,65,0.2);}
-        .tag-medium{background:rgba(255,170,0,0.1);color:#ffaa00;border:1px solid rgba(255,170,0,0.2);}
-        .tag-high{background:rgba(255,102,0,0.1);color:#ff6600;border:1px solid rgba(255,102,0,0.2);}
-        .tag-critical{background:rgba(255,0,64,0.12);color:#ff0040;border:1px solid rgba(255,0,64,0.25);animation:tagPulse 2s infinite;}
-        @keyframes tagPulse{0%,100%{box-shadow:none;}50%{box-shadow:0 0 12px rgba(255,0,64,0.2);}}
+        .threat-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:0.65rem;font-weight:700;font-family:'JetBrains Mono',monospace;}
+        .tag-low{background:var(--green-light);color:#006633;border:1px solid #c8e6c9;}
+        .tag-medium{background:#fff8e1;color:#f57f17;border:1px solid #ffe082;}
+        .tag-high{background:#fff3e0;color:#e65100;border:1px solid #ffcc80;}
+        .tag-critical{background:var(--accent-light);color:var(--accent);border:1px solid #ef9a9a;animation:tagPulse 2s infinite;}
+        @keyframes tagPulse{0%,100%{box-shadow:none;}50%{box-shadow:0 0 10px rgba(206,17,38,0.15);}}
 
-        .cat-tag{display:inline-block;padding:2px 8px;font-size:0.65rem;font-weight:700;border-radius:2px;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(0,255,65,0.15);letter-spacing:0.03em;}
+        .cat-tag{display:inline-block;padding:3px 10px;font-size:0.65rem;font-weight:700;border-radius:20px;background:var(--navy-light);color:var(--navy);border:1px solid #d0ddeb;}
 
         .card-meta{display:flex;align-items:center;gap:10px;font-size:0.7rem;color:var(--text-muted);flex-wrap:wrap;font-family:'JetBrains Mono',monospace;}
-        .card-meta i{font-size:0.6rem;}
+        .card-meta i{font-size:0.6rem;color:var(--navy);}
 
         /* === المودال === */
-        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(12px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.35s ease;padding:16px;}
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.3s ease;padding:16px;}
         .modal-overlay.active{opacity:1;visibility:visible;}
-        .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;max-width:780px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(30px) scale(0.97);transition:all 0.35s cubic-bezier(0.4,0,0.2,1);}
+        .modal-box{background:#fff;border-radius:24px;max-width:780px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(30px) scale(0.97);transition:all 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 20px 60px rgba(0,0,0,0.2);}
         .modal-overlay.active .modal-box{transform:translateY(0) scale(1);}
-        .modal-box::-webkit-scrollbar{width:4px;}
+        .modal-box::-webkit-scrollbar{width:5px;}
         .modal-box::-webkit-scrollbar-track{background:var(--bg);}
-        .modal-box::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:2px;}
+        .modal-box::-webkit-scrollbar-thumb{background:var(--navy);border-radius:3px;}
 
         /* === زر العودة === */
-        .back-top{position:fixed;bottom:24px;right:24px;z-index:150;width:44px;height:44px;border-radius:4px;background:var(--accent);color:#000;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(16px);transition:all 0.3s ease;font-weight:900;}
+        .back-top{position:fixed;bottom:24px;right:24px;z-index:150;width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(16px);transition:all 0.3s ease;box-shadow:0 4px 14px rgba(0,0,0,0.15);}
         [dir="ltr"] .back-top{right:auto;left:24px;}
         .back-top.visible{opacity:1;visibility:visible;transform:translateY(0);}
-        .back-top:hover{box-shadow:0 0 24px var(--accent-glow-hi);transform:translateY(-2px);}
+        .back-top:hover{background:var(--accent);box-shadow:0 6px 20px rgba(206,17,38,0.3);}
 
         /* === قائمة الموبايل === */
-        .mobile-menu{position:fixed;inset:0;background:rgba(2,4,8,0.98);backdrop-filter:blur(20px);z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;visibility:hidden;transition:all 0.4s ease;}
+        .mobile-menu{position:fixed;inset:0;background:#fff;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;visibility:hidden;transition:all 0.3s ease;}
         .mobile-menu.active{opacity:1;visibility:visible;}
 
         /* === حالة التحميل === */
         .load-state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:60px 20px;text-align:center;}
-        .load-state .spinner{width:36px;height:36px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;}
+        .load-state .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin 0.7s linear infinite;}
         @keyframes spin{to{transform:rotate(360deg);}}
-        .retry-btn{padding:8px 20px;border-radius:4px;background:var(--accent);color:#000;border:none;cursor:pointer;font-weight:800;font-family:inherit;font-size:0.85rem;transition:all 0.2s ease;}
-        .retry-btn:hover{box-shadow:0 0 16px var(--accent-glow-md);}
+        .retry-btn{padding:8px 22px;border-radius:30px;background:var(--navy);color:#fff;border:none;cursor:pointer;font-weight:700;font-family:inherit;font-size:0.85rem;transition:all 0.2s ease;}
+        .retry-btn:hover{background:var(--navy-dark);}
 
         /* === الإظهار التدريجي === */
-        .reveal{opacity:0;transform:translateY(24px);transition:all 0.6s cubic-bezier(0.4,0,0.2,1);}
+        .reveal{opacity:0;transform:translateY(20px);transition:all 0.5s ease;}
         .reveal.visible{opacity:1;transform:translateY(0);}
 
         /* === شريط التحميل === */
-        .load-bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:999;transition:width 0.3s ease;box-shadow:0 0 12px var(--accent-glow-hi);}
+        .load-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:999;transition:width 0.3s ease;}
 
         /* === انتقال اللغة === */
         .lang-fade{transition:opacity 0.25s ease;}
         .lang-fade.out{opacity:0;}
 
-        /* === خط فاصل مضيء === */
-        .glow-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-light),rgba(0,255,65,0.15),var(--border-light),transparent);}
+        /* === خط فاصل === */
+        .divider{height:1px;background:var(--border);max-width:80px;margin:0 auto;}
 
         /* === الفوتر === */
-        footer{background:var(--bg2);border-top:1px solid var(--border);}
+        footer{background:var(--navy-dark);border-top:4px solid var(--green);color:#b0c4de;}
 
         /* === إحصائيات === */
-        .stat-box{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:16px;text-align:center;transition:all 0.3s ease;}
-        .stat-box:hover{border-color:rgba(0,255,65,0.2);box-shadow:0 0 20px var(--accent-glow);}
-        .stat-num{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:800;color:var(--accent);}
+        .stat-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center;transition:all 0.2s ease;}
+        .stat-box:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06);border-color:var(--navy);}
+        .stat-num{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:800;color:var(--navy);}
 
         /* === التبديل اللغوي === */
-        .lang-switch{display:flex;background:var(--bg3);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
-        .lang-sw-btn{padding:5px 12px;font-size:0.7rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;border:none;background:transparent;color:var(--text-muted);font-family:inherit;}
-        .lang-sw-btn.active{background:var(--accent);color:#000;}
+        .lang-switch{display:flex;background:var(--bg3);border:1px solid var(--border);border-radius:30px;overflow:hidden;}
+        .lang-sw-btn{padding:5px 14px;font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;border:none;background:transparent;color:var(--text-muted);font-family:inherit;}
+        .lang-sw-btn.active{background:var(--navy);color:#fff;}
 
         /* === الاستجابة === */
         @media(max-width:768px){
-            .hero-section{height:52vh;min-height:360px;}
+            .hero-section{height:50vh;min-height:340px;}
             .hero-content{padding:20px;}
-            .card-img-wrap{height:150px;}
-            .threat-seg{width:18px;height:7px;}
+            .card-img-wrap{height:155px;}
+            .threat-seg{width:16px;height:6px;}
         }
         @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
-        ::-webkit-scrollbar{width:6px;}
+        ::-webkit-scrollbar{width:7px;}
         ::-webkit-scrollbar-track{background:var(--bg);}
-        ::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:3px;}
-        ::-webkit-scrollbar-thumb:hover{background:var(--accent-dim);}
+        ::-webkit-scrollbar-thumb{background:#c0cad8;border-radius:4px;}
+        ::-webkit-scrollbar-thumb:hover{background:var(--navy);}
     </style>
 
-    <!-- البيانات المنظمة لـ SEO -->
     <script type="application/ld+json">
-    {
-        "@context":"https://schema.org",
-        "@type":"Organization",
-        "name":"هيئة الرصد السيبراني — وحدة الرصد النافذ",
-        "description":"منصة استخباراتية سيبرانية متقدمة لرصد وتحليل التهديدات الرقمية",
-        "sameAs":[]
-    }
+    {"@context":"https://schema.org","@type":"Organization","name":"هيئة الرصد السيبراني — وحدة الرصد النافذ","description":"منصة استخباراتية سيبرانية متقدمة لرصد وتحليل التهديدات الرقمية"}
     </script>
 </head>
 
