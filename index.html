@@ -37,13 +37,11 @@
         body{font-family:'Cairo',sans-serif;background:var(--cream);color:var(--gray-800);line-height:1.7;-webkit-font-smoothing:antialiased;}
         a{text-decoration:none;color:inherit;}
 
-        /* === التخطيط العلوي === */
         .top-bar{background:var(--navy);padding:6px 0;font-size:0.72rem;color:var(--gray-400);border-bottom:1px solid rgba(255,255,255,0.06);}
         .top-bar-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
         .top-bar a{color:var(--gray-400);transition:color 0.2s;}
         .top-bar a:hover{color:var(--gold-light);}
 
-        /* === الهيدر === */
         .header{background:var(--white);border-bottom:3px solid var(--red);padding:16px 0;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-xs);}
         .header-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
         .brand h1{font-size:1.8rem;font-weight:900;color:var(--navy);line-height:1.1;}
@@ -60,24 +58,20 @@
         .live-dot{width:8px;height:8px;background:var(--red-bright);border-radius:50%;animation:livePulse 2s ease-in-out infinite;flex-shrink:0;}
         @keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(231,76,60,0.4);}50%{opacity:0.6;box-shadow:0 0 0 6px rgba(231,76,60,0);}}
 
-        /* === شريط التصنيفات === */
-        .categories{background:var(--white);border-bottom:1px solid var(--gray-200);padding:0;position:sticky;top:58px;z-index:99;}
+        .categories{background:var(--white);border-bottom:1px solid var(--gray-200);position:sticky;top:58px;z-index:99;}
         .cat-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;}
         .cat-inner::-webkit-scrollbar{display:none;}
-        .cat-btn{padding:8px 16px;font-family:inherit;font-size:0.78rem;font-weight:700;color:var(--gray-600);background:transparent;border:none;border-radius:var(--radius-pill);cursor:pointer;transition:0.2s;white-space:nowrap;position:relative;}
+        .cat-btn{padding:8px 16px;font-family:inherit;font-size:0.78rem;font-weight:700;color:var(--gray-600);background:transparent;border:none;border-radius:var(--radius-pill);cursor:pointer;transition:0.2s;white-space:nowrap;}
         .cat-btn:hover{background:var(--cream-dark);color:var(--navy);}
         .cat-btn.active{background:var(--navy);color:#fff;}
         .cat-sep{width:1px;height:20px;background:var(--gray-200);flex-shrink:0;margin:0 2px;}
 
-        /* === التيكر === */
         .ticker-bar{background:var(--navy);padding:8px 0;overflow:hidden;border-bottom:2px solid var(--gold);}
         .ticker-track{display:flex;animation:tickerScroll 80s linear infinite;white-space:nowrap;}
         .ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font-size:0.8rem;font-weight:600;color:var(--gray-300);}
         .ticker-item i{color:var(--gold);font-size:0.6rem;}
-        [dir="ltr"] .ticker-item{border-left:none;border-right:1px solid rgba(255,255,255,0.08);}
         @keyframes tickerScroll{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
 
-        /* === المحتوى === */
         .main{max-width:1280px;margin:0 auto;padding:24px 20px 60px;}
         .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
         .section-head h2{font-size:1.3rem;font-weight:900;color:var(--navy);display:flex;align-items:center;gap:8px;}
@@ -85,10 +79,8 @@
         .result-count{font-size:0.82rem;color:var(--gray-500);background:var(--cream-dark);padding:5px 14px;border-radius:var(--radius-pill);display:none;}
         .result-count.show{display:block;}
 
-        /* === شبكة البطاقات === */
         .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;}
 
-        /* === البطاقة === */
         .card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;transition:0.25s;box-shadow:var(--shadow-xs);display:flex;flex-direction:column;cursor:pointer;}
         .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
         .card-img{width:100%;height:190px;object-fit:cover;background:var(--gray-100);display:block;transition:transform 0.4s;}
@@ -104,8 +96,13 @@
         .card-excerpt{font-size:0.84rem;color:var(--gray-500);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:12px;}
         .card-read{color:var(--red);font-weight:700;font-size:0.82rem;display:inline-flex;align-items:center;gap:4px;margin-top:auto;background:none;border:none;font-family:inherit;cursor:pointer;padding:0;}
         .card-read:hover{gap:8px;}
+        .card-threat{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:var(--radius-pill);font-size:0.6rem;font-weight:700;margin-top:8px;}
+        .threat-low{background:#e8f5e9;color:#2e7d32;}
+        .threat-medium{background:#fff8e1;color:#f57f17;}
+        .threat-high{background:#fff3e0;color:#e65100;}
+        .threat-critical{background:#fef2f2;color:var(--red);animation:tagBlink 2s infinite;}
+        @keyframes tagBlink{0%,100%{opacity:1;}50%{opacity:0.6;}}
 
-        /* === حالة التحميل === */
         .loading{text-align:center;padding:80px 20px;color:var(--gray-400);}
         .spinner{width:36px;height:36px;border:3px solid var(--gray-200);border-top-color:var(--red);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 16px;}
         @keyframes spin{to{transform:rotate(360deg);}}
@@ -117,11 +114,13 @@
         .error-box p{color:var(--gray-500);font-size:0.88rem;margin-bottom:16px;}
         .retry-btn{background:var(--navy);color:#fff;border:none;padding:8px 24px;border-radius:var(--radius-pill);font-family:inherit;font-weight:700;cursor:pointer;font-size:0.85rem;transition:0.2s;}
         .retry-btn:hover{background:var(--navy-light);}
+        .source-badge{font-size:0.68rem;padding:2px 6px;border-radius:4px;font-weight:600;}
+        .src-json{background:#e8f5e9;color:#2e7d32;}
+        .src-github{background:#e3f2fd;color:#1565c0;}
 
-        /* === المودال === */
         .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:2000;overflow-y:auto;padding:20px;}
         .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center;min-height:100vh;}
-        .modal-box{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:860px;margin:40px auto;overflow:hidden;animation:modalUp 0.3s ease;box-shadow:var(--shadow-lg);}
+        .modal-box{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:860px;margin:40px auto;overflow:hidden;animation:modalUp 0.3s ease;box-shadow:var(--shadow-lg);position:relative;}
         @keyframes modalUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
         .modal-close{position:absolute;top:14px;z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.9);border:1px solid var(--gray-200);color:var(--gray-600);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:0.2s;backdrop-filter:blur(4px);}
         [dir="rtl"] .modal-close{left:14px;}
@@ -148,8 +147,7 @@
         .share-btn{background:var(--navy);color:#fff;border:none;padding:7px 18px;border-radius:var(--radius-pill);font-family:inherit;font-weight:700;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:0.2s;}
         .share-btn:hover{background:var(--navy-light);}
 
-        /* === الفوتر === */
-        footer{background:var(--navy);color:var(--gray-400);padding:40px 20px 20px;margin-top:0;}
+        footer{background:var(--navy);color:var(--gray-400);padding:40px 20px 20px;}
         .footer-inner{max-width:1280px;margin:0 auto;}
         .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,0.08);}
         .footer-brand h2{color:#fff;font-size:1.5rem;font-weight:900;}
@@ -160,18 +158,15 @@
         .footer-col a:hover{color:var(--gold-light);}
         .footer-bottom{padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;flex-wrap:wrap;gap:8px;}
 
-        /* === زر العودة === */
         .back-top{position:fixed;bottom:24px;left:24px;z-index:150;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:0.3s;box-shadow:var(--shadow-md);}
         [dir="ltr"] .back-top{left:auto;right:24px;}
         .back-top.show{opacity:1;visibility:visible;transform:translateY(0);}
         .back-top:hover{background:var(--red);}
 
-        /* === إشعار === */
         .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:10px 22px;border-radius:var(--radius-pill);box-shadow:var(--shadow-md);z-index:9999;font-size:0.85rem;font-weight:600;animation:toastIn 0.3s ease;}
         [dir="ltr"] .toast{right:auto;left:24px;}
         @keyframes toastIn{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 
-        /* === الاستجابة === */
         @media(max-width:768px){
             .top-bar-inner{flex-direction:column;gap:2px;text-align:center;}
             .header-inner{justify-content:center;text-align:center;}
@@ -189,7 +184,6 @@
 </head>
 <body>
 
-<!-- الشريط العلوي -->
 <div class="top-bar">
     <div class="top-bar-inner">
         <span id="dateDisplay"></span>
@@ -201,7 +195,6 @@
     </div>
 </div>
 
-<!-- الهيدر -->
 <header class="header">
     <div class="header-inner">
         <div class="brand">
@@ -218,7 +211,6 @@
     </div>
 </header>
 
-<!-- التصنيفات -->
 <div class="categories">
     <div class="cat-inner" id="catBar">
         <button class="cat-btn active" data-f="all">الكل</button>
@@ -236,15 +228,14 @@
         <button class="cat-btn" data-f="intrusions">اختراقات</button>
         <button class="cat-btn" data-f="vulns">ثغرات</button>
         <button class="cat-btn" data-f="shadow">حروب ظل</button>
+        <button class="cat-btn" data-f="natsec">أمن قومي</button>
     </div>
 </div>
 
-<!-- التيكر -->
 <div class="ticker-bar">
     <div class="ticker-track" id="ticker"></div>
 </div>
 
-<!-- المحتوى -->
 <main class="main">
     <div class="section-head">
         <h2><i class="fas fa-satellite-dish"></i> التقارير الميدانية</h2>
@@ -253,18 +244,16 @@
     <div class="grid" id="grid"></div>
     <div class="loading" id="loadingState"><div class="spinner"></div><p>جاري تحميل التقارير من مصادر الرصد...</p></div>
     <div class="no-data" id="noData" style="display:none;"><i class="fas fa-folder-open"></i><p>لا توجد تقارير مطابقة</p></div>
-    <div class="error-box" id="errorState" style="display:none;"><i class="fas fa-exclamation-circle"></i><h3>فشل تحميل البيانات</h3><p>تعذر الاتصال بمصادر الرصد. تحقق من اتصالك بالإنترنت.</p><button class="retry-btn" onclick="loadReports()"><i class="fas fa-redo"></i> إعادة المحاولة</button></div>
+    <div class="error-box" id="errorState" style="display:none;"><i class="fas fa-exclamation-circle"></i><h3>فشل تحميل البيانات</h3><p>تعذر الاتصال بمصادر الرصد.</p><button class="retry-btn" onclick="loadAllReports()"><i class="fas fa-redo"></i> إعادة المحاولة</button></div>
 </main>
 
-<!-- المودال -->
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
-    <div class="modal-box" style="position:relative;">
+    <div class="modal-box">
         <button class="modal-close" onclick="closeModal()" aria-label="إغلاق"><i class="fas fa-times"></i></button>
         <div id="modalContent"></div>
     </div>
 </div>
 
-<!-- الفوتر -->
 <footer>
     <div class="footer-inner">
         <div class="footer-top">
@@ -286,52 +275,52 @@
                 <a onclick="filterBy('intrusions')">عمليات الاختراق</a>
                 <a onclick="filterBy('vulns')">رصد الثغرات</a>
                 <a onclick="filterBy('shadow')">حروب الظل</a>
+                <a onclick="filterBy('natsec')">أمن قومي</a>
             </div>
         </div>
         <div class="footer-bottom">
             <span>&copy; 2025 وحدة الرصد السيبراني</span>
-            <span>BUILD v5.0</span>
+            <span>BUILD v5.1</span>
         </div>
     </div>
 </footer>
 
-<!-- زر العودة -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0})" aria-label="الأعلى"><i class="fas fa-chevron-up"></i></button>
 
 <script>
 /* ============================================================
-       الإعدادات — غيّر هذه القيم فقط
+       الإعدادات — غيّر فقط ما تحتاجه
     ============================================================ */
 const CONFIG = {
-    /* ضع اسم مستخدم GitHub واسم المستودع الخاص بالأخبار */
+    /* GitHub: اسم المستخدم ومستودع الأخبار */
     githubUser: 'cmu-wa',
     githubRepo: 'news-data',
-    /* فرع المستودع (غالباً main) */
     branch: 'main',
-    /* المجلد الذي بداخله ملفات الأخبار */
     postsFolder: 'posts',
-    /* فترة التحقق من أخبار جديدة (بالدقائق) — 0 يعني بدون تحقق تلقائي */
-    refreshInterval: 30,
-    /* عدد الأخبار في الصفحة الواحدة — 0 يعني بدون تقسيم */
-    perPage: 0
+    /* فترة التحقق من أخبار جديدة بالدقائق — 0 = بدون تحقق */
+    refreshInterval: 30
 };
 
 /* ============================================================
-       المتغيرات العامة
+       الثوابت
+    ============================================================ */
+const COUNTRIES = {
+    yemen:'اليمن',algeria:'الجزائر',saudi:'السعودية',gulf:'الخليج',
+    iran:'إيران',israel:'إسرائيل',iraq:'العراق',egypt:'مصر',global:'عالمي'
+};
+const CATS = {intrusions:'اختراق',vulns:'ثغرة',shadow:'حرب ظل',natsec:'أمن قومي'};
+const THREAT_CLASS = {low:'threat-low',medium:'threat-medium',high:'threat-high',critical:'threat-critical'};
+const THREAT_LABEL = {low:'منخفض',medium:'متوسط',high:'مرتفع',critical:'حرج'};
+const GITHUB_API = `https://api.github.com/repos/${CONFIG.githubUser}/${CONFIG.githubRepo}/contents/${CONFIG.postsFolder}?ref=${CONFIG.branch}`;
+
+/* ============================================================
+       الحالة العامة
     ============================================================ */
 let allReports = [];
 let filteredReports = [];
 let activeFilter = 'all';
 let searchQuery = '';
 let currentModalSlug = null;
-let refreshTimer = null;
-
-const COUNTRIES = {
-    yemen:'اليمن',algeria:'الجزائر',saudi:'السعودية',gulf:'الخليج',
-    iran:'إيران',israel:'إسرائيل',iraq:'العراق',egypt:'مصر',global:'عالمي'
-};
-const CATS = {intrusions:'اختراق',vulns:'ثغرة',shadow:'حرب ظل'};
-const API_URL = `https://api.github.com/repos/${CONFIG.githubUser}/${CONFIG.githubRepo}/contents/${CONFIG.postsFolder}?ref=${CONFIG.branch}`;
 
 /* ============================================================
        التهيئة
@@ -342,24 +331,21 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCategories();
     setupScroll();
     handleHash();
-    loadReports();
+    loadAllReports();
     if (CONFIG.refreshInterval > 0) {
-        refreshTimer = setInterval(loadReports, CONFIG.refreshInterval * 60000);
+        setInterval(loadAllReports, CONFIG.refreshInterval * 60000);
     }
 });
 
-/* ============================================================
-       التاريخ
-    ============================================================ */
 function setDate() {
     document.getElementById('dateDisplay').textContent =
         new Date().toLocaleDateString('ar-EG', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
 }
 
 /* ============================================================
-       جلب الأخبار من GitHub
+       التحميل الرئيسي — يجمع من JSON + GitHub
     ============================================================ */
-async function loadReports() {
+async function loadAllReports() {
     const grid = document.getElementById('grid');
     const loading = document.getElementById('loadingState');
     const noData = document.getElementById('noData');
@@ -371,105 +357,144 @@ async function loadReports() {
     error.style.display = 'none';
 
     try {
-        const res = await fetch(API_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        /* المصدر الأول: ملف JSON المحلي */
+        let jsonReports = [];
+        try {
+            const res = await fetch('./news-data.json');
+            if (res.ok) {
+                const data = await res.json();
+                if (Array.isArray(data)) {
+                    jsonReports = data.map(item => ({
+                        slug: 'json-' + item.id,
+                        title: item.title_ar || item.title_en || '',
+                        excerpt: item.excerpt_ar || item.excerpt_en || '',
+                        content: (item.content_ar || item.content_en || '').replace(/\n/g, '<br>'),
+                        image: item.image || '',
+                        country: item.category === 'natsec' ? 'global' : mapCountry(item),
+                        category: item.category || 'shadow',
+                        threat_level: item.threat_level || 'high',
+                        source: item.source_ar || 'مصادر الرصد',
+                        date: item.date || '',
+                        dateObj: new Date(item.date),
+                        featured: item.featured || false,
+                        sourceType: 'json'
+                    }));
+                }
+            }
+        } catch(e) { /* ملف غير موجود — نتجاوزه */ }
 
-        const files = await res.json();
-        if (!Array.isArray(files) || files.length === 0) {
-            loading.style.display = 'none';
+        /* المصدر الثاني: ملفات HTML من GitHub */
+        let githubReports = [];
+        try {
+            const res = await fetch(GITHUB_API);
+            if (res.ok) {
+                const files = await res.json();
+                if (Array.isArray(files)) {
+                    for (const file of files) {
+                        if (!file.name.endsWith('.html')) continue;
+                        try {
+                            githubReports.push(parseGithubFile(file));
+                        } catch(e) { /* تخطي */ }
+                    }
+                }
+            }
+        } catch(e) { /* GitHub غير متاح — نتجاوزه */ }
+
+        /* دمج المصدرين: JSON أولاً ثم GitHub */
+        allReports = [...jsonReports, ...githubReports];
+
+        /* ترتيب بالتاريخ (الأحدث أولاً) */
+        allReports.sort((a, b) => {
+            const da = a.dateObj ? a.dateObj.getTime() : 0;
+            const db = b.dateObj ? b.dateObj.getTime() : 0;
+            return db - da;
+        });
+
+        loading.style.display = 'none';
+
+        if (allReports.length === 0) {
             noData.style.display = 'block';
             return;
         }
 
-        /* ترتيب حسب تاريخ التعديل (الأحدث أولاً) */
-        files.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-
-        /* تحليل كل ملف */
-        const reports = [];
-        for (const file of files) {
-            if (!file.name.endsWith('.html')) continue;
-            try {
-                const report = parseReport(file);
-                if (report) reports.push(report);
-            } catch(e) { /* تخطي الملفات التالفة */ }
-        }
-
-        allReports = reports;
-        loading.style.display = 'none';
         applyFilters();
         buildTicker();
 
     } catch(err) {
-        console.error('فشل التحميل:', err);
+        console.error('خطأ:', err);
         loading.style.display = 'none';
         error.style.display = 'block';
     }
 }
 
 /* ============================================================
-       تحليل ملف الخبر
-       يستخرج البيانات من تعليقات HTML خاصة داخل الملف
+       تحويل بيانات JSON إلى تنسيق موحد
     ============================================================ */
-function parseReport(file) {
-    /* جلب محتوى الملف — نستخدم واجهة raw.githubusercontent */
-    const rawUrl = `https://raw.githubusercontent.com/${CONFIG.githubUser}/${CONFIG.githubRepo}/${CONFIG.branch}/${CONFIG.postsFolder}/${file.name}`;
+function mapCountry(item) {
+    /* محاولة استنتاج البلد من العنوان أو التصنيف */
+    const t = (item.title_ar || '').toLowerCase();
+    const cats = ['intrusions','vulns','shadow','natsec'];
+    const cat = (item.category || '').toLowerCase();
 
-    /*
-       في هذه المرحلة نستخرج البيانات الوصفية فقط.
-       نعتمد على اسم الملف كـ slug، والتاريخ من GitHub API.
-       المحتوى الكامل يُحمّل فقط عند فتح المودال.
-       البيانات الإضافية (العنوان، البلد، إلخ) تُستخرج
-       من التعليقات داخل الملف أو من اسم الملف.
-    */
+    if (t.includes('يمن') || t.includes('حوثي') || t.includes('صنعاء')) return 'yemen';
+    if (t.includes('جزائر')) return 'algeria';
+    if (t.includes('سعودي') || t.includes('نيوم')) return 'saudi';
+    if (t.includes('إمارات') || t.includes('خليج')) return 'gulf';
+    if (t.includes('إيران') || t.includes('شامون') || t.includes('apt33')) return 'iran';
+    if (t.includes('إسرائيل') || t.includes('8200')) return 'israel';
+    if (t.includes('عراق')) return 'iraq';
+    if (t.includes('مصر') || t.includes('السودان')) return 'egypt';
+    return 'global';
+}
+
+/* ============================================================
+       تحليل ملف من GitHub (بيانات وصفية فقط)
+    ============================================================ */
+function parseGithubFile(file) {
     const slug = file.name.replace('.html', '');
-
-    /* محاولة استخراج البيانات من اسم الملف */
-    /* الصيغة المقترحة: رقم-البلد-الفئة-عنوان مختصر.html */
-    /* مثال: 001-yemen-intrusions-اختراق-اتصالات-سعودية.html */
     const parts = slug.split('-');
     let country = 'global';
     let category = 'shadow';
     let title = slug;
+    let excerpt = '';
+    let threat_level = 'high';
+    let source = 'مصادر الرصد';
+    let image = '';
 
     if (parts.length >= 3) {
-        const possibleCountry = parts[1].toLowerCase();
-        if (COUNTRIES[possibleCountry]) country = possibleCountry;
-        const possibleCat = parts[2].toLowerCase();
-        if (CATS[possibleCat]) category = possibleCat;
-        /* الباقي يُشكل العنوان */
+        if (COUNTRIES[parts[1]]) country = parts[1];
+        if (CATS[parts[2]]) category = parts[2];
         title = parts.slice(3).join(' ');
     }
 
-    /* إذا كان الملف يحتوي على بيانات وصفية في التعليقات، نحاول قراءتها */
-    /* لكن لتجنب طلبات كثيرة، نستخدم الاسم فقط الآن */
-
-    const date = new Date(file.updated_at);
-
     return {
         slug: slug,
-        title: title || slug,
-        excerpt: '',
+        title: title,
+        excerpt: excerpt,
+        content: '', /* يُحمّل لاحقاً عند الفتح */
+        image: image,
         country: country,
         category: category,
-        date: date.toISOString().split('T')[0],
-        dateObj: date,
-        rawUrl: rawUrl,
-        githubUrl: file.html_url,
-        featured: parts.length >= 3
+        threat_level: threat_level,
+        source: source,
+        date: file.updated_at ? file.updated_at.split('T')[0] : '',
+        dateObj: new Date(file.updated_at),
+        featured: parts.length >= 3,
+        sourceType: 'github',
+        rawUrl: `https://raw.githubusercontent.com/${CONFIG.githubUser}/${CONFIG.githubRepo}/${CONFIG.branch}/${CONFIG.postsFolder}/${file.name}`
     };
 }
 
 /* ============================================================
-       تحميل محتوى الخبر الكامل (عند فتح المودال فقط)
+       تحميل المحتوى الكامل لخبر GitHub (عند فتح المودال)
     ============================================================ */
-async function loadFullReport(report) {
+async function loadGithubContent(report) {
     try {
         const res = await fetch(report.rawUrl);
         if (!res.ok) return null;
         let html = await res.text();
 
-        /* استخراج البيانات من التعليقات الوصفية */
-        const meta = {};
+        /* استخراج الميتا من التعليقات */
         const metaMatch = html.match(/<!--\s*meta\s+([\s\S]*?)-->/);
         if (metaMatch) {
             const metaText = metaMatch[1];
@@ -477,29 +502,26 @@ async function loadFullReport(report) {
             if (pairs) {
                 pairs.forEach(p => {
                     const [key, ...vals] = p.split(':');
-                    meta[key.trim()] = vals.join(':').trim();
+                    const val = vals.join(':').trim();
+                    if (key.trim() === 'title') report.title = val;
+                    if (key.trim() === 'excerpt') report.excerpt = val;
+                    if (key.trim() === 'country' && COUNTRIES[val.toLowerCase()]) report.country = val.toLowerCase();
+                    if (key.trim() === 'category' && CATS[val.toLowerCase()]) report.category = val.toLowerCase();
+                    if (key.trim() === 'threat') report.threat_level = val.toLowerCase();
+                    if (key.trim() === 'source') report.source = val;
+                    if (key.trim() === 'image') report.image = val;
                 });
             }
         }
 
-        /* استخراج محتوى <body> فقط */
+        /* استخراج <body> */
         const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-        let bodyContent = bodyMatch ? bodyMatch[1] : html;
+        let body = bodyMatch ? bodyMatch[1] : html;
+        body = body.replace(/<script[\s\S]*?<\/script>/gi, '');
 
-        /* إزالة السكربتات */
-        bodyContent = bodyContent.replace(/<script[\s\S]*?<\/script>/gi, '');
-
-        /* تحديث البيانات من الميتا إذا وجدت */
-        if (meta.title) report.title = meta.title;
-        if (meta.excerpt) report.excerpt = meta.excerpt;
-        if (meta.country && COUNTRIES[meta.country.toLowerCase()]) report.country = meta.country.toLowerCase();
-        if (meta.category && CATS[meta.category.toLowerCase()]) report.category = meta.category.toLowerCase();
-        if (meta.threat) report.threat = meta.threat;
-        if (meta.source) report.source = meta.source;
-
-        return { content: bodyContent, meta: meta };
+        return body;
     } catch(e) {
-        console.error('فشل تحميل الخبر:', e);
+        console.error('فشل تحميل:', e);
         return null;
     }
 }
@@ -509,35 +531,33 @@ async function loadFullReport(report) {
     ============================================================ */
 function applyFilters() {
     filteredReports = allReports;
-
     if (activeFilter !== 'all') {
         filteredReports = filteredReports.filter(r =>
             r.country === activeFilter || r.category === activeFilter
         );
     }
-
     if (searchQuery) {
         const q = searchQuery.toLowerCase();
         filteredReports = filteredReports.filter(r =>
             r.title.toLowerCase().includes(q) ||
             (COUNTRIES[r.country] || '').includes(q) ||
-            (CATS[r.category] || '').includes(q)
+            (CATS[r.category] || '').includes(q) ||
+            (THREAT_LABEL[r.threat_level] || '').includes(q)
         );
     }
-
     renderGrid();
 }
 
 function renderGrid() {
     const grid = document.getElementById('grid');
     const noData = document.getElementById('noData');
-    const resultCount = document.getElementById('resultCount');
+    const rc = document.getElementById('resultCount');
 
     if (searchQuery || activeFilter !== 'all') {
-        resultCount.classList.add('show');
-        resultCount.textContent = `${filteredReports.length} تقرير`;
+        rc.classList.add('show');
+        rc.textContent = `${filteredReports.length} تقرير`;
     } else {
-        resultCount.classList.remove('show');
+        rc.classList.remove('show');
     }
 
     if (filteredReports.length === 0) {
@@ -548,23 +568,28 @@ function renderGrid() {
     noData.style.display = 'none';
 
     grid.innerHTML = filteredReports.map(r => {
-        const titleHTML = searchQuery ? highlight(r.title, searchQuery) : escapeHTML(r.title);
-        const excerpt = r.excerpt || '';
+        const tHTML = searchQuery ? hl(r.title, searchQuery) : esc(r.title);
+        const imgSrc = r.image || r.rawUrl || '';
+        const imgOnErr = r.sourceType === 'github'
+            ? `this.onerror="this.style.display='none';this.parentElement.querySelector('.card-country').style.bottom='10px'"`
+            : `this.onerror="this.style.display='none'"`;
+
         return `
-        <article class="card" onclick="openModal('${r.slug}')" tabindex="0"
-            onkeydown="if(event.key==='Enter')openModal('${r.slug}')">
+        <article class="card" onclick="openModal('${r.slug}','${r.sourceType}')" tabindex="0"
+            onkeydown="if(event.key==='Enter')openModal('${r.slug}','${r.sourceType}')">
             <div class="card-img-wrap">
-                <img class="card-img" src="${r.rawUrl}" alt="" loading="lazy"
-                    onerror="this.style.display='none'">
+                ${imgSrc ? `<img class="card-img" src="${esc(imgSrc)}" alt="" loading="lazy" ${imgOnErr}>` : ''}
                 <span class="card-country"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[r.country]||'عالمي'}</span>
             </div>
             <div class="card-body">
                 <div class="card-meta">
                     <span class="card-source">${CATS[r.category]||'تقرير'}</span>
+                    <span class="source-badge ${r.sourceType==='json'?'src-json':'src-github'}">${r.sourceType==='json'?'JSON':'GITHUB'}</span>
                     <span>${fmtDate(r.date)}</span>
                 </div>
-                <h3 class="card-title">${titleHTML}</h3>
-                ${excerpt ? `<p class="card-excerpt">${escapeHTML(excerpt)}</p>` : ''}
+                <h3 class="card-title">${tHTML}</h3>
+                ${r.excerpt ? `<p class="card-excerpt">${esc(r.excerpt)}</p>` : ''}
+                ${r.threat_level ? `<span class="card-threat ${THREAT_CLASS[r.threat_level]||''}"><i class="fas fa-exclamation-triangle"></i> ${THREAT_LABEL[r.threat_level]||r.threat_level}</span>` : ''}
                 <button class="card-read">قراءة التقرير <i class="fas fa-arrow-left"></i></button>
             </div>
         </article>`;
@@ -572,9 +597,9 @@ function renderGrid() {
 }
 
 /* ============================================================
-       المودال — يحمّل المحتوى الكامل فقط عند الفتح
+       المودال
     ============================================================ */
-async function openModal(slug) {
+async function openModal(slug, sourceType) {
     const report = allReports.find(r => r.slug === slug);
     if (!report) return;
 
@@ -582,69 +607,71 @@ async function openModal(slug) {
     document.getElementById('modal').classList.add('open');
     document.body.style.overflow = 'hidden';
     history.pushState({slug}, '', '#report-' + slug);
+    document.title = report.title + ' — وحدة الرصد السيبراني';
 
-    /* عرض حالة تحميل أولية */
+    /* حالة تحميل */
     document.getElementById('modalContent').innerHTML = `
         <div style="padding:60px;text-align:center;color:var(--gray-400);">
             <div class="spinner" style="margin:0 auto 14px;"></div>
             <p>جاري تحميل التقرير...</p>
         </div>`;
 
-    /* تحديث العنوان لـ SEO */
-    document.title = report.title + ' — وحدة الرصد السيبراني';
+    let bodyHTML = '';
 
-    /* تحميل المحتوى الكامل */
-    const data = await loadFullReport(report);
-
-    if (!data) {
-        document.getElementById('modalContent').innerHTML = `
-            <div style="padding:60px;text-align:center;color:var(--gray-400);">
-                <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:var(--red);"></i>
-                <p style="margin-top:12px;">فشل تحميل التقرير</p>
-                <button class="retry-btn" onclick="openModal('${slug}')" style="margin-top:14px;">إعادة المحاولة</button>
-            </div>`;
-        return;
+    if (sourceType === 'github' && !report.content) {
+        /* تحميل المحتوى من GitHub */
+        bodyHTML = await loadGithubContent(report);
+        if (!bodyHTML) {
+            document.getElementById('modalContent').innerHTML = `
+                <div style="padding:60px;text-align:center;color:var(--gray-400);">
+                    <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:var(--red);"></i>
+                    <p style="margin-top:12px;">فشل تحميل التقرير</p>
+                    <button class="retry-btn" onclick="openModal('${slug}','github')" style="margin-top:14px;">إعادة المحاولة</button>
+                </div>`;
+            return;
+        }
+    } else {
+        /* محتوى من JSON جاهز */
+        bodyHTML = report.content || '<p>لا يوجد محتوى متاح.</p>';
     }
 
-    /* بناء المودال بالمحتوى الكامل */
-    const threat = report.threat || '—';
-    const source = report.source || 'مصادر الرصد الخاصة';
-    const finalTitle = report.title;
+    /* استخراج وسائط من المحتوى */
+    let mediaHTML = '';
+    const ytMatch = bodyHTML.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
+    if (ytMatch) {
+        mediaHTML = `<iframe class="modal-video" src="https://www.youtube.com/embed/${ytMatch[1]}" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        bodyHTML = bodyHTML.replace(new RegExp(ytMatch[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'g'), '');
+    } else {
+        const imgMatch = bodyHTML.match(/<img[^>]+src=["']([^"']+)["'][^>]*>/);
+        if (imgMatch) {
+            mediaHTML = `<img class="modal-img" src="${imgMatch[1]}" alt="" loading="lazy">`;
+            bodyHTML = bodyHTML.replace(imgMatch[0], '');
+        } else if (report.image) {
+            mediaHTML = `<img class="modal-img" src="${esc(report.image)}" alt="" loading="lazy" onerror="this.style.display='none'">`;
+        }
+    }
+
+    const threat = THREAT_LABEL[report.threat_level] || '';
 
     document.getElementById('modalContent').innerHTML = `
-        ${getMediaHTML(data.content)}
+        ${mediaHTML}
         <div class="modal-body">
             <div class="modal-tags">
                 <span class="mtag mtag-country"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[report.country]||'عالمي'}</span>
                 <span class="mtag mtag-cat"><i class="fas fa-shield-halved"></i> ${CATS[report.category]||'تقرير'}</span>
-                ${threat !== '—' ? `<span class="mtag mtag-threat"><i class="fas fa-exclamation-triangle"></i> ${escapeHTML(threat)}</span>` : ''}
+                ${threat ? `<span class="mtag mtag-threat"><i class="fas fa-exclamation-triangle"></i> ${threat}</span>` : ''}
             </div>
-            <h2>${escapeHTML(finalTitle)}</h2>
+            <h2>${esc(report.title)}</h2>
             <div class="modal-info">
                 <span><i class="far fa-clock"></i> ${fmtDate(report.date)}</span>
-                <span><i class="fas fa-building"></i> ${escapeHTML(source)}</span>
+                <span><i class="fas fa-building"></i> ${esc(report.source)}</span>
             </div>
-            <div class="modal-content-text">${data.content}</div>
+            <div class="modal-content-text">${bodyHTML}</div>
             <div class="modal-foot">
                 <span>${slug} — وحدة الرصد السيبراني</span>
                 <button class="share-btn" onclick="shareReport('${slug}')"><i class="fas fa-share-nodes"></i> مشاركة</button>
             </div>
         </div>`;
-}
-
-/* استخراج أول صورة أو فيديو يوتيوب من المحتوى */
-function getMediaHTML(content) {
-    /* البحث عن فيديو يوتيوب */
-    const ytMatch = content.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
-    if (ytMatch) {
-        return `<iframe class="modal-video" src="https://www.youtube.com/embed/${ytMatch[1]}" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
-    }
-    /* البحث عن أول صورة */
-    const imgMatch = content.match(/<img[^>]+src=["']([^"']+)["'][^>]*>/);
-    if (imgMatch) {
-        return `<img class="modal-img" src="${imgMatch[1]}" alt="" loading="lazy" onerror="this.style.display='none'">`;
-    }
-    return '';
 }
 
 function closeModal() {
@@ -657,15 +684,16 @@ function closeModal() {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 window.addEventListener('popstate', () => {
-    if (currentModalSlug) { closeModal(); }
-    else { handleHash(); }
+    if (currentModalSlug) closeModal();
+    else handleHash();
 });
 
 function handleHash() {
     const hash = window.location.hash;
     if (hash.startsWith('#report-')) {
         const slug = hash.replace('#report-', '');
-        if (slug) openModal(slug);
+        const r = allReports.find(x => x.slug === slug);
+        if (r) openModal(slug, r.sourceType);
     }
 }
 
@@ -673,20 +701,20 @@ function handleHash() {
        التيكر
     ============================================================ */
 function buildTicker() {
-    const featured = allReports.filter(r => r.featured).slice(0, 8);
+    const items = allReports.filter(r => r.featured || r.threat_level === 'critical').slice(0, 10);
     const el = document.getElementById('ticker');
-    if (featured.length === 0) {
-        el.innerHTML = '<span class="ticker-item"><i class="fas fa-satellite-dish"></i> وحدة الرصد السيبراني — رصد مستمر للتهديدات الرقمية</span>';
+    if (items.length === 0) {
+        el.innerHTML = '<span class="ticker-item"><i class="fas fa-satellite-dish"></i> وحدة الرصد السيبراني — رصد مستمر</span>';
         return;
     }
-    const items = featured.map(r =>
-        `<span class="ticker-item"><i class="fas fa-circle-exclamation"></i> ${escapeHTML(r.title)}</span>`
+    const txt = items.map(r =>
+        `<span class="ticker-item"><i class="fas fa-circle-exclamation"></i> ${esc(r.title)}</span>`
     ).join('');
-    el.innerHTML = items + items;
+    el.innerHTML = txt + txt;
 }
 
 /* ============================================================
-       التصنيفات
+       التصنيفات والبحث
     ============================================================ */
 function setupCategories() {
     document.querySelectorAll('.cat-btn').forEach(btn => {
@@ -702,22 +730,17 @@ function setupCategories() {
 
 function filterBy(f) {
     activeFilter = f;
-    document.querySelectorAll('.cat-btn').forEach(b => {
-        b.classList.toggle('active', b.dataset.f === f);
-    });
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.f === f));
     applyFilters();
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-/* ============================================================
-       البحث
-    ============================================================ */
 function setupSearch() {
     const input = document.getElementById('searchInput');
-    let debounce;
+    let timer;
     input.addEventListener('input', () => {
-        clearTimeout(debounce);
-        debounce = setTimeout(() => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
             searchQuery = input.value.trim();
             applyFilters();
         }, 300);
@@ -725,15 +748,12 @@ function setupSearch() {
 }
 
 /* ============================================================
-       مشاركة
+       مشاركة وأدوات
     ============================================================ */
 function shareReport(slug) {
     const url = window.location.origin + window.location.pathname + '#report-' + slug;
-    if (navigator.share) {
-        navigator.share({title: document.title, url}).catch(()=>{});
-    } else if (navigator.clipboard) {
-        navigator.clipboard.writeText(url).then(() => showToast('تم نسخ الرابط'));
-    }
+    if (navigator.share) navigator.share({title: document.title, url}).catch(()=>{});
+    else if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => showToast('تم نسخ الرابط'));
 }
 
 function showToast(msg) {
@@ -744,29 +764,25 @@ function showToast(msg) {
     setTimeout(() => t.remove(), 3000);
 }
 
-/* ============================================================
-       أدوات
-    ============================================================ */
 function fmtDate(d) {
     try { return new Date(d).toLocaleDateString('ar-EG',{year:'numeric',month:'short',day:'numeric'}); }
     catch(e) { return d; }
 }
-function escapeHTML(s) {
+
+function esc(s) {
     if (!s) return '';
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-function highlight(text, q) {
-    if (!q) return escapeHTML(text);
-    const safe = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-    return escapeHTML(text).replace(new RegExp(`(${safe})`,'gi'),'<span class="hl">$1</span>');
+
+function hl(text, q) {
+    if (!q) return esc(text);
+    const s = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    return esc(text).replace(new RegExp(`(${s})`,'gi'), '<span class="hl">$1</span>');
 }
 
-/* التمرير */
 function setupScroll() {
     const btn = document.getElementById('backTop');
-    window.addEventListener('scroll', () => {
-        btn.classList.toggle('show', window.scrollY > 400);
-    }, {passive:true});
+    window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 400), {passive:true});
 }
 </script>
 </body>
