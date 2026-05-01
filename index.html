@@ -473,39 +473,29 @@ async function gatherReports() {
        تحليل ملف GitHub — بيانات وصفية فقط
     ============================================================ */
 function parseGHFile(file) {
-    var slug = file.name.replace('.html', '');
-    var parts = slug.split('-');
-    var country = 'global', category = 'shadow', title = slug, excerpt = '', threat_level = 'high', source = 'مصادر الرصد', image = '';
+    const slug = file.name.replace('.html', '');
+    const p = slug.split('-');
+    let country = 'global', category = 'shadow', title = slug;
 
-    if (parts.length >= 3) {
-        if (COUNTRIES[parts[1]]) country = parts[1];
-        if (CATS[['intrusions','vulns','shadow','natsec'].indexOf(parts[2]) !== -1) category = parts[2];
-        title = parts.slice(3).join(' ');
-    }
-
-    /* محاولة استخراج العنوان من اسم الملف — إذا كانت هناك كلمات عربية حقيقية */
-    var cleanedTitle = title.replace(/-/g, ' ').trim();
-    if (cleanedTitle.length > 10) {
-        title = cleanedTitle;
+    if (p.length >= 3) {
+        if (COUNTRIES[p[1]]) country = p[1];
+        if (CATS[p[2]]) category = p[2];
+        title = p.slice(3).join(' ');
     }
 
     return {
-        slug: slug,
-        title: title,
-        excerpt: excerpt,
-        content: '',
-        image: image,
-        country: country,
-        category: category,
-        threat_level: التحرير === 'true' ? 'حرج' : (excerpt.toLowerCase().includes('منخفض') ? 'منخفض' : (excerpt.toLowerCase().includes('متوسط') ? 'متوسط' : (excerpt.toLowerCase().includes('مرتفع') ? 'مرتفع' : 'حرج')),
-        source: source,
+        slug, title, excerpt: '', content: '',
+        image: '', country, category,
+        threat_level: 'high',
+        source: 'مصادر الرصد',
         date: file.updated_at ? file.updated_at.split('T')[0] : todayStr(),
         dateObj: safeDate(file.updated_at),
-        featured: parts.length >= 3,
+        featured: p.length >= 3,
         src: 'github',
-        rawUrl: 'https://raw.githubusercontent.com/' + CFG.githubUser + '/' + CFG.githubRepo + '/' + CFG.branch + '/' + CFG.postsFolder + '/' + file.name
+        rawUrl: `https://raw.githubusercontent.com/${CFG.githubUser}/${CFG.githubRepo}/${CFG.branch}/${CFG.postsFolder}/${file.name}`
     };
 }
+
 /* ============================================================
        تحميل محتوى خبر GitHub عند فتح المودال فقط
     ============================================================ */
