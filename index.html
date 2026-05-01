@@ -475,7 +475,8 @@ async function gatherReports() {
 function parseGHFile(file) {
     const slug = file.name.replace('.html', '');
     const p = slug.split('-');
-    let country = 'global', category = 'shadow', title = slug;
+    let country = 'global', category = 'shadow', title = slug,
+        excerpt = '', threat_level = 'high', source = 'مصادر الرصد', image = '';
 
     if (p.length >= 3) {
         if (COUNTRIES[p[1]]) country = p[1];
@@ -483,11 +484,14 @@ function parseGHFile(file) {
         title = p.slice(3).join(' ');
     }
 
+    /* محاولة استخراج البيانات من اسم الملف كطب أولي سريع — إذا فشلت نلجأ للا شيء */
+    const possibleTitle = title.replace(/-/g, ' ').trim();
+    if (possibleTitle.length > 10) title = possibleTitle;
+
     return {
-        slug, title, excerpt: '', content: '',
-        image: '', country, category,
-        threat_level: 'high',
-        source: 'مصادر الرصد',
+        slug, title, excerpt, content: '',
+        image, country, category,
+        threat_level, source,
         date: file.updated_at ? file.updated_at.split('T')[0] : todayStr(),
         dateObj: safeDate(file.updated_at),
         featured: p.length >= 3,
@@ -774,4 +778,4 @@ if (!document.getElementById('spinnerStyle')) {
 }
 </script>
 </body>
-</html> 
+</html>
