@@ -24,9 +24,9 @@
             --gold:#c8952e;--gold-light:#e8b44a;
             --cream:#f8f5ef;--cream-dark:#efe9dd;
             --white:#ffffff;
-            --g100:#f5f5f5;--g200:#e5e5e5;--g300:#d4d4d4;
-            --g400:#a3a3a3;--g500:#737373;--g600:#525252;
-            --g700:#404040;--g800:#262626;--g900:#171717;
+            --g100:#f5f5f5;--g200:#e5e5e5;--g300:#d4d4d4;--g400:#a3a3a3;
+            --g500:#737373;--g600:#525252;--g700:#404040;
+            --g800:#262626;--g900:#171717;
             --s-xs:0 1px 2px rgba(0,0,0,0.04);
             --s-sm:0 2px 8px rgba(0,0,0,0.06);
             --s-md:0 8px 24px rgba(0,0,0,0.08);
@@ -87,7 +87,7 @@
         .card:hover .card-img{transform:scale(1.03);}
         .card-img-wrap{overflow:hidden;position:relative;}
         .card-country{position:absolute;bottom:10px;right:10px;background:rgba(12,30,53,0.85);color:#fff;padding:3px 10px;border-radius:var(--rp);font-size:0.65rem;font-weight:700;backdrop-filter:blur(4px);}
-        [dir="ltr] .card-country{right:auto;left:10px;}
+        [dir="ltr"] .card-country{right:auto;left:10px;}
         .card-body{padding:16px 18px;flex:1;display:flex;flex-direction:column;}
         .card-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:0.72rem;color:var(--g500);}
         .card-source{background:var(--cream);padding:2px 10px;border-radius:var(--rp);font-weight:700;color:var(--navy);}
@@ -110,7 +110,7 @@
         @keyframes mu{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
         .modal-close{position:absolute;top:14px;z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.9);border:1px solid var(--g200);color:var(--g600);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:0.2s;backdrop-filter:blur(4px);}
         [dir="rtl"] .modal-close{left:14px;}
-        [dir="ltr] .modal-close{right:14px;}
+        [dir="ltr"] .modal-close{right:14px;}
         .modal-close:hover{background:var(--red);color:#fff;border-color:var(--red);}
         .modal-img{width:100%;max-height:400px;object-fit:cover;display:block;background:var(--g100);}
         .modal-video{width:100%;aspect-ratio:16/9;display:block;background:#000;}
@@ -123,7 +123,7 @@
         .modal-body h2{font-size:1.5rem;font-weight:900;line-height:1.4;color:var(--g900);margin-bottom:14px;}
         .modal-info{display:flex;gap:16px;flex-wrap:wrap;font-size:0.78rem;color:var(--g500);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--g200);}
         .modal-info i{margin-left:4px;color:var(--navy);}
-        [dir="ltr] .modal-info i{margin-left:0;margin-right:4px;}
+        [dir="ltr"] .modal-info i{margin-left:0;margin-right:4px;}
         .modal-ct{font-size:0.95rem;line-height:2;color:var(--g700);}
         .modal-ct p{margin-bottom:14px;}
         .modal-ct img{max-width:100%;border-radius:var(--rs);margin:10px 0;}
@@ -143,29 +143,6 @@
         .footer-col a{display:block;font-size:0.82rem;color:var(--g500);margin:8px 0;transition:0.2s;cursor:pointer;}
         .footer-col a:hover{color:var(--gold-light);}
         .footer-bottom{padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;flex-wrap:wrap;gap:8px;}
-
-        .back-top{position:fixed;bottom:24px;left:24px;z-index:150;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:0.3s;box-shadow:var(--s-md);}
-        [dir="ltr] .back-top{left:auto;right:24px;}
-        .back-top.show{opacity:1;visibility:visible;transform:translateY(0);}
-        .back-top:hover{background:var(--red);}
-
-        .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:10px 22px;border-radius:var(--rp);box-shadow:var(--s-md);z-index:9999;font-size:0.85rem;font-weight:600;animation:ti 0.3s ease;}
-        [dir="ltr] .toast{right:auto;left:24px;}
-        @keyframes ti{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
-
-        @media(max-width:768px){
-            .top-bar-inner{flex-direction:column;gap:2px;text-align:center;}
-            .header-inner{justify-content:center;text-align:center;}
-            .brand h1{font-size:1.4rem;}
-            .search-wrap input{width:160px;}
-            .grid{grid-template-columns:1fr;}
-            .card-img{height:160px;}
-            .footer-top{grid-template-columns:1fr;}
-            .modal-box{margin:20px auto;}
-            .modal-body{padding:18px;}
-            .modal-body h2{font-size:1.2rem;}
-        }
-        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
     </style>
 </head>
 <body>
@@ -198,7 +175,7 @@
 </header>
 
 <div class="categories">
-    <div class="cat-inner">
+    <div class="cat-inner" id="catBar">
         <button class="cat-btn active" data-f="all">الكل</button>
         <div class="cat-sep"></div>
         <button class="cat-btn" data-f="yemen">اليمن</button>
@@ -213,7 +190,7 @@
         <div class="cat-sep"></div>
         <button class="cat-btn" data-f="intrusions">اختراقات</button>
         <button class="cat-btn" data-f="vulns">ثغرات</button>
-        <button class="cat-sidep btn" data-f="shadow">حروب ظل</button>
+        <button class="cat-btn" data-f="shadow">حروب ظل</button>
         <button class="cat-btn" data-f="natsec">أمن قومي</button>
     </div>
 </div>
@@ -255,7 +232,7 @@
                 <a onclick="filterBy('saudi')">السعودية</a>
                 <a onclick="filterBy('gulf')">الخليج</a>
                 <a onclick="filterBy('iran')">إيران</a>
-                <a onclick="filterBy('global')">عالمي</a>
+                <a onclick->('global')">عالمي</a>
             </div>
             <div class="footer-col">
                 <h4>الأنواع</h4>
@@ -272,32 +249,24 @@
     </div>
 </footer>
 
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0})" aria-label="الأعلى"><i class="fas fa-cevron-up"></i></button>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0})" aria-label="الأعلى"><i class="fas fa-chevron-up"></i></button>
 
 <script>
-/* ============================================================
-       الثوابت
-    ============================================================ */
+/* الثوابت */
 var COUNTRIES={yemen:'اليمن',algeria:'الجزائر',saudi:'السعودية',gulf:'الخليج',iran:'إيران',israel:'إسرائيل',iraq:'العراق',egypt:'مصر',global:'عالمي'};
 var CATS={intrusions:'اختراق',vulns:'ثغرة',shadow:'حرب ظل',natsec:'أمن قومي'};
 var TCL={low:'tl',medium:'tm',high:'th',critical:'tc'};
 var TLBL={low:'منخفض',medium:'متوسط',high:'مرتفع',critical:'حرج'};
+var CACHE_KEY='csu_r', CACHE_TS='csu_r_ts', CACHE_TTL=300000;
 
-/* ============================================================
-       حالة التطبيق
-    ============================================================ */
+/* حالة التطبيق */
 var allReports = [];
 var filteredReports = [];
 var activeFilter = 'all';
 var searchQuery = '';
 var currentModalSlug = null;
-var CACHE_KEY = 'csu_r';
-var CACHE_TS = 'csu_r_ts';
-var CACHE_TTL = 300000;
 
-/* ============================================================
-       التهيئة — تنفيذ فوري
-    ============================================================ */
+/* التهيئة — تنفيذ فوري */
 window.onload = function() {
     setDate();
     setupSearch();
@@ -309,17 +278,15 @@ window.onload = function() {
 
 function setDate() {
     document.getElementById('dateDisplay').textContent =
-        new Date().toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+        new Date().toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'short',day:'numeric'});
 }
 
-/* ============================================================
-       التخزين المؤقت
-    ============================================================ */
+/* التخزين المؤقت */
 function cacheGet() {
     try {
         var raw = localStorage.getItem(CACHE_KEY);
         if (!raw) return null;
-        var ts = parseInt(localStorage.getItem(CACHE_TS) || '0');
+        var ts = parseInt(localStorage.getItem(CACHE_TS) || '0';
         if (Date.now() - ts > CACHE_TTL) {
             localStorage.removeItem(CACHE_KEY);
             localStorage.removeItem(CACHE_TS);
@@ -336,16 +303,20 @@ function cacheSave(data) {
     } catch(e) {}
 }
 
+/* منعرف الظهور الكامل — يمنعكس تماماً */
 function noCache(url) {
     return url + (url.indexOf('?') > -1 ? '&' : '?') + '_nc=' + Math.random().toString(36).substring(2, 10);
 }
 
-/* ============================================================
-       جلب الأخبار — Stale-While-Revalidate
-       يعرض المخزن فوراً، ثم يجلب الجديد في الخلفية
-    ============================================================ */
+/* تاريخ آمن */
+function safeDate(v) {
+    if (!v) return new Date();
+    var d = new Date(v);
+    return isNaN(d.getTime()) ? new Date() : d;
+}
+
+/* جلب الأخبار */
 async function fetchNews() {
-    /* المرحلة 1: عرض المخزن فوراً بدون أي تأخير للمستخدم */
     var cached = cacheGet();
     if (cached && cached.length > 0) {
         allReports = cached;
@@ -353,8 +324,6 @@ async function fetchNews() {
         buildTicker();
         return;
     }
-
-    /* المرحلة 2: جلب البيانات في الخلفية بصمت */
     try {
         var res = await fetch(noCache('./news-data.json'));
         if (res.ok) {
@@ -385,13 +354,11 @@ async function fetchNews() {
         }
     } catch(e) {}
 
-    /* لم يُعثر على بيانات — إظهار رسالة واضحة */
+    /* لا بيانات — إظهار رسالة واضحة */
     document.getElementById('noData').style.display = 'block';
 }
 
-/* ============================================================
-       تحويل البلد من محتوى الخبر
-    ============================================================ */
+/* تخمين البلد من العنوان */
 function guessCountry(item) {
     var t = (item.title_ar || '').toLowerCase();
     if (t.indexOf('يمن') > -1 || t.indexOf('حوثي') > -1 || t.indexOf('صنعاء') > -1 || t.indexOf('عدن') > -1) return 'yemen';
@@ -405,16 +372,7 @@ function guessCountry(item) {
     return 'global';
 }
 
-/* تاريخ آمن — تاريخ اليوم كبديل إذا كان غير صالح */
-function safeDate(v) {
-    if (!v) return new Date();
-    var d = new Date(v);
-    return isNaN(d.getTime()) ? new Date() : d;
-}
-
-/* ============================================================
-       الفلترة والبحث
-    ============================================================ */
+/* الفلترة */
 function applyFilters() {
     filteredReports = allReports;
     if (activeFilter !== 'all') {
@@ -479,9 +437,7 @@ function renderGrid() {
     }).join('');
 }
 
-/* ============================================================
-       المودال
-    ============================================================ */
+/* المودال */
 function openModal(slug) {
     var r = allReports.find(function(x) { return x.slug === slug; });
     if (!r) return;
@@ -492,7 +448,6 @@ function openModal(slug) {
     history.pushState({slug: slug}, '', '#report-' + slug);
     document.title = r.title + ' — وحدة الرصد السيبراني';
 
-    /* عرض تحميل أولي */
     document.getElementById('modalContent').innerHTML =
         '<div style="padding:60px;text-align:center;color:var(--g400);">' +
         '<div class="spinner" style="margin:0 auto 14px;"></div>' +
@@ -500,7 +455,6 @@ function openModal(slug) {
 
     var bodyHTML = r.content || '<p>لا يوجد محتوى متاح.</p>';
 
-    /* استخراج وسائط */
     var mediaHTML = '';
     var ytMatch = bodyHTML.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
     if (ytMatch) {
@@ -561,9 +515,7 @@ function handleHash() {
     }
 }
 
-/* ============================================================
-       التيكر
-    ============================================================ */
+/* التيكر */
 function buildTicker() {
     var items = allReports.filter(function(r) { return r.featured || r.threat_level === 'critical'; }).slice(0, 10);
     var el = document.getElementById('ticker');
@@ -577,9 +529,7 @@ function buildTicker() {
     el.innerHTML = txt + txt;
 }
 
-/* ============================================================
-       التصنيفات والبحث
-    ============================================================ */
+/* التصنيفات */
 function setupCategories() {
     document.querySelectorAll('.cat-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
@@ -611,12 +561,10 @@ function setupSearch() {
     });
 }
 
-/* ============================================================
-       أدوات
-    ============================================================ */
+/* أدوات */
 function shareReport(slug) {
     var url = window.location.origin + window.location.pathname + '#report-' + slug;
-    if (navigator.share) navigator.share({title: document.title, url: url}).catch(function(){});
+    if (navigator.share) navigator.share({title: document.title, url}).catch(function(){});
     else if (navigator.clipboard) navigator.clipboard.writeText(url).then(function() { showToast('تم نسخ الرابط'); });
 }
 
@@ -645,7 +593,7 @@ function hl(text, q) {
 }
 
 function setupScroll() {
-    var btn = document.getElementById('backTop');
+    var btn = document.getElementById('back-top');
     window.addEventListener('scroll', function() { btn.classList.toggle('show', window.scrollY > 400); }, {passive:true});
 }
 </script>
