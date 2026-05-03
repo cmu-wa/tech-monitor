@@ -7,7 +7,7 @@
         "category": "intrusions",
         "threat": "critical",
         "date": "2025-06-14",
-        "image": "https://picsum.photos/seed/yemen-energy/800/400",
+        "image": "https://images.unsplash.com/photo-iIQNTQsRe3o?auto=format&fit=crop&w=800&h=400&q=80",
         "source": "مصادر الرصد الخاصة"
     },
     {
@@ -18,18 +18,18 @@
         "category": "vulns",
         "threat": "high",
         "date": "2025-06-12",
-        "image": "https://picsum.photos/seed/gulf-oil-vuln/800/400",
+        "image": "https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?auto=format&fit=crop&w=800&h=400&q=80",
         "source": "فريق تحليل الثغرات"
     },
     {
         "slug": "iran-shadow-cyber-espionage-diplomats",
         "title": "حملة تجسس إلكتروني إيرانية تستهدف بعثات دبلوماسية في المنطقة",
-        "excerpt": "كشفت التحليلات عن حملة طويلة الأمد تعتمد على أساليب الصيد الاحتيالي المتقدم عبر استغلال خدمات سحابية شرعية لتسلل غير مكتشف.",
+        "excerpt": "كشفت التحليلات عن حملة طويلة الأمد تعتمد على أساليب الصيد الاحتيالي المتقدم عبر استغلال خدمات سحابية شرعية.",
         "country": "iran",
         "category": "shadow",
         "threat": "high",
         "date": "2025-06-10",
-        "image": "https://picsum.photos/seed/iran-shadow-ops/800/400",
+        "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&h=400&q=80",
         "source": "وحدة الاستخبارات السيبرانية"
     }
 ]
