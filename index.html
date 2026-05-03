@@ -19,141 +19,129 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
         :root{
-            --navy:#0c1e35;--navy-light:#1a3455;
-            --red:#c0392b;--red-bright:#e74c3c;
-            --gold:#c8952e;--gold-light:#e8b44a;
-            --cream:#f8f5ef;--cream-dark:#efe9dd;
-            --white:#ffffff;--gray-50:#fafafa;--gray-100:#f5f5f5;
-            --gray-200:#e5e5e5;--gray-300:#d4d4d4;--gray-400:#a3a3a3;
-            --gray-500:#737373;--gray-600:#525252;--gray-700:#404040;
-            --gray-800:#262626;--gray-900:#171717;
-            --shadow-xs:0 1px 2px rgba(0,0,0,0.04);
-            --shadow-sm:0 2px 8px rgba(0,0,0,0.06);
-            --shadow-md:0 8px 24px rgba(0,0,0,0.08);
-            --shadow-lg:0 16px 40px rgba(0,0,0,0.12);
+            --navy:#0c1e35;--navy-lt:#1a3455;
+            --red:#c0392b;--red-br:#e74c3c;
+            --gold:#c8952e;--gold-lt:#e8b44a;
+            --cream:#f8f5ef;--cream-dk:#efe9dd;
+            --wh:#ffffff;--g50:#fafafa;--g100:#f5f5f5;
+            --g200:#e5e5e5;--g300:#d4d4d4;--g400:#a3a3a3;
+            --g500:#737373;--g600:#525252;--g700:#404040;
+            --g800:#262626;--g900:#171717;
+            --s-xs:0 1px 2px rgba(0,0,0,0.04);
+            --s-sm:0 2px 8px rgba(0,0,0,0.06);
+            --s-md:0 8px 24px rgba(0,0,0,0,08);
+            --s-lg:0 16px 40px rgba(0,0,0,0,12);
             --rlg:16px;--rmd:12px;--rsm:8px;--rpill:50px;
         }
         html{scroll-behavior:smooth;}
-        body{font-family:'Cairo',sans-serif;background:var(--cream);color:var(--gray-800);line-height:1.7;-webkit-font-smoothing:antialiased;}
+        body{font-family:'Cairo',sans-serif;background:var(--cream);color:var(--g800);line-height:1.7;-webkit-font-smoothing:antialiased;}
         a{text-decoration:none;color:inherit;}
-
-        .top-bar{background:var(--navy);padding:6px 0;font-size:0.72rem;color:var(--gray-400);border-bottom:1px solid rgba(255,255,255,0.06);}
+        .top-bar{background:var(--navy);padding:6px 0;font-size:0.72rem;color:var(--g400);border-bottom:1px solid rgba(255,255,255,0.06);}
         .top-bar-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
-        .top-bar a{color:var(--gray-400);transition:color 0.2s;}
-        .top-bar a:hover{color:var(--gold-light);}
-
-        .header{background:var(--white);border-bottom:3px solid var(--red);padding:16px 0;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-xs);}
+        .top-bar a{color:var(--g400);transition:color 0.2s;}
+        .top-bar a:hover{color:var(--gold-lt);}
+        .header{background:var(--wh);border-bottom:3px solid var(--red);padding:16px 0;position:sticky;top:0;z-index:100;box-shadow:var(--s-xs);}
         .header-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
         .brand h1{font-size:1.8rem;font-weight:900;color:var(--navy);line-height:1.1;}
         .brand h1 span{color:var(--red);}
-        .brand p{font-size:0.65rem;color:var(--gray-500);letter-spacing:1.5px;margin-top:2px;}
+        .brand p{font-size:0.65rem;color:var(--g500);letter-spacing:1.5px;margin-top:2px;}
         .header-actions{display:flex;align-items:center;gap:12px;}
         .search-wrap{position:relative;}
-        .search-wrap input{width:220px;padding:8px 36px 8px 14px;border:1.5px solid var(--gray-200);border-radius:var(--rpill);font-family:inherit;font-size:0.85rem;outline:none;background:var(--gray-50);transition:0.2s;color:var(--gray-800);}
+        .search-wrap input{width:220px;padding:8px 36px 8px 14px;border:1.5px solid var(--g200);border-radius:var(--rpill);font-family:inherit;font-size:0.85rem;outline:none;background:var(--g50);transition:0.2s;color:var(--g800);}
         [dir="rtl"] .search-wrap input{padding:8px 14px 8px 36px;}
         .search-wrap input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,57,43,0.1);background:#fff;}
-        .search-wrap i{position:absolute;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:0.82rem;}
+        .search-wrap i{position:absolute;top:50%;transform:translateY(-50%);color:var(--g400);font-size:0.82rem;}
         [dir="rtl"] .search-wrap i{left:12px;}
-        [dir="ltr"] .search-wrap i{right:12px;}
-        .live-dot{width:8px;height:8px;background:var(--red-bright);border-radius:50%;animation:lp 2s ease-in-out infinite;flex-shrink:0;}
+        [dir="ltr] .search-wrap i{right:12px;}
+        .live-dot{width:8px;height:8px;background:var(--red-br);border-radius:50%;animation:lp 2s ease-in-out infinite;flex-shrink:0;}
         @keyframes lp{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(231,76,60,0.4);}50%{opacity:0.6;box-shadow:0 0 0 6px rgba(231,76,60,0);}}
-
-        .categories{background:var(--white);border-bottom:1px solid var(--gray-200);position:sticky;top:58px;z-index:99;}
+        .categories{background:var(--wh);border-bottom:1px solid var(--g200);position:sticky;top:58px;z-index:99;}
         .cat-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;}
         .cat-inner::-webkit-scrollbar{display:none;}
-        .cat-btn{padding:8px 16px;font-family:inherit;font-size:0.78rem;font-weight:700;color:var(--gray-600);background:transparent;border:none;border-radius:var(--rpill);cursor:pointer;transition:0.2s;white-space:nowrap;}
-        .cat-btn:hover{background:var(--cream-dark);color:var(--navy);}
+        .cat-btn{padding:8px 16px;font-family:inherit;font-size:0.78rem;font-weight:700;color:var(--g600);background:transparent;border:none;border-radius:var(--rpill);cursor:pointer;transition:0.2s;white-space:nowrap;}
+        .cat-btn:hover{background:var(--cream-dk);color:var(--navy);}
         .cat-btn.active{background:var(--navy);color:#fff;}
-        .cat-sep{width:1px;height:20px;background:var(--gray-200);flex-shrink:0;margin:0 2px;}
-
+        .cat-sep{width:1px;height:20px;background:var(--g200);flex-shrink:0;margin:0 2px;}
         .ticker-bar{background:var(--navy);padding:8px 0;overflow:hidden;border-bottom:2px solid var(--gold);}
         .ticker-track{display:flex;animation:ts 80s linear infinite;white-space:nowrap;}
-        .ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font-size:0.8rem;font-weight:600;color:var(--gray-300);}
+        .ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font-size:0.8rem;font-weight:600;color:var(--g300);}
         .ticker-item i{color:var(--gold);font-size:0.6rem;}
         @keyframes ts{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
-
         .main{max-width:1280px;margin:0 auto;padding:24px 20px 60px;}
         .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
         .section-head h2{font-size:1.3rem;font-weight:900;color:var(--navy);display:flex;align-items:center;gap:8px;}
         .section-head h2 i{color:var(--red);font-size:1.1rem;}
-        .result-count{font-size:0.82rem;color:var(--gray-500);background:var(--cream-dark);padding:5px 14px;border-radius:var(--rpill);display:none;}
+        .result-count{font-size:0.82rem;color:var(--g500);background:var(--cream-dk);padding:5px 14px;border-radius:var(--rpill);display:none;}
         .result-count.show{display:block;}
         .sync-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:none;animation:lp 1.5s infinite;}
         .sync-dot.active{display:inline-block;margin-right:6px;}
-
         .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;}
-
-        .card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--rlg);overflow:hidden;transition:0.25s;box-shadow:var(--shadow-xs);display:flex;flex-direction:column;cursor:pointer;}
-        .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
-        .card-img{width:100%;height:190px;object-fit:cover;background:var(--gray-100);display:block;transition:transform 0.4s;}
+        .card{background:var(--wh);border:1px solid var(--g200);border-radius:var(--rlg);overflow:hidden;transition:0.25s;box-shadow:var(--s-xs);display:flex;flex-direction:column;cursor:pointer;}
+        .card:hover{transform:translateY(-4px);box-shadow:var(--s-lg);border-color:transparent;}
+        .card-img{width:100%;height:190px;object-fit:cover;background:var(--g100);display:block;transition:transform 0.4s;}
         .card:hover .card-img{transform:scale(1.03);}
         .card-img-wrap{overflow:hidden;position:relative;}
         .card-country{position:absolute;bottom:10px;right:10px;background:rgba(12,30,53,0.85);color:#fff;padding:3px 10px;border-radius:var(--rpill);font-size:0.65rem;font-weight:700;backdrop-filter:blur(4px);}
-        [dir="ltr"] .card-country{right:auto;left:10px;}
+        [dir="ltr] .card-country{right:auto;left:10px;}
         .card-body{padding:16px 18px;flex:1;display:flex;flex-direction:column;}
-        .card-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:0.72rem;color:var(--gray-500);}
+        .card-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:0.72rem;color:var(--g500);}
         .card-source{background:var(--cream);padding:2px 10px;border-radius:var(--rpill);font-weight:700;color:var(--navy);}
-        .card-title{font-size:1.05rem;font-weight:900;line-height:1.45;color:var(--gray-900);margin-bottom:8px;}
-        .card-title .hl{background:var(--cream-dark);color:var(--red);padding:0 2px;border-radius:2px;}
-        .card-excerpt{font-size:0.84rem;color:var(--gray-500);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:12px;}
+        .card-title{font-size:1.05rem;font-weight:900;line-height:1.45;color:var(--g900);margin-bottom:8px;}
+        .card-title .hl{background:var(--cream-dk);color:var(--red);padding:0 2px;border-radius:2px;}
+        .card-excerpt{font-size:0.84rem;color:var(--g500);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:12px;}
         .card-read{color:var(--red);font-weight:700;font-size:0.82rem;display:inline-flex;align-items:center;gap:4px;margin-top:auto;background:none;border:none;font-family:inherit;cursor:pointer;padding:0;}
         .card-read:hover{gap:8px;}
         .card-threat{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:var(--rpill);font-size:0.6rem;font-weight:700;margin-top:8px;}
         .t-low{background:#e8f5e9;color:#2e7d32;}.t-med{background:#fff8e1;color:#f57f17;}.t-high{background:#fff3e0;color:#e65100;}
         .t-crit{background:#fef2f2;color:var(--red);animation:tb 2s infinite;}
         @keyframes tb{0%,100%{opacity:1;}50%{opacity:0.6;}}
-
-        .no-data{text-align:center;padding:60px 20px;color:var(--gray-400);display:none;}
-        .no-data i{font-size:2.5rem;margin-bottom:12px;display:block;color:var(--gray-300);}
-
+        .no-data{text-align:center;padding:60px 20px;color:var(--g400);display:none;}
+        .no-data i{font-size:2.5rem;margin-bottom:12px;display:block;color:var(--g300);}
         .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:2000;overflow-y:auto;padding:20px;}
         .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center;min-height:100vh;}
-        .modal-box{background:var(--white);border-radius:var(--rlg);width:100%;max-width:860px;margin:40px auto;overflow:hidden;animation:mu 0.3s ease;box-shadow:var(--shadow-lg);position:relative;}
+        .modal-box{background:var(--wh);border-radius:var(--rlg);width:100%;max-width:860px;margin:40px auto;overflow:hidden;animation:mu 0.3s ease;box-shadow:var(--s-lg);position:relative;}
         @keyframes mu{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-        .modal-close{position:absolute;top:14px;z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.9);border:1px solid var(--gray-200);color:var(--gray-600);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:0.2s;backdrop-filter:blur(4px);}
+        .modal-close{position:absolute;top:14px;z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.9);border:1px solid var(--g200);color:var(--g600);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:0.2s;backdrop-filter:blur(4px);}
         [dir="rtl"] .modal-close{left:14px;}
         [dir="ltr] .modal-close{right:14px;}
         .modal-close:hover{background:var(--red);color:#fff;border-color:var(--red);}
-        .modal-img{width:100%;max-height:400px;object-fit:cover;display:block;background:var(--gray-100);}
+        .modal-img{width:100%;max-height:400px;object-fit:cover;display:block;background:var(--g100);}
         .modal-video{width:100%;aspect-ratio:16/9;display:block;background:#000;}
         .modal-body{padding:24px 28px 28px;}
         .modal-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
         .mtag{display:inline-block;padding:3px 12px;border-radius:var(--rpill);font-size:0.7rem;font-weight:700;}
         .mtag-c{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9;}
-        .mtag-t{background:var(--cream);color:var(--navy);border:1px solid var(--gray-200);}
+        .mtag-t{background:var(--cream);color:var(--navy);border:1px solid var(--g200);}
         .mtag-h{background:#fef2f2;color:var(--red);border:1px solid #fecaca;}
-        .modal-body h2{font-size:1.5rem;font-weight:900;line-height:1.4;color:var(--gray-900);margin-bottom:14px;}
-        .modal-info{display:flex;gap:16px;flex-wrap:wrap;font-size:0.78rem;color:var(--gray-500);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--gray-200);}
+        .modal-body h2{font-size:1.5rem;font-weight:900;line-height:1.4;color:var(--g900);margin-bottom:14px;}
+        .modal-info{display:flex;gap:16px;flex-wrap:wrap;font-size:0.78rem;color:var(--g500);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--g200);}
         .modal-info i{margin-left:4px;color:var(--navy);}
-        [dir="ltr"] .modal-info i{margin-left:0;margin-right:4px;}
-        .mct{font-size:0.95rem;line-height:2;color:var(--gray-700);}
+        [dir="ltr] .modal-info i{margin-left:0;margin-right:4px;}
+        .mct{font-size:0.95rem;line-height:2;color:var(--g700);}
         .mct p{margin-bottom:14px;}
         .mct img{max-width:100%;border-radius:var(--rsm);margin:10px 0;}
         .mct iframe{max-width:100%;border-radius:var(--rsm);margin:10px 0;}
-        .modal-foot{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--gray-200);margin-top:16px;flex-wrap:wrap;gap:8px;}
-        .modal-foot span{font-size:0.72rem;color:var(--gray-400);}
+        .modal-foot{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--g200);margin-top:16px;flex-wrap:wrap;gap:8px;}
+        .modal-foot span{font-size:0.72rem;color:var(--g400);}
         .share-btn{background:var(--navy);color:#fff;border:none;padding:7px 18px;border-radius:var(--rpill);font-family:inherit;font-weight:700;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:0.2s;}
-        .share-btn:hover{background:var(--navy-light);}
-
-        footer{background:var(--navy);color:var(--gray-400);padding:40px 20px 20px;}
+        .share-btn:hover{background:var(--navy-lt);}
+        footer{background:var(--navy);color:var(--g400);padding:40px 20px 20px;}
         .footer-inner{max-width:1280px;margin:0 auto;}
         .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,0.08);}
         .footer-brand h2{color:#fff;font-size:1.5rem;font-weight:900;}
         .footer-brand h2 span{color:var(--red);}
-        .footer-brand p{font-size:0.8rem;line-height:1.9;margin-top:10px;color:var(--gray-500);}
+        .footer-brand p{font-size:0.8rem;line-height:1.9;margin-top:10px;color:var(--g500);}
         .footer-col h4{color:#fff;font-size:0.9rem;font-weight:800;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--red);display:inline-block;}
-        .footer-col a{display:block;font-size:0.82rem;color:var(--gray-500);margin:8px 0;transition:0.2s;cursor:pointer;}
-        .footer-col a:hover{color:var(--gold-light);}
+        .footer-col a{display:block;font-size:0.82rem;color:var(--g500);margin:8px 0;transition:color 0.2s;cursor:pointer;}
+        .footer-col a:hover{color:var(--gold-lt);}
         .footer-bottom{padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;flex-wrap:wrap;gap:8px;}
-
-        .back-top{position:fixed;bottom:24px;left:24px;z-index:150;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:0.3s;box-shadow:var(--shadow-md);}
-        [dir="ltr"] .back-top{left:auto;right:24px;}
+        .back-top{position:fixed;bottom:24px;left:24px;z-index:150;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:0.3s;box-shadow:var(--s-md);}
+        [dir="ltr] .back-top{left:auto;right:24px;}
         .back-top.show{opacity:1;visibility:visible;transform:translateY(0);}
         .back-top:hover{background:var(--red);}
-        .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:10px 22px;border-radius:var(--rpill);box-shadow:var(--shadow-md);z-index:9999;font-size:0.85rem;font-weight:600;animation:ti 0.3s ease;}
-        [dir="ltr"] .toast{right:auto;left:24px;}
+        .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:10px 22px;border-radius:var(--rpill);box-shadow:var(--s-md);z-index:9999;font-size:0.85rem;font-weight:600;animation:ti 0.3s ease;}
+        [dir="ltr] .toast{right:auto;left:24px;}
         @keyframes ti{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
-
         @media(max-width:768px){
             .top-bar-inner{flex-direction:column;gap:2px;text-align:center;}
             .header-inner{justify-content:center;text-align:center;}
@@ -212,10 +200,10 @@
         <button class="cat-btn" data-f="egypt">مصر</button>
         <button class="cat-btn" data-f="global">عالمي</button>
         <div class="cat-sep"></div>
-        <button class="cat-btn" data-f="intrusions">اختراقات</button>
-        <button class="cat-btn" data-f="vulns">ثغرات</button>
-        <button class="cat-btn" data-f="shadow">حروب ظل</button>
-        <button class="cat-btn" data-f="natsec">أمن قومي</button>
+        <button class="btn-vulns" data-f="vulns">ثغرات</button>
+        <button class="btn-intr" data-f="intrusions">اختراقات</button>
+        <button class="btn-shad" data-f="shadow">حروب ظل</button>
+        <button class="btn-natsec" data-f="natsec">أمن قومي</button>
     </div>
 </div>
 
@@ -263,7 +251,7 @@
         </div>
         <div class="footer-bottom">
             <span>&copy; 2025 وحدة الرصد السيبراني</span>
-            <span>BUILD v5.2</span>
+            <span>BUILD v5.3</span>
         </div>
     </div>
 </footer>
@@ -279,18 +267,11 @@ const CFG = {
     githubRepo: 'news-data',
     branch: 'main',
     postsFolder: 'posts',
-    /* مدة صلاحية الـ Cache بالدقائق */
     cacheTTL: 5,
-    /* فترة التحديث بالدقائق (0 = بدون تحديث تلقائي) */
     refreshInterval: 30,
-    /* مفتاح فريد في الـ LocalStorage */
     cacheKey: 'csu_reports',
     cacheMetaKey: 'csu_meta'
 };
-
-/* ============================================================
-       الثوابت
-    ============================================================ */
 const COUNTRIES = {
     yemen:'اليمن',algeria:'الجزائر',saudi:'السعودية',gulf:'الخليج',
     iran:'إيران',israel:'إسرائيل',iraq:'العراق',egypt:'مصر',global:'عالمي'
@@ -299,9 +280,10 @@ const CATS = {intrusions:'اختراق',vulns:'ثغرة',shadow:'حرب ظل',na
 const TCLS = {low:'t-low',medium:'t-med',high:'t-high',critical:'t-crit'};
 const TLBL = {low:'منخفض',medium:'متوسط',high:'مرتفع',critical:'حرج'};
 const GH_API = `https://api.github.com/repos/${CFG.githubUser}/${CFG.githubRepo}/contents/${CFG.postsFolder}?ref=${CFG.branch}`;
+const LAST_FETCH_KEY = 'csu_last_fetch';
 
 /* ============================================================
-       الحالة
+       الحالة العامة
     ============================================================ */
 let allReports = [];
 let filtered = [];
@@ -311,9 +293,10 @@ let currentSlug = null;
 let isPageVisible = true;
 let refreshTimer = null;
 let hasRateLimited = false;
+let lastFetchTime = 0;
 
 /* ============================================================
-       التهيئة — تحميل فوري بدون تأخير
+       التهيئة — تحميل فوري بدون أي تأخير للمستخدم
     ============================================================ */
 window.onload = function() {
     setDate();
@@ -327,24 +310,20 @@ window.onload = function() {
 };
 
 /* ============================================================
-       رؤية الصفحة — التحديث التلقائي يعمل فقط
-       عندما يكون المستخدم ينظر للموقع فعلاً
+       رؤية الصفحة — التحديث التلقائي يعمل فقط عندما تكون الصفحة مرئية
     ============================================================ */
 function setupVisibility() {
-    const onVisible = () => { isPageVisible = true; startRefreshTimer(); };
-    const onHidden  = () => { isPageVisible = false; stopRefreshTimer(); };
+    const onV = () => { isPageVisible = true; startRefreshTimer(); };
+    const onH = () => { isPageVisible = false; stopRefreshTimer(); };
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) onHidden(); else onVisible();
+        if (document.hidden) onH(); else onV();
     });
 }
 
 function startRefreshTimer() {
     if (refreshTimer || CFG.refreshInterval <= 0 || hasRateLimited) return;
     refreshTimer = setTimeout(() => {
-        if (isPageVisible) {
-            silentRefresh();
-            startRefreshTimer();
-        }
+        if (isPageVisible) { silentRefresh(); startRefreshTimer(); }
     }, CFG.refreshInterval * 60000);
 }
 
@@ -354,23 +333,17 @@ function stopRefreshTimer() {
 
 /* ============================================================
        التحميل الرئيسي — Stale-While-Revalidate
-       1) عرض البيانات المخزنة فوراً (إن وُجدت)
-       2) جلب البيانات الجديدة في الخلفية
-       3) تحديث الواجهة بسلاسة إذا تغيّرت البيانات
     ============================================================ */
 async function fetchNews() {
     const cached = loadCache();
     if (cached && cached.length > 0) {
-        /* عرض فوري من الـ Cache */
         allReports = cached;
         applyFilters();
         buildTicker();
-        /* ثم تحديث صامت في الخلفية */
         silentRefresh();
-    } else {
-        /* لا يوجد cache — اعرض مباشرة */
-        await forceRefresh();
+        return;
     }
+    await forceRefresh();
 }
 
 async function forceRefresh() {
@@ -384,6 +357,7 @@ async function forceRefresh() {
 }
 
 async function silentRefresh() {
+    if (hasRateLimited) return;
     try {
         const data = await gatherReports();
         if (data.length > 0 && isDataDifferent(data)) {
@@ -391,12 +365,15 @@ async function silentRefresh() {
             saveCache(data);
             applyFilters();
             buildTicker();
-            /* نقطة تحديث صغيرة على العنوان */
-            const dot = document.getElementById('syncDot');
+            const dot = document.getElementById('sync-dot');
             if (dot) { dot.classList.add('active'); setTimeout(() => dot.classList.remove('active'), 2000); }
         }
     } catch(e) {
-        handleFetchError(e);
+        if (e.status === 403) {
+            hasRateLimited = true;
+            console.warn('[CSU] GitHub Rate Limit — الاعتماد على البيانات المخزنة حتى يُرفع الحظر.');
+            stopRefreshTimer();
+        }
     }
 }
 
@@ -414,9 +391,9 @@ async function gatherReports() {
             if (Array.isArray(d) && d.length > 0) {
                 results.push(...d.map(item => ({
                     slug: 'r' + item.id,
-                    title: item.title_ar || '',
-                    excerpt: item.excerpt_ar || '',
-                    content: (item.content_ar || '').replace(/\n/g, '<br>'),
+                    title: item.title_ar || item.title_en || '',
+                    excerpt: item.excerpt_ar || item.excerpt_en || '',
+                    content: (item.content_ar || item.content_en || '').replace(/\n/g, '<br>'),
                     image: item.image || '',
                     country: inferCountry(item),
                     category: item.category || 'shadow',
@@ -428,35 +405,31 @@ async function gatherReports() {
                 })));
             }
         }
-    } catch(e) { /* تجاوز */ }
+    } catch(e) { /* ملف JSON غير موجود — تجاوزه */ }
 
-    /* === المصدر 2: ملفات HTML من GitHub (مع No-Cache و Rate Limit Handling) === */
+    /* === المصدر 2: ملفات HTML من GitHub === */
     if (!hasRateLimited) {
         try {
             const ts = Date.now();
-            const url = GH_API + '&_=' + ts; /* Timestamp لمنع التخزين المؤقت */
-            const r = await fetch(url);
-
-            /* كشف الحظر */
-            if (r.status === 403) {
-                hasRateLimited = true;
-                console.warn('[CSU] GitHub Rate Limit — سنعتمد على البيانات المخزنة حتى يتم رفع الحظر.');
-                stopRefreshTimer();
-                return results;
-            }
-
-            if (r.ok) {
-                const files = await r.json();
-                if (Array.isArray(files)) {
-                    for (const f of files) {
-                        if (!f.name.endsWith('.html')) continue;
-                        try { results.push(parseGHFile(f)); } catch(e) {}
-                    }
+        const url = GH_API + '&_=' + ts;
+        const r = await fetch(url);
+        if (r.status === 403) {
+            hasRateLimited = true;
+            console.warn('[CSU] GitHub Rate Limit — الاعتماد على البيانات المخزنة حتى يُرفع الحظر.');
+            stopRefreshTimer();
+            return results;
+        }
+        if (r.ok) {
+            const files = await r.json();
+            if (Array.isArray(files)) {
+                for (const f of files) {
+                    if (!f.name.endsWith('.html')) continue;
+                    try { results.push(parseGHFile(f)); } catch(e) {}
                 }
             }
-        } catch(e) {
-            handleFetchError(e);
         }
+    } catch(e) {
+        handleFetchError(e);
     }
 
     /* ترتيب بالأحدث أولاً */
@@ -470,63 +443,34 @@ async function gatherReports() {
 }
 
 /* ============================================================
-       تحليل ملف GitHub — بيانات وصفية فقط
+       تحليل ملف GitHub — مع إضافة محاولة اسم الملف
     ============================================================ */
 function parseGHFile(file) {
     const slug = file.name.replace('.html', '');
-    const p = slug.split('-');
-    let country = 'global', category = 'shadow', title = slug;
+    const parts = slug.split('-');
+    let country = 'global', category = 'shadow', title = slug,
+        excerpt = '', threat_level = 'high', source = 'مصادر الرصد', image = '';
 
-    if (p.length >= 3) {
-        if (COUNTRIES[p[1]]) country = p[1];
-        if (CATS[p[2]]) category = p[2];
-        title = p.slice(3).join(' ');
+    /* محاولة استخراج العنوان من اسم الملف */
+    if (parts.length >= 3) {
+        if (COUNTRIES[parts[1]]) country = parts[1];
+        if (CATS[['intrusions','vulns','shadow','natsec']].indexOf(parts[2]) !== -1) category = parts[2];
+        title = parts.slice(3).join(' ');
     }
 
+    /* إذا كانت الكلمات العربية الحقيق أطول من 10 أحرف — استخدمها */
+    const cleanedTitle = title.replace(/-/g, ' ').trim();
+    if (cleanedTitle.length > 10) title = cleanedTitle;
+
     return {
-        slug, title, excerpt: '', content: '',
-        image: '', country, category,
-        threat_level: 'high',
-        source: 'مصادر الرصد',
+        slug, title, excerpt, content: '', image, country, category,
+        threat_level, source,
         date: file.updated_at ? file.updated_at.split('T')[0] : todayStr(),
         dateObj: safeDate(file.updated_at),
-        featured: p.length >= 3,
+        featured: parts.length >= 3,
         src: 'github',
-        rawUrl: `https://raw.githubusercontent.com/${CFG.githubUser}/${CFG.githubRepo}/${CFG.branch}/${CFG.postsFolder}/${file.name}`
+        rawUrl: 'https://raw.githubusercontent.com/' + CFG.githubUser + '/' + CFG.githubRepo + '/' + CFG.branch + '/' + CFG.postsFolder + '/' + file.name
     };
-}
-
-/* ============================================================
-       تحميل محتوى خبر GitHub عند فتح المودال فقط
-    ============================================================ */
-async function loadGHContent(report) {
-    try {
-        const r = await fetch(report.rawUrl + '?_=' + Date.now()); /* No-Cache */
-        if (!r.ok) return null;
-        let html = await r.text();
-
-        /* استخراج الميتا */
-        const mm = html.match(/<!--\s*meta\s+([\s\S]*?)-->/);
-        if (mm) {
-            const pairs = mm[1].match(/(\w+)\s*:\s*(.+)/g);
-            if (pairs) pairs.forEach(p => {
-                const [k, ...v] = p.split(':');
-                const val = v.join(':').trim();
-                if (k.trim() === 'title') report.title = val;
-                if (k.trim() === 'excerpt') report.excerpt = val;
-                if (k.trim() === 'country' && COUNTRIES[val.toLowerCase()]) report.country = val.toLowerCase();
-                if (k.trim() === 'category' && CATS[val.toLowerCase()]) report.category = val.toLowerCase();
-                if (k.trim() === 'threat') report.threat_level = val.toLowerCase();
-                if (k.trim() === 'source') report.source = val;
-                if (k.trim() === 'image') report.image = val;
-            });
-        }
-
-        const bm = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-        let body = bm ? bm[1] : html;
-        body = body.replace(/<script[\s\S]*?<\/script>/gi, '');
-        return body;
-    } catch(e) { return null; }
 }
 
 /* ============================================================
@@ -537,17 +481,20 @@ function loadCache() {
         const meta = JSON.parse(localStorage.getItem(CFG.cacheMetaKey) || '{}');
         if (!meta.ts) return null;
         const age = (Date.now() - meta.ts) / 60000;
-        if (age > CFG.cacheTTL) { localStorage.removeItem(CFG.cacheKey); localStorage.removeItem(CFG.cacheMetaKey); return null; }
-        const data = JSON.parse(localStorage.getItem(CFG.cacheKey) || '[]');
+        if (age > CFG.cacheTTL) {
+            localStorage.removeItem(CFG.cacheKey);
+            localStorage.removeItem(CFG.cacheMetaKey);
+            return null;
+        }
+        const data = JSON.parse(localStorage.getItem(CFG.cacheKey) || '[]';
         return Array.isArray(data) && data.length > 0 ? data : null;
-    } catch(e) { return null; }
-}
+    }
 
 function saveCache(data) {
     try {
         localStorage.setItem(CFG.cacheKey, JSON.stringify(data));
         localStorage.setItem(CFG.cacheMetaKey, JSON.stringify({ ts: Date.now(), count: data.length }));
-    } catch(e) { /* مساحة ممتلئة — نتجاهل */ }
+    } catch(e) {}
 }
 
 function isDataDifferent(newData) {
@@ -556,15 +503,14 @@ function isDataDifferent(newData) {
 }
 
 /* ============================================================
-       معالجة الأخطاء — سilent إلا الحظر
+       معالجة أخطاء الحظر — صامت تماماً للمستخدم
     ============================================================ */
 function handleFetchError(e) {
-    if (e.message?.includes('403') || e.status === 403) {
+    if (e?.status === 403) {
         hasRateLimited = true;
-        console.warn('[CSU] GitHub Rate Limit — الاعتماد على البيانات المخزنة.');
+        console.warn('[CSU] GitHub Rate Limit — الاعتماد على البيانات المخزنة حتى يُرفع الحظر.');
         stopRefreshTimer();
     }
-    /* أخطاء أخرى: تجاهل صمتاً — المستخدم لا يرى شيئاً */
 }
 
 /* ============================================================
@@ -584,61 +530,48 @@ function inferCountry(item) {
 }
 
 /* ============================================================
-       الفلترة والبحث
+       أدوات مساعدة
     ============================================================ */
-function applyFilters() {
-    filtered = allReports;
-    if (activeFilter !== 'all') {
-        filtered = filtered.filter(r => r.country === activeFilter || r.category === activeFilter);
-    }
-    if (searchQ) {
-        const q = searchQ.toLowerCase();
-        filtered = filtered.filter(r =>
-            r.title.toLowerCase().includes(q) ||
-            (COUNTRIES[r.country] || '').includes(q) ||
-            (CATS[r.category] || '').includes(q) ||
-            (TLBL[r.threat_level] || '').includes(q)
-        );
-    }
-    renderGrid();
+function safeDate(d) { if (!d) return new Date(); try { const dt = new Date(d); return isNaN(dt.getTime()) ? new Date() : dt; } catch(e) { return new Date(); } }
+function todayStr() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function fmtDate(d) { try { return new Date(d).toLocaleDateString('ar-EG',{year:'numeric',month:'short',day:'numeric'}); } catch(e) { return d; } }
+function esc(s) { if (!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/&gt;').replace(/"/g,'&quot;'); }
+function hl(text, q) { if (!q) return esc(text); const s = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); return esc(text).replace(new RegExp(`(${s})`,'gi'), '<span class="hl">$1</span>'); }
+function setDate() { document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'}); }
+function setupSearch() { const inp = document.getElementById('searchInput'); let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { searchQ = inp.value.trim(); applyFilters(); }, 300); }); }
+function setupCats() {
+    document.querySelectorAll('.cat-btn').forEach(b => {
+        b.addEventListener('click', () => {
+            activeFilter = b.dataset.f;
+            document.querySelectorAll('.cat-btn').forEach(x => x.classList.toggle('active', x.dataset.f === activeFilter));
+            applyFilters();
+            document.getElementById('grid').scrollIntoView({behavior:'smooth',block:'start'});
+        });
+    });
 }
-
-function renderGrid() {
-    const grid = document.getElementById('grid');
-    const nd = document.getElementById('noData');
-    const rc = document.getElementById('resultCount');
-    if (searchQ || activeFilter !== 'all') { rc.classList.add('show'); rc.textContent = `${filtered.length} تقرير`; }
-    else { rc.classList.remove('show'); }
-    if (filtered.length === 0) { grid.innerHTML = ''; nd.style.display = 'block'; return; }
-    nd.style.display = 'none';
-    grid.innerHTML = filtered.map(r => {
-        const tH = searchQ ? hl(r.title, searchQ) : esc(r.title);
-        const img = r.image || (r.src === 'github' ? r.rawUrl : '');
-        const onErr = r.src === 'github' ? `this.onerror="this.style.display='none';this.nextElementSibling.style.bottom='10px'"` : `this.onerror="this.style.display='none'"`;
-        return `<article class="card" onclick="openModal('${r.slug}','${r.src}')" tabindex="0"
-            onkeydown="if(event.key==='Enter')openModal('${r.slug}','${r.src}')">
-            <div class="card-img-wrap">
-                ${img ? `<img class="card-img" src="${esc(img)}" alt="" loading="lazy" ${onErr}>` : ''}
-                <span class="card-country" style="${img?'':'bottom:10px;'}"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[r.country]||'عالمي'}</span>
-            </div>
-            <div class="card-body">
-                <div class="card-meta">
-                    <span class="card-source">${CATS[r.category]||'تقرير'}</span>
-                    <span>${fmtDate(r.date)}</span>
-                </div>
-                <h3 class="card-title">${tH}</h3>
-                ${r.excerpt ? `<p class="card-excerpt">${esc(r.excerpt)}</p>` : ''}
-                ${r.threat_level ? `<span class="card-threat ${TCLS[r.threat_level]||''}"><i class="fas fa-exclamation-triangle"></i> ${TLBL[r.threat_level]||r.threat_level}</span>` : ''}
-                <button class="card-read">قراءة التقرير <i class="fas fa-arrow-left"></i></button>
-            </div>
-        </article>`;
-    }).join('');
+function filterBy(f) {
+    activeFilter = f;
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.f === f));
+    applyFilters();
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
-
-/* ============================================================
-       المودال
-    ============================================================ */
-async function openModal(slug, src) {
+function setupScroll() { const b = document.getElementById('backTop'); window.addEventListener('scroll', () => b.classList.toggle('show', window.scrollY > 400), {passive:true}); }
+function setupVisibility() {
+    const onV = () => { isPageVisible = true; startRefreshTimer(); };
+    const onH = () => { isPageVisible = false; stopRefreshTimer(); };
+    document.addEventListener('visibilitychange', () => { if (document.hidden) onH(); else onV(); });
+}
+function setupHash() { const h = window.location.hash; if (h.startsWith('#report-')) { const s = h.replace('#report-',''); const r = allReports.find(x => x.slug === s); if (r) openModal(s, r.src); } }
+function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+    currentSlug = null;
+    history.pushState({}, '', window.location.pathname);
+    document.title = 'وحدة الرصد السيبراني — تقارير ميدانية';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+window.addEventListener('popstate', () => { if (currentSlug) closeModal(); else handleHash(); });
+function openModal(slug, src) {
     const r = allReports.find(x => x.slug === slug);
     if (!r) return;
     currentSlug = slug;
@@ -646,18 +579,16 @@ async function openModal(slug, src) {
     document.body.style.overflow = 'hidden';
     history.pushState({}, '', '#report-' + slug);
     document.title = r.title + ' — وحدة الرصد السيبراني';
-
     document.getElementById('modalContent').innerHTML = `
-        <div style="padding:60px;text-align:center;color:var(--gray-400);">
+        <div style="padding:60px;text-align:center;color:var(--g400);">
             <div class="spinner" style="margin:0 auto 14px;"></div><p>جاري تحميل التقرير...</p>
         </div>`;
-
     let bodyHTML = '';
     if (src === 'github' && !r.content) {
         bodyHTML = await loadGHContent(r);
         if (!bodyHTML) {
             document.getElementById('modalContent').innerHTML = `
-                <div style="padding:60px;text-align:center;color:var(--gray-400);">
+                <div style="padding:60px;text-align:center;color:var(--g400);">
                     <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:var(--red);"></i>
                     <p style="margin-top:12px;">فشل تحميل التقرير</p>
                     <button class="retry-btn" onclick="openModal('${slug}','github')" style="margin-top:14px;">إعادة المحاولة</button>
@@ -665,7 +596,6 @@ async function openModal(slug, src) {
             return;
         }
     } else { bodyHTML = r.content || '<p>لا يوجد محتوى.</p>'; }
-
     /* وسائط */
     let media = '';
     const yt = bodyHTML.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
@@ -677,7 +607,6 @@ async function openModal(slug, src) {
         if (im) { media = `<img class="modal-img" src="${im[1]}" alt="" loading="lazy">`; bodyHTML = bodyHTML.replace(im[0], ''); }
         else if (r.image) { media = `<img class="modal-img" src="${esc(r.image)}" alt="" loading="lazy" onerror="this.style.display='none'">`; }
     }
-
     const thr = TLBL[r.threat_level] || '';
     document.getElementById('modalContent').innerHTML = `
         ${media}
@@ -694,12 +623,11 @@ async function openModal(slug, src) {
             </div>
             <div class="mct">${bodyHTML}</div>
             <div class="modal-foot">
-                <span>${slug}</span>
-                <button class="share-btn" onclick="shareReport('${slug}')"><i class="fas fa-share-nodes"></i> مشاركة</button>
+                <span>${r.slug}</span>
+                <button class="share-btn" onclick="shareReport('${r.slug}')"><i class="fas fa-share-nodes"></i> مشاركة</button>
             </div>
         </div>`;
 }
-
 function closeModal() {
     document.getElementById('modal').classList.remove('open');
     document.body.style.overflow = '';
@@ -709,11 +637,10 @@ function closeModal() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 window.addEventListener('popstate', () => { if (currentSlug) closeModal(); else handleHash(); });
-function handleHash() { const h = window.location.hash; if (h.startsWith('#report-')) { const s = h.replace('#report-',''); const r = allReports.find(x => x.slug === s); if (r) openModal(s, r.src); } }
-
-/* ============================================================
-       التيكر
-    ============================================================ */
+function handleHash() {
+    const h = window.location.hash;
+    if (h.startsWith('#report-')) { const s = h.replace('#report-',''); const r = allReports.find(x => x.slug === s); if (r) openModal(s, r.src); }
+}
 function buildTicker() {
     const items = allReports.filter(r => r.featured || r.threat_level === 'critical').slice(0, 10);
     const el = document.getElementById('ticker');
@@ -721,16 +648,28 @@ function buildTicker() {
     const t = items.map(r => `<span class="ticker-item"><i class="fas fa-circle-exclamation"></i> ${esc(r.title)}</span>`).join('');
     el.innerHTML = t + t;
 }
-
-/* ============================================================
-       التصنيفات والبحث
-    ============================================================ */
+function shareReport(slug) {
+    const url = window.location.origin + window.location.pathname + '#report-' + slug;
+    if (navigator.share) navigator.share({title: document.title, url}).catch(()=>{});
+    else if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => showToast('تم نسخ الرابط'));
+}
+function showToast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 3000); }
+function fmtDate(d) { try { return new Date(d).toLocaleDateString('ar-EG',{year:'numeric',month:'short',day:'numeric'}); } catch(e) { return d; } }
+function esc(s) { if (!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+function hl(text, q) { if (!q) return esc(text); const s = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); return esc(text).replace(new RegExp(`(${s})`,'gi'), '<span class="hl">$1</span>'; }
+function safeDate(d) { if (!d) return new Date(); try { const dt = new Date(d); return isNaN(dt.getTime()) ? new Date() : dt; } catch(e) { return new Date(); } }
+function todayStr() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function setDate() { document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'}); }
+function setupSearch() {
+    const inp = document.getElementById('searchInput');
+    let t;
+    inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { searchQ = inp.value.trim(); applyFilters(); }, 300); });
+}
 function setupCats() {
     document.querySelectorAll('.cat-btn').forEach(b => {
         b.addEventListener('click', () => {
             activeFilter = b.dataset.f;
-            document.querySelectorAll('.cat-btn').forEach(x => x.classList.remove('active'));
-            b.classList.add('active');
+            document.querySelectorAll('.cat-btn').forEach(x => x.classList.toggle('active', x.dataset.f === activeFilter));
             applyFilters();
             document.getElementById('grid').scrollIntoView({behavior:'smooth',block:'start'});
         });
@@ -742,34 +681,11 @@ function filterBy(f) {
     applyFilters();
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
-function setupSearch() {
-    const inp = document.getElementById('searchInput');
-    let t;
-    inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { searchQ = inp.value.trim(); applyFilters(); }, 300); });
-}
-
-/* ============================================================
-       أدوات
-    ============================================================ */
-function shareReport(slug) {
-    const url = window.location.origin + window.location.pathname + '#report-' + slug;
-    if (navigator.share) navigator.share({title: document.title, url}).catch(()=>{});
-    else if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => showToast('تم نسخ الرابط'));
-}
-function showToast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 3000); }
-function fmtDate(d) { try { return new Date(d).toLocaleDateString('ar-EG',{year:'numeric',month:'short',day:'numeric'}); } catch(e) { return d; } }
-function esc(s) { if (!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function hl(text, q) { if (!q) return esc(text); const s = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); return esc(text).replace(new RegExp(`(${s})`,'gi'), '<span class="hl">$1</span>'); }
-function safeDate(d) { if (!d) return new Date(); try { const dt = new Date(d); return isNaN(dt.getTime()) ? new Date() : dt; } catch(e) { return new Date(); } }
-function todayStr() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
-function setDate() { document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'}); }
 function setupScroll() { const b = document.getElementById('backTop'); window.addEventListener('scroll', () => b.classList.toggle('show', window.scrollY > 400), {passive:true}); }
-
-/* Spinner CSS مُضمّن لتجنب الاعتماد على ملف خارجي */
 if (!document.getElementById('spinnerStyle')) {
     const s = document.createElement('style');
     s.id = 'spinnerStyle';
-    s.textContent = `.spinner{width:36px;height:36px;border:3px solid var(--gray-200);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px;}@keyframes spin{to{transform:rotate(360deg);}}`;
+    s.textContent = `.spinner{width:36px;height:36px;border:3px solid var(--g200);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px;}@keyframes spin{to{transform:rotate(360deg;}}`;
     document.head.appendChild(s);
 }
 </script>
