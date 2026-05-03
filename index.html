@@ -3,211 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وحدة الرصد السيبراني — غرب آسيا | CMU-WA</title>
-    <meta name="description" content="وحدة رصد استخباراتي سيبرانية من مصادر خاصة. رصد التهديدات الرقمية والعمليات الاستخبارات في غرب آسيا والمنطقة العربية.">
-    <meta name="keywords" content="أمن سيبراني, استخبارات رقمية, تهديدات, غرب آسيا, Yemen, cyber threats, zero-day, APT, SCADA">
-    <meta name="author" content="وحدة الرصد السيبرانية">
+    <title>وحدة الرصد السيبراني — تقارير ميدانية</title>
+    <meta name="description" content="تقارير استخباراتية سيبرانية ميدانية من مصادر الرصد الخاصة. رصد التهديدات الرقمية والعمليات السيبرانية في الوقت الفعلي.">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="وحدة الرائد السيبراني — غرب آسيا">
-    <meta property="og:description" content="رصد التهديدات الرقمية والعمليات الاستخبارات في الوقت الفعلي">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop">
     <meta property="og:locale" content="ar_SA">
+    <meta property="og:site_name" content="وحدة الرصد السيبراني">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"وحدة الرصد السيبراني — غرب آسيا","alternateName":"Cyber Monitoring Unit — CMU-WA","description":"رصد التهديدات السيبرانية من مصادر خاصة"}
+    {"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"وحدة الرصد السيبراني","description":"تقارير استخباراتية من مصادر الرصد الخاصة"}
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
         :root{
-            --bg:#060a12;--bg-raised:#0c1220;--bg-card:rgba(12,18,32,0.75);
-            --border-subtle:rgba(16,185,129,0.08);--border-glow:rgba(16,185,129,0.2);
-            --border-active:rgba(16,185,129,0.45);
-            --neon:#00ff9c;--neon-dim:#00996a;--neon-glow:0 0 12px rgba(0,255,156,0.15);
-            --gold:#c9a24a;--gold-dim:#8a6b1a;
-            --red:#dc2626;--red-dim:#991b1b;
-            --text-pri:#e2e8f0;--text-sec:#94a3b8;--text-dim:#64748b;
-            --white:#ffffff;--gray-50:#fafafa;--gray-100:#f1f5f9;--gray-200:#e2e8f0;
-            --shadow-card:0 4px 24px rgba(0,0,0,0.08);
-            --shadow-lg:0 16px 48px rgba(0,0,0,0.12);
+            --navy:#0c1e35;--navy-light:#1a3455;
+            --red:#c0392b;--red-bright:#e74c3c;
+            --gold:#c8952e;--gold-light:#e8b44a;
+            --cream:#f8f5ef;--cream-dark:#efe9dd;
+            --white:#ffffff;--gray-50:#fafafa;--gray-100:#f5f5f5;
+            --gray-200:#e5e5e5;--gray-300:#d4d4d4;--gray-400:#a3a3a3;
+            --gray-500:#737373;--gray-600:#525252;--gray-700:#404040;
+            --gray-800:#262626;--gray-900:#171717;
+            --shadow-xs:0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm:0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md:0 8px 24px rgba(0,0,0,0.08);
+            --shadow-lg:0 16px 40px rgba(0,0,0,0.12);
             --rlg:16px;--rmd:12px;--rsm:8px;--rpill:50px;
         }
         html{scroll-behavior:smooth;}
-        body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text-sec);line-height:1.7;-webkit-font-smoothing:antialiased;}
+        body{font-family:'Cairo',sans-serif;background:var(--cream);color:var(--gray-800);line-height:1.7;-webkit-font-smoothing:antialiased;}
         a{text-decoration:none;color:inherit;}
-        img{display:block;max-width:100%;}
 
-        /* === Scan Lines === */
-        .scan-lines{position:fixed;inset:0;pointer-events:none;z-index:0;
-            background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,156,0.015) 2px,transparent 4px);
-            animation:scanMove 8s linear infinite;}
-        @keyframes scanMove{0%{background-position:0 0;}100%{background-position:0 60px;}}
+        .top-bar{background:var(--navy);padding:6px 0;font-size:0.72rem;color:var(--gray-400);border-bottom:1px solid rgba(255,255,255,0.06);}
+        .top-bar-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
+        .top-bar a{color:var(--gray-400);transition:color 0.2s;}
+        .top-bar a:hover{color:var(--gold-light);}
 
-        /* === Glow Orbs === */
-        .glow{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(120px);}
-        .glow-1{width:500px;height:500px;background:rgba(16,185,129,0.03);top:-150px;right:-100px;animation:gFloat1 25s ease-in-out infinite;}
-        .glow-2{width:400px;height:400px;background:rgba(0,255,156,0.025);bottom:-100px;left:-80px;animation:gFloat2 30s ease-in-out infinite;}
-        @keyframes gFloat1{0%,100%{transform:translate(0,0);}50%{transform:translate(-60px,40px);}100%{transform:translate(0,0);}}
-        @keyframes gFloat2{0%,100%{transform:translate(0,0);}50%{transform:(60px,-40px);}100%{transform:translate(0,0);}}
-
-        /* === Top Info Bar === */
-        .info-bar{background:rgba(6,10,18,0.95);border-bottom:1px solid var(--border-subtle);padding:5px 0;font-size:0.7rem;color:var(--text-dim);position:relative;z-index:101;}
-        .info-bar-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
-        .info-bar a{color:var(--text-dim);transition:color 0.2s;}
-        .info-bar a:hover{color:var(--neon);}
-        .info-bar .live-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(0,255,156,0.08);border:1px solid var(--border-glow);color:var(--neon);padding:2px 10px;border-radius:var(--rpill);font-size:0.62rem;font-weight:700;font-family:'Inter',monospace;letter-spacing:0.1em;text-transform:uppercase;}
-        .live-dot{width:6px;height:6px;background:var(--neon);border-radius:50%;animation:lPulse 2s ease-in-out infinite;}
-        @keyframes lPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,156,0.5);}50%{opacity:0.5;box-shadow:0 0 0 8px rgba(0,255,156,0);}@keyframes lPulse{0%,100%{opacity:1;}50%{opacity:0;}}
-
-        /* === Header === */
-        .header{background:rgba(6,10,18,0.97);border-bottom:2px solid var(--border-glow);padding:14px 0;position:sticky;top:26px;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+        .header{background:var(--white);border-bottom:3px solid var(--red);padding:16px 0;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-xs);}
         .header-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
-        .brand{display:flex;align-items:center;gap:12px;}
-        .brand-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,255,156,0.08);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-        .brand-icon::after{content:'';position:absolute;inset:3px;border-radius:50%;border:2px solid var(--neon);border-top-color:transparent;animation:radarSpin 4s linear infinite;opacity:0.5;}
-        @keyframes radarSpin{to{transform:rotate(360deg;}}
-        .brand h1{font-size:1.7rem;font-weight:900;color:var(--text-pri);line-height:1;}
-        .brand h1 span{color:var(--neon);}
-        .brand p{font-size:0.6rem;color:color:var(--text-dim);letter-spacing:2px;font-family:'Inter',monospace;margin-top:1px;}
-        .header-actions{display:flex;align-items:center;gap:10px;}
+        .brand h1{font-size:1.8rem;font-weight:900;color:var(--navy);line-height:1.1;}
+        .brand h1 span{color:var(--red);}
+        .brand p{font-size:0.65rem;color:var(--gray-500);letter-spacing:1.5px;margin-top:2px;}
+        .header-actions{display:flex;align-items:center;gap:12px;}
         .search-wrap{position:relative;}
-        .search-wrap input{width:200px;padding:7px 34px 7px 14px;border:1px solid var(--border-subtle);border-radius:var(--rpill);font-family:'Cairo',sans-serif;font-size:0.82rem;outline:none;background:rgba(12,18,32,0.4);color:var(--text-pri);transition:all 0.25s;}
-        [dir="rtl"] .search-wrap input{padding:7px 14px 7px 34px;}
-        .search-wrap input:focus{border-color:var(--border-active);background:rgba(12,18,32,0.7);box-shadow:0 0 0 4px rgba(16,185,129,0.15);}
-        .search-wrap i{position:absolute;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:0.8rem;}
+        .search-wrap input{width:220px;padding:8px 36px 8px 14px;border:1.5px solid var(--gray-200);border-radius:var(--rpill);font-family:inherit;font-size:0.85rem;outline:none;background:var(--gray-50);transition:0.2s;color:var(--gray-800);}
+        [dir="rtl"] .search-wrap input{padding:8px 14px 8px 36px;}
+        .search-wrap input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,57,43,0.1);background:#fff;}
+        .search-wrap i{position:absolute;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:0.82rem;}
         [dir="rtl"] .search-wrap i{left:12px;}
         [dir="ltr"] .search-wrap i{right:12px;}
-        .live-dot{width:8px;height:8px;background:var(--neon);border-radius:50%;animation:lPulse 2s ease-in-out infinite;flex-shrink:0;}
+        .live-dot{width:8px;height:8px;background:var(--red-bright);border-radius:50%;animation:lp 2s ease-in-out infinite;flex-shrink:0;}
+        @keyframes lp{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(231,76,60,0.4);}50%{opacity:0.6;box-shadow:0 0 0 6px rgba(231,76,60,0);}}
 
-        /* === Categories === */
-        .cats{background:rgba(6,10,18,0.97);border-bottom:1px solid var(--border-subtle);position:sticky;top:58px;z-index:99;}
-        .cats-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:3px;overflow-x:auto;scrollbar-width:none;}
-        .cats-inner::-webkit-scrollbar{display:none;}
-        .cb{padding:7px 14px;font-family:'Cairo',sans-serif;font-size:0.75rem;font-weight:700;color:var(--text-sec);background:transparent;border:1px solid var(--border-subtle);border-radius:var(--rpill);cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-        .cb:hover{background:rgba(16,185,129,0.08);color:var(--neon);}
-        .cb.active{background:rgba(16,185,129,0.15);border-color:var(--border-active);color:var(--neon);box-shadow:0 0 12px rgba(0,255,156,0.1);}
-        .csep{width:1px;height:18px;background:var(--border-subtle);flex-shrink:0;margin:0 2px;}
-        .cat-country{font-size:0.7rem;color:var(--gold);font-weight:700;display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:var(--rpill);background:rgba(201,162,74,0.08);border:1px solid rgba(201,162,74,0.15);white-space:nowrap;}
-        .cat-tech{font-size:0.7rem;color:var(--neon-dim);font-weight:700;display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:var(--rpill);white-space:nowrap;}
-        .cat-geo{font-size:0.7rem;color:var(--red-dim);font-weight:700;display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:var(--rpill);background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.1);white-space:nowrap;}
+        .categories{background:var(--white);border-bottom:1px solid var(--gray-200);position:sticky;top:58px;z-index:99;}
+        .cat-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;}
+        .cat-inner::-webkit-scrollbar{display:none;}
+        .cat-btn{padding:8px 16px;font-family:inherit;font-size:0.78rem;font-weight:700;color:var(--gray-600);background:transparent;border:none;border-radius:var(--rpill);cursor:pointer;transition:0.2s;white-space:nowrap;}
+        .cat-btn:hover{background:var(--cream-dark);color:var(--navy);}
+        .cat-btn.active{background:var(--navy);color:#fff;}
+        .cat-sep{width:1px;height:20px;background:var(--gray-200);flex-shrink:0;margin:0 2px;}
 
-        /* === Ticker === */
-        .ticker{background:rgba(6,10,18,0.97);border-bottom:1px solid var(--border-glow);padding:7px 0;overflow:hidden;}
-        .tk{display:flex;animation:tkScroll 70s linear infinite;white-space:nowrap;}
-        .tk-i{display:inline-flex;align-items:center;gap:6px;padding:0 28px;font-size:0.78rem;font-weight:600;color:var(--text-dim);}
-        .tk-i i{color:var(--gold);font-size:0.55rem;}
-        @keyframes tkScroll{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+        .ticker-bar{background:var(--navy);padding:8px 0;overflow:hidden;border-bottom:2px solid var(--gold);}
+        .ticker-track{display:flex;animation:ts 80s linear infinite;white-space:nowrap;}
+        .ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font-size:0.8rem;font-weight:600;color:var(--gray-300);}
+        .ticker-item i{color:var(--gold);font-size:0.6rem;}
+        @keyframes ts{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
 
-        /* === Main === */
-        .main{max-width:1280px;margin:0 auto;padding:20px 20px 60px;}
-        .sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
-        .sh h2{font-size:1.25rem;font-weight:900;color:var(--text-pri);display:flex;align-items:center;gap:8px;}
-        .sh h2 i{color:var(--red);font-size:1rem;}
-        .rc{font-size:0.8rem;color:var(--text-dim);background:var(--bg-raised);padding:4px 12px;border-radius:var(--rpill);display:none;}
-        .rc.show{display:block;}
-        .sync-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:none;animation:lPulse 1.5s infinite;}
-        .sync-dot.on{display:inline-block;margin-right:6px;}
+        .main{max-width:1280px;margin:0 auto;padding:24px 20px 60px;}
+        .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
+        .section-head h2{font-size:1.3rem;font-weight:900;color:var(--navy);display:flex;align-items:center;gap:8px;}
+        .section-head h2 i{color:var(--red);font-size:1.1rem;}
+        .result-count{font-size:0.82rem;color:var(--gray-500);background:var(--cream-dark);padding:5px 14px;border-radius:var(--rpill);display:none;}
+        .result-count.show{display:block;}
+        .sync-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:none;animation:lp 1.5s infinite;}
+        .sync-dot.active{display:inline-block;margin-right:6px;}
 
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;}
 
-        /* === Card === */
-        .cd{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--rlg);overflow:hidden;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:var(--shadow-card);display:flex;flex-direction:column;cursor:pointer;position:relative;}
-        .cd::before{content:'';position:absolute;inset:-1px;border-radius:inherit;background:conic-gradient(from 0deg,transparent 0deg,rgba(16,185,129,0.06) 60deg,transparent 120deg);opacity:0;transition:opacity 0;z-index:1;pointer-events:none;}
-        .cd:hover::after{content:'';position:absolute;inset:-1px;border-radius:inherit;border:1px solid var(--border-glow);opacity:0;transition:all 0.4s;z-index:2;pointer-events:none;animation:radarSpin 4s linear infinite;}
-        .cd:hover::before{opacity:1;}
-        .cd:hover::after{opacity:1;}
-        .cd:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:transparent;background:rgba(12,18,32,0.85);}
-        .cd-img-wrap{overflow:hidden;position:relative;height:185px;}
-        .cd-img{width:100%;height:100%;object-fit:cover;background:var(--bg-raised);display:block;transition:transform 0.4s ease;}
-        .cd:hover .cd-img{transform:scale(1.04);}
-        .cd-country{position:absolute;bottom:10px;right:10px;background:rgba(6,10,18,0.88);color:#fff;padding:3px 10px;border-radius:var(--rpill);font-size:0.62rem;font-weight:700;backdrop-filter:blur(4px);z-index:3;}
-        [dir="ltr] .cd-country{right:auto;left:10px;}
-        .cd-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;position:relative;z-index:4;}
-        .cd-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:0.68rem;color:var(--text-dim);}
-        .cd-cat{background:var(--bg-raised);padding:2px 8px;border-radius:var(--rpill);font-weight:700;color:var(--neon-dim);}
-        .cd-date{font-family:'Inter',monospace;font-size:0.65rem;color:var(--text-dim);}
-        .cd-title{font-size:1rem;font-weight:900;line-height:1.45;color:var(--text-pri);margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-        .cd-title .hl{background:rgba(16,185,129,0.1);color:var(--neon);padding:0 2px;border-radius:2px;}
-        .cd-excerpt{font-size:0.82rem;color:var(--text-sec);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px;}
-        .cd-threat{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:var(--rpill);font-size:0.58rem;font-weight:700;margin-top:auto;font-family:'Inter',monospace;}
-        .tl{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9;}
-        .tm{background:#fff8e1;color:#f57f17;border:1px solid #ffe082;}
-        .th{background:#fff3e0;color:#e65100;border:1px solid #ffcc80;}
-        .tc{background:#fef2f2;color:var(--red);border:1px solid #fecaca;animation:tcPulse 2s infinite;}
-        @keyframes tcPulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
-        .cd-read{color:var(--red);font-weight:700;font-size:0.8rem;display:inline-flex;align-items:center;gap:4px;margin-top:10px;background:none;border:none;font-family:inherit;cursor:pointer;padding:0;}
-        .cd-read:hover{gap:8px;}
+        .card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--rlg);overflow:hidden;transition:0.25s;box-shadow:var(--shadow-xs);display:flex;flex-direction:column;cursor:pointer;}
+        .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
+        .card-img{width:100%;height:190px;object-fit:cover;background:var(--gray-100);display:block;transition:transform 0.4s;}
+        .card:hover .card-img{transform:scale(1.03);}
+        .card-img-wrap{overflow:hidden;position:relative;}
+        .card-country{position:absolute;bottom:10px;right:10px;background:rgba(12,30,53,0.85);color:#fff;padding:3px 10px;border-radius:var(--rpill);font-size:0.65rem;font-weight:700;backdrop-filter:blur(4px);}
+        [dir="ltr"] .card-country{right:auto;left:10px;}
+        .card-body{padding:16px 18px;flex:1;display:flex;flex-direction:column;}
+        .card-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:0.72rem;color:var(--gray-500);}
+        .card-source{background:var(--cream);padding:2px 10px;border-radius:var(--rpill);font-weight:700;color:var(--navy);}
+        .card-title{font-size:1.05rem;font-weight:900;line-height:1.45;color:var(--gray-900);margin-bottom:8px;}
+        .card-title .hl{background:var(--cream-dark);color:var(--red);padding:0 2px;border-radius:2px;}
+        .card-excerpt{font-size:0.84rem;color:var(--gray-500);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:12px;}
+        .card-read{color:var(--red);font-weight:700;font-size:0.82rem;display:inline-flex;align-items:center;gap:4px;margin-top:auto;background:none;border:none;font-family:inherit;cursor:pointer;padding:0;}
+        .card-read:hover{gap:8px;}
+        .card-threat{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:var(--rpill);font-size:0.6rem;font-weight:700;margin-top:8px;}
+        .t-low{background:#e8f5e9;color:#2e7d32;}.t-med{background:#fff8e1;color:#f57f17;}.t-high{background:#fff3e0;color:#e65100;}
+        .t-crit{background:#fef2f2;color:var(--red);animation:tb 2s infinite;}
+        @keyframes tb{0%,100%{opacity:1;}50%{opacity:0.6;}}
 
-        /* === No Data === */
-        .no-data{text-align:center;padding:60px 20px;color:var(--text-dim);display:none;}
-        .no-data i{font-size:2.5rem;margin-bottom:12px;display:block;color:var(--border-subtle);}
+        .no-data{text-align:center;padding:60px 20px;color:var(--gray-400);display:none;}
+        .no-data i{font-size:2.5rem;margin-bottom:12px;display:block;color:var(--gray-300);}
 
-        /* === Modal === */
-        .mo-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:200;overflow-y:auto;padding:20px;}
-        .mo-ov.open{display:flex;align-items:flex-start;justify-content:center;min-height:100vh;}
-        .mo{background:var(--bg);border:1px solid var(--border-glow);border-radius:var(--rlg);width:100%;max-width:860px;margin:40px auto;overflow:hidden;position:relative;animation:moUp 0.3s ease;box-shadow:var(--shadow-lg);}
-        @keyframes moUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-        .mo-close{position:absolute;top:14px;z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.9);border:1px solid var(--border-subtle);color:var(--text-sec);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.2s;backdrop-filter:blur(4px);}
-        [dir="rtl"] .mo-close{left:14px;}
-        [dir="ltr"] .mo-close{right:14px;}
-        .mo-close:hover{background:var(--red);color:#fff;border-color:var(--red);}
-        .mo-img{width:100%;max-height:400px;object-fit:cover;display:block;background:var(--bg-raised);}
-        .mo-vid{width:100%;aspect-ratio:16/9;display:block;background:#000;}
-        .mo-bd{padding:24px 28px 28px;}
-        .mo-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-        .mt{display:inline-block;padding:3px 12px;border-radius:var(--rpill);font-size:0.68rem;font-weight:700;}
-        .mt-c{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9;}
-        .mt-t{background:var(--bg-raised);color:var(--neon-dim);border:1px solid var(--border-subtle);}
-        .mt-h{background:#fef2f2;color:var(--red);border:1px solid #fecaca;}
-        .mo-bd h2{font-size:1.45rem;font-weight:900;line-height:1.4;color:var(--text-pri);margin-bottom:14px;}
-        .mo-info{display:flex;gap:14px;flex-wrap:wrap;font-size:0.76rem;color:var(--text-dim);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border-subtle);}
-        .mo-info i{margin-left:4px;color:var(--neon-dim);}
-        [dir="ltr] .mo-info i{margin-left:0;margin-right:4px;}
-        .mo-ct{font-size:0.93rem;line-height:2;color:var(--text-sec);}
-        .mo-ct p{margin-bottom:14px;}
-        .mo-ct img{max-width:100%;border-radius:var(--rmd);margin:10px 0;}
-        .mo-ct iframe{max-width:100%;border-radius:var(--rmd);margin:10px 0;}
-        .mo-foot{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--border-subtle);margin-top:16px;flex-wrap:wrap;gap:8px;}
-        .mo-foot span{font-size:0.7rem;color:var(--text-dim);}
-        .share-btn{background:var(--bg-raised);border:1px solid var(--border-glow);color:var(--neon-dim);border-radius:var(--rpill);font-family:inherit;font-weight:700;font-size:0.78rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s;}
-        .share-btn:hover{background:rgba(16,185,129,0.15);border-color:var(--border-active);color:var(--neon);}
-        footer{background:var(--bg);border-top:1px solid var(--border-glow);color:var(--text-dim);padding:40px 20px 20px;}
-        .ft-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.04);}
-        .ft-brand h2{color:var(--text-pri);font-size:1.4rem;font-weight:900;}
-        .ft-brand h2 span{color:var(--neon);}
-        .ft-brand p{font-size:0.78rem;line-height:1.9;margin-top:8px;color:var(--text-dim);}
-        .ft-col h4{color:var(--text-pri);font-size:0.88rem;font-weight:800;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--red);display:inline-block;}
-        .ft-col a{display:block;font-size:0.8rem;color:var(--text-dim);margin:7px 0;transition:color 0.2s;}
-        .ft-col a:hover{color:var(--neon);}
-        .ft-bot{padding-top:16px;display:flex;justify-content:space-between;align-items:center;font-size:0.76rem;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(255,255,255,0.04);}
-        .back-top{position:fixed;bottom:24px;left:24px;z-index:150;width:42px;height:42px;border-radius:50%;background:var(--bg-raised);border:1px solid var(--border-glow);color:var(--neon-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:all 0.3s;box-shadow:var(--shadow-md);}
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:2000;overflow-y:auto;padding:20px;}
+        .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center;min-height:100vh;}
+        .modal-box{background:var(--white);border-radius:var(--rlg);width:100%;max-width:860px;margin:40px auto;overflow:hidden;animation:mu 0.3s ease;box-shadow:var(--shadow-lg);position:relative;}
+        @keyframes mu{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+        .modal-close{position:absolute;top:14px;z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.9);border:1px solid var(--gray-200);color:var(--gray-600);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:0.2s;backdrop-filter:blur(4px);}
+        [dir="rtl"] .modal-close{left:14px;}
+        [dir="ltr] .modal-close{right:14px;}
+        .modal-close:hover{background:var(--red);color:#fff;border-color:var(--red);}
+        .modal-img{width:100%;max-height:400px;object-fit:cover;display:block;background:var(--gray-100);}
+        .modal-video{width:100%;aspect-ratio:16/9;display:block;background:#000;}
+        .modal-body{padding:24px 28px 28px;}
+        .modal-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+        .mtag{display:inline-block;padding:3px 12px;border-radius:var(--rpill);font-size:0.7rem;font-weight:700;}
+        .mtag-c{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9;}
+        .mtag-t{background:var(--cream);color:var(--navy);border:1px solid var(--gray-200);}
+        .mtag-h{background:#fef2f2;color:var(--red);border:1px solid #fecaca;}
+        .modal-body h2{font-size:1.5rem;font-weight:900;line-height:1.4;color:var(--gray-900);margin-bottom:14px;}
+        .modal-info{display:flex;gap:16px;flex-wrap:wrap;font-size:0.78rem;color:var(--gray-500);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--gray-200);}
+        .modal-info i{margin-left:4px;color:var(--navy);}
+        [dir="ltr"] .modal-info i{margin-left:0;margin-right:4px;}
+        .mct{font-size:0.95rem;line-height:2;color:var(--gray-700);}
+        .mct p{margin-bottom:14px;}
+        .mct img{max-width:100%;border-radius:var(--rsm);margin:10px 0;}
+        .mct iframe{max-width:100%;border-radius:var(--rsm);margin:10px 0;}
+        .modal-foot{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--gray-200);margin-top:16px;flex-wrap:wrap;gap:8px;}
+        .modal-foot span{font-size:0.72rem;color:var(--gray-400);}
+        .share-btn{background:var(--navy);color:#fff;border:none;padding:7px 18px;border-radius:var(--rpill);font-family:inherit;font-weight:700;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:0.2s;}
+        .share-btn:hover{background:var(--navy-light);}
+
+        footer{background:var(--navy);color:var(--gray-400);padding:40px 20px 20px;}
+        .footer-inner{max-width:1280px;margin:0 auto;}
+        .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,0.08);}
+        .footer-brand h2{color:#fff;font-size:1.5rem;font-weight:900;}
+        .footer-brand h2 span{color:var(--red);}
+        .footer-brand p{font-size:0.8rem;line-height:1.9;margin-top:10px;color:var(--gray-500);}
+        .footer-col h4{color:#fff;font-size:0.9rem;font-weight:800;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--red);display:inline-block;}
+        .footer-col a{display:block;font-size:0.82rem;color:var(--gray-500);margin:8px 0;transition:0.2s;cursor:pointer;}
+        .footer-col a:hover{color:var(--gold-light);}
+        .footer-bottom{padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;flex-wrap:wrap;gap:8px;}
+
+        .back-top{position:fixed;bottom:24px;left:24px;z-index:150;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:0.3s;box-shadow:var(--shadow-md);}
         [dir="ltr"] .back-top{left:auto;right:24px;}
         .back-top.show{opacity:1;visibility:visible;transform:translateY(0);}
-        .back-top:hover{background:var(--red);box-shadow:0 6px 20px rgba(220,38,38,0.15);}
-        .toast{position:fixed;bottom:24px;right:24px;background:var(--bg-raised);border:1px solid var(--border-glow);color:var(--neon);padding:10px 22px;border-radius:var(--rpill);box-shadow:var(--shadow-md);z-index:9999;font-size:0.85rem;font-weight:600;animation:ti 0.3s ease;}
-        [dir="ltr] .toast{right:auto;left:24px;}
+        .back-top:hover{background:var(--red);}
+        .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:10px 22px;border-radius:var(--rpill);box-shadow:var(--shadow-md);z-index:9999;font-size:0.85rem;font-weight:600;animation:ti 0.3s ease;}
+        [dir="ltr"] .toast{right:auto;left:24px;}
         @keyframes ti{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+
         @media(max-width:768px){
             .top-bar-inner{flex-direction:column;gap:2px;text-align:center;}
             .header-inner{justify-content:center;text-align:center;}
-            .brand h1{font-size:1.35rem;}
-            .search-wrap input{width:150px;}
-            .grid{grid-template-columns:1fr;}.cd-img{height:150px;}
-            .footer-top{grid-template-columns:1fr;}.modal-box{margin:20px auto;}.modal-body{padding:18px;}.modal-body h2{font-size:1.2rem;}
+            .brand h1{font-size:1.4rem;}
+            .search-wrap input{width:160px;}
+            .grid{grid-template-columns:1fr;}
+            .card-img{height:160px;}
+            .footer-top{grid-template-columns:1fr;}
+            .modal-box{margin:20px auto;}
+            .modal-body{padding:18px;}
+            .modal-body h2{font-size:1.2rem;}
         }
         @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
     </style>
 </head>
 <body>
-<div class="scan-lines" aria-hidden="true"></div>
-<div class="glow glow-1" aria-hidden="true"></div>
-<div class="glow glow-2" aria-hidden="true"></div>
 
-<div class="info-bar">
-    <div class="info-bar-inner">
+<div class="top-bar">
+    <div class="top-bar-inner">
         <span id="dateDisplay"></span>
         <div style="display:flex;align-items:center;gap:14px;">
             <a href="#"><i class="fab fa-telegram"></i></a>
@@ -220,69 +185,66 @@
 <header class="header">
     <div class="header-inner">
         <div class="brand">
-            <div class="brand-icon"><svg width="22" height="22" viewBox="0 0 100 100" fill="none" style="display:block;" aria-hidden="true"><circle cx="50" cy="50" r="32" stroke="#00ff9c" stroke-width="2.5" fill="none"/><circle cx="50" cy="50" r="6" fill="#00ff9c"/><line x1="50" y1="18" x2="50" y2="6" stroke="#00ff9c" stroke-width="2"/><line x1="50" y1="94" x2="50" y2="82" stroke="#00ff9c" stroke-width="1.5"/></svg></div>
-            <div>
-                <h1>وحدة الرصد <span>السيبراني</span></h1>
-                <p style="font-size:0.58rem;color:var(--text-dim);letter-spacing:2px;font-family:'Inter',monospace;margin-top:1px;">CMU-WA — غرب آسيا</p>
-            </div>
+            <h1>وحدة الرصد <span>السيبراني</span></h1>
+            <p>مصادر خاصة — رصد مباشر — تقارير ميدانية</p>
         </div>
         <div class="header-actions">
             <div class="live-dot"></div>
             <div class="search-wrap">
                 <i class="fas fa-search"></i>
-                <input type="search" id="sInput" placeholder="بحث..." aria-label="البحث">
+                <input type="search" id="searchInput" placeholder="بحث في التقارير..." aria-label="البحث">
             </div>
         </div>
     </div>
 </header>
 
-<div class="cats">
-    <div class="cats-inner" id="catBar">
-        <button class="cb active" data-f="all">الكل</button>
-        <div class="csep"></div>
-        <span class="cat-country"><i class="fas fa-map-marker-alt"></i> اليمن</span>
-        <span class="cat-geo"><i class="fas fa-globe-americas"></i> الجزائر</span>
-        <span class="cat-country"><i class="fas fa-map-marker-alt"></i> السعودية</span>
-        <span class="cat-geo"><i class="fas fa-globe-americas"></i> الخليج</span>
-        <span class="cat-country"><i class="fas fa-map-marker-alt"></i> إيران</span>
-        <span class="cat-country"><i class="fas fa-map-marker-alt"></i> إسرائيل</span>
-        <span class="cat-country"><i class="fas fa-map-marker-alt"></i> العراق</span>
-        <span class="cat-country"><i class="fas fa-map-marker-alt"></i> مصر</span>
-        <span class="cat-geo"><i class="fas fa-globe-americas"></i> عالمي</span>
-        <div class="csep"></div>
-        <span class="cat-tech"><i class="fas fa-bug"></i> اختراقات</span>
-        <span class="cat-tech"><i class="fas fa-shield-halved"></i> ثغرات</span>
-        <span class="cat-tech"><i class="fas fa-user-secret"></i> حروب ظل</span>
-        <span class="cat-geo"><i class="fas fa-landmark"></i> أمن قومي</span>
+<div class="categories">
+    <div class="cat-inner" id="catBar">
+        <button class="cat-btn active" data-f="all">الكل</button>
+        <div class="cat-sep"></div>
+        <button class="cat-btn" data-f="yemen">اليمن</button>
+        <button class="cat-btn" data-f="algeria">الجزائر</button>
+        <button class="cat-btn" data-f="saudi">السعودية</button>
+        <button class="cat-btn" data-f="gulf">الخليج</button>
+        <button class="cat-btn" data-f="iran">إيران</button>
+        <button class="cat-btn" data-f="israel">إسرائيل</button>
+        <button class="cat-btn" data-f="iraq">العراق</button>
+        <button class="cat-btn" data-f="egypt">مصر</button>
+        <button class="cat-btn" data-f="global">عالمي</button>
+        <div class="cat-sep"></div>
+        <button class="cat-btn" data-f="intrusions">اختراقات</button>
+        <button class="cat-btn" data-f="vulns">ثغرات</button>
+        <button class="cat-btn" data-f="shadow">حروب ظل</button>
+        <button class="cat-btn" data-f="natsec">أمن قومي</button>
     </div>
 </div>
 
-<div class="ticker"><div class="tk" id="ticker"></div></div>
+<div class="ticker-bar"><div class="ticker-track" id="ticker"></div></div>
 
 <main class="main">
-    <div class="sh">
+    <div class="section-head">
         <h2><i class="fas fa-satellite-dish"></i> التقارير الميدانية <span class="sync-dot" id="syncDot"></span></h2>
-        <span class="rc" id="rc"></span>
+        <span class="result-count" id="resultCount"></span>
     </div>
     <div class="grid" id="grid"></div>
     <div class="no-data" id="noData"><i class="fas fa-folder-open"></i><p>لا توجد تقارير مطابقة</p></div>
 </main>
 
-<div class="mo-ov" id="modal" onclick="if(event.target===this)closeModal()">
-    <div class="mo">
-        <button class="mo-close" onclick="closeModal()" aria-label="إغلاق"><i class="fas fa-times"></i></button>
-        <div id="moC"></div>
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+        <div id="modalContent"></div>
     </div>
 </div>
 
 <footer>
-    <div class="ft-in">
-        <div class="ft-top">
-            <div class="ft-brand">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
                 <h2>وحدة الرصد <span>السيبراني</span></h2>
-                <p>هذه المنصة مجرد واجهة مؤقتة لرصد البيانات العامة، أما العمليات الحقيقية فتتم خلف الكواليس حيث لا تصل خوارزميات جوجل. جميع التقارير مبنية على مصادر الرصد الخاصة.</p>
+                <p>هذه المنصة مجرد واجهة مؤقتة لرصد البيانات العامة، أما العمليات الحقيقية فتتم خلف الكواليس حيث لا تصل خوارزميات جوجل. جميع التقارير مبنية على مصادر الرصد الخاصة ولا تعتمد على المصادر المفتوحة.</p>
             </div>
-            <div class="ft-col">
+            <div class="footer-col">
                 <h4>التصنيفات</h4>
                 <a onclick="filterBy('yemen')">اليمن</a>
                 <a onclick="filterBy('algeria')">الجزائر</a>
@@ -291,7 +253,7 @@
                 <a onclick="filterBy('iran')">إيران</a>
                 <a onclick="filterBy('global')">عالمي</a>
             </div>
-            <div class="ft-col">
+            <div class="footer-col">
                 <h4>الأنواع</h4>
                 <a onclick="filterBy('intrusions')">عمليات الاختراق</a>
                 <a onclick="filterBy('vulns')">رصد الثغرات</a>
@@ -299,15 +261,14 @@
                 <a onclick="filterBy('natsec')">أمن قومي</a>
             </div>
         </div>
-        <div class="ft-bot">
+        <div class="footer-bottom">
             <span>&copy; 2025 وحدة الرصد السيبراني</span>
-            <span>BUILD v6.0</span>
+            <span>BUILD v5.2</span>
         </div>
     </div>
 </footer>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0})" aria-label="الأعلى"><i class="fas fa-chevron-up"></i></button>
-<div class="toast" id="toast"></div>
 
 <script>
 /* ============================================================
@@ -317,301 +278,390 @@ const CFG = {
     githubUser: 'YOUR_USERNAME',
     githubRepo: 'news-data',
     branch: 'main',
-    postsFolder: 'https://raw.githubusercontent.com/' + 'YOUR_USERNAME/' + 'news-data/main/' + 'posts/',
-    /* Cache مدته ساعة واحدة — بعد انتهاء المدة لا يتم إرسال أي طلب */
-    cacheTTL: 1,
-    /* التحديث التلقائي — معطي أن الصفحة نشطة */
-    refreshInterval: 0,
-    cacheKey: 'csu_d',
-    cacheMetaKey: 'csu_m'
+    postsFolder: 'posts',
+    /* مدة صلاحية الـ Cache بالدقائق */
+    cacheTTL: 5,
+    /* فترة التحديث بالدقائق (0 = بدون تحديث تلقائي) */
+    refreshInterval: 30,
+    /* مفتاح فريد في الـ LocalStorage */
+    cacheKey: 'csu_reports',
+    cacheMetaKey: 'csu_meta'
 };
 
+/* ============================================================
+       الثوابت
+    ============================================================ */
 const COUNTRIES = {
     yemen:'اليمن',algeria:'الجزائر',saudi:'السعودية',gulf:'الخليج',
     iran:'إيران',israel:'إسرائيل',iraq:'العراق',egypt:'مصر',global:'عالمي'
 };
-const CATS = {intrusions:'عمليات الاختراق',vulns:'رصد الثغرات',shadow:'حروب الظل',natsec:'أمن قومي'};
-const TCLS = {low:'tl',medium:'tm',high:'th',critical:'tc'};
+const CATS = {intrusions:'اختراق',vulns:'ثغرة',shadow:'حرب ظل',natsec:'أمن قومي'};
+const TCLS = {low:'t-low',medium:'t-med',high:'t-high',critical:'t-crit'};
 const TLBL = {low:'منخفض',medium:'متوسط',high:'مرتفع',critical:'حرج'};
-const CAT_LABELS = {intrusions:'عمليات الاختراق',vulns:'رصد الثغرات',shadow:'حرب الظل',natsec:'أمن قومي'};
-const GH_LIST_API = `https://api.github.com/repos/${CFG.githubUser}/${CFG.githubRepo}/contents/${'news-data'}?ref=${CFG.branch}`;
+const GH_API = `https://api.github.com/repos/${CFG.githubUser}/${CFG.githubRepo}/contents/${CFG.postsFolder}?ref=${CFG.branch}`;
 
 /* ============================================================
-       الحالة العامة
+       الحالة
     ============================================================ */
-let allR = [];
-let filtR = [];
-let af = 'all';
-let sq = '';
-let cSlug = null;
-let isVis = true;
-let rTimer = null;
-let isRL = false;
+let allReports = [];
+let filtered = [];
+let activeFilter = 'all';
+let searchQ = '';
+let currentSlug = null;
+let isPageVisible = true;
+let refreshTimer = null;
+let hasRateLimited = false;
 
+/* ============================================================
+       التهيئة — تحميل فوري بدون تأخير
+    ============================================================ */
 window.onload = function() {
     setDate();
     setupSearch();
     setupCats();
     setupScroll();
     handleHash();
-    setupVis();
-    doFetch();
-    if (CFG.refreshInterval > 0) startRT();
+    setupVisibility();
+    fetchNews();
+    if (CFG.refreshInterval > 0) startRefreshTimer();
 };
 
 /* ============================================================
-       الرؤية — Stale-While-Revalidate مع حماية الحظر والـ Cache
+       رؤية الصفحة — التحديث التلقائي يعمل فقط
+       عندما يكون المستخدم ينظر للموقع فعلاً
     ============================================================ */
-async function doFetch() {
-    let cached = loadCache();
-    if (cached && cached.length > 0) {
-        allR = cached;
-        renderGrid();
-        buildTicker();
-        silentRefresh();
-        return;
-    }
-    await doForceRefresh();
+function setupVisibility() {
+    const onVisible = () => { isPageVisible = true; startRefreshTimer(); };
+    const onHidden  = () => { isPageVisible = false; stopRefreshTimer(); };
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) onHidden(); else onVisible();
+    });
 }
 
-async function doForceRefresh() {
-    const data = await gatherAll();
-    if (data.length > 0) {
-        allR = data;
-        saveCache(data);
-        if (cached && isDifferent(data)) {
-            renderGrid();
-            buildTicker();
-            const d = document.getElementById('syncDot');
-            if (d) { d.classList.add('on'); setTimeout(() => d.classList.remove('on'), 2000); }
+function startRefreshTimer() {
+    if (refreshTimer || CFG.refreshInterval <= 0 || hasRateLimited) return;
+    refreshTimer = setTimeout(() => {
+        if (isPageVisible) {
+            silentRefresh();
+            startRefreshTimer();
         }
+    }, CFG.refreshInterval * 60000);
+}
+
+function stopRefreshTimer() {
+    if (refreshTimer) { clearTimeout(refreshTimer); refreshTimer = null; }
+}
+
+/* ============================================================
+       التحميل الرئيسي — Stale-While-Revalidate
+       1) عرض البيانات المخزنة فوراً (إن وُجدت)
+       2) جلب البيانات الجديدة في الخلفية
+       3) تحديث الواجهة بسلاسة إذا تغيّرت البيانات
+    ============================================================ */
+async function fetchNews() {
+    const cached = loadCache();
+    if (cached && cached.length > 0) {
+        /* عرض فوري من الـ Cache */
+        allReports = cached;
+        applyFilters();
+        buildTicker();
+        /* ثم تحديث صامت في الخلفية */
+        silentRefresh();
+    } else {
+        /* لا يوجد cache — اعرض مباشرة */
+        await forceRefresh();
+    }
+}
+
+async function forceRefresh() {
+    const data = await gatherReports();
+    if (data.length > 0) {
+        allReports = data;
+        saveCache(data);
+        applyFilters();
+        buildTicker();
+    }
+}
+
+async function silentRefresh() {
+    try {
+        const data = await gatherReports();
+        if (data.length > 0 && isDataDifferent(data)) {
+            allReports = data;
+            saveCache(data);
+            applyFilters();
+            buildTicker();
+            /* نقطة تحديث صغيرة على العنوان */
+            const dot = document.getElementById('syncDot');
+            if (dot) { dot.classList.add('active'); setTimeout(() => dot.classList.remove('active'), 2000); }
+        }
+    } catch(e) {
+        handleFetchError(e);
     }
 }
 
 /* ============================================================
-       جمع البيانات — JSON + GitHub مع حماية الحظر والـ Cache والـ Rate Limit
+       جمع البيانات من المصدرين
     ============================================================ */
-async function gatherAll() {
-    const res = [];
-    /* === JSON === */
+async function gatherReports() {
+    const results = [];
+
+    /* === المصدر 1: ملف JSON المحلي === */
     try {
         const r = await fetch('./news-data.json');
         if (r.ok) {
             const d = await r.json();
             if (Array.isArray(d) && d.length > 0) {
-                res.push(...d.map(i => ({
-                    slug: 'r' + i.id,
-                    title: i.title_ar || '',
-                    excerpt: i.excerpt_ar || '',
-                    content: (i.content_ar || i.content_en || '').replace(/\n/g, '<br>'),
-                    image: i.image || '',
-                    country: inferCountry(i),
-                    category: i.category || 'shadow',
-                    threat_level: i.threat_level || 'high',
-                    source: i.source_ar || 'مصادر الرصد',
-                    date: i.date || todayStr(),
-                    dateObj: safeD(i.date),
-                    featured: !!i.featured
+                results.push(...d.map(item => ({
+                    slug: 'r' + item.id,
+                    title: item.title_ar || '',
+                    excerpt: item.excerpt_ar || '',
+                    content: (item.content_ar || '').replace(/\n/g, '<br>'),
+                    image: item.image || '',
+                    country: inferCountry(item),
+                    category: item.category || 'shadow',
+                    threat_level: item.threat_level || 'high',
+                    source: item.source_ar || 'مصادر الرصد',
+                    date: item.date || todayStr(),
+                    dateObj: safeDate(item.date),
+                    featured: !!item.featured
                 })));
             }
         }
-    } catch(e) {}
+    } catch(e) { /* تجاوز */ }
 
-    /* === GitHub === */
-    if (!isRL) {
+    /* === المصدر 2: ملفات HTML من GitHub (مع No-Cache و Rate Limit Handling) === */
+    if (!hasRateLimited) {
         try {
-            const r = await fetch(GH_LIST_API + '?_=' + Date.now());
-            if (r.status === 403) { isRL = true; stopRT(); return res; }
+            const ts = Date.now();
+            const url = GH_API + '&_=' + ts; /* Timestamp لمنع التخزين المؤقت */
+            const r = await fetch(url);
+
+            /* كشف الحظر */
+            if (r.status === 403) {
+                hasRateLimited = true;
+                console.warn('[CSU] GitHub Rate Limit — سنعتمد على البيانات المخزنة حتى يتم رفع الحظر.');
+                stopRefreshTimer();
+                return results;
+            }
+
             if (r.ok) {
                 const files = await r.json();
                 if (Array.isArray(files)) {
                     for (const f of files) {
                         if (!f.name.endsWith('.html')) continue;
-                        try { res.push(parseGH(f)); } catch(e) {}
+                        try { results.push(parseGHFile(f)); } catch(e) {}
                     }
                 }
             }
-        } catch(e) { handleErr(e); }
+        } catch(e) {
+            handleFetchError(e);
+        }
     }
-    return res;
+
+    /* ترتيب بالأحدث أولاً */
+    results.sort((a, b) => {
+        const da = a.dateObj ? a.dateObj.getTime() : 0;
+        const db = b.dateObj ? b.dateObj.getTime() : 0;
+        return db - da;
+    });
+
+    return results;
 }
 
 /* ============================================================
-       تحليل ملف GitHub — بيانات وصفية فقط (بدون تحميل المحتوى)
+       تحليل ملف GitHub — بيانات وصفية فقط
     ============================================================ */
-function parseGH(f) {
-    const s = f.name.replace('.html',''), p = s.split('-');
-    let c='global', cat='shadow', t=s, ex='', tl='high', src='مصادر الرصد', img='', dl='2025-01-01';
+function parseGHFile(file) {
+    const slug = file.name.replace('.html', '');
+    const p = slug.split('-');
+    let country = 'global', category = 'shadow', title = slug;
+
     if (p.length >= 3) {
-        if (COUNTRIES[p[1]]) c = p[1];
-        if (CATS[p[2]]) cat = p[2];
-        t = p.slice(3).join(' ');
+        if (COUNTRIES[p[1]]) country = p[1];
+        if (CATS[p[2]]) category = p[2];
+        title = p.slice(3).join(' ');
     }
-    if (f.updated_at) dl = f.updated_at.split('T')[0];
-    return { slug:s, title:t, excerpt:ex, content:'', image:img, country:c, category:cat, threat_level:tl, source:src, date:dl, dateObj:safeD(dl), featured:p.length>=3, src:'gh', rawUrl: CFG.postsFolder + f.name };
+
+    return {
+        slug, title, excerpt: '', content: '',
+        image: '', country, category,
+        threat_level: 'high',
+        source: 'مصادر الرصد',
+        date: file.updated_at ? file.updated_at.split('T')[0] : todayStr(),
+        dateObj: safeDate(file.updated_at),
+        featured: p.length >= 3,
+        src: 'github',
+        rawUrl: `https://raw.githubusercontent.com/${CFG.githubUser}/${CFG.githubRepo}/${CFG.branch}/${CFG.postsFolder}/${file.name}`
+    };
 }
 
-/* تحميل محتوى GitHub عند فتح المودال فقط */
-async function loadGHContent(r) {
+/* ============================================================
+       تحميل محتوى خبر GitHub عند فتح المودال فقط
+    ============================================================ */
+async function loadGHContent(report) {
     try {
-        const r2 = await fetch(r.rawUrl + '?_=' + Date.now());
-        if (!r2.ok) return null;
-        let h = await r2.text();
-        const mm = h.match(/<!--\s*meta\s+([\s\S]*?)-->/);
+        const r = await fetch(report.rawUrl + '?_=' + Date.now()); /* No-Cache */
+        if (!r.ok) return null;
+        let html = await r.text();
+
+        /* استخراج الميتا */
+        const mm = html.match(/<!--\s*meta\s+([\s\S]*?)-->/);
         if (mm) {
-            const ps = mm[1].match(/(\w+)\s*:\s*(.+)/g);
-            if (ps) ps.forEach(p => {
-                const [k,...v] = p.split(':');
+            const pairs = mm[1].match(/(\w+)\s*:\s*(.+)/g);
+            if (pairs) pairs.forEach(p => {
+                const [k, ...v] = p.split(':');
                 const val = v.join(':').trim();
-                if (k.trim()==='title') r.title = val;
-                if (k.trim()==='excerpt') r.excerpt = val;
-                if (k.trim()=='country' && COUNTRIES[val.toLowerCase()]) r.country = val.toLowerCase();
-                if (k.trim()=='category' && CATS[val.toLowerCase()]) r.category = val.toLowerCase();
-                if (k.trim()=='threat') r.threat_level = val.toLowerCase();
-                if (k.trim()=='source') r.source = val;
-                if (k.trim()==='image') r.image = val;
+                if (k.trim() === 'title') report.title = val;
+                if (k.trim() === 'excerpt') report.excerpt = val;
+                if (k.trim() === 'country' && COUNTRIES[val.toLowerCase()]) report.country = val.toLowerCase();
+                if (k.trim() === 'category' && CATS[val.toLowerCase()]) report.category = val.toLowerCase();
+                if (k.trim() === 'threat') report.threat_level = val.toLowerCase();
+                if (k.trim() === 'source') report.source = val;
+                if (k.trim() === 'image') report.image = val;
             });
         }
-        const bm = h.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-        let body = bm ? bm[1] : h;
+
+        const bm = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+        let body = bm ? bm[1] : html;
         body = body.replace(/<script[\s\S]*?<\/script>/gi, '');
         return body;
-    }
-    catch(e) { return null; }
+    } catch(e) { return null; }
 }
 
 /* ============================================================
-       Cache — LocalStorage
+       نظام التخزين المؤقت — LocalStorage
     ============================================================ */
 function loadCache() {
     try {
-        const m = JSON.parse(localStorage.getItem(CFG.cacheMetaKey));
-        if (!m || !m.ts) return null;
-        const age = (Date.now() - m.ts) / 60000;
-        if (age > CFG.cacheTTL) { cleanup(); return null; }
-        const d = JSON.parse(localStorage.getItem(CFG.cacheKey));
-        return (Array.isArray(d) && d.length > 0) ? d : null;
-    }
-    function saveCache(d) { try { localStorage.setItem(CFG.cacheKey, JSON.stringify(d)); localStorage.setItem(CFG.cacheMetaKey, JSON.stringify({ts:Date.now(),count:d.length})); } catch(e) {} }
-    function cleanup() { try { localStorage.removeItem(CFG.cacheKey); localStorage.removeItem(CFG.cacheMetaKey); } catch(e) {} }
+        const meta = JSON.parse(localStorage.getItem(CFG.cacheMetaKey) || '{}');
+        if (!meta.ts) return null;
+        const age = (Date.now() - meta.ts) / 60000;
+        if (age > CFG.cacheTTL) { localStorage.removeItem(CFG.cacheKey); localStorage.removeItem(CFG.cacheMetaKey); return null; }
+        const data = JSON.parse(localStorage.getItem(CFG.cacheKey) || '[]');
+        return Array.isArray(data) && data.length > 0 ? data : null;
+    } catch(e) { return null; }
+}
 
-function isDifferent(nd) {
-    if (nd.length !== allR.length) return true;
-    return nd.some((r,i) => r.slug !== allR[i]?.slug || r.title !== allR[i]?.title);
+function saveCache(data) {
+    try {
+        localStorage.setItem(CFG.cacheKey, JSON.stringify(data));
+        localStorage.setItem(CFG.cacheMetaKey, JSON.stringify({ ts: Date.now(), count: data.length }));
+    } catch(e) { /* مساحة ممتلئة — نتجاهل */ }
+}
+
+function isDataDifferent(newData) {
+    if (allReports.length !== newData.length) return true;
+    return newData.some((r, i) => r.slug !== allReports[i]?.slug || r.title !== allReports[i]?.title);
 }
 
 /* ============================================================
-       No-Cache لـ GitHub لمنع الحظر من المتصفح
+       معالجة الأخطاء — سilent إلا الحظر
     ============================================================ */
-function handleErr(e) {
-    if (e?.status === 403 || e?.message?.includes('403')) {
-        isRL = true;
-        console.warn('[CSU] Rate Limited — الاعتماد على البيانات المخزنة فقط حتى يُرفع الحظر.');
-        stopRT();
+function handleFetchError(e) {
+    if (e.message?.includes('403') || e.status === 403) {
+        hasRateLimited = true;
+        console.warn('[CSU] GitHub Rate Limit — الاعتماد على البيانات المخزنة.');
+        stopRefreshTimer();
     }
+    /* أخطاء أخرى: تجاهل صمتاً — المستخدم لا يرى شيئاً */
 }
 
 /* ============================================================
-       التحديث الصامت — يعمل فقط إذا كانت الصفحة نشطة
+       استنتاج البلد من بيانات JSON
     ============================================================ */
-function startRT() {
-    stopRT();
-    if (CFG.refreshInterval > 0 && isVis && !isRL) {
-        rTimer = setTimeout(() => { if (isVis) { doFetch(); startRT(); } }, CFG.refreshInterval * 60000);
-    }
-}
-function stopRT() { if (rTimer) { clearTimeout(rTimer); rTimer = null; }
-/* ============================================================
-       التصنيفات والبحث
-    ============================================================ */
-function setupCats() {
-    document.querySelectorAll('.cb').forEach(b => b.addEventListener('click', () => {
-        af = b.dataset.f;
-        document.querySelectorAll('.cb').forEach(x => x.classList.toggle('active', x.dataset.f === af));
-        applyFilters();
-        document.getElementById('grid').scrollIntoView({behavior:'smooth',block:'start'});
-    });
-}
-function filterBy(f) {
-    af = f;
-    document.querySelectorAll('.cb').forEach(x => x.classList.toggle('active', x.dataset.f === af));
-    applyFilters();
-    window.scrollTo({top:0, behavior:'smooth'});
-}
-function setupSearch() {
-    const inp = document.getElementById('sInput');
-    let t;
-    inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { sq = inp.value.trim(); applyFilters(); }, 300); });
-}
-function setupScroll() { const b = document.getElementById('backTop'); window.addEventListener('scroll', () => b.classList.toggle('show', window.scrollY > 400), {passive:true}); }
-function setupVis() {
-    const d = document.addEventListener ? document.hidden : true;
-    if (d && !isVis) { isVis = true; startRT(); }
-    else if (!d && isVis) { isVis = false; stopRT(); }
+function inferCountry(item) {
+    const t = (item.title_ar || '').toLowerCase();
+    if (t.includes('يمن') || t.includes('حوثي') || t.includes('صنعاء') || t.includes('عدن')) return 'yemen';
+    if (t.includes('جزائر')) return 'algeria';
+    if (t.includes('سعودي') || t.includes('نيوم') || t.includes('الإمارات')) return 'saudi';
+    if (t.includes('إمارات')) return 'gulf';
+    if (t.includes('إيران') || t.includes('شامون') || t.includes('apt33')) return 'iran';
+    if (t.includes('إسرائيل') || t.includes('8200') || t.includes('الموساد')) return 'israel';
+    if (t.includes('عراق')) return 'iraq';
+    if (t.includes('مصر') || t.includes('السودان')) return 'egypt';
+    return 'global';
 }
 
 /* ============================================================
-       الفلترة والبحث والعرض
+       الفلترة والبحث
     ============================================================ */
 function applyFilters() {
-    filtR = allR;
-    if (af !== 'all') filtR = filtR.filter(r => r.country === af || r.category === af);
-    if (sq) {
-        const q = sq.toLowerCase();
-        filtR = filtR.filter(r =>
+    filtered = allReports;
+    if (activeFilter !== 'all') {
+        filtered = filtered.filter(r => r.country === activeFilter || r.category === activeFilter);
+    }
+    if (searchQ) {
+        const q = searchQ.toLowerCase();
+        filtered = filtered.filter(r =>
             r.title.toLowerCase().includes(q) ||
             (COUNTRIES[r.country] || '').includes(q) ||
-            (CAT_LABELS[r.category] || '').includes(q) ||
+            (CATS[r.category] || '').includes(q) ||
             (TLBL[r.threat_level] || '').includes(q)
         );
     }
     renderGrid();
 }
+
 function renderGrid() {
-    const g = document.getElementById('grid'), nd = document.getElementById('noData'), rc = document.getElementById('rc');
-    if (sq || af !== 'all') { rc.classList.add('show'); rc.textContent = filtR.length + ' تقرير'; }
+    const grid = document.getElementById('grid');
+    const nd = document.getElementById('noData');
+    const rc = document.getElementById('resultCount');
+    if (searchQ || activeFilter !== 'all') { rc.classList.add('show'); rc.textContent = `${filtered.length} تقرير`; }
     else { rc.classList.remove('show'); }
-    if (!filtR.length) { g.innerHTML = ''; nd.style.display = 'block'; return; }
+    if (filtered.length === 0) { grid.innerHTML = ''; nd.style.display = 'block'; return; }
     nd.style.display = 'none';
-    g.innerHTML = filtR.map(r => {
-        const tH = sq ? hl(r.title, sq) : esc(r.title);
-        const img = r.image || (r.src==='gh' ? r.rawUrl : '');
-        const onE = r.src==='gh' ? `this.onerror="this.style.display='none';this.nextElementSibling.style.bottom='10px'"` : `this.onerror="this.style.display='none'"`;
-        return `<article class="cd" onclick="openM('${r.slug}','${r.src}')" tabindex="0" onkeydown="if(event.key==='Enter')openM('${r.slug}','${r.src}')" aria-label="${esc(r.title)}">
-            <div class="cd-img-wrap"><img class="cd-img" src="${esc(img)}" alt="" loading="lazy" ${onE}></div>
-            <div class="cd-body">
-                <div class="cd-meta">
-                    <span class="cd-cat"><i class="fas fa-shield-halved"></i> ${CAT_LABELS[r.category]||'تقرير'}</span>
-                    <span class="cd-date">${fmtD(r.date)}</span>
+    grid.innerHTML = filtered.map(r => {
+        const tH = searchQ ? hl(r.title, searchQ) : esc(r.title);
+        const img = r.image || (r.src === 'github' ? r.rawUrl : '');
+        const onErr = r.src === 'github' ? `this.onerror="this.style.display='none';this.nextElementSibling.style.bottom='10px'"` : `this.onerror="this.style.display='none'"`;
+        return `<article class="card" onclick="openModal('${r.slug}','${r.src}')" tabindex="0"
+            onkeydown="if(event.key==='Enter')openModal('${r.slug}','${r.src}')">
+            <div class="card-img-wrap">
+                ${img ? `<img class="card-img" src="${esc(img)}" alt="" loading="lazy" ${onErr}>` : ''}
+                <span class="card-country" style="${img?'':'bottom:10px;'}"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[r.country]||'عالمي'}</span>
+            </div>
+            <div class="card-body">
+                <div class="card-meta">
+                    <span class="card-source">${CATS[r.category]||'تقرير'}</span>
+                    <span>${fmtDate(r.date)}</span>
                 </div>
-                <h3 class="cd-title">${tH}</h3>
-                ${r.excerpt ? `<p class="cd-excerpt">${esc(r.excerpt)}</p>` : ''}
-                ${r.threat_level ? `<span class="cd-threat ${TCLS[r.threat_level]||''}"><i class="fas fa-exclamation-triangle"></i> ${TLBL[r.threat_level]||r.threat_level}</span>` : ''}
-                <button class="cd-read">قراءة التقرير <i class="fas fa-arrow-left"></i></button>
+                <h3 class="card-title">${tH}</h3>
+                ${r.excerpt ? `<p class="card-excerpt">${esc(r.excerpt)}</p>` : ''}
+                ${r.threat_level ? `<span class="card-threat ${TCLS[r.threat_level]||''}"><i class="fas fa-exclamation-triangle"></i> ${TLBL[r.threat_level]||r.threat_level}</span>` : ''}
+                <button class="card-read">قراءة التقرير <i class="fas fa-arrow-left"></i></button>
             </div>
         </article>`;
     }).join('');
 }
 
 /* ============================================================
-       المودال — يحمّل المحتوى الكامل فقط عند الفتح
+       المودال
     ============================================================ */
-async function openM(slug, src) {
-    const r = allR.find(x => x.slug === slug);
+async function openModal(slug, src) {
+    const r = allReports.find(x => x.slug === slug);
     if (!r) return;
-    cSlug = slug;
+    currentSlug = slug;
     document.getElementById('modal').classList.add('open');
     document.body.style.overflow = 'hidden';
     history.pushState({}, '', '#report-' + slug);
     document.title = r.title + ' — وحدة الرصد السيبراني';
 
-    document.getElementById('moC').innerHTML = `<div style="padding:50px;text-align:center;color:var(--text-dim);"><div style="width:32px;height:32px;border:3px solid var(--border-subtle);border-top-color:var(--neon-dim);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px;"></div><p>جاري التحميل...</p></div>`;
+    document.getElementById('modalContent').innerHTML = `
+        <div style="padding:60px;text-align:center;color:var(--gray-400);">
+            <div class="spinner" style="margin:0 auto 14px;"></div><p>جاري تحميل التقرير...</p>
+        </div>`;
 
     let bodyHTML = '';
-    if (src === 'gh' && !r.content) {
+    if (src === 'github' && !r.content) {
         bodyHTML = await loadGHContent(r);
         if (!bodyHTML) {
-            document.getElementById('moC').innerHTML = `<div style="padding:60px;text-align:center;color:var(--text-dim);"><i class="fas fa-exclamation-triangle" style="font-size:2rem;color:var(--red);"></i><p style="margin-top:12px;">فشل التحميل</p><button class="retry-btn" onclick="openM('${slug}','gh')" style="margin-top:14px;">إعادة المحاولة</button></div>`;
+            document.getElementById('modalContent').innerHTML = `
+                <div style="padding:60px;text-align:center;color:var(--gray-400);">
+                    <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:var(--red);"></i>
+                    <p style="margin-top:12px;">فشل تحميل التقرير</p>
+                    <button class="retry-btn" onclick="openModal('${slug}','github')" style="margin-top:14px;">إعادة المحاولة</button>
+                </div>`;
             return;
         }
     } else { bodyHTML = r.content || '<p>لا يوجد محتوى.</p>'; }
@@ -620,73 +670,108 @@ async function openM(slug, src) {
     let media = '';
     const yt = bodyHTML.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
     if (yt) {
-        media = `<iframe class="mo-vid" src="https://www.youtube.com/embed/${yt[1]}" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        media = `<iframe class="modal-video" src="https://www.youtube.com/embed/${yt[1]}" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
         bodyHTML = bodyHTML.replace(new RegExp(yt[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'g'), '');
     } else {
         const im = bodyHTML.match(/<img[^>]+src=["']([^"']+)["'][^>]*>/);
-        if (im) { media = `<img class="mo-img" src="${im[1]}" alt="" loading="lazy">`; bodyHTML = bodyHTML.replace(im[0], ''); }
-        else if (r.image) { media = `<img class="mo-img" src="${esc(r.image)}" alt="" loading="lazy" onerror="this.style.display='none'">`; }
+        if (im) { media = `<img class="modal-img" src="${im[1]}" alt="" loading="lazy">`; bodyHTML = bodyHTML.replace(im[0], ''); }
+        else if (r.image) { media = `<img class="modal-img" src="${esc(r.image)}" alt="" loading="lazy" onerror="this.style.display='none'">`; }
     }
 
     const thr = TLBL[r.threat_level] || '';
-    document.getElementById('moC').innerHTML = `
+    document.getElementById('modalContent').innerHTML = `
         ${media}
-        <div class="mo-bd">
-            <div class="mo-tags">
-                <span class="mt-c"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[r.country]||'عالمي'}</span>
-                <span class="mt-t"><i class="fas fa-shield-halved"></i> ${CAT_LABELS[r.category]||'تقرير'}</span>
-                ${thr ? `<span class="mt-h"><i class="fas fa-exclamation-triangle"></i> ${thr}</span>` : ''}
+        <div class="modal-body">
+            <div class="modal-tags">
+                <span class="mtag mtag-c"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[r.country]||'عالمي'}</span>
+                <span class="mtag mtag-t"><i class="fas fa-shield-halved"></i> ${CATS[r.category]||'تقرير'}</span>
+                ${thr ? `<span class="mtag mtag-h"><i class="fas fa-exclamation-triangle"></i> ${thr}</span>` : ''}
             </div>
             <h2>${esc(r.title)}</h2>
-            <div class="mo-info">
-                <span><i class="far fa-clock"></i> ${fmtD(r.date)}</span>
+            <div class="modal-info">
+                <span><i class="far fa-clock"></i> ${fmtDate(r.date)}</span>
                 <span><i class="fas fa-building"></i> ${esc(r.source)}</span>
             </div>
-            <div class="mo-ct">${bodyHTML}</div>
-            <div class="mo-foot">
-                <span>${r.slug}</span>
-                <button class="share-btn" onclick="shareR('${r.slug}')"><i class="fas fa-share-nodes"></i> مشاركة</button>
+            <div class="mct">${bodyHTML}</div>
+            <div class="modal-foot">
+                <span>${slug}</span>
+                <button class="share-btn" onclick="shareReport('${slug}')"><i class="fas fa-share-nodes"></i> مشاركة</button>
             </div>
         </div>`;
 }
 
-function closeM() {
+function closeModal() {
     document.getElementById('modal').classList.remove('open');
     document.body.style.overflow = '';
-    cSlug = null;
+    currentSlug = null;
     history.pushState({}, '', window.location.pathname);
-    document.title = 'وحدة الرصد السيبراني — غرب آسيا';
+    document.title = 'وحدة الرصد السيبراني — تقارير ميدانية';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeM(); });
-window.addEventListener('popstate', () => { if (cSlug) closeM(); else handleHash(); });
-function handleHash() { const h = window.location.hash; if (h.startsWith('#report-')) { const s = h.replace('#report-',''); const r = allR.find(x => x.slug === s); if (r) openM(s, r.src); } }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+window.addEventListener('popstate', () => { if (currentSlug) closeModal(); else handleHash(); });
+function handleHash() { const h = window.location.hash; if (h.startsWith('#report-')) { const s = h.replace('#report-',''); const r = allReports.find(x => x.slug === s); if (r) openModal(s, r.src); } }
 
 /* ============================================================
        التيكر
     ============================================================ */
 function buildTicker() {
-    const items = allR.filter(r => r.featured || r.threat_level === 'critical').slice(0, 10);
+    const items = allReports.filter(r => r.featured || r.threat_level === 'critical').slice(0, 10);
     const el = document.getElementById('ticker');
-    if (!items.length) { el.innerHTML = '<span class="tk-i"><i class="fas fa-satellite-dish"></i> وحدة الرصد السيبراني — رصد مستمر</span>'; return; }
-    el.innerHTML = items.map(r => `<span class="tk-i"><i class="fas fa-circle-exclamation"></i> ${esc(r.title)}</span>`).join('');
+    if (items.length === 0) { el.innerHTML = '<span class="ticker-item"><i class="fas fa-satellite-dish"></i> وحدة الرصد السيبراني — رصد مستمر</span>'; return; }
+    const t = items.map(r => `<span class="ticker-item"><i class="fas fa-circle-exclamation"></i> ${esc(r.title)}</span>`).join('');
+    el.innerHTML = t + t;
+}
+
+/* ============================================================
+       التصنيفات والبحث
+    ============================================================ */
+function setupCats() {
+    document.querySelectorAll('.cat-btn').forEach(b => {
+        b.addEventListener('click', () => {
+            activeFilter = b.dataset.f;
+            document.querySelectorAll('.cat-btn').forEach(x => x.classList.remove('active'));
+            b.classList.add('active');
+            applyFilters();
+            document.getElementById('grid').scrollIntoView({behavior:'smooth',block:'start'});
+        });
+    });
+}
+function filterBy(f) {
+    activeFilter = f;
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.f === f));
+    applyFilters();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function setupSearch() {
+    const inp = document.getElementById('searchInput');
+    let t;
+    inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { searchQ = inp.value.trim(); applyFilters(); }, 300); });
 }
 
 /* ============================================================
        أدوات
     ============================================================ */
-function shareR(slug) {
-    const u = window.location.origin + window.location.pathname + '#report-' + slug;
-    if (navigator.share) navigator.share({title:document.title, url}).catch(()=>{});
-    else if (navigator.clipboard) navigator.clipboard.writeText(u).then(() => showToast('تم نسخ الرابط'));
+function shareReport(slug) {
+    const url = window.location.origin + window.location.pathname + '#report-' + slug;
+    if (navigator.share) navigator.share({title: document.title, url}).catch(()=>{});
+    else if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => showToast('تم نسخ الرابط'));
 }
-function showToast(m) { const t = document.createElement('div'); t.className='toast'; t.textContent=m; document.body.appendChild(t); setTimeout(() => t.remove(), 3000); }
-function fmtD(d) { try { return new Date(d).toLocaleDateString('ar-EG',{year:'numeric',month:'short',day:'numeric'}); } catch(e) { return d; } }
+function showToast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 3000); }
+function fmtDate(d) { try { return new Date(d).toLocaleDateString('ar-EG',{year:'numeric',month:'short',day:'numeric'}); } catch(e) { return d; } }
 function esc(s) { if (!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function hl(text, q) { if (!q) return esc(text); const s = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); return esc(text).replace(new RegExp(`(${s})`,'gi'), '<span class="hl">$1</span>'); }
+function safeDate(d) { if (!d) return new Date(); try { const dt = new Date(d); return isNaN(dt.getTime()) ? new Date() : dt; } catch(e) { return new Date(); } }
+function todayStr() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 function setDate() { document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'}); }
-
 function setupScroll() { const b = document.getElementById('backTop'); window.addEventListener('scroll', () => b.classList.toggle('show', window.scrollY > 400), {passive:true}); }
-</script>
+
+/* Spinner CSS مُضمّن لتجنب الاعتماد على ملف خارجي */
+if (!document.getElementById('spinnerStyle')) {
+    const s = document.createElement('style');
+    s.id = 'spinnerStyle';
+    s.textContent = `.spinner{width:36px;height:36px;border:3px solid var(--gray-200);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px;}@keyframes spin{to{transform:rotate(360deg);}}`;
+    document.head.appendChild(s);
+}
 </script>
 </body>
 </html>
