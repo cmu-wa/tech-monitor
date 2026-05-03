@@ -1,14 +1,69 @@
 [
     {
+        "slug": "saudi-intrusions-neom-smart-city",
+        "title": "اختراق متقدم لطبقة IoT في البنية التحتية الذكية لمشروع نيوم",
+        "excerpt": "رصدت وحدة الرصد محاولات اختراق منظمة تستهدف بروتوكولات إنترنت الأشياء في المرحلة التجريبية من البنية الذكية لنيوم.",
+        "country": "saudi",
+        "category": "intrusions",
+        "threat": "critical",
+        "date": "2025-06-18",
+        "image": "posts/images/saudi-neom-iot.jpg",
+        "source": "مصادر الرصد الخاصة"
+    },
+    {
+        "slug": "israel-intrusions-banking-ddos",
+        "title": "حملة هجومية إيرانية منسقة تستهدف القطاع المصرفي الإسرائيلي",
+        "excerpt": "رصدت وحدة الرصد حملة DDoS واسعة النطاق بدعم إيراني مباشر تستهدف 5 بنوك إسرائيلية كبرى مع استخدام تقنيات جديدة لتجاوز أنظمة الحماية.",
+        "country": "israel",
+        "category": "intrusions",
+        "threat": "high",
+        "date": "2025-06-17",
+        "image": "posts/images/israel-banking-cyber.jpg",
+        "source": "مركز العمليات السيبرانية المشتركة"
+    },
+    {
+        "slug": "algeria-intrusions-government-database",
+        "title": "تسريب ضخم لقواعد بيانات حكومية جزائرية يكشف عن اختراق طويل الأمد",
+        "excerpt": "كشف تحليل جنائي رقمي عن اختراق استمر 14 شهراً في قواعد بيانات عدة وزارات جزائرية مع تسريب ملايين السجلات.",
+        "country": "algeria",
+        "category": "intrusions",
+        "threat": "critical",
+        "date": "2025-06-16",
+        "image": "posts/images/algeria-database-breach.jpg",
+        "source": "فريق التحليل الجنائي الرقمي"
+    },
+    {
+        "slug": "global-vulns-sandstorm-ransomware",
+        "title": "فايروس فدية جديد عاصفة رملية يستهدف تحديداً المؤسسات المالية العربية",
+        "excerpt": "اكتشاف سلالة فدية جديدة متطورة تُظهر استهدافاً مُتعمداً للمؤسسات المالية في الدول العربية مع قدرات تشفير مزدوجة.",
+        "country": "global",
+        "category": "vulns",
+        "threat": "critical",
+        "date": "2025-06-15",
+        "image": "posts/images/global-ransomware-sandstorm.jpg",
+        "source": "مختبر التحليل البرمجي"
+    },
+    {
         "slug": "yemen-intrusions-apt-energy-grid",
         "title": "عملية اختراق واسعة تستهدف الشبكة الوطنية للطاقة في اليمن",
-        "excerpt": "رصدت وحدة الرصد السيبرانية عملية منظمة استهدفت أنظمة التحكم الصناعي التابعة للشبكة الوطنية للطاقة الكهربائية عبر ثغرة يوم-صفر في بروتوكولات SCADA.",
+        "excerpt": "رصدت وحدة الرصد السيبرانية عملية منظمة استهدفت أنظمة التحكم الصناعي عبر ثغرة يوم-صفر في بروتوكولات SCADA.",
         "country": "yemen",
         "category": "intrusions",
         "threat": "critical",
         "date": "2025-06-14",
         "image": "posts/images/yemen-energy-grid.jpg",
         "source": "مصادر الرصد الخاصة"
+    },
+    {
+        "slug": "iraq-shadow-oil-ministry-espionage",
+        "title": "حملة تجسس سيبراني مجهولة تستهدف وزارة النفط العراقية",
+        "excerpt": "رصدت وحدة المراقبة شبكة اتصالات مشفرة تنقل بيانات مسروقة من خوادم وزارة النفط عبر مسارات متعددة لتمويه الوجهة.",
+        "country": "iraq",
+        "category": "shadow",
+        "threat": "high",
+        "date": "2025-06-13",
+        "image": "posts/images/iraq-oil-espionage.jpg",
+        "source": "وحدة المراقبة الشبكية"
     },
     {
         "slug": "gulf-vulns-oil-infrastructure",
@@ -18,18 +73,40 @@
         "category": "vulns",
         "threat": "high",
         "date": "2025-06-12",
-        "image": "https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?auto=format&fit=crop&w=800&h=400&q=80",
+        "image": "posts/images/gulf-oil-refinery.jpg",
         "source": "فريق تحليل الثغرات"
+    },
+    {
+        "slug": "egypt-vulns-telecom-backbone",
+        "title": "ثغرة حرجة في العمود الفقري للاتصالات المصري تهدد ملايين المشتركين",
+        "excerpt": "اكتشاف ثغرة في بروتوكولات التوجيه الأساسية للشبكة الوطنية المصرية تسمح باعتراض حركة البيانات وإعادة توجيهها.",
+        "country": "egypt",
+        "category": "vulns",
+        "threat": "critical",
+        "date": "2025-06-11",
+        "image": "posts/images/egypt-telecom-backbone.jpg",
+        "source": "فريق أمن البنية التحتية الحيوية"
     },
     {
         "slug": "iran-shadow-cyber-espionage-diplomats",
         "title": "حملة تجسس إلكتروني إيرانية تستهدف بعثات دبلوماسية في المنطقة",
-        "excerpt": "كشفت التحليلات عن حملة طويلة الأمد تعتمد على أساليب الصيد الاحتيالي المتقدم عبر استغلال خدمات سحابية شرعية.",
+        "excerpt": "كشفت التحليلات عن حملة طويلة الأمد تعتمد على الصيد الاحتيالي المتقدم عبر استغلال خدمات سحابية شرعية.",
         "country": "iran",
         "category": "shadow",
         "threat": "high",
         "date": "2025-06-10",
-        "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&h=400&q=80",
+        "image": "posts/images/iran-cyber-espionage.jpg",
         "source": "وحدة الاستخبارات السيبرانية"
+    },
+    {
+        "slug": "iran-shadow-apt-toolkit-gulf-defense",
+        "title": "طقم أدوات سيبراني إيراني جديد يُستخدم ضد مقاولي دفاع خليجيين",
+        "excerpt": "رصد تحليلي لطقم أدوات Labyrinth-3 المتطور الذي يُستخدم في عمليات تجسس ضد شركات دفاعية خليجية مع قدرات غير مسبوقة.",
+        "country": "iran",
+        "category": "shadow",
+        "threat": "critical",
+        "date": "2025-06-09",
+        "image": "posts/images/iran-apt-toolkit.jpg",
+        "source": "مختبر التحليل المتقدم للتهديدات"
     }
 ]
