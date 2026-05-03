@@ -1,0 +1,35 @@
+[
+    {
+        "slug": "yemen-intrusions-apt-energy-grid",
+        "title": "عملية اختراق واسعة تستهدف الشبكة الوطنية للطاقة في اليمن",
+        "excerpt": "رصدت وحدة الرصد السيبرانية عملية منظمة استهدفت أنظمة التحكم الصناعي التابعة للشبكة الوطنية للطاقة الكهربائية عبر ثغرة يوم-صفر في بروتوكولات SCADA.",
+        "country": "yemen",
+        "category": "intrusions",
+        "threat": "critical",
+        "date": "2025-06-14",
+        "image": "https://picsum.photos/seed/yemen-energy/800/400",
+        "source": "مصادر الرصد الخاصة"
+    },
+    {
+        "slug": "gulf-vulns-oil-infrastructure",
+        "title": "ثغرة حرجة في أنظمة المراقبة الصناعية لمنشآت النفط الخليجية",
+        "excerpt": "اكتشاف ثغرة غير مُعلنة في نظام مراقبة حراري مُستخدم في عدة منشآت نفطية خليجية تسمح بالتنفيذ عن بُعد.",
+        "country": "gulf",
+        "category": "vulns",
+        "threat": "high",
+        "date": "2025-06-12",
+        "image": "https://picsum.photos/seed/gulf-oil-vuln/800/400",
+        "source": "فريق تحليل الثغرات"
+    },
+    {
+        "slug": "iran-shadow-cyber-espionage-diplomats",
+        "title": "حملة تجسس إلكتروني إيرانية تستهدف بعثات دبلوماسية في المنطقة",
+        "excerpt": "كشفت التحليلات عن حملة طويلة الأمد تعتمد على أساليب الصيد الاحتيالي المتقدم عبر استغلال خدمات سحابية شرعية لتسلل غير مكتشف.",
+        "country": "iran",
+        "category": "shadow",
+        "threat": "high",
+        "date": "2025-06-10",
+        "image": "https://picsum.photos/seed/iran-shadow-ops/800/400",
+        "source": "وحدة الاستخبارات السيبرانية"
+    }
+]
