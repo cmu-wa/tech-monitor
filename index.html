@@ -580,7 +580,12 @@ function sanitizeHTML(rawHTML) {
                     /* إزالة السمات غير المسموحة */
                     if (!allowed.includes(name) && !globalAllowed.includes(name)) { child.removeAttribute(name); continue; }
                     /* فحص الروابط الخطرة */
-                    if ((name === 'src' || name === 'href') && FORBIDDEN_URI.some(p => val.trim().toLowerCase().startsWith(p))) {
+                                  /* إصلاح مسارات الصور النسبية */
+              if (tag === 'img' && name === 'src' && val && !val.startsWith('http') && !val.startsWith('data:') && !val.startsWith('blob:') && !val.startsWith('./') && !val.startsWith('/')) {
+                child.setAttribute(name, './' + val);
+              }
+              /* فحص الروابط الخطرة */
+              if ((name === 'src' || name === 'href') && FORBIDDEN_URI.some(p => val.trim().toLowerCase().startsWith(p))) {
                         child.removeAttribute(name); continue;
                     }
                     /* تنظيف inline style من تعبيرات خطرة */
@@ -907,13 +912,13 @@ function renderGrid() {
 function renderCard(item) {
     const tH = highlightText(item.title, state.searchQuery);
     const isBookmarked = state.bookmarks.has(item.slug);
-    const imgSrc = item.image || '';
+    const imgSrc = fixImagePath(item.image);
     const threatClass = THREAT_CLASSES[item.threat] || '';
     const threatLabel = THREAT_LABELS[item.threat] || '';
 
     return `<article class="card" data-slug="${escapeAttr(item.slug)}" tabindex="0">
         <div class="card-img-wrap">
-            ${imgSrc ? `<img class="card-img" src="${escapeAttr(imgSrc)}" alt="" loading="lazy" onerror="this.style.display='none'">` : '<div class="skeleton skel-img" style="display:flex;"></div>'}
+            ${imgSrc ? `<img class="card-img" src="${escapeAttr(imgSrc)}" alt="" loading="lazy" onerror="this.outerHTML='<div style=\\'width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;\\'><i class=\\'fas fa-image\\' style=\\'font-size:1.5rem;margin-inline-end:8px;\\'></i> صورة غير متوفرة</div>'">` : '<div style="width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;"><i class="fas fa-image" style="font-size:1.5rem;margin-inline-end:8px;"></i> لا توجد صورة</div>'}
             <span class="card-country"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[item.country] || 'عالمي'}</span>
             <button class="card-bookmark ${isBookmarked ? 'saved' : ''}" data-bm="${escapeAttr(item.slug)}" aria-label="${isBookmarked ? 'إزالة من المحفوظات' : 'حفظ التقرير'}">
                 <i class="${isBookmarked ? 'fas' : 'far'} fa-bookmark"></i>
@@ -999,10 +1004,10 @@ async function openModal(slug) {
     } else {
         const imgMatch = bodyHTML.match(/<img[^>]+src=["']([^"']+)["'][^>]*>/);
         if (imgMatch) {
-            media = `<img class="modal-img" src="${imgMatch[1]}" alt="" loading="lazy" onerror="this.style.display='none'">`;
+            media = `<img class="modal-img" src="${fixImagePath(imgMatch[1])}" alt="" loading="lazy" onerror="this.outerHTML='<div style=\\'width:100%;height:200px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);\\'><i class=\\'fas fa-image\\' style=\\'font-size:2rem;margin-inline-end:10px;\\'></i> صورة غير متوفرة</div>'">`;
             bodyHTML = bodyHTML.replace(imgMatch[0], '');
         } else if (image) {
-            media = `<img class="modal-img" src="${escapeAttr(image)}" alt="" loading="lazy" onerror="this.style.display='none'">`;
+            media = `<img class="modal-img" src="${fixImagePath(image)}" alt="" loading="lazy" onerror="this.outerHTML='<div style=\\'width:100%;height:200px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);\\'><i class=\\'fas fa-image\\' style=\\'font-size:2rem;margin-inline-end:10px;\\'></i> صورة غير متوفرة</div>'">`;
         }
     }
 
@@ -1276,6 +1281,23 @@ function buildTicker() {
 /* ================================================================
        أدوات مساعدة
 ================================================================ */
+/* ================================================================
+       أدوات مساعدة
+================================================================ */
+
+/* إصلاح المسارات النسبية حسب بيئة الاستضافة */
+function fixImagePath(path) {
+    if (!path) return '';
+    /* بالفعل رابط مطلق أو بروتوكول */
+    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:') || path.startsWith('blob:')) return path;
+    /* بالفعل يبدأ بـ ./ */
+    if (path.startsWith('./')) return path;
+    /* بالفعل يبدأ بـ / */
+    if (path.startsWith('/')) return path;
+    /* إضافة ./ للمسارات النسبية */
+    return './' + path;
+}
+
 function escapeHTML(s) {
     if (!s) return '';
     return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
