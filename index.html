@@ -45,18 +45,12 @@
             --t-shadow-md:0 8px 24px rgba(0,0,0,0.3);
             --t-shadow-lg:0 16px 48px rgba(0,0,0,0.4);
         }
-
-        /* ألوان العلامة التجارية (ثابتة) */
         :root {
             --navy:#0c1e35;--navy-light:#1a3455;
             --red:#c0392b;--red-bright:#e74c3c;
             --gold:#c8952e;--gold-light:#e8b44a;
             --rlg:16px;--rmd:12px;--rsm:8px;--rpill:50px;
         }
-
-        /* ================================================================
-           2. إعادة التعيين والأساسيات
-        ================================================================ */
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
         body{font-family:'Cairo',sans-serif;background:var(--t-bg);color:var(--t-text);line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;}
@@ -65,7 +59,7 @@
         :focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:4px;}
 
         /* ================================================================
-           3. شريط الهيدر العلوي
+           2. أعلى الصفحة
         ================================================================ */
         .top-bar{background:var(--navy);padding:6px 0;font-size:.72rem;color:var(--t-text-3);border-bottom:1px solid rgba(255,255,255,.06);}
         .top-bar-inner{max-width:1320px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
@@ -73,10 +67,11 @@
         .top-bar a:hover{color:var(--gold-light);}
 
         /* ================================================================
-           4. الهيدر الرئيسي
+           3. الهيدر
         ================================================================ */
         .header{background:var(--t-header);border-bottom:3px solid var(--red);padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:var(--t-shadow-sm);transition:background .35s;}
         .header-inner{max-width:1320px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;}
+        .brand{cursor:pointer;}
         .brand h1{font-size:1.75rem;font-weight:900;color:var(--navy);line-height:1.1;transition:color .35s;}
         [data-theme="dark"] .brand h1{color:var(--t-text);}
         .brand h1 span{color:var(--red);}
@@ -96,6 +91,35 @@
         .sync-dot.active{display:inline-block;margin-inline-end:6px;}
 
         /* ================================================================
+           4. قائمة التنقل (Overlay)
+        ================================================================ */
+        .nav-overlay{position:fixed;inset:0;z-index:5000;display:flex;opacity:0;visibility:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);}
+        .nav-overlay.open{opacity:1;visibility:visible;}
+        .nav-backdrop{position:absolute;inset:0;background:var(--t-overlay);backdrop-filter:blur(8px);}
+        .nav-panel{position:relative;width:380px;max-width:85vw;background:var(--navy);color:#fff;height:100%;overflow-y:auto;transform:translateX(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;}
+        [dir="ltr"] .nav-panel{transform:translateX(-100%);margin-left:auto;}
+        [dir="rtl"] .nav-panel{transform:translateX(100%);margin-right:auto;}
+        .nav-overlay.open .nav-panel{transform:translateX(0);}
+        .nav-header{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08);}
+        .nav-header h2{font-size:1.3rem;font-weight:900;}
+        .nav-header h2 span{color:var(--red);}
+        .nav-header p{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:4px;}
+        .nav-close{position:absolute;top:20px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.5);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;}
+        [dir="rtl"] .nav-close{left:20px;}
+        [dir="ltr"] .nav-close{right:20px;}
+        .nav-close:hover{background:var(--red);color:#fff;}
+        .nav-links{flex:1;padding:16px 0;}
+        .nav-link{display:flex;align-items:center;gap:14px;padding:14px 24px;font-size:.92rem;font-weight:700;color:rgba(255,255,255,.65);cursor:pointer;transition:all .2s;border:none;background:none;width:100%;font-family:inherit;text-align:start;}
+        .nav-link:hover{color:#fff;background:rgba(255,255,255,.06);}
+        .nav-link.active{color:var(--gold-light);background:rgba(200,149,46,.08);}
+        .nav-link i{width:20px;text-align:center;font-size:.9rem;}
+        .nav-link .nav-badge{margin-inline-start:auto;background:var(--red);color:#fff;font-size:.6rem;padding:2px 8px;border-radius:var(--rpill);}
+        .nav-sep{height:1px;background:rgba(255,255,255,.06);margin:8px 24px;}
+        .nav-footer{padding:20px 24px;border-top:1px solid rgba(255,255,255,.08);font-size:.72rem;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:12px;}
+        .nav-footer a{color:rgba(255,255,255,.4);transition:color .2s;font-size:.9rem;}
+        .nav-footer a:hover{color:var(--gold-light);}
+
+        /* ================================================================
            5. شريط التصنيفات
         ================================================================ */
         .categories{background:var(--t-card);border-bottom:1px solid var(--t-border);position:sticky;top:57px;z-index:99;transition:background .35s;}
@@ -110,7 +134,7 @@
         .cat-btn.active .badge-count{background:rgba(255,255,255,.25);}
 
         /* ================================================================
-           6. شريط العناوين المتحركة
+           6. التيكر
         ================================================================ */
         .ticker-bar{background:var(--navy);padding:8px 0;overflow:hidden;border-bottom:2px solid var(--gold);}
         .ticker-track{display:flex;animation:tickerScroll 90s linear infinite;white-space:nowrap;}
@@ -132,7 +156,7 @@
         .sort-select:focus{border-color:var(--red);}
 
         /* ================================================================
-           8. بطاقات التقارير
+           8. البطاقات
         ================================================================ */
         .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:22px;}
         .card{background:var(--t-card);border:1px solid var(--t-border);border-radius:var(--rlg);overflow:hidden;transition:all .3s cubic-bezier(.4,0,.2,1);box-shadow:var(--t-shadow-sm);display:flex;flex-direction:column;cursor:pointer;position:relative;border-inline-start:3px solid transparent;}
@@ -149,7 +173,7 @@
         .card-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:.72rem;color:var(--t-text-3);}
         .card-source{background:var(--t-tag);padding:2px 10px;border-radius:var(--rpill);font-weight:700;color:var(--navy);}
         [data-theme="dark"] .card-source{color:var(--t-text-2);}
-        .card-title{font-size:1.02rem;font-weight:900;line-height:1.5;color:var(--t-text);margin-bottom:8px;transition:color .2s;}
+        .card-title{font-size:1.02rem;font-weight:900;line-height:1.5;color:var(--t-text);margin-bottom:8px;}
         .card-excerpt{font-size:.83rem;color:var(--t-text-3);line-height:1.75;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:12px;}
         .card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;border-top:1px solid var(--t-border-2);}
         .card-read{color:var(--red);font-weight:700;font-size:.8rem;display:inline-flex;align-items:center;gap:4px;background:none;border:none;font-family:inherit;cursor:pointer;padding:0;transition:gap .25s;}
@@ -162,20 +186,17 @@
         @keyframes threatBlink{0%,100%{opacity:1;}50%{opacity:.55;}}
 
         /* ================================================================
-           9. هيكل تحميل Skeleton
+           9. Skeleton
         ================================================================ */
         .skeleton{background:linear-gradient(90deg,var(--t-skeleton-base) 25%,var(--t-skeleton-shine) 50%,var(--t-skeleton-base) 75%);background-size:200% 100%;animation:shimmer 1.5s ease-in-out infinite;border-radius:var(--rsm);}
         @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
         .skel-card{background:var(--t-card);border:1px solid var(--t-border);border-radius:var(--rlg);overflow:hidden;display:flex;flex-direction:column;}
         .skel-img{width:100%;height:195px;}
         .skel-body{padding:16px 18px;flex:1;display:flex;flex-direction:column;gap:10px;}
-        .skel-line{height:12px;border-radius:6px;}
-        .skel-line.w60{width:60%;}.skel-line.w80{width:80%;}.skel-line.w40{width:40%;}.skel-line.w100{width:100%;}
-        .skel-line.h8{height:8px;}.skel-line.h16{height:16px;border-radius:8px;}
-        .skel-line.h20{height:20px;border-radius:10px;}
+        .skel-line{height:12px;border-radius:6px;}.skel-line.w60{width:60%;}.skel-line.w80{width:80%;}.skel-line.w40{width:40%;}.skel-line.w100{width:100%;}.skel-line.h8{height:8px;}.skel-line.h16{height:16px;border-radius:8px;}.skel-line.h20{height:20px;border-radius:10px;}
 
         /* ================================================================
-           10. زر تحميل المزيد
+           10. تحميل المزيد
         ================================================================ */
         .load-more-wrap{display:flex;justify-content:center;padding:32px 0 8px;}
         .load-more-btn{padding:12px 36px;border:2px solid var(--t-border);border-radius:var(--rpill);background:var(--t-card);color:var(--t-text-2);font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:8px;}
@@ -183,16 +204,12 @@
         .load-more-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;}
         .load-more-btn .spinner-sm{width:16px;height:16px;border:2px solid var(--t-border);border-top-color:var(--red);border-radius:50%;animation:spin .6s linear infinite;}
         @keyframes spin{to{transform:rotate(360deg);}}
-
-        /* ================================================================
-           11. حالة عدم وجود بيانات
-        ================================================================ */
         .no-data{text-align:center;padding:70px 20px;color:var(--t-text-3);display:none;}
         .no-data i{font-size:2.8rem;margin-bottom:14px;display:block;color:var(--t-text-4);}
         .no-data p{font-size:.95rem;}
 
         /* ================================================================
-           12. المودال
+           11. المودال
         ================================================================ */
         .modal-overlay{display:none;position:fixed;inset:0;background:var(--t-overlay);backdrop-filter:blur(6px);z-index:2000;overflow-y:auto;padding:20px;}
         .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center;min-height:100vh;}
@@ -200,13 +217,11 @@
         @keyframes modalIn{from{opacity:0;transform:translateY(36px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
         .modal-close{position:absolute;top:14px;z-index:10;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid var(--t-border);color:var(--t-text-2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;backdrop-filter:blur(6px);}
         [data-theme="dark"] .modal-close{background:rgba(15,22,32,.92);}
-        [dir="rtl"] .modal-close{left:14px;}
-        [dir="ltr"] .modal-close{right:14px;}
+        [dir="rtl"] .modal-close{left:14px;}[dir="ltr"] .modal-close{right:14px;}
         .modal-close:hover{background:var(--red);color:#fff;border-color:var(--red);}
         .modal-bookmark{position:absolute;top:14px;z-index:10;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid var(--t-border);color:var(--t-text-2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;backdrop-filter:blur(6px);}
         [data-theme="dark"] .modal-bookmark{background:rgba(15,22,32,.92);}
-        [dir="rtl"] .modal-bookmark{left:60px;}
-        [dir="ltr"] .modal-bookmark{right:60px;}
+        [dir="rtl"] .modal-bookmark{left:60px;}[dir="ltr"] .modal-bookmark{right:60px;}
         .modal-bookmark:hover,.modal-bookmark.saved{color:var(--gold);border-color:var(--gold);}
         .modal-img{width:100%;max-height:400px;object-fit:cover;display:block;background:var(--t-tag);}
         .modal-video{width:100%;aspect-ratio:16/9;display:block;background:#000;}
@@ -218,18 +233,16 @@
         .mtag-h{background:#fdd;color:var(--red);border:1px solid #fcc;}[data-theme="dark"] .mtag-h{background:#2d0a0a;color:#f87171;border-color:#7f1d1d;}
         .modal-body h2{font-size:1.45rem;font-weight:900;line-height:1.4;color:var(--t-text);margin-bottom:14px;}
         .modal-info{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:var(--t-text-3);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--t-border);}
-        .modal-info i{margin-inline-end:5px;color:var(--navy);}
-        [data-theme="dark"] .modal-info i{color:var(--gold);}
+        .modal-info i{margin-inline-end:5px;color:var(--navy);}[data-theme="dark"] .modal-info i{color:var(--gold);}
         .mct{font-size:.95rem;line-height:2.1;color:var(--t-text-2);}
-        .mct p{margin-bottom:16px;}
-        .mct img{max-width:100%;border-radius:var(--rsm);margin:12px 0;}
-        .mct iframe{max-width:100%;border-radius:var(--rsm);margin:12px 0;}
+        .mct p{margin-bottom:16px;}.mct img{max-width:100%;border-radius:var(--rsm);margin:12px 0;}.mct iframe{max-width:100%;border-radius:var(--rsm);margin:12px 0;}
         .mct blockquote{border-inline-start:3px solid var(--red);padding-inline-start:16px;margin:16px 0;color:var(--t-text-3);font-style:italic;}
         .mct strong{color:var(--t-text);font-weight:700;}
         .modal-foot{display:flex;justify-content:space-between;align-items:center;padding-top:18px;border-top:1px solid var(--t-border);margin-top:20px;flex-wrap:wrap;gap:10px;}
         .modal-foot span{font-size:.72rem;color:var(--t-text-4);font-family:monospace;direction:ltr;}
         .share-btn{background:var(--navy);color:#fff;border:none;padding:8px 20px;border-radius:var(--rpill);font-family:inherit;font-weight:700;font-size:.8rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;}
         .share-btn:hover{background:var(--red);transform:translateY(-1px);}
+        .reading-progress{position:absolute;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .08s linear;z-index:11;border-radius:0 2px 2px 0;min-width:0;}
         .modal-loading{text-align:center;padding:70px 20px;color:var(--t-text-3);}
         .modal-error{text-align:center;padding:70px 20px;color:var(--t-text-3);}
         .modal-error i{font-size:2.2rem;color:var(--red);margin-bottom:12px;}
@@ -237,16 +250,59 @@
         .modal-retry:hover{background:var(--red);color:#fff;}
 
         /* ================================================================
-           13. شريط تقدم القراءة
+           12. الصفحات الثابتة
         ================================================================ */
-        .reading-progress{position:absolute;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .08s linear;z-index:11;border-radius:0 2px 2px 0;min-width:0;}
+        .static-page{display:none;max-width:860px;margin:0 auto;padding:40px 20px 80px;}
+        .static-page.active{display:block;animation:pageIn .4s ease;}
+        @keyframes pageIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+        .page-back{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border:1.5px solid var(--t-border);border-radius:var(--rpill);background:var(--t-card);color:var(--t-text-2);font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:28px;}
+        .page-back:hover{border-color:var(--red);color:var(--red);}
+        .page-hero{text-align:center;padding:40px 20px 36px;border-bottom:2px solid var(--t-border);margin-bottom:36px;}
+        .page-hero-icon{width:64px;height:64px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 18px;}
+        [data-theme="dark"] .page-hero-icon{background:var(--t-tag);color:var(--gold-light);}
+        .page-hero h2{font-size:1.7rem;font-weight:900;color:var(--t-text);margin-bottom:8px;}
+        .page-hero p{font-size:.92rem;color:var(--t-text-3);max-width:560px;margin:0 auto;}
+        .page-section{margin-bottom:36px;}
+        .page-section h3{font-size:1.15rem;font-weight:900;color:var(--t-text);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+        .page-section h3 i{color:var(--red);font-size:.95rem;}
+        .page-section p,.page-section li{font-size:.92rem;line-height:2;color:var(--t-text-2);}
+        .page-section ul,.page-section ol{padding-inline-start:20px;margin-bottom:12px;}
+        .page-section li{margin-bottom:6px;}
+        .page-section blockquote{border-inline-start:3px solid var(--gold);padding:16px 20px;background:var(--t-tag);border-radius:0 var(--rsm) var(--rsm) 0;margin:16px 0;font-size:.88rem;color:var(--t-text-2);font-style:italic;}
+        .page-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0;}
+        .page-card{background:var(--t-tag);border:1px solid var(--t-border);border-radius:var(--rlg);padding:22px 20px;transition:all .2s;}
+        .page-card:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:var(--t-shadow-sm);}
+        .page-card h4{font-size:.95rem;font-weight:900;color:var(--t-text);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+        .page-card h4 i{color:var(--gold);font-size:.85rem;}
+        .page-card p{font-size:.82rem;color:var(--t-text-3);line-height:1.8;margin:0;}
+        .page-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:24px 0;}
+        .page-stat{background:var(--t-tag);border:1px solid var(--t-border);border-radius:var(--rmd);padding:18px 16px;text-align:center;}
+        .page-stat .num{font-size:1.6rem;font-weight:900;color:var(--red);display:block;}
+        .page-stat .label{font-size:.72rem;color:var(--t-text-3);margin-top:4px;}
+        .page-contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:18px 0;}
+        .page-contact{background:var(--t-tag);border:1px solid var(--t-border);border-radius:var(--rlg);padding:20px;text-align:center;transition:all .2s;cursor:default;}
+        .page-contact:hover{border-color:var(--gold);transform:translateY(-2px);}
+        .page-contact i{font-size:1.5rem;color:var(--navy);margin-bottom:10px;display:block;}
+        [data-theme="dark"] .page-contact i{color:var(--gold);}
+        .page-contact h4{font-size:.9rem;font-weight:900;color:var(--t-text);margin-bottom:4px;}
+        .page-contact p{font-size:.78rem;color:var(--t-text-3);margin:0;}
+        .page-warning{background:#fef2f2;border:1px solid #fecaca;border-radius:var(--rmd);padding:18px 20px;margin:18px 0;display:flex;gap:12px;align-items:flex-start;}
+        [data-theme="dark"] .page-warning{background:#2d0a0a;border-color:#7f1d1d;}
+        .page-warning i{color:var(--red);font-size:1.1rem;margin-top:3px;flex-shrink:0;}
+        .page-warning p{font-size:.85rem;color:var(--t-text-2);margin:0;line-height:1.8;}
+        .page-timeline{position:relative;padding-inline-start:28px;margin:20px 0;}
+        .page-timeline::before{content:'';position:absolute;inset-inline-start:8px;top:0;bottom:0;width:2px;background:var(--t-border);}
+        .page-timeline-item{position:relative;margin-bottom:24px;}
+        .page-timeline-item::before{content:'';position:absolute;inset-inline-start:-24px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--red);border:2px solid var(--t-card);z-index:1;}
+        .page-timeline-item h4{font-size:.9rem;font-weight:900;color:var(--t-text);margin-bottom:4px;}
+        .page-timeline-item p{font-size:.82rem;color:var(--t-text-3);margin:0;}
 
         /* ================================================================
-           14. الفوتر
+           13. الفوتر
         ================================================================ */
         footer{background:var(--navy);color:var(--t-text-3);padding:44px 20px 22px;}
         .footer-inner{max-width:1320px;margin:0 auto;}
-        .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.07);}
+        .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.07);}
         .footer-brand h2{color:#fff;font-size:1.45rem;font-weight:900;}
         .footer-brand h2 span{color:var(--red);}
         .footer-brand p{font-size:.8rem;line-height:2;margin-top:10px;color:#6e7a8a;}
@@ -256,23 +312,15 @@
         .footer-bottom{padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;flex-wrap:wrap;gap:8px;}
 
         /* ================================================================
-           15. زر العودة للأعلى
+           14. العناصر المشتركة
         ================================================================ */
         .back-top{position:fixed;bottom:26px;inset-inline-start:26px;z-index:150;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:all .3s;box-shadow:var(--t-shadow-md);}
         .back-top.show{opacity:1;visibility:visible;transform:translateY(0);}
         .back-top:hover{background:var(--red);transform:translateY(-2px);}
-
-        /* ================================================================
-           16. إشعار Toast
-        ================================================================ */
         .toast-container{position:fixed;bottom:24px;inset-inline-end:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;}
         .toast{background:var(--navy);color:#fff;padding:10px 22px;border-radius:var(--rpill);box-shadow:var(--t-shadow-md);font-size:.85rem;font-weight:600;animation:toastIn .3s ease;display:flex;align-items:center;gap:8px;}
         .toast i{color:var(--gold);}
         @keyframes toastIn{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
-
-        /* ================================================================
-           17. شارة التحديث الصامت
-        ================================================================ */
         .sync-badge{position:fixed;top:-60px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 22px;border-radius:0 0 var(--rlg) var(--rlg);display:flex;align-items:center;gap:10px;z-index:9998;font-size:.84rem;font-weight:600;box-shadow:var(--t-shadow-lg);transition:top .45s cubic-bezier(.4,0,.2,1);}
         .sync-badge.show{top:0;}
         .sync-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 1.2s infinite;}
@@ -280,14 +328,10 @@
         .sync-badge-btn:hover{background:rgba(255,255,255,.15);}
         .sync-badge-close{background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:.8rem;padding:2px;transition:color .2s;}
         .sync-badge-close:hover{color:#fff;}
-
-        /* ================================================================
-           18. تمييز نتائج البحث
-        ================================================================ */
         mark{background:rgba(200,149,46,.25);color:var(--red);padding:1px 3px;border-radius:3px;font-style:normal;}
 
         /* ================================================================
-           19. متجاوب
+           15. متجاوب
         ================================================================ */
         @media(max-width:768px){
             .top-bar-inner{flex-direction:column;gap:3px;text-align:center;}
@@ -295,22 +339,19 @@
             .brand h1{font-size:1.35rem;}
             .search-wrap input{width:170px;font-size:.8rem;}
             .grid{grid-template-columns:1fr;}
-            .card-img{height:165px;}
-            .skel-img{height:165px;}
-            .footer-top{grid-template-columns:1fr;gap:24px;}
+            .card-img{height:165px;}.skel-img{height:165px;}
+            .footer-top{grid-template-columns:1fr 1fr;gap:24px;}
             .modal-box{margin:16px auto;border-radius:var(--rmd);}
-            .modal-body{padding:18px 20px 24px;}
-            .modal-body h2{font-size:1.15rem;}
+            .modal-body{padding:18px 20px 24px;}.modal-body h2{font-size:1.15rem;}
             .section-head{flex-direction:column;align-items:flex-start;}
+            .page-grid{grid-template-columns:1fr;}
+            .page-hero h2{font-size:1.35rem;}
         }
-        @media(max-width:400px){
+        @media(max-width:480px){
             .search-wrap input{width:130px;}
             .card-title{font-size:.92rem;}
+            .footer-top{grid-template-columns:1fr;}
         }
-
-        /* ================================================================
-           20. تقليل الحركة
-        ================================================================ */
         @media(prefers-reduced-motion:reduce){
             *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
             .ticker-track{animation:none!important;}
@@ -319,7 +360,7 @@
 </head>
 <body>
 
-<!-- شريط المعلومات العلوي -->
+<!-- أعلى الصفحة -->
 <div class="top-bar">
     <div class="top-bar-inner">
         <span id="dateDisplay"></span>
@@ -331,26 +372,55 @@
     </div>
 </div>
 
-<!-- الهيدر الرئيسي -->
+<!-- الهيدر -->
 <header class="header">
     <div class="header-inner">
-        <div class="brand">
+        <div class="brand" id="brandHome">
             <h1>وحدة الرصد <span>السيبراني</span></h1>
             <p>مصادر خاصة — رصد مباشر — تقارير ميدانية</p>
         </div>
         <div class="header-actions">
             <div class="live-dot" aria-hidden="true"></div>
             <button class="icon-btn" id="themeToggle" aria-label="تبديل المظهر"><i class="fas fa-moon"></i></button>
-            <div class="search-wrap">
+            <div class="search-wrap" id="searchWrap">
                 <i class="fas fa-search"></i>
                 <input type="search" id="searchInput" placeholder="بحث في التقارير..." aria-label="البحث في التقارير">
             </div>
+            <button class="icon-btn" id="menuToggle" aria-label="القائمة"><i class="fas fa-bars"></i></button>
         </div>
     </div>
 </header>
 
+<!-- قائمة التنقل -->
+<div class="nav-overlay" id="navOverlay">
+    <div class="nav-backdrop" id="navBackdrop"></div>
+    <div class="nav-panel">
+        <button class="nav-close" id="navClose" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+        <div class="nav-header">
+            <h2>وحدة الرصد <span>السيبراني</span></h2>
+            <p>القائمة الرئيسية</p>
+        </div>
+        <div class="nav-links">
+            <button class="nav-link active" data-page="home"><i class="fas fa-satellite-dish"></i> الرئيسية</button>
+            <button class="nav-link" data-page="about"><i class="fas fa-shield-halved"></i> من نحن</button>
+            <button class="nav-link" data-page="methodology"><i class="fas fa-microscope"></i> منهجية الرصد</button>
+            <button class="nav-link" data-page="team"><i class="fas fa-users-gear"></i> فريق العمل</button>
+            <div class="nav-sep"></div>
+            <button class="nav-link" data-page="contact"><i class="fas fa-paper-plane"></i> تواصل معنا</button>
+            <button class="nav-link" data-page="privacy"><i class="fas fa-lock"></i> سياسة الخصوصية</button>
+            <button class="nav-link" data-page="disclaimer"><i class="fas fa-triangle-exclamation"></i> إخلاء المسؤولية</button>
+        </div>
+        <div class="nav-footer">
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="#"><i class="fas fa-rss"></i></a>
+            <span>CMS-ARCH v6.0</span>
+        </div>
+    </div>
+</div>
+
 <!-- شريط التصنيفات -->
-<nav class="categories" aria-label="تصنيفات التقارير">
+<nav class="categories" id="categoriesBar" aria-label="تصنيفات التقارير">
     <div class="cat-inner" id="catBar">
         <button class="cat-btn active" data-f="all">الكل</button>
         <div class="cat-sep"></div>
@@ -373,29 +443,349 @@
     </div>
 </nav>
 
-<!-- شريط العناوين المتحركة -->
-<div class="ticker-bar" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+<!-- التيكر -->
+<div class="ticker-bar" id="tickerBar" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
 
-<!-- المحتوى الرئيسي -->
-<main class="main">
-    <div class="section-head">
-        <h2><i class="fas fa-satellite-dish"></i> التقارير الميدانية <span class="sync-dot" id="syncDot"></span></h2>
-        <div class="section-controls">
-            <span class="result-count" id="resultCount"></span>
-            <select id="sortSelect" class="sort-select" aria-label="ترتيب">
-                <option value="newest">الأحدث أولاً</option>
-                <option value="oldest">الأقدم أولاً</option>
-                <option value="threat">حسب التهديد</option>
-            </select>
+<!-- ========== الصفحة الرئيسية (التقارير) ========== -->
+<div id="pageHome">
+    <main class="main">
+        <div class="section-head">
+            <h2><i class="fas fa-satellite-dish"></i> التقارير الميدانية <span class="sync-dot" id="syncDot"></span></h2>
+            <div class="section-controls">
+                <span class="result-count" id="resultCount"></span>
+                <select id="sortSelect" class="sort-select" aria-label="ترتيب">
+                    <option value="newest">الأحدث أولاً</option>
+                    <option value="oldest">الأقدم أولاً</option>
+                    <option value="threat">حسب التهديد</option>
+                </select>
+            </div>
+        </div>
+        <div class="grid" id="grid"></div>
+        <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+            <button class="load-more-btn" id="loadMoreBtn">تحميل المزيد <i class="fas fa-chevron-down"></i></button>
+        </div>
+        <div id="scrollSentinel" style="height:1px;"></div>
+        <div class="no-data" id="noData"><i class="fas fa-folder-open"></i><p>لا توجد تقارير مطابقة للبحث</p></div>
+    </main>
+</div>
+
+<!-- ========== صفحة من نحن ========== -->
+<div class="static-page" id="pageAbout">
+    <button class="page-back" onclick="Router.go('home')"><i class="fas fa-arrow-right"></i> العودة للتقارير</button>
+    <div class="page-hero">
+        <div class="page-hero-icon"><i class="fas fa-shield-halved"></i></div>
+        <h2>من نحن</h2>
+        <p>وحدة متخصصة في رصد التهديدات السيبرانية وتحليل العمليات الإلكترونية في المنطقة العربية</p>
+    </div>
+    <div class="page-stats">
+        <div class="page-stat"><span class="num">500+</span><span class="label">تقرير ميداني</span></div>
+        <div class="page-stat"><span class="num">18</span><span class="label">دولة تحت الرصد</span></div>
+        <div class="page-stat"><span class="num">47</span><span class="label">تهديد نشط</span></div>
+        <div class="page-stat"><span class="num">24/7</span><span class="label">رصد مستمر</span></div>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-bullseye"></i> مهمتنا</h3>
+        <p>وحدة الرصد السيبراني هي ذراع استخباري رقمي متخصص في مراقبة وتحليل التهديدات السيبرانية التي تستهدف المنطقة العربية. نعمل على توفير صورة استخباراتية شاملة ودقيقة تُمكّن صناع القرار من اتخاذ إجراءات استباقية لحماية البنية التحتية الحيوية والمصالح الوطنية.</p>
+        <p>نعتمد على منظومة رصد متعددة الطبقات تجمع بين التقنيات الآلية والتحليل البشري المتخصص، مع شبكة مصادر خاصة تُزوّدنا ببيانات حصرية لا تتوفر في المصادر المفتوحة.</p>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-eye"></i> نطاق الرصد</h3>
+        <div class="page-grid">
+            <div class="page-card">
+                <h4><i class="fas fa-building-shield"></i> القطاع الحكومي</h4>
+                <p>رصد الاختراقات والتجسس الإلكتروني ضد المؤسسات الحكومية والوزارات والهيئات السيادية</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-bolt"></i> البنية التحتية الحيوية</h4>
+                <p>مراقبة التهديدات ضد قطاعات الطاقة والمياه والاتصالات والنقل</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-landmark"></i> القطاع المالي</h4>
+                <p>تتبع حملات استهداف البنوك والبورصات وأنظمة الدفع الإلكتروني</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-user-secret"></i> مجموعات APT</h4>
+                <p>تتبع ورصد نشاط مجموعات التهديد المتقدمة المرتبطة بجهات فاعلة على مستوى دولتية</p>
+            </div>
         </div>
     </div>
-    <div class="grid" id="grid"></div>
-    <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
-        <button class="load-more-btn" id="loadMoreBtn">تحميل المزيد <i class="fas fa-chevron-down"></i></button>
+    <div class="page-section">
+        <h3><i class="fas fa-fingerprint"></i> ما يميزنا</h3>
+        <ul>
+            <li><strong>مصادر حصرية:</strong> لا نعتمد حصرياً على المصادر المفتوحة — بل نمتلك شبكة مصادر خاصة توفر بيانات أولية</li>
+            <li><strong>تحليل عميق:</strong> لا نكتفي بالرصد السطحي — كل تقرير يمر بعملية تحليل متعددة الطبقات</li>
+            <li><strong>سرعة الاستجابة:</strong> من الاكتشاف إلى النشر في أقل من ساعات في الحالات الحرجة</li>
+            <li><strong>دقة الإسناد:</strong> نتبع منهجية صارمة في إسناد العمليات لجهات محددة مع مستويات ثقة واضحة</li>
+        </ul>
     </div>
-    <div id="scrollSentinel" style="height:1px;"></div>
-    <div class="no-data" id="noData"><i class="fas fa-folder-open"></i><p>لا توجد تقارير مطابقة للبحث</p></div>
-</main>
+</div>
+
+<!-- ========== صفحة منهجية الرصد ========== -->
+<div class="static-page" id="pageMethodology">
+    <button class="page-back" onclick="Router.go('home')"><i class="fas fa-arrow-right"></i> العودة للتقارير</button>
+    <div class="page-hero">
+        <div class="page-hero-icon"><i class="fas fa-microscope"></i></div>
+        <h2>منهجية الرصد</h2>
+        <p>كيف نجمع البيانات ونحللها ونصنفها قبل نشرها كتقرير ميداني</p>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-arrows-spin"></i> دورة حياة التقرير</h3>
+        <div class="page-timeline">
+            <div class="page-timeline-item">
+                <h4>المرحلة 1 — الاكتشاف والرصد</h4>
+                <p>استقبال إشارة من مصادر الرصد (آلية أو بشرية) تشير إلى نشاط سيبراني مشبوه. هذه المرحلة تعمل على مدار الساعة عبر أدوات مراقبة آلية.</p>
+            </div>
+            <div class="page-timeline-item">
+                <h4>المرحلة 2 — التجميع والاستطلاع</h4>
+                <p>جمع البيانات الأولية من مصادر متعددة: مؤشرات الشبكة، عينات برمجية، بيانات منسوبة، معلومات مفتوحة. يتم التحقق من سلامة البيانات وسلامتها التقنية.</p>
+            </div>
+            <div class="page-timeline-item">
+                <h4>المرحلة 3 — التحليل المعمق</h4>
+                <p>تحليل ثنائي وربط المؤشرات مع قواعد بيانات التهديدات المعروفة. تحليل العينات البرمجية في بيئات معزولة. بناء سلسلة الهجوم (Kill Chain) الكاملة.</p>
+            </div>
+            <div class="page-timeline-item">
+                <h4>المرحلة 4 — الإسناد والتقييم</h4>
+                <p>إسناد العملية لجهة محددة مع تحديد مستوى الثقة (منخفض/متوسط/مرتفع/مؤكد). تقييم مستوى التهديد وفق معايير خاصة بالوحدة.</p>
+            </div>
+            <div class="page-timeline-item">
+                <h4>المرحلة 5 — المراجعة والنشر</h4>
+                <p>مراجعة التقرير من محرر أمني ومستشار قانوني. تصنيف التقرير حسب مستوى السرية. النشر على المنصة مع إشعار الجهات المعنية.</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-layer-group"></i> مصادر البيانات</h3>
+        <div class="page-grid">
+            <div class="page-card">
+                <h4><i class="fas fa-robot"></i> رصد آلي</h4>
+                <p>مجسات شبكية، مراقبة Dark Web، أنظمة Honeypot، محللات حركة المرور</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-user-secret"></i> مصادر بشرية</h4>
+                <p>شبكة مصادر داخل القطاعات المستهدفة، تعاون مع فرق استجابة إقليمية</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-globe"></i> مصادر مفتوحة</h4>
+                <p>تقارير شركات الأمن السيبراني، قواعد بيانات التهديدات العالمية، منصات تبادل المعلومات</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-vial"></i> تحليل laboratory</h4>
+                <p>تحليل عكسي للبرمجيات الخبيثة، فحص البنية التحتية للهجوم، استخراج مؤشرات IOC</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-signal"></i> مستويات التهديد</h3>
+        <div class="page-grid">
+            <div class="page-card" style="border-top:3px solid #155724;">
+                <h4 style="color:#155724;"><i class="fas fa-check-circle"></i> منخفض</h4>
+                <p>نشاط محدود التأثير، لا يستهدف بنية تحتية حيوية، إمكانية الاحتواء عالية</p>
+            </div>
+            <div class="page-card" style="border-top:3px solid #856404;">
+                <h4 style="color:#856404;"><i class="fas fa-exclamation-circle"></i> متوسط</h4>
+                <p>نشاط ملحوظ يستهدف قطاعات معينة، يتطلب تدخلاً أمنياً محدداً</p>
+            </div>
+            <div class="page-card" style="border-top:3px solid #c2410c;">
+                <h4 style="color:#c2410c;"><i class="fas fa-exclamation-triangle"></i> مرتفع</h4>
+                <p>عملية منظمة تستهدف بنية تحتية حيوية، تأثير محتمل على خدمات أساسية</p>
+            </div>
+            <div class="page-card" style="border-top:3px solid var(--red);">
+                <h4 style="color:var(--red);"><i class="fas fa-radiation"></i> حرج</h4>
+                <p>تهديد وجودي يُشكل خطراً مباشراً على أمن قومي أو سلامة مدنيين، يتطلب استجابة فورية</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== صفحة فريق العمل ========== -->
+<div class="static-page" id="pageTeam">
+    <button class="page-back" onclick="Router.go('home')"><i class="fas fa-arrow-right"></i> العودة للتقارير</button>
+    <div class="page-hero">
+        <div class="page-hero-icon"><i class="fas fa-users-gear"></i></div>
+        <h2>فريق العمل</h2>
+        <p>فريق متخصص يجمع بين الخبرة الاستخباراتية والقدرات التقنية المتقدمة</p>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-sitemap"></i> هيكل الفريق</h3>
+        <div class="page-grid">
+            <div class="page-card">
+                <h4><i class="fas fa-user-tie"></i> قيادة العمليات</h4>
+                <p>إدارة الاستراتيجية والتوجيه العام لعمليات الرصد، التنسيق مع الجهات المعنية، واتخاذ قرارات النشر</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-code"></i> فريق التحليل التقني</h4>
+                <p>تحليل العينات البرمجية، فحص البنية التحتية للهجوم، استخراج المؤشرات التقنية (IOC)</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-magnifying-glass-chart"></i> فريق الاستخبارات</h4>
+                <p>التحليل السياقي، إسناد العمليات، ربط التهديدات بالجهات الفاعلة، بناء الصورة الاستخباراتية</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-tower-broadcast"></i> فريق المراقبة</h4>
+                <p>تشغيل أنظمة الرصد الآلي على مدار الساعة، الفرز الأولي للإشارات، تنبيه فرق التحليل</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-language"></i> فريق اللغات</h4>
+                <p>ترجمة وتحليل محتوى من الفارسية والعبرية والروسية والصينية والإنجليزية</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-scale-balanced"></i> المستشار القانوني</h4>
+                <p>مراجعة التقارير من الناحية القانونية، ضمان التوافق مع الأنظمة، تحديد حدود النشر</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-shield-halved"></i> مبادئنا</h3>
+        <ul>
+            <li><strong>الموضوعية:</strong> نقدم الحقائق كما هي دون تحيز سياسي أو أيديولوجي</li>
+            <li><strong>الدقة:</strong> لا ننشر إلا ما تم التحقق منه عبر مصادر متعددة</li>
+            <li><strong>الحماية:</strong> هويات أعضاء الفريق ومصادرنا محمية بأعلى معايير الأمن التشغيلي</li>
+            <li><strong>المسؤولية:</strong> نحترم قواعد المسؤولية في النشر ولا نُسهّل إلحاق الضرر</li>
+            <li><strong>الشفافية المنضبطة:</strong> نوضح منهجيتنا ومستويات ثقتنا دون إفشاء المصادر</li>
+        </ul>
+    </div>
+    <div class="page-warning">
+        <i class="fas fa-user-shield"></i>
+        <p>لأسباب أمنية، لا نُنشر أسماء أو صور أعضاء الفريق. الهويات الحقيقية محمية ببروتوكولات أمن تشغيلي صارمة تُطابق معايير حماية المصادر الاستخباراتية.</p>
+    </div>
+</div>
+
+<!-- ========== صفحة تواصل معنا ========== -->
+<div class="static-page" id="pageContact">
+    <button class="page-back" onclick="Router.go('home')"><i class="fas fa-arrow-right"></i> العودة للتقارير</button>
+    <div class="page-hero">
+        <div class="page-hero-icon"><i class="fas fa-paper-plane"></i></div>
+        <h2>تواصل معنا</h2>
+        <p>قنوات تواصل آمنة ومشفرة للإبلاغ عن تهديدات أو طلب معلومات</p>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-lock"></i> القنوات الآمنة</h3>
+        <p>نفضّل التواصل عبر القنوات المشفرة لضمان حماية هويتك ومعلوماتك. جميع القنوات التالية توفر تشفير طرف لطرف:</p>
+        <div class="page-contacts">
+            <div class="page-contact">
+                <i class="fas fa-comment-dots"></i>
+                <h4>Signal</h4>
+                <p>القناة الأكثر أماناً للتواصل الحساس</p>
+            </div>
+            <div class="page-contact">
+                <i class="fab fa-telegram"></i>
+                <h4>Telegram</h4>
+                <p>تواصل سريع مع تشفير إضافي عبر Secret Chat</p>
+            </div>
+            <div class="page-contact">
+                <i class="fas fa-envelope"></i>
+                <h4>بريد مشفر</h4>
+                <p>استخدم PGP للمراسلات الحساسة</p>
+            </div>
+            <div class="page-contact">
+                <i class="fas fa-box-archive"></i>
+                <h4>SecureDrop</h4>
+                <p>إرسال ملفات ومستندات بشكل مجهول</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-circle-info"></i> أسباب التواصل</h3>
+        <div class="page-grid">
+            <div class="page-card">
+                <h4><i class="fas fa-bug"></i> الإبلاغ عن تهديد</h4>
+                <p>رصدت نشاطاً سيبرانياً مشبوهاً؟ أبلغنا عبر قنوات آمنة وسنتابع فوراً</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-file-shield"></i> طلب معلومات</h4>
+                <p>جهة حكومية أو أمنية وتحتاج بيانات تهديدات محددة؟ تواصل معنا</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-handshake"></i> تعاون مؤسسي</h4>
+                <p>مؤسسة أمنية وتريد تبادل معلومات التهديدات أو شراكة تقنية</p>
+            </div>
+            <div class="page-card">
+                <h4><i class="fas fa-user-plus"></i> الانضمام للفريق</h4>
+                <p>لديك خبرة في التحليل السيبراني أو الاستخبارات الرقمية؟ نرحب بك</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-warning">
+        <i class="fas fa-shield-halved"></i>
+        <p><strong>تنبيه أمني:</strong> لا نتواصل أبداً أولاً عبر البريد الإلكتروني العادي أو وسائل التواصل الاجتماعي لأغراض حساسة. إذا تلقيت رسالة تدّعي أنها من وحدة الرصد عبر هذه القنوات، تعامل معها بحذر — تحقق عبر القنوات المشفرة المعتمدة فقط.</p>
+    </div>
+</div>
+
+<!-- ========== صفحة سياسة الخصوصية ========== -->
+<div class="static-page" id="pagePrivacy">
+    <button class="page-back" onclick="Router.go('home')"><i class="fas fa-arrow-right"></i> العودة للتقارير</button>
+    <div class="page-hero">
+        <div class="page-hero-icon"><i class="fas fa-lock"></i></div>
+        <h2>سياسة الخصوصية</h2>
+        <p>كيف نتعامل مع بياناتك وما هي الحقوق المتاحة لك</p>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-database"></i> البيانات التي نجمعها</h3>
+        <p>هذه المنصة مصممة لتكون خفيفة من حيث جمع البيانات. بشكل محدد:</p>
+        <ul>
+            <li><strong>التقارير المحفوظة:</strong> تُخزن محلياً في متصفحك (localStorage) ولا تُرسل لأي خادم. يمكنك حذفها من إعدادات المتصفح</li>
+            <li><strong>تفضيل المظهر:</strong> خيار الفاتح/الداكن يُخزن محلياً فقط</li>
+            <li><strong>بيانات التصفح:</strong> لا نستخدم ملفات تعريف الارتباط (cookies) أو أدوات تتبع تحليلية</li>
+            <li><strong>عنوان IP:</strong> لا نجمع ولا نخزن عناوين IP للزوار</li>
+        </ul>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-server"></i> أين تُخزن البيانات</h3>
+        <p>جميع البيانات المرتبطة بتفاعلك مع المنصة تُخزن <strong>محلياً في متصفحك فقط</strong> (عبر localStorage). لا نملك خادم collects بيانات المستخدمين. عند مسح بيانات المتصفح، تُحذف جميع بياناتك من جانبنا.</p>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-user-shield"></i> حقوقك</h3>
+        <ul>
+            <li>حق الوصول: يمكنك في أي وقت مراجعة البيانات المخزنة محلياً عبر أدوات المطور في المتصفح</li>
+            <li>حق الحذف: مسح بيانات المتصفح يُزيل كل شيء نهائياً</li>
+            <li>حق الاعتراض: لا نجمع بيانات بشكل أساسي، لكن يمكنك تعطيل JavaScript لمنع أي تخزين محلي</li>
+        </ul>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-shield-halved"></i> أمن البيانات</h3>
+        <p>نطبق مبادئ أمنية صارمة على مستوى المنصة: تنظيف HTML من الأكواد الخطرة، عدم تنفيذ أي سكربت خارجي، تشفير اتصالات البيانات عبر HTTPS. محتوى التقارير نفسه يمر بعملية sanitize قبل العرض.</p>
+    </div>
+</div>
+
+<!-- ========== صفحة إخلاء المسؤولية ========== -->
+<div class="static-page" id="pageDisclaimer">
+    <button class="page-back" onclick="Router.go('home')"><i class="fas fa-arrow-right"></i> العودة للتقارير</button>
+    <div class="page-hero">
+        <div class="page-hero-icon"><i class="fas fa-triangle-exclamation"></i></div>
+        <h2>إخلاء المسؤولية</h2>
+        <p>تنبيهات قانونية وأخلاقية مهمة بشأن محتوى هذه المنصة</p>
+    </div>
+    <div class="page-warning">
+        <i class="fas fa-radiation"></i>
+        <p><strong>قراءة هذا القسم إلزامية قبل استخدام المنصة.</strong> بمجرد استخدامك لهذه المنصة فإنك تقبل بشروط وأحكام هذا الإخلاء بالكامل.</p>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-file-contract"></i> طبيعة المحتوى</h3>
+        <ul>
+            <li>التقارير المنشورة مبنية على تحليل استخباراتي ولا تُمثل حقيقة مطلقة — بل هي تقييمات خاضعة لمستويات ثقة محددة تُذكر في كل تقرير</li>
+            <li>المعلومات التقنية (مثل تفاصيل الثغرات وأسماء المجموعات) مبنية على تحليلنا وقد لا تتطابق مع تقييمات جهات أخرى</li>
+            <li>نحتفظ بحق تعديل أو حذف أي تقرير في أي وقت دون إشعار مسبق</li>
+        </ul>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-ban"></i> استخدام محظور</h3>
+        <ul>
+            <li>استخدام المعلومات المنشورة لتنفيذ هجمات سيبرانية أو أي نشاط غير قانوني</li>
+            <li>إعادة نشر التقارير كاملة أو جزئياً دون إذن كتابي مع ذكر المصدر</li>
+            <li>استخدام المنصة أو محتواها لأغراض تشهيرية أو تحريضية</li>
+            <li>محاولة تحديد هويات المصادر أو أعضاء الفريق من خلال المحتوى المنشور</li>
+        </ul>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-scale-balanced"></i> الإسناد والمسؤولية</h3>
+        <p>إسناد العمليات السيبرانية لجهات محددة هو عملية تحليلية بطبيعتها، ولا يمكن في كثير من الحالات الوصول إلى يقين مطلق. مستويات الثقة المذكورة في التقارير تعكس درجة يقيننا التحليلي وليست ادعاءات يمكن إثباتها قضائياً.</p>
+        <p>لا نتحمل أي مسؤولية عن قرارات يتخذها آخرون بناءً على تقاريرنا، سواء كانت قرارات أمنية أو سياسية أو إعلامية.</p>
+    </div>
+    <div class="page-section">
+        <h3><i class="fas fa-calendar"></i> تحديث الشروط</h3>
+        <p>قد نُحدّث هذا الإخلاء بشكل دوري. الاستمرار في استخدام المنصة بعد التحديث يُعد موافقة ضمنية على الشروط المحدّثة. تاريخ آخر تحديث: يونيو 2025.</p>
+    </div>
+</div>
 
 <!-- المودال -->
 <div class="modal-overlay" id="modal" role="dialog" aria-modal="true">
@@ -413,23 +803,27 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <h2>وحدة الرصد <span>السيبراني</span></h2>
-                <p>هذه المنصة واجهة لعرض تقارير الرصد السيبراني. جميع البيانات مبنية على مصادر الرصد الخاصة وتُخزن بصيغة ملفات مستقلة لضمان القابلية للتوسع والسرعة في العرض.</p>
+                <p>وحدة متخصصة في رصد التهديدات السيبرانية وتحليل العمليات الإلكترونية في المنطقة العربية. جميع التقارير مبنية على مصادر الرصد الخاصة وتخضع لمنهجية تحليل صارمة.</p>
             </div>
             <div class="footer-col">
-                <h4>المناطق</h4>
-                <a onclick="filterBy('yemen')">اليمن</a>
-                <a onclick="filterBy('algeria')">الجزائر</a>
-                <a onclick="filterBy('saudi')">السعودية</a>
-                <a onclick="filterBy('gulf')">الخليج</a>
-                <a onclick="filterBy('iran')">إيران</a>
-                <a onclick="filterBy('global')">عالمي</a>
+                <h4>التقارير</h4>
+                <a onclick="Router.go('home');filterBy('yemen')">اليمن</a>
+                <a onclick="Router.go('home');filterBy('saudi')">السعودية</a>
+                <a onclick="Router.go('home');filterBy('gulf')">الخليج</a>
+                <a onclick="Router.go('home');filterBy('iran')">إيران</a>
+                <a onclick="Router.go('home');filterBy('global')">عالمي</a>
             </div>
             <div class="footer-col">
-                <h4>الأنواع</h4>
-                <a onclick="filterBy('intrusions')">عمليات الاختراق</a>
-                <a onclick="filterBy('vulns')">رصد الثغرات</a>
-                <a onclick="filterBy('shadow')">حروب الظل</a>
-                <a onclick="filterBy('natsec')">أمن قومي</a>
+                <h4>المنصة</h4>
+                <a onclick="Router.go('about')">من نحن</a>
+                <a onclick="Router.go('methodology')">منهجية الرصد</a>
+                <a onclick="Router.go('team')">فريق العمل</a>
+                <a onclick="Router.go('contact')">تواصل معنا</a>
+            </div>
+            <div class="footer-col">
+                <h4>قانوني</h4>
+                <a onclick="Router.go('privacy')">سياسة الخصوصية</a>
+                <a onclick="Router.go('disclaimer')">إخلاء المسؤولية</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -439,13 +833,9 @@
     </div>
 </footer>
 
-<!-- زر العودة للأعلى -->
+<!-- عناصر عائمة -->
 <button class="back-top" id="backTop" aria-label="الأعلى"><i class="fas fa-chevron-up"></i></button>
-
-<!-- حاوية الإشعارات -->
 <div class="toast-container" id="toastContainer"></div>
-
-<!-- شارة التحديث الصامت -->
 <div class="sync-badge" id="syncBadge">
     <span class="sync-badge-dot"></span>
     <span id="syncBadgeText">تقارير جديدة متاحة</span>
@@ -455,27 +845,19 @@
 
 <script>
 /* ================================================================
-       الإعدادات الرئيسية — عدّل حسب بيئتك
+       الإعدادات
 ================================================================ */
 const CFG = {
-    /* مسار ملف الفهرس (نسبي للموقع نفسه) */
     indexUrl: './posts/index.json',
-    /* مسار مجلد المقالات */
     postsBaseUrl: './posts/',
-    /* بديل: GitHub API (إذا كان مستودع البيانات منفصلاً) */
     githubUser: '',
     githubRepo: '',
     branch: 'main',
     postsFolder: 'posts',
-    /* مدة صلاحية كاش البيانات الوصفية (بالدقائق) */
     metaCacheTTL: 5,
-    /* مدة صلاحية كاش المقالات الكاملة (بالدقائق) */
     articleCacheTTL: 30,
-    /* فترة التحديث الصامت (بالدقائق، 0 = معطّل) */
     refreshInterval: 15,
-    /* عدد البطاقات في كل دفعة */
     pageSize: 12,
-    /* مفاتيح التخزين المحلي */
     keys: {
         meta: 'csu_meta',
         articles: 'csu_articles',
@@ -486,7 +868,7 @@ const CFG = {
 };
 
 /* ================================================================
-       الثوابت والخرائط
+       الثوابت
 ================================================================ */
 const COUNTRIES = {
     yemen:'اليمن', algeria:'الجزائر', saudi:'السعودية', gulf:'الخليج',
@@ -501,24 +883,92 @@ const THREAT_ORDER = { critical:0, high:1, medium:2, low:3 };
        حالة التطبيق
 ================================================================ */
 const state = {
-    allMeta: [],          /* كل البيانات الوصفية */
-    filtered: [],         /* بعد الفلترة والترتيب */
-    displayed: [],        /* ما يُعرض فعلاً ( Pagination ) */
-    page: 0,
-    hasMore: false,
-    activeFilter: 'all',
-    searchQuery: '',
-    sortBy: 'newest',
-    currentSlug: null,
-    bookmarks: new Set(),
-    isPageVisible: true,
-    hasRateLimited: false,
-    refreshTimer: null,
-    isLoadingMore: false
+    allMeta: [], filtered: [], displayed: [],
+    page: 0, hasMore: false,
+    activeFilter: 'all', searchQuery: '', sortBy: 'newest',
+    currentSlug: null, currentPage: 'home',
+    bookmarks: new Set(), isPageVisible: true,
+    hasRateLimited: false, refreshTimer: null, isLoadingMore: false
 };
 
 /* ================================================================
-       أداة إلغاء تكرار الطلبات
+       مُوجّه الصفحات (Router)
+================================================================ */
+const Router = {
+    go(pageName) {
+        /* إغلاق أي مودال مفتوح */
+        if (state.currentSlug) closeModal();
+
+        /* إخفاء كل الصفحات */
+        document.querySelectorAll('.static-page').forEach(p => p.classList.remove('active'));
+        document.getElementById('pageHome').style.display = 'none';
+
+        /* تحديث حالة التنقل */
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[data-page="${pageName}"]`);
+        if (activeLink) activeLink.classList.add('active');
+
+        /* إظهار/إخفاء عناصر التقارير */
+        const showNews = pageName === 'home';
+        document.getElementById('categoriesBar').style.display = showNews ? '' : 'none';
+        document.getElementById('tickerBar').style.display = showNews ? '' : 'none';
+        document.getElementById('searchWrap').style.display = showNews ? '' : 'none';
+
+        if (showNews) {
+            document.getElementById('pageHome').style.display = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            const pageEl = document.getElementById('page' + pageName.charAt(0).toUpperCase() + pageName.slice(1));
+            if (pageEl) {
+                pageEl.classList.add('active');
+                window.scrollTo({ top: 0 });
+            }
+        }
+
+        state.currentPage = pageName;
+        history.pushState({}, '', pageName === 'home' ? window.location.pathname : '#page-' + pageName);
+        this.closeNav();
+    },
+    closeNav() {
+        document.getElementById('navOverlay').classList.remove('open');
+    },
+    init() {
+        /* فتح/إغلاق القائمة */
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('navOverlay').classList.add('open');
+        });
+        document.getElementById('navClose').addEventListener('click', () => this.closeNav());
+        document.getElementById('navBackdrop').addEventListener('click', () => this.closeNav());
+
+        /* روابط التنقل */
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => this.go(link.dataset.page));
+        });
+
+        /* شعار العودة للرئيسية */
+        document.getElementById('brandHome').addEventListener('click', () => this.go('home'));
+
+        /* التعامل مع الهاش */
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash;
+            if (hash.startsWith('#page-')) {
+                const pg = hash.replace('#page-', '');
+                if (['about','methodology','team','contact','privacy','disclaimer'].includes(pg)) {
+                    this.go(pg);
+                    return;
+                }
+            }
+            if (hash.startsWith('#report-')) {
+                handleHash();
+                return;
+            }
+            this.go('home');
+        });
+    }
+};
+
+/* ================================================================
+       إلغاء تكرار الطلبات
 ================================================================ */
 const pendingRequests = new Map();
 function dedupedFetch(url, options) {
@@ -530,7 +980,7 @@ function dedupedFetch(url, options) {
 }
 
 /* ================================================================
-       مُنظِّف HTML — منع حقن الأكواد
+       مُنظّف HTML
 ================================================================ */
 const ALLOWED_TAGS = new Set([
     'p','div','span','h1','h2','h3','h4','h5','h6',
@@ -544,8 +994,7 @@ const ALLOWED_ATTRS = {
     'img': ['src','alt','width','height','loading'],
     'iframe': ['src','width','height','frameborder','allowfullscreen','allow','loading'],
     'a': ['href','target','rel'],
-    'td': ['colspan','rowspan'],
-    'th': ['colspan','rowspan'],
+    'td': ['colspan','rowspan'], 'th': ['colspan','rowspan'],
 };
 const FORBIDDEN_URI = ['javascript:','data:text/html'];
 
@@ -554,49 +1003,37 @@ function sanitizeHTML(rawHTML) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(rawHTML, 'text/html');
     const body = doc.body;
-
     function cleanNode(node) {
         const children = Array.from(node.childNodes);
         for (const child of children) {
             if (child.nodeType === Node.ELEMENT_NODE) {
                 const tag = child.tagName.toLowerCase();
-                /* إزالة السكربتات والمحتوى الخطير */
                 if (tag === 'script' || tag === 'style' || tag === 'link' || tag === 'meta' || tag === 'form' || tag === 'input' || tag === 'object' || tag === 'embed' || tag === 'base') {
                     child.remove(); continue;
                 }
                 if (!ALLOWED_TAGS.has(tag)) {
-                    /* نقل الأبناء الآمنين إلى الأب بدلاً من الحذف */
                     while (child.firstChild) node.insertBefore(child.firstChild, child);
                     child.remove(); continue;
                 }
-                /* فحص السمات */
                 const allowed = ALLOWED_ATTRS[tag] || [];
                 const globalAllowed = ALLOWED_ATTRS['*'] || [];
                 for (const attr of Array.from(child.attributes)) {
                     const name = attr.name.toLowerCase();
                     const val = attr.value || '';
-                    /* إزالة معالجات الأحداث */
                     if (name.startsWith('on')) { child.removeAttribute(name); continue; }
-                    /* إزالة السمات غير المسموحة */
                     if (!allowed.includes(name) && !globalAllowed.includes(name)) { child.removeAttribute(name); continue; }
-                    /* فحص الروابط الخطرة */
-                                  /* إصلاح مسارات الصور النسبية */
-              if (tag === 'img' && name === 'src' && val && !val.startsWith('http') && !val.startsWith('data:') && !val.startsWith('blob:') && !val.startsWith('./') && !val.startsWith('/')) {
-                child.setAttribute(name, './' + val);
-              }
-              /* فحص الروابط الخطرة */
-              if ((name === 'src' || name === 'href') && FORBIDDEN_URI.some(p => val.trim().toLowerCase().startsWith(p))) {
+                    if ((name === 'src' || name === 'href') && FORBIDDEN_URI.some(p => val.trim().toLowerCase().startsWith(p))) {
                         child.removeAttribute(name); continue;
                     }
-                    /* تنظيف inline style من تعبيرات خطرة */
                     if (name === 'style' && /expression\(|javascript:|url\s*\(/i.test(val)) {
                         child.removeAttribute(name); continue;
                     }
+                    if (tag === 'img' && name === 'src' && val && !val.startsWith('http') && !val.startsWith('data:') && !val.startsWith('blob:') && !val.startsWith('./') && !val.startsWith('/')) {
+                        child.setAttribute(name, './' + val);
+                    }
                 }
                 cleanNode(child);
-            } else if (child.nodeType === Node.COMMENT_NODE) {
-                child.remove();
-            }
+            } else if (child.nodeType === Node.COMMENT_NODE) { child.remove(); }
         }
     }
     cleanNode(body);
@@ -607,171 +1044,112 @@ function sanitizeHTML(rawHTML) {
        مدير التخزين المؤقت
 ================================================================ */
 const Cache = {
-    get(key, ttlMinutes) {
+    get(key, ttl) {
         try {
             const raw = localStorage.getItem(key);
             if (!raw) return null;
-            const entry = JSON.parse(raw);
-            if (!entry.ts || !entry.data) return null;
-            const age = (Date.now() - entry.ts) / 60000;
-            if (age > ttlMinutes) { localStorage.removeItem(key); return null; }
-            return entry.data;
+            const e = JSON.parse(raw);
+            if (!e.ts || !e.data) return null;
+            if ((Date.now() - e.ts) / 60000 > ttl) { localStorage.removeItem(key); return null; }
+            return e.data;
         } catch { return null; }
     },
     set(key, data) {
-        try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data })); }
-        catch { /* مساحة ممتلئة */ }
+        try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data })); } catch {}
     },
-    getArticle(slug) {
-        return Cache.get(CFG.keys.articles + ':' + slug, CFG.articleCacheTTL);
-    },
-    setArticle(slug, data) {
-        Cache.set(CFG.keys.articles + ':' + slug, data);
-    }
+    getArticle(slug) { return this.get(CFG.keys.articles + ':' + slug, CFG.articleCacheTTL); },
+    setArticle(slug, data) { this.set(CFG.keys.articles + ':' + slug, data); }
 };
 
 /* ================================================================
-       محلل البيانات الوصفية من تعليقات HTML
+       محلل الميتا
 ================================================================ */
 function parseMetaFromHTML(html) {
     const meta = {};
-    const match = html.match(/<!--\s*meta\s+([\s\S]*?)-->/);
-    if (!match) return meta;
-    const lines = match[1].split('\n');
-    for (const line of lines) {
+    const m = html.match(/<!--\s*meta\s+([\s\S]*?)-->/);
+    if (!m) return meta;
+    m[1].split('\n').forEach(line => {
         const idx = line.indexOf(':');
-        if (idx === -1) continue;
-        const key = line.slice(0, idx).trim().toLowerCase();
-        const val = line.slice(idx + 1).trim();
-        if (key && val) meta[key] = val;
-    }
+        if (idx === -1) return;
+        const k = line.slice(0, idx).trim().toLowerCase();
+        const v = line.slice(idx + 1).trim();
+        if (k && v) meta[k] = v;
+    });
     return meta;
 }
-
-/* ================================================================
-       محلل اسم الملف (بديل إذا لم يتوفر ميتا)
-================================================================ */
 function parseSlug(slug) {
-    const parts = slug.split('-');
+    const p = slug.split('-');
     let country = 'global', category = 'shadow', title = slug.replace(/-/g, ' ');
-    if (parts.length >= 3) {
-        if (COUNTRIES[parts[0]]) country = parts[0];
-        if (CATEGORIES[parts[1]]) category = parts[1];
-        title = parts.slice(2).join(' ');
+    if (p.length >= 3) {
+        if (COUNTRIES[p[0]]) country = p[0];
+        if (CATEGORIES[p[1]]) category = p[1];
+        title = p.slice(2).join(' ');
     }
     return { country, category, title };
 }
 
 /* ================================================================
-       تحميل البيانات الوصفية (الفهرس)
+       تحميل البيانات الوصفية
 ================================================================ */
 async function loadMetadata() {
-    /* 1) محاولة تحميل من الكاش */
     const cached = Cache.get(CFG.keys.meta, CFG.metaCacheTTL);
     if (cached && Array.isArray(cached) && cached.length > 0) return cached;
-
-    /* 2) محاولة تحميل index.json */
     try {
         const res = await dedupedFetch(CFG.indexUrl + '?_=' + Date.now());
         if (res.ok) {
             const data = await res.json();
             if (Array.isArray(data) && data.length > 0) {
-                const normalized = data.map(normalizeMeta);
-                Cache.set(CFG.keys.meta, normalized);
-                return normalized;
+                const n = data.map(normalizeMeta);
+                Cache.set(CFG.keys.meta, n);
+                return n;
             }
         }
-    } catch { /* تجاوز */ }
-
-    /* 3) بديل: GitHub API */
+    } catch {}
     if (CFG.githubUser && CFG.githubRepo && !state.hasRateLimited) {
         try {
-            const apiUrl = `https://api.github.com/repos/${CFG.githubUser}/${CFG.githubRepo}/contents/${CFG.postsFolder}?ref=${CFG.branch}&_=${Date.now()}`;
-            const res = await dedupedFetch(apiUrl);
+            const url = `https://api.github.com/repos/${CFG.githubUser}/${CFG.githubRepo}/contents/${CFG.postsFolder}?ref=${CFG.branch}&_=${Date.now()}`;
+            const res = await dedupedFetch(url);
             if (res.status === 403) { state.hasRateLimited = true; return null; }
             if (res.ok) {
                 const files = await res.json();
                 if (Array.isArray(files)) {
-                    const meta = files
-                        .filter(f => f.name.endsWith('.html'))
-                        .map(f => {
-                            const slug = f.name.replace('.html', '');
-                            const parsed = parseSlug(slug);
-                            return {
-                                slug,
-                                title: parsed.title,
-                                excerpt: '',
-                                country: parsed.country,
-                                category: parsed.category,
-                                threat: 'high',
-                                date: f.updated_at ? f.updated_at.split('T')[0] : todayStr(),
-                                image: '',
-                                source: 'مصادر الرصد',
-                                dateObj: safeDate(f.updated_at),
-                                _src: 'github'
-                            };
-                        });
+                    const meta = files.filter(f => f.name.endsWith('.html')).map(f => {
+                        const slug = f.name.replace('.html', '');
+                        const parsed = parseSlug(slug);
+                        return { slug, title: parsed.title, excerpt: '', country: parsed.country, category: parsed.category, threat: 'high', date: f.updated_at ? f.updated_at.split('T')[0] : todayStr(), image: '', source: 'مصادر الرصد', dateObj: safeDate(f.updated_at), _src: 'github' };
+                    });
                     Cache.set(CFG.keys.meta, meta);
                     return meta;
                 }
             }
-        } catch { /* تجاوز */ }
+        } catch {}
     }
-
-    /* 4) لا يوجد شيء */
     return null;
 }
-
 function normalizeMeta(item) {
-    return {
-        slug: item.slug || '',
-        title: item.title || '',
-        excerpt: item.excerpt || '',
-        country: (item.country || 'global').toLowerCase(),
-        category: (item.category || 'shadow').toLowerCase(),
-        threat: (item.threat || 'high').toLowerCase(),
-        date: item.date || todayStr(),
-        image: item.image || '',
-        source: item.source || 'مصادر الرصد',
-        dateObj: safeDate(item.date),
-        _src: 'index'
-    };
+    return { slug: item.slug || '', title: item.title || '', excerpt: item.excerpt || '', country: (item.country || 'global').toLowerCase(), category: (item.category || 'shadow').toLowerCase(), threat: (item.threat || 'high').toLowerCase(), date: item.date || todayStr(), image: item.image || '', source: item.source || 'مصادر الرصد', dateObj: safeDate(item.date), _src: 'index' };
 }
 
 /* ================================================================
-       تحميل محتوى مقال كامل (عند فتح المودال فقط)
+       تحميل مقال كامل
 ================================================================ */
 async function loadArticle(slug) {
-    /* 1) كاش المقال */
     const cached = Cache.getArticle(slug);
     if (cached) return cached;
-
-    /* 2) جلب الملف */
     let url = CFG.postsBaseUrl + slug + '.html?_=' + Date.now();
-    /* إذا كان المصدر GitHub API */
     const meta = state.allMeta.find(m => m.slug === slug);
     if (meta && meta._src === 'github' && CFG.githubUser) {
         url = `https://raw.githubusercontent.com/${CFG.githubUser}/${CFG.githubRepo}/${CFG.branch}/${CFG.postsFolder}/${slug}.html?_=${Date.now()}`;
     }
-
     try {
         const res = await dedupedFetch(url);
         if (!res.ok) return null;
         const html = await res.text();
-
-        /* استخراج الميتا من التعليقات */
         const commentMeta = parseMetaFromHTML(html);
-
-        /* استخراج المحتوى */
         const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
         let body = bodyMatch ? bodyMatch[1] : html;
-
-        /* إزالة تعليقات الميتا من المحتوى المعروض */
         body = body.replace(/<!--\s*meta\s+[\s\S]*?-->/, '').trim();
-
-        /* تنظيف المحتوى */
         body = sanitizeHTML(body);
-
         const result = { meta: commentMeta, body };
         Cache.setArticle(slug, result);
         return result;
@@ -779,29 +1157,20 @@ async function loadArticle(slug) {
 }
 
 /* ================================================================
-       محرك البحث
+       البحث
 ================================================================ */
 function searchFilter(items, query) {
     if (!query) return items;
     const q = query.toLowerCase();
     return items.filter(item => {
-        const fields = [
-            item.title,
-            COUNTRIES[item.country] || '',
-            CATEGORIES[item.category] || '',
-            THREAT_LABELS[item.threat] || '',
-            item.excerpt || '',
-            item.source || ''
-        ];
+        const fields = [item.title, COUNTRIES[item.country] || '', CATEGORIES[item.category] || '', THREAT_LABELS[item.threat] || '', item.excerpt || '', item.source || ''];
         return fields.some(f => f.toLowerCase().includes(q));
     });
 }
-
 function highlightText(text, query) {
     if (!query || !text) return escapeHTML(text);
-    const escaped = escapeHTML(text);
     const q = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    return escaped.replace(new RegExp(`(${q})`, 'gi'), '<mark>$1</mark>');
+    return escapeHTML(text).replace(new RegExp(`(${q})`, 'gi'), '<mark>$1</mark>');
 }
 
 /* ================================================================
@@ -809,246 +1178,107 @@ function highlightText(text, query) {
 ================================================================ */
 function applyFilters() {
     let items = [...state.allMeta];
-
-    /* فلترة المحفوظات */
-    if (state.activeFilter === 'bookmarks') {
-        items = items.filter(i => state.bookmarks.has(i.slug));
-    }
-    /* فلترة التصنيف */
-    else if (state.activeFilter !== 'all') {
-        items = items.filter(i => i.country === state.activeFilter || i.category === state.activeFilter);
-    }
-
-    /* البحث */
+    if (state.activeFilter === 'bookmarks') items = items.filter(i => state.bookmarks.has(i.slug));
+    else if (state.activeFilter !== 'all') items = items.filter(i => i.country === state.activeFilter || i.category === state.activeFilter);
     items = searchFilter(items, state.searchQuery);
-
-    /* الترتيب */
     switch (state.sortBy) {
-        case 'oldest':
-            items.sort((a, b) => (a.dateObj?.getTime() || 0) - (b.dateObj?.getTime() || 0));
-            break;
-        case 'threat':
-            items.sort((a, b) => (THREAT_ORDER[a.threat] ?? 3) - (THREAT_ORDER[b.threat] ?? 3));
-            break;
-        default: /* newest */
-            items.sort((a, b) => (b.dateObj?.getTime() || 0) - (a.dateObj?.getTime() || 0));
+        case 'oldest': items.sort((a, b) => (a.dateObj?.getTime() || 0) - (b.dateObj?.getTime() || 0)); break;
+        case 'threat': items.sort((a, b) => (THREAT_ORDER[a.threat] ?? 3) - (THREAT_ORDER[b.threat] ?? 3)); break;
+        default: items.sort((a, b) => (b.dateObj?.getTime() || 0) - (a.dateObj?.getTime() || 0));
     }
-
-    state.filtered = items;
-    state.page = 0;
-    state.displayed = [];
-    state.hasMore = items.length > CFG.pageSize;
+    state.filtered = items; state.page = 0; state.displayed = []; state.hasMore = items.length > CFG.pageSize;
     renderGrid();
 }
 
 /* ================================================================
-       التصيير — Skeleton ثم البطاقات
+       التصيير
 ================================================================ */
 function renderSkeletons(count) {
-    let html = '';
-    for (let i = 0; i < count; i++) {
-        html += `<div class="skel-card" aria-hidden="true">
-            <div class="skeleton skel-img"></div>
-            <div class="skel-body">
-                <div class="skeleton skel-line w40 h8"></div>
-                <div class="skeleton skel-line w100 h20"></div>
-                <div class="skeleton skel-line w80 h16"></div>
-                <div class="skeleton skel-line w60 h8"></div>
-                <div style="flex:1;"></div>
-                <div class="skeleton skel-line w60 h8"></div>
-            </div>
-        </div>`;
-    }
-    return html;
+    let h = '';
+    for (let i = 0; i < count; i++) h += `<div class="skel-card" aria-hidden="true"><div class="skeleton skel-img"></div><div class="skel-body"><div class="skeleton skel-line w40 h8"></div><div class="skeleton skel-line w100 h20"></div><div class="skeleton skel-line w80 h16"></div><div class="skeleton skel-line w60 h8"></div><div style="flex:1;"></div><div class="skeleton skel-line w60 h8"></div></div></div>`;
+    return h;
 }
-
 function renderGrid() {
     const grid = document.getElementById('grid');
     const noData = document.getElementById('noData');
     const rc = document.getElementById('resultCount');
     const lmWrap = document.getElementById('loadMoreWrap');
-
-    /* عداد النتائج */
-    if (state.searchQuery || state.activeFilter !== 'all') {
-        rc.classList.add('show');
-        rc.textContent = state.filtered.length + ' تقرير';
-    } else {
-        rc.classList.remove('show');
-    }
-
-    /* لا نتائج */
-    if (state.filtered.length === 0 && state.allMeta.length > 0) {
-        grid.innerHTML = '';
-        noData.style.display = 'block';
-        lmWrap.style.display = 'none';
-        return;
-    }
+    if (state.searchQuery || state.activeFilter !== 'all') { rc.classList.add('show'); rc.textContent = state.filtered.length + ' تقرير'; }
+    else { rc.classList.remove('show'); }
+    if (state.filtered.length === 0 && state.allMeta.length > 0) { grid.innerHTML = ''; noData.style.display = 'block'; lmWrap.style.display = 'none'; return; }
     noData.style.display = 'none';
-
-    /* تحميل الصفحة التالية */
     const start = state.page * CFG.pageSize;
     const end = Math.min(start + CFG.pageSize, state.filtered.length);
     const newItems = state.filtered.slice(start, end);
-
-    if (state.page === 0) {
-        grid.innerHTML = newItems.length ? newItems.map(renderCard).join('') : renderSkeletons(CFG.pageSize);
-    } else {
-        grid.insertAdjacentHTML('beforeend', newItems.map(renderCard).join(''));
-    }
-
-    state.displayed.push(...newItems);
-    state.page++;
+    if (state.page === 0) grid.innerHTML = newItems.length ? newItems.map(renderCard).join('') : renderSkeletons(CFG.pageSize);
+    else grid.insertAdjacentHTML('beforeend', newItems.map(renderCard).join(''));
+    state.displayed.push(...newItems); state.page++;
     state.hasMore = end < state.filtered.length;
-
-    /* زر تحميل المزيد */
     lmWrap.style.display = state.hasMore ? 'flex' : 'none';
     const btn = document.getElementById('loadMoreBtn');
     btn.disabled = state.isLoadingMore;
-    btn.innerHTML = state.isLoadingMore
-        ? '<span class="spinner-sm"></span> جاري التحميل...'
-        : 'تحميل المزيد <i class="fas fa-chevron-down"></i>';
+    btn.innerHTML = state.isLoadingMore ? '<span class="spinner-sm"></span> جاري التحميل...' : 'تحميل المزيد <i class="fas fa-chevron-down"></i>';
 }
-
 function renderCard(item) {
     const tH = highlightText(item.title, state.searchQuery);
-    const isBookmarked = state.bookmarks.has(item.slug);
+    const isBm = state.bookmarks.has(item.slug);
     const imgSrc = fixImagePath(item.image);
-    const threatClass = THREAT_CLASSES[item.threat] || '';
-    const threatLabel = THREAT_LABELS[item.threat] || '';
-
-    return `<article class="card" data-slug="${escapeAttr(item.slug)}" tabindex="0">
-        <div class="card-img-wrap">
-            ${imgSrc ? `<img class="card-img" src="${escapeAttr(imgSrc)}" alt="" loading="lazy" onerror="this.outerHTML='<div style=\\'width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;\\'><i class=\\'fas fa-image\\' style=\\'font-size:1.5rem;margin-inline-end:8px;\\'></i> صورة غير متوفرة</div>'">` : '<div style="width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;"><i class="fas fa-image" style="font-size:1.5rem;margin-inline-end:8px;"></i> لا توجد صورة</div>'}
-            <span class="card-country"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[item.country] || 'عالمي'}</span>
-            <button class="card-bookmark ${isBookmarked ? 'saved' : ''}" data-bm="${escapeAttr(item.slug)}" aria-label="${isBookmarked ? 'إزالة من المحفوظات' : 'حفظ التقرير'}">
-                <i class="${isBookmarked ? 'fas' : 'far'} fa-bookmark"></i>
-            </button>
-        </div>
-        <div class="card-body">
-            <div class="card-meta">
-                <span class="card-source">${CATEGORIES[item.category] || 'تقرير'}</span>
-                <span>${formatDate(item.date)}</span>
-            </div>
-            <h3 class="card-title">${tH}</h3>
-            ${item.excerpt ? `<p class="card-excerpt">${highlightText(item.excerpt, state.searchQuery)}</p>` : ''}
-            <div class="card-footer">
-                ${threatLabel ? `<span class="card-threat ${threatClass}"><i class="fas fa-exclamation-triangle"></i> ${threatLabel}</span>` : '<span></span>'}
-                <button class="card-read" data-open="${escapeAttr(item.slug)}">قراءة التقرير <i class="fas fa-arrow-left"></i></button>
-            </div>
-        </div>
-    </article>`;
+    const tc = THREAT_CLASSES[item.threat] || '';
+    const tl = THREAT_LABELS[item.threat] || '';
+    const fallback = `this.outerHTML='<div style=\\'width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;\\'><i class=\\'fas fa-image\\' style=\\'font-size:1.5rem;margin-inline-end:8px;\\'></i> صورة غير متوفرة</div>'`;
+    return `<article class="card" data-slug="${escapeAttr(item.slug)}" tabindex="0"><div class="card-img-wrap">${imgSrc ? `<img class="card-img" src="${escapeAttr(imgSrc)}" alt="" loading="lazy" onerror="${fallback}">` : '<div style="width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;"><i class="fas fa-image" style="font-size:1.5rem;margin-inline-end:8px;"></i> لا توجد صورة</div>'}<span class="card-country"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[item.country] || 'عالمي'}</span><button class="card-bookmark ${isBm ? 'saved' : ''}" data-bm="${escapeAttr(item.slug)}" aria-label="${isBm ? 'إزالة من المحفوظات' : 'حفظ التقرير'}"><i class="${isBm ? 'fas' : 'far'} fa-bookmark"></i></button></div><div class="card-body"><div class="card-meta"><span class="card-source">${CATEGORIES[item.category] || 'تقرير'}</span><span>${formatDate(item.date)}</span></div><h3 class="card-title">${tH}</h3>${item.excerpt ? `<p class="card-excerpt">${highlightText(item.excerpt, state.searchQuery)}</p>` : ''}<div class="card-footer">${tl ? `<span class="card-threat ${tc}"><i class="fas fa-exclamation-triangle"></i> ${tl}</span>` : '<span></span>'}<button class="card-read" data-open="${escapeAttr(item.slug)}">قراءة التقرير <i class="fas fa-arrow-left"></i></button></div></div></article>`;
 }
 
 /* ================================================================
-       المودال — تحميل كسول للمحتوى
+       المودال
 ================================================================ */
 async function openModal(slug) {
     const meta = state.allMeta.find(m => m.slug === slug);
     if (!meta) return;
-
     state.currentSlug = slug;
-    const overlay = document.getElementById('modal');
-    const content = document.getElementById('modalContent');
-    const progressBar = document.getElementById('readingProgress');
-    const bmBtn = document.getElementById('modalBookmarkBtn');
-
-    overlay.classList.add('open');
+    document.getElementById('modal').classList.add('open');
     document.body.style.overflow = 'hidden';
-    progressBar.style.width = '0%';
-
-    /* تحديث زر الحفظ */
+    document.getElementById('readingProgress').style.width = '0%';
     updateModalBookmark(slug);
-
-    /* تحديث URL */
     history.pushState({}, '', '#report-' + slug);
-
-    /* تحديث SEO */
     SEO.update(meta);
-
-    /* عرض حالة التحميل */
-    content.innerHTML = `<div class="modal-loading">
-        <div style="width:36px;height:36px;border:3px solid var(--t-border);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px;"></div>
-        <p>جاري تحميل التقرير...</p>
-    </div>`;
-
-    /* تحميل المحتوى الكامل */
+    document.getElementById('modalContent').innerHTML = `<div class="modal-loading"><div style="width:36px;height:36px;border:3px solid var(--t-border);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px;"></div><p>جاري تحميل التقرير...</p></div>`;
     const article = await loadArticle(slug);
-
     if (!article) {
-        content.innerHTML = `<div class="modal-error">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p>فشل تحميل محتوى التقرير</p>
-            <button class="modal-retry" onclick="openModal('${escapeAttr(slug)}')">إعادة المحاولة</button>
-        </div>`;
+        document.getElementById('modalContent').innerHTML = `<div class="modal-error"><i class="fas fa-exclamation-triangle"></i><p>فشل تحميل محتوى التقرير</p><button class="modal-retry" onclick="openModal('${escapeAttr(slug)}')">إعادة المحاولة</button></div>`;
         return;
     }
-
-    /* دمج الميتا من الملف مع الميتا من الفهرس */
-    const fileMeta = article.meta;
-    const title = fileMeta.title || meta.title;
-    const excerpt = fileMeta.excerpt || meta.excerpt;
-    const country = (fileMeta.country || meta.country).toLowerCase();
-    const category = (fileMeta.category || meta.category).toLowerCase();
-    const threat = (fileMeta.threat || meta.threat).toLowerCase();
-    const source = fileMeta.source || meta.source;
-    const image = fileMeta.image || meta.image;
-    const date = fileMeta.date || meta.date;
+    const fm = article.meta;
+    const title = fm.title || meta.title;
+    const excerpt = fm.excerpt || meta.excerpt;
+    const country = (fm.country || meta.country).toLowerCase();
+    const category = (fm.category || meta.category).toLowerCase();
+    const threat = (fm.threat || meta.threat).toLowerCase();
+    const source = fm.source || meta.source;
+    const image = fm.image || meta.image;
+    const date = fm.date || meta.date;
     let bodyHTML = article.body;
-
-    /* كشف الوسائط */
     let media = '';
-    const ytMatch = bodyHTML.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
-    if (ytMatch) {
-        media = `<iframe class="modal-video" src="https://www.youtube.com/embed/${ytMatch[1]}" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
-        bodyHTML = bodyHTML.replace(new RegExp(ytMatch[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '');
+    const yt = bodyHTML.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
+    if (yt) {
+        media = `<iframe class="modal-video" src="https://www.youtube.com/embed/${yt[1]}" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+        bodyHTML = bodyHTML.replace(new RegExp(yt[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '');
     } else {
-        const imgMatch = bodyHTML.match(/<img[^>]+src=["']([^"']+)["'][^>]*>/);
-        if (imgMatch) {
-            media = `<img class="modal-img" src="${fixImagePath(imgMatch[1])}" alt="" loading="lazy" onerror="this.outerHTML='<div style=\\'width:100%;height:200px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);\\'><i class=\\'fas fa-image\\' style=\\'font-size:2rem;margin-inline-end:10px;\\'></i> صورة غير متوفرة</div>'">`;
-            bodyHTML = bodyHTML.replace(imgMatch[0], '');
-        } else if (image) {
-            media = `<img class="modal-img" src="${fixImagePath(image)}" alt="" loading="lazy" onerror="this.outerHTML='<div style=\\'width:100%;height:200px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);\\'><i class=\\'fas fa-image\\' style=\\'font-size:2rem;margin-inline-end:10px;\\'></i> صورة غير متوفرة</div>'">`;
-        }
+        const im = bodyHTML.match(/<img[^>]+src=["']([^"']+)["'][^>]*>/);
+        if (im) { media = `<img class="modal-img" src="${fixImagePath(im[1])}" alt="" loading="lazy" onerror="this.outerHTML='<div style=\\'width:100%;height:200px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);\\'><i class=\\'fas fa-image\\' style=\\'font-size:2rem;\\'></i></div>'">`; bodyHTML = bodyHTML.replace(im[0], ''); }
+        else if (image) { media = `<img class="modal-img" src="${fixImagePath(image)}" alt="" loading="lazy" onerror="this.style.display='none'">`; }
     }
-
-    const threatClass = THREAT_CLASSES[threat] || '';
-    const threatLabel = THREAT_LABELS[threat] || '';
-
-    content.innerHTML = `
-        ${media}
-        <div class="modal-body">
-            <div class="modal-tags">
-                <span class="mtag mtag-c"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[country] || 'عالمي'}</span>
-                <span class="mtag mtag-t"><i class="fas fa-shield-halved"></i> ${CATEGORIES[category] || 'تقرير'}</span>
-                ${threatLabel ? `<span class="mtag mtag-h"><i class="fas fa-exclamation-triangle"></i> ${threatLabel}</span>` : ''}
-            </div>
-            <h2>${escapeHTML(title)}</h2>
-            <div class="modal-info">
-                <span><i class="far fa-clock"></i> ${formatDate(date)}</span>
-                <span><i class="fas fa-building"></i> ${escapeHTML(source)}</span>
-                <span><i class="fas fa-fingerprint"></i> ${escapeAttr(slug)}</span>
-            </div>
-            <div class="mct">${bodyHTML}</div>
-            <div class="modal-foot">
-                <span>${escapeAttr(slug)}</span>
-                <button class="share-btn" onclick="Share.report('${escapeAttr(slug)}')"><i class="fas fa-share-nodes"></i> مشاركة</button>
-            </div>
-        </div>`;
-
-    /* تحديث SEO بالبيانات النهائية */
+    const tc = THREAT_CLASSES[threat] || '';
+    const tl = THREAT_LABELS[threat] || '';
+    document.getElementById('modalContent').innerHTML = `${media}<div class="modal-body"><div class="modal-tags"><span class="mtag mtag-c"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[country] || 'عالمي'}</span><span class="mtag mtag-t"><i class="fas fa-shield-halved"></i> ${CATEGORIES[category] || 'تقرير'}</span>${tl ? `<span class="mtag mtag-h"><i class="fas fa-exclamation-triangle"></i> ${tl}</span>` : ''}</div><h2>${escapeHTML(title)}</h2><div class="modal-info"><span><i class="far fa-clock"></i> ${formatDate(date)}</span><span><i class="fas fa-building"></i> ${escapeHTML(source)}</span><span><i class="fas fa-fingerprint"></i> ${escapeAttr(slug)}</span></div><div class="mct">${bodyHTML}</div><div class="modal-foot"><span>${escapeAttr(slug)}</span><button class="share-btn" onclick="Share.report('${escapeAttr(slug)}')"><i class="fas fa-share-nodes"></i> مشاركة</button></div></div>`;
     SEO.update({ title, excerpt, image, country, category, threat, date, slug });
 }
-
 function closeModal() {
-    const overlay = document.getElementById('modal');
-    overlay.classList.remove('open');
+    document.getElementById('modal').classList.remove('open');
     document.body.style.overflow = '';
     state.currentSlug = null;
     document.getElementById('readingProgress').style.width = '0%';
-
-    if (window.location.hash.startsWith('#report-')) {
-        history.pushState({}, '', window.location.pathname);
-    }
+    if (window.location.hash.startsWith('#report-')) history.pushState({}, '', window.location.pathname);
     SEO.restore();
 }
 
@@ -1060,164 +1290,118 @@ function setupReadingProgress() {
     const bar = document.getElementById('readingProgress');
     overlay.addEventListener('scroll', () => {
         if (!overlay.classList.contains('open')) return;
-        const scrollTop = overlay.scrollTop;
-        const scrollHeight = overlay.scrollHeight - overlay.clientHeight;
-        const pct = scrollHeight > 0 ? Math.min((scrollTop / scrollHeight) * 100, 100) : 0;
-        bar.style.width = pct + '%';
+        const sT = overlay.scrollTop;
+        const sH = overlay.scrollHeight - overlay.clientHeight;
+        bar.style.width = (sH > 0 ? Math.min((sT / sH) * 100, 100) : 0) + '%';
     }, { passive: true });
 }
 
 /* ================================================================
-       مدير الثيم (فاتح/داكن)
+       الثيم
 ================================================================ */
 const Theme = {
     init() {
         const saved = localStorage.getItem(CFG.keys.theme);
         if (saved) this.set(saved, false);
         else if (window.matchMedia('(prefers-color-scheme: dark)').matches) this.set('dark', false);
-
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            this.set(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark', true);
-        });
-
-        /* استماع لتغيير تفضيل النظام */
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem(CFG.keys.theme)) this.set(e.matches ? 'dark' : 'light', false);
-        });
+        document.getElementById('themeToggle').addEventListener('click', () => this.set(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark', true));
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { if (!localStorage.getItem(CFG.keys.theme)) this.set(e.matches ? 'dark' : 'light', false); });
     },
     set(theme, save) {
         document.documentElement.dataset.theme = theme;
-        const icon = document.querySelector('#themeToggle i');
-        icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        document.querySelector('#themeToggle i').className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         if (save) localStorage.setItem(CFG.keys.theme, theme);
     }
 };
 
 /* ================================================================
-       مدير المحفوظات
+       المحفوظات
 ================================================================ */
 const Bookmarks = {
     init() {
-        try {
-            const saved = JSON.parse(localStorage.getItem(CFG.keys.bookmarks) || '[]');
-            state.bookmarks = new Set(saved);
-        } catch { state.bookmarks = new Set(); }
+        try { state.bookmarks = new Set(JSON.parse(localStorage.getItem(CFG.keys.bookmarks) || '[]')); } catch { state.bookmarks = new Set(); }
         this.updateCount();
     },
     toggle(slug) {
-        if (state.bookmarks.has(slug)) {
-            state.bookmarks.delete(slug);
-            showToast('fa-bookmark', 'تمت الإزالة من المحفوظات');
-        } else {
-            state.bookmarks.add(slug);
-            showToast('fa-bookmark', 'تم الحفظ بنجاح');
-        }
+        if (state.bookmarks.has(slug)) { state.bookmarks.delete(slug); showToast('fa-bookmark', 'تمت الإزالة من المحفوظات'); }
+        else { state.bookmarks.add(slug); showToast('fa-bookmark', 'تم الحفظ بنجاح'); }
         localStorage.setItem(CFG.keys.bookmarks, JSON.stringify([...state.bookmarks]));
         this.updateCount();
         this.updateCardButtons(slug);
         if (state.currentSlug === slug) updateModalBookmark(slug);
-        /* إذا كان العرض على المحفوظات، أعد التصيير */
         if (state.activeFilter === 'bookmarks') applyFilters();
     },
     updateCount() {
         const el = document.getElementById('bookmarkCount');
-        const count = state.bookmarks.size;
-        el.style.display = count > 0 ? 'inline' : 'none';
-        el.textContent = count;
+        el.style.display = state.bookmarks.size > 0 ? 'inline' : 'none';
+        el.textContent = state.bookmarks.size;
     },
     updateCardButtons(slug) {
         document.querySelectorAll(`.card-bookmark[data-bm="${slug}"]`).forEach(btn => {
-            const isSaved = state.bookmarks.has(slug);
-            btn.classList.toggle('saved', isSaved);
-            btn.querySelector('i').className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
-            btn.setAttribute('aria-label', isSaved ? 'إزالة من المحفوظات' : 'حفظ التقرير');
+            const s = state.bookmarks.has(slug);
+            btn.classList.toggle('saved', s);
+            btn.querySelector('i').className = s ? 'fas fa-bookmark' : 'far fa-bookmark';
         });
     }
 };
-
 function updateModalBookmark(slug) {
     const btn = document.getElementById('modalBookmarkBtn');
-    const isSaved = state.bookmarks.has(slug);
-    btn.classList.toggle('saved', isSaved);
-    btn.querySelector('i').className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
+    const s = state.bookmarks.has(slug);
+    btn.classList.toggle('saved', s);
+    btn.querySelector('i').className = s ? 'fas fa-bookmark' : 'far fa-bookmark';
 }
 
 /* ================================================================
-       مدير المشاركة
+       المشاركة
 ================================================================ */
 const Share = {
     report(slug) {
         const url = window.location.origin + window.location.pathname + '#report-' + slug;
         const meta = state.allMeta.find(m => m.slug === slug);
-        const title = meta ? meta.title : 'تقرير سيبراني';
-        if (navigator.share) {
-            navigator.share({ title, url }).catch(() => {});
-        } else if (navigator.clipboard) {
-            navigator.clipboard.writeText(url).then(() => showToast('fa-link', 'تم نسخ الرابط'));
-        }
+        if (navigator.share) navigator.share({ title: meta ? meta.title : 'تقرير سيبراني', url }).catch(() => {});
+        else if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => showToast('fa-link', 'تم نسخ الرابط'));
     }
 };
 
 /* ================================================================
-       مدير SEO الديناميكي
+       SEO
 ================================================================ */
 const SEO = {
-    defaults: {
-        title: 'وحدة الرصد السيبراني — تقارير ميدانية',
-        desc: 'تقارير استخباراتية سيبرانية ميدانية من مصادر الرصد الخاصة. رصد التهديدات الرقمية والعمليات السيبرانية في الوقت الفعلي.',
-        img: ''
-    },
-    update(meta) {
-        const title = (meta.title || this.defaults.title) + ' — وحدة الرصد السيبراني';
-        const desc = meta.excerpt || this.defaults.desc;
-        const img = meta.image || this.defaults.img;
-        document.title = title;
-        this.setMeta('metaDesc', 'content', desc);
-        this.setMeta('ogTitle', 'content', title);
-        this.setMeta('ogDesc', 'content', desc);
-        if (img) this.setMeta('ogImg', 'content', img);
+    defaults: { title: 'وحدة الرصد السيبراني — تقارير ميدانية', desc: 'تقارير استخباراتية سيبرانية ميدانية من مصادر الرصد الخاصة.', img: '' },
+    update(m) {
+        const t = (m.title || this.defaults.title) + ' — وحدة الرصد السيبراني';
+        document.title = t;
+        this.setM('metaDesc', 'content', m.excerpt || this.defaults.desc);
+        this.setM('ogTitle', 'content', t);
+        this.setM('ogDesc', 'content', m.excerpt || this.defaults.desc);
+        if (m.image) this.setM('ogImg', 'content', m.image);
     },
     restore() {
         document.title = this.defaults.title;
-        this.setMeta('metaDesc', 'content', this.defaults.desc);
-        this.setMeta('ogTitle', 'content', this.defaults.title);
-        this.setMeta('ogDesc', 'content', this.defaults.desc);
-        this.setMeta('ogImg', 'content', this.defaults.img);
+        this.setM('metaDesc', 'content', this.defaults.desc);
+        this.setM('ogTitle', 'content', this.defaults.title);
+        this.setM('ogDesc', 'content', this.defaults.desc);
+        this.setM('ogImg', 'content', this.defaults.img);
     },
-    setMeta(id, attr, val) {
-        const el = document.getElementById(id);
-        if (el) el.setAttribute(attr, val);
-    }
+    setM(id, attr, val) { const el = document.getElementById(id); if (el) el.setAttribute(attr, val); }
 };
 
 /* ================================================================
-       مدير التحديث الصامت
+       التحديث الصامت
 ================================================================ */
 const Sync = {
     init() {
         if (CFG.refreshInterval <= 0) return;
         this.startTimer();
-
         document.getElementById('syncBadgeBtn').addEventListener('click', () => this.apply());
         document.getElementById('syncBadgeClose').addEventListener('click', () => this.dismiss());
-
-        /* تحديث فقط عند رؤية الصفحة */
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) this.stopTimer();
-            else { this.startTimer(); this.checkNow(); }
-        });
+        document.addEventListener('visibilitychange', () => { if (document.hidden) this.stopTimer(); else { this.startTimer(); this.checkNow(); } });
     },
     startTimer() {
         if (state.refreshTimer || CFG.refreshInterval <= 0) return;
-        state.refreshTimer = setTimeout(() => {
-            if (state.isPageVisible) this.checkNow();
-            state.refreshTimer = null;
-            this.startTimer();
-        }, CFG.refreshInterval * 60000);
+        state.refreshTimer = setTimeout(() => { if (state.isPageVisible) this.checkNow(); state.refreshTimer = null; this.startTimer(); }, CFG.refreshInterval * 60000);
     },
-    stopTimer() {
-        if (state.refreshTimer) { clearTimeout(state.refreshTimer); state.refreshTimer = null; }
-    },
+    stopTimer() { if (state.refreshTimer) { clearTimeout(state.refreshTimer); state.refreshTimer = null; } },
     async checkNow() {
         if (state.hasRateLimited) return;
         try {
@@ -1225,271 +1409,136 @@ const Sync = {
             if (!res.ok) return;
             const data = await res.json();
             if (!Array.isArray(data)) return;
-            const newMeta = data.map(normalizeMeta);
-
-            /* مقارنة مع البيانات الحالية */
-            if (this.isDifferent(newMeta)) {
-                state.allMeta = newMeta;
-                Cache.set(CFG.keys.meta, newMeta);
-                applyFilters();
-                buildTicker();
-                this.showBadge(newMeta.length - state.allMeta.length);
-                /* مؤشر صغير */
+            const n = data.map(normalizeMeta);
+            if (this.isDifferent(n)) {
+                state.allMeta = n; Cache.set(CFG.keys.meta, n); applyFilters(); buildTicker();
+                this.showBadge(n.length - state.allMeta.length);
                 const dot = document.getElementById('syncDot');
-                dot.classList.add('active');
-                setTimeout(() => dot.classList.remove('active'), 3000);
+                dot.classList.add('active'); setTimeout(() => dot.classList.remove('active'), 3000);
             }
-        } catch { /* تجاوز */ }
+        } catch {}
     },
-    isDifferent(newData) {
-        if (newData.length !== state.allMeta.length) return true;
-        return newData.some((item, i) => item.slug !== state.allMeta[i]?.slug);
-    },
-    showBadge(count) {
-        const badge = document.getElementById('syncBadge');
-        document.getElementById('syncBadgeText').textContent = count > 0 ? `${count} تقارير جديدة متاحة` : 'تم تحديث التقارير';
-        badge.classList.add('show');
-        setTimeout(() => this.dismiss(), 15000);
-    },
-    dismiss() {
-        document.getElementById('syncBadge').classList.remove('show');
-    },
-    apply() {
-        this.dismiss();
-        applyFilters();
-        buildTicker();
-        showToast('fa-sync', 'تم تحديث التقارير');
-    }
+    isDifferent(n) { if (n.length !== state.allMeta.length) return true; return n.some((i, idx) => i.slug !== state.allMeta[idx]?.slug); },
+    showBadge(c) { document.getElementById('syncBadgeText').textContent = c > 0 ? `${c} تقارير جديدة متاحة` : 'تم تحديث التقارير'; document.getElementById('syncBadge').classList.add('show'); setTimeout(() => this.dismiss(), 15000); },
+    dismiss() { document.getElementById('syncBadge').classList.remove('show'); },
+    apply() { this.dismiss(); applyFilters(); buildTicker(); showToast('fa-sync', 'تم تحديث التقارير'); }
 };
 
 /* ================================================================
        التيكر
 ================================================================ */
 function buildTicker() {
-    const items = state.allMeta
-        .filter(r => r.threat === 'critical' || r.threat === 'high')
-        .slice(0, 12);
+    const items = state.allMeta.filter(r => r.threat === 'critical' || r.threat === 'high').slice(0, 12);
     const el = document.getElementById('ticker');
-    if (items.length === 0) {
-        el.innerHTML = '<span class="ticker-item"><i class="fas fa-satellite-dish"></i> وحدة الرصد السيبراني — رصد مستمر للتهديدات</span>';
-        return;
-    }
-    const html = items.map(r => `<span class="ticker-item"><i class="fas fa-circle-exclamation"></i> ${escapeHTML(r.title)}</span>`).join('');
-    el.innerHTML = html + html; /* نسخة مكررة للتمرير السلس */
+    if (items.length === 0) { el.innerHTML = '<span class="ticker-item"><i class="fas fa-satellite-dish"></i> وحدة الرصد السيبراني — رصد مستمر</span>'; return; }
+    const h = items.map(r => `<span class="ticker-item"><i class="fas fa-circle-exclamation"></i> ${escapeHTML(r.title)}</span>`).join('');
+    el.innerHTML = h + h;
 }
 
 /* ================================================================
-       أدوات مساعدة
+       أدوات
 ================================================================ */
-/* ================================================================
-       أدوات مساعدة
-================================================================ */
-
-/* إصلاح المسارات النسبية حسب بيئة الاستضافة */
-function fixImagePath(path) {
-    if (!path) return '';
-    /* بالفعل رابط مطلق أو بروتوكول */
-    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:') || path.startsWith('blob:')) return path;
-    /* بالفعل يبدأ بـ ./ */
-    if (path.startsWith('./')) return path;
-    /* بالفعل يبدأ بـ / */
-    if (path.startsWith('/')) return path;
-    /* إضافة ./ للمسارات النسبية */
-    return './' + path;
-}
-
-function escapeHTML(s) {
-    if (!s) return '';
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-function escapeAttr(s) {
-    if (!s) return '';
-    return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-function safeDate(d) {
-    if (!d) return new Date();
-    try { const dt = new Date(d); return isNaN(dt.getTime()) ? new Date() : dt; }
-    catch { return new Date(); }
-}
-function todayStr() {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-}
-function formatDate(d) {
-    try { return new Date(d).toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' }); }
-    catch { return d || ''; }
-}
+function fixImagePath(p) { if (!p) return ''; if (p.startsWith('http://') || p.startsWith('https://') || p.startsWith('data:') || p.startsWith('blob:')) return p; if (p.startsWith('./') || p.startsWith('/')) return p; return './' + p; }
+function escapeHTML(s) { if (!s) return ''; return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function escapeAttr(s) { if (!s) return ''; return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function safeDate(d) { if (!d) return new Date(); try { const dt = new Date(d); return isNaN(dt.getTime()) ? new Date() : dt; } catch { return new Date(); } }
+function todayStr() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+function formatDate(d) { try { return new Date(d).toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' }); } catch { return d || ''; } }
 function showToast(icon, msg) {
-    const container = document.getElementById('toastContainer');
-    const el = document.createElement('div');
-    el.className = 'toast';
-    el.innerHTML = `<i class="fas ${icon}"></i> ${msg}`;
-    container.appendChild(el);
-    setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'all .3s'; }, 2700);
-    setTimeout(() => el.remove(), 3100);
+    const c = document.getElementById('toastContainer');
+    const el = document.createElement('div'); el.className = 'toast'; el.innerHTML = `<i class="fas ${icon}"></i> ${msg}`;
+    c.appendChild(el); setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'all .3s'; }, 2700); setTimeout(() => el.remove(), 3100);
 }
 
 /* ================================================================
        ربط الأحداث
 ================================================================ */
 function setupEvents() {
-    /* البحث */
     const searchInput = document.getElementById('searchInput');
-    let searchTimer;
-    searchInput.addEventListener('input', () => {
-        clearTimeout(searchTimer);
-        searchTimer = setTimeout(() => {
-            state.searchQuery = searchInput.value.trim();
-            applyFilters();
-        }, 250);
-    });
-
-    /* التصنيفات */
+    let st;
+    searchInput.addEventListener('input', () => { clearTimeout(st); st = setTimeout(() => { state.searchQuery = searchInput.value.trim(); applyFilters(); }, 250); });
     document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             state.activeFilter = btn.dataset.f;
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            applyFilters();
+            btn.classList.add('active'); applyFilters();
             document.getElementById('grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
-
-    /* الترتيب */
-    document.getElementById('sortSelect').addEventListener('change', e => {
-        state.sortBy = e.target.value;
-        applyFilters();
-    });
-
-    /* تحميل المزيد */
+    document.getElementById('sortSelect').addEventListener('change', e => { state.sortBy = e.target.value; applyFilters(); });
     document.getElementById('loadMoreBtn').addEventListener('click', loadMore);
-
-    /* Infinite Scroll عبر IntersectionObserver */
     const sentinel = document.getElementById('scrollSentinel');
-    const observer = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting && state.hasMore && !state.isLoadingMore) loadMore();
-    }, { rootMargin: '300px' });
-    observer.observe(sentinel);
-
-    /* النقر على البطاقات (Event Delegation) */
+    new IntersectionObserver(entries => { if (entries[0].isIntersecting && state.hasMore && !state.isLoadingMore) loadMore(); }, { rootMargin: '300px' }).observe(sentinel);
     document.getElementById('grid').addEventListener('click', e => {
-        /* زر الحفظ */
-        const bmBtn = e.target.closest('.card-bookmark');
-        if (bmBtn) { e.stopPropagation(); Bookmarks.toggle(bmBtn.dataset.bm); return; }
-        /* زر القراءة أو البطاقة نفسها */
-        const openBtn = e.target.closest('[data-open]');
+        const bm = e.target.closest('.card-bookmark');
+        if (bm) { e.stopPropagation(); Bookmarks.toggle(bm.dataset.bm); return; }
+        const ob = e.target.closest('[data-open]');
         const card = e.target.closest('.card');
-        const slug = openBtn?.dataset.open || card?.dataset.slug;
+        const slug = ob?.dataset.open || card?.dataset.slug;
         if (slug) openModal(slug);
     });
-
-    /* لوحة المفاتيح للبطاقات */
-    document.getElementById('grid').addEventListener('keydown', e => {
-        if (e.key === 'Enter') {
-            const card = e.target.closest('.card');
-            if (card) openModal(card.dataset.slug);
-        }
-    });
-
-    /* المودال */
+    document.getElementById('grid').addEventListener('keydown', e => { if (e.key === 'Enter') { const c = e.target.closest('.card'); if (c) openModal(c.dataset.slug); } });
     document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
-    document.getElementById('modal').addEventListener('click', e => {
-        if (e.target === document.getElementById('modal')) closeModal();
-    });
-    document.getElementById('modalBookmarkBtn').addEventListener('click', () => {
-        if (state.currentSlug) Bookmarks.toggle(state.currentSlug);
-    });
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && state.currentSlug) closeModal();
-    });
-    window.addEventListener('popstate', () => {
-        if (state.currentSlug) closeModal();
-        else handleHash();
-    });
-
-    /* العودة للأعلى */
-    document.getElementById('backTop').addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    window.addEventListener('scroll', () => {
-        document.getElementById('backTop').classList.toggle('show', window.scrollY > 400);
-    }, { passive: true });
+    document.getElementById('modal').addEventListener('click', e => { if (e.target === document.getElementById('modal')) closeModal(); });
+    document.getElementById('modalBookmarkBtn').addEventListener('click', () => { if (state.currentSlug) Bookmarks.toggle(state.currentSlug); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && state.currentSlug) closeModal(); });
+    document.getElementById('backTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => document.getElementById('backTop').classList.toggle('show', window.scrollY > 400), { passive: true });
 }
-
 function handleHash() {
     const h = window.location.hash;
     if (h.startsWith('#report-')) {
-        const slug = h.replace('#report-', '');
-        if (state.allMeta.find(m => m.slug === slug)) openModal(slug);
+        const s = h.replace('#report-', '');
+        if (state.allMeta.find(m => m.slug === s)) openModal(s);
     }
 }
-
-/* فلترة من الفوتر */
 function filterBy(f) {
     state.activeFilter = f;
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.f === f));
-    applyFilters();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    applyFilters(); window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-/* تحميل المزيد */
 async function loadMore() {
     if (state.isLoadingMore || !state.hasMore) return;
     state.isLoadingMore = true;
     const btn = document.getElementById('loadMoreBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner-sm"></span> جاري التحميل...';
-
-    /* تأخير بسيط لتجربة أفضل بصرياً */
+    btn.disabled = true; btn.innerHTML = '<span class="spinner-sm"></span> جاري التحميل...';
     await new Promise(r => setTimeout(r, 200));
-    renderGrid();
-
-    state.isLoadingMore = false;
+    renderGrid(); state.isLoadingMore = false;
 }
 
 /* ================================================================
-       التهيئة الرئيسية
+       التهيئة
 ================================================================ */
 async function init() {
-    /* عرض التاريخ */
-    document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('ar-EG', {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-    });
+    document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    Theme.init(); Bookmarks.init(); Router.init(); setupEvents(); setupReadingProgress();
 
-    /* تهيئة المكونات */
-    Theme.init();
-    Bookmarks.init();
-    setupEvents();
-    setupReadingProgress();
+    /* معالجة الهاش الأولي */
+    const hash = window.location.hash;
+    if (hash.startsWith('#page-')) {
+        const pg = hash.replace('#page-', '');
+        if (['about','methodology','team','contact','privacy','disclaimer'].includes(pg)) {
+            /* لا تُحمّل الأخبار — اعرض الصفحة مباشرة */
+            document.getElementById('grid').innerHTML = renderSkeletons(CFG.pageSize);
+            const data = await loadMetadata();
+            if (data) { state.allMeta = data; buildTicker(); }
+            Router.go(pg); return;
+        }
+    }
 
-    /* عرض Skeleton فوراً */
+    /* التحميل العادي */
     document.getElementById('grid').innerHTML = renderSkeletons(CFG.pageSize);
-
-    /* تحميل البيانات */
     const data = await loadMetadata();
-
     if (data && data.length > 0) {
-        state.allMeta = data;
-        applyFilters();
-        buildTicker();
+        state.allMeta = data; applyFilters(); buildTicker();
     } else {
-        /* لا بيانات — عرض حالة فارغة */
         document.getElementById('grid').innerHTML = '';
         document.getElementById('noData').style.display = 'block';
         document.getElementById('noData').querySelector('p').textContent = 'لا توجد تقارير حالياً. تأكد من إعداد ملف index.json في مجلد posts/';
     }
-
-    /* التعامل مع الهاش */
-    handleHash();
-
-    /* بدء التحديث الصامت */
-    Sync.init();
-
-    /* تسجيل آخر زيارة */
+    handleHash(); Sync.init();
     localStorage.setItem(CFG.keys.lastVisit, Date.now().toString());
 }
-
-/* بدء التشغيل */
 document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
