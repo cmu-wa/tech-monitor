@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cmu-wa.github.io/news-data/sitemap.xml
