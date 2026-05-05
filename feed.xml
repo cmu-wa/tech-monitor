@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>وحدة الرصد السيبراني — تقارير ميدانية</title>
+        <link>https://cmu-wa.github.io/news-data/</link>
+        <description>تقارير استخباراتية سيبرانية ميدانية من مصادر الرصد الخاصة</description>
+        <language>ar</language>
+        <atom:link href="https://cmu-wa.github.io/news-data/feed.xml" rel="self" type="application/rss+xml"/>
+        <copyright>2025 وحدة الرصد السيبراني</copyright>
+        <managingEditor>contact@cmu-wa.github.io (وحدة الرصد السيبراني)</managingEditor>
+        <lastBuildDate>Fri, 20 Jun 2025 00:00:00 +0300</lastBuildDate>
+
+        <item>
+            <title>عملية اختراق واسعة تستهدف الشبكة الوطنية للطاقة في اليمن</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/yemen-intrusions-apt-energy-grid.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/yemen-intrusions-apt-energy-grid.html</guid>
+            <description>رصدت وحدة الرصد السيبرانية عملية منظمة استهدفت أنظمة التحكم الصناعي التابعة للشبكة الوطنية للطاقة الكهربائية عبر ثغرة يوم-صفر في بروتوكولات SCADA.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>اختراقات</category>
+            <pubDate>Sat, 14 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
+
+        <item>
+            <title>ثغرة حرجة في أنظمة المراقبة الصناعية لمنشآت النفط الخليجية</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/gulf-vulns-oil-infrastructure.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/gulf-vulns-oil-infrastructure.html</guid>
+            <description>اكتشاف ثغرة غير مُعلنة في نظام مراقبة حراري مُستخدم في عدة منشآت نفطية خليجية تسمح بالتنفيذ عن بُعد.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>ثغرات</category>
+            <pubDate>Thu, 12 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
+
+        <item>
+            <title>حملة تجسس إلكتروني إيرانية تستهدف بعثات دبلوماسية في المنطقة</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/iran-shadow-cyber-espionage-diplomats.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/iran-shadow-cyber-espionage-diplomats.html</guid>
+            <description>كشفت التحليلات عن حملة طويلة الأمد تعتمد على أساليب الصيد الاحتيالي المتقدم عبر استغلال خدمات سحابية شرعية.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>حروب ظل</category>
+            <pubDate>Tue, 10 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
+
+    </channel>
+</rss>
