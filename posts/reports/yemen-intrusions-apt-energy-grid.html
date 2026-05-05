@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عملية اختراق واسعة تستهدف الشبكة الوطنية للطاقة في اليمن — وحدة الرصد السيبراني</title>
+    <meta name="description" content="رصدت وحدة الرصد السيبرانية عملية منظمة استهدفت أنظمة التحكم الصناعي التابعة للشبكة الوطنية للطاقة الكهربائية عبر ثغرة يوم-صفر في بروتوكولات SCADA.">
+    <meta name="author" content="وحدة الرصد السيبراني">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cmu-wa.github.io/news-data/posts/reports/yemen-intrusions-apt-energy-grid.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="عملية اختراق واسعة تستهدف الشبكة الوطنية للطاقة في اليمن">
+    <meta property="og:description" content="رصدت وحدة الرصد السيبرانية عملية منظمة استهدفت أنظمة التحكم الصناعي عبر ثغرة يوم-صفر في بروتوكولات SCADA.">
+    <meta property="og:image" content="https://cmu-wa.github.io/news-data/posts/images/yemen-energy-grid.jpg">
+    <meta property="og:url" content="https://cmu-wa.github.io/news-data/posts/reports/yemen-intrusions-apt-energy-grid.html">
+    <meta property="article:published_time" content="2025-06-14T00:00:00+03:00">
+    <meta property="article:section" content="اختراقات">
+    <meta property="article:tag" content="اليمن">
+    <meta property="article:tag" content="سيبراني">
+    <meta property="article:tag" content="اختراق">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="عملية اختراق واسعة تستهدف الشبكة الوطنية للطاقة في اليمن">
+    <meta name="twitter:description" content="رصدت وحدة الرصد السيبرانية عملية منظمة استهدفت أنظمة التحكم الصناعي عبر ثغرة يوم-صفر.">
+    <meta name="twitter:image" content="https://cmu-wa.github.io/news-data/posts/images/yemen-energy-grid.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Cairo',sans-serif;background:#f8f5ef;color:#171717;line-height:1.7;-webkit-font-smoothing:antialiased;}
+        a{text-decoration:none;color:inherit;}
+        .header{background:#fff;border-bottom:3px solid #c0392b;padding:14px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+        .header-inner{max-width:860px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+        .brand a{font-size:1.1rem;font-weight:900;color:#0c1e35;}
+        .brand a span{color:#c0392b;}
+        .back-link{color:#c0392b;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:6px;}
+        .back-link:hover{gap:10px;}
+        .article-wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px;}
+        .meta-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+        .meta-bar .tag{display:inline-flex;align-items:center;gap:4px;padding:4px 13px;border-radius:50px;font-size:.7rem;font-weight:700;}
+        .tag-c{background:#d4edda;color:#155724;border:1px solid #c3e6cb;}
+        .tag-t{background:#f0ece4;color:#0c1e35;border:1px solid #e5e5e5;}
+        .tag-h{background:#fdd;color:#c0392b;border:1px solid #fcc;animation:blink 2s infinite;}
+        @keyframes blink{0%,100%{opacity:1;}50%{opacity:.55;}}
+        .article-wrap h1{font-size:1.6rem;font-weight:900;line-height:1.4;color:#171717;margin-bottom:16px;}
+        .info{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:#a3a3a3;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #e5e5e5;}
+        .info i{margin-inline-end:5px;color:#0c1e35;}
+        .article-img{width:100%;max-height:420px;object-fit:cover;border-radius:12px;margin-bottom:24px;background:#f0f0f0;}
+        .body{font-size:.95rem;line-height:2.1;color:#525252;}
+        .body p{margin-bottom:16px;}
+        .body img{max-width:100%;border-radius:8px;margin:12px 0;}
+        .body iframe{max-width:100%;border-radius:8px;margin:12px 0;}
+        .body blockquote{border-inline-start:3px solid #c0392b;padding-inline-start:16px;margin:16px 0;color:#a3a3a3;font-style:italic;}
+        .body strong{color:#171717;font-weight:700;}
+        .body h3{font-size:1.1rem;font-weight:900;color:#171717;margin:24px 0 12px;}
+        .body ul{padding-inline-start:20px;margin-bottom:12px;}
+        .body li{margin-bottom:6px;}
+        .share-bar{display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid #e5e5e5;margin-top:32px;flex-wrap:wrap;}
+        .share-bar span{font-size:.82rem;color:#a3a3a3;font-weight:700;}
+        .share-btn{padding:8px 18px;border-radius:50px;border:1.5px solid #e5e5e5;background:#fff;color:#525252;font-family:inherit;font-weight:700;font-size:.8rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;}
+        .share-btn:hover{border-color:#c0392b;color:#c0392b;}
+        .related{margin-top:40px;padding-top:28px;border-top:2px solid #e5e5e5;}
+        .related h3{font-size:1.1rem;font-weight:900;color:#0c1e35;margin-bottom:16px;}
+        .related-link{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1px solid #e5e5e5;border-radius:12px;margin-bottom:10px;transition:all .2s;cursor:pointer;}
+        .related-link:hover{border-color:#c0392b;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+        .related-link h4{font-size:.88rem;font-weight:900;color:#171717;}
+        .related-link span{font-size:.72rem;color:#a3a3a3;}
+        .footer{text-align:center;padding:24px 20px;font-size:.75rem;color:#a3a3a3;border-top:1px solid #e5e5e5;}
+        @media(max-width:768px){.article-wrap h1{font-size:1.25rem;}.article-img{max-height:240px;}}
+    </style>
+
+    <!-- ====== Schema.org — هنا بالضبط ====== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": "عملية اختراق واسعة تستهدف الشبكة الوطنية للطاقة في اليمن",
+        "description": "رصدت وحدة الرصد السيبرانية عملية منظمة استهدفت أنظمة التحكم الصناعي التابعة للشبكة الوطنية للطاقة الكهربائية عبر ثغرة يوم-صفر في بروتوكولات SCADA.",
+        "image": "https://cmu-wa.github.io/news-data/posts/images/yemen-energy-grid.jpg",
+        "datePublished": "2025-06-14T00:00:00+03:00",
+        "dateModified": "2025-06-14T00:00:00+03:00",
+        "author": {
+            "@type": "Organization",
+            "name": "وحدة الرصد السيبراني",
+            "url": "https://cmu-wa.github.io/news-data/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "وحدة الرصد السيبراني",
+            "url": "https://cmu-wa.github.io/news-data/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://cmu-wa.github.io/news-data/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://cmu-wa.github.io/news-data/posts/reports/yemen-intrusions-apt-energy-grid.html"
+        },
+        "articleSection": "اختراقات",
+        "keywords": ["اليمن", "سيبراني", "اختراق", "SCADA", "APT", "بنية تحتية"]
+    }
+    </script>
+</head>
+<body>
+<header class="header">
+    <div class="header-inner">
+        <div class="brand"><a href="../../index.html">وحدة الرصد <span>السيبراني</span></a></div>
+        <a href="../../index.html" class="back-link"><i class="fas fa-arrow-right"></i> جميع التقارير</a>
+    </div>
+</header>
+<article class="article-wrap">
+    <div class="meta-bar">
+        <span class="tag tag-c"><i class="fas fa-map-marker-alt"></i> اليمن</span>
+        <span class="tag tag-t"><i class="fas fa-shield-halved"></i> اختراق</span>
+        <span class="tag tag-h"><i class="fas fa-exclamation-triangle"></i> حرج</span>
+    </div>
+    <h1>عملية اختراق واسعة تستهدف الشبكة الوطنية للطاقة في اليمن</h1>
+    <div class="info">
+        <span><i class="far fa-clock"></i> 14 يونيو 2025</span>
+        <span><i class="fas fa-building"></i> مصادر الرصد الخاصة</span>
+        <span><i class="fas fa-fingerprint"></i> yemen-intrusions-apt-energy-grid</span>
+    </div>
+    <img class="article-img" src="../images/yemen-energy-grid.jpg" alt="أعمدة نقل الطاقة الكهربائية عالية الجهد" loading="eager">
+    <div class="body">
+        <p>رصدت وحدة الرصد السيبرانية في الساعات الأولى من صباح يوم 14 يونيو 2025 عملية اختراق واسعة النطاق استهدفت البنية التحتية للشبكة الوطنية للطاقة الكهربائية في اليمن. العملية التي أُطلق عليها تسمية <strong>"الطوفان الصامت"</strong> تم تنفيذها عبر استغلال ثغرة يوم-صفر غير مُعلنة في بروتوكولات SCADA المستخدمة في أنظمة التحكم الصناعي.</p>
+        <p>تشير المؤشرات الأولية إلى أن المهاجمين تمكنوا من الوصول إلى واجهات الإدارة عن بُعد لعدد من محطات التحويل الرئيسية، حيث تم رصد محاولات تعديل معلمات التشغيل في محطتين على الأقل.</p>
+        <blockquote>هذه ليست مجرد عملية اختراق تقليدية — الأنماط التي رصدها الفريق تتوافق مع قدرات مجموعات APT المرتبطة بجهات فاعلة على مستوى دولتية، مع استخدام تقنيات التخفي المتقدمة التي تجعل الاكتشاف المبكر شبه مستحيل عبر أنظمة المراقبة التقليدية.</blockquote>
+        <p>من أبرز ما كشفه التحليل:</p>
+        <ul>
+            <li>استخدام بروتوكولات اتصال مشفرة بطبقات متعددة لإخفاء حركة البيانات</li>
+            <li>نشر أدوات قابلة للتكيف تُعدَّل تلقائياً حسب بيئة الهدف</li>
+            <li>استغلال سلاسل توريد برمجية موثوقة كنقطة دخول أولية</li>
+            <li>تنفيذ تقنيات lateral movement لم تُرصد سابقاً في عمليات المنطقة</li>
+        </ul>
+        <img src="../images/yemen-energy-grid.jpg" alt="تحليل البنية التحتية للهجوم">
+        <p>من خلال تحليل البنية التحتية للهجوم، تم تحديد أن المهاجمين استخدموا سلسلة من المراحل المتدرجة بدءاً من الاستطلاع الأولي للشبكة وصولاً إلى محاولة السيطرة على أنظمة التحكم في محطات التحويل. وقد اعتمدت العملية على تقنيات <strong>living-off-the-land</strong> مما يجعل رصدها شبه مستحيل عبر أدوات الحماية التقليدية.</p>
+        <p>تجري حالياً عمليات احتواء معززة بالتنسيق مع الجهات المعنية، مع مواصلة التحليل الجنائي الرقمي لتحديد النطاق الكامل للعملية والبنية التحتية المستخدمة فيها.</p>
+        <p>ستُنشر تحديثات لاحقة عند توفر معلومات إضافية بعد اكتمال مرحلة الاحتواء الأولية.</p>
+    </div>
+    <div class="share-bar">
+        <span>مشاركة:</span>
+        <button class="share-btn" onclick="navigator.share({title:document.title,url:location.href}).catch(()=>{})"><i class="fas fa-share-nodes"></i> مشاركة</button>
+        <button class="share-btn" onclick="navigator.clipboard.writeText(location.href);this.textContent='تم النسخ'"><i class="fas fa-link"></i> نسخ الرابط</button>
+    </div>
+    <div class="related">
+        <h3>تقارير ذات صلة</h3>
+        <a class="related-link" href="gulf-vulns-oil-infrastructure.html"><div><h4>ثغرة حرجة في أنظمة المراقبة الصناعية لمنشآت النفط الخليجية</h4><span>12 يونيو 2025 — الخليج</span></div></a>
+        <a class="related-link" href="egypt-vulns-telecom-backbone.html"><div><h4>ثغرة حرجة في العمود الفقري للاتصالات المصري تهدد ملايين المشتركين</h4><span>11 يونيو 2025 — مصر</span></div></a>
+    </div>
+</article>
+<footer class="footer">&copy; 2025 وحدة الرصد السيبراني — جميع التقارير مبنية على مصادر الرصد الخاصة</footer>
+</body>
+</html>
