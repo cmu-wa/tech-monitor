@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثغرة حرجة في العمود الفقري للاتصالات المصري تهدد ملايين المشتركين — وحدة الرصد السيبراني</title>
+    <meta name="description" content="اكتشاف ثغرة في بروتوكولات التوجيه الأساسية للشبكة الوطنية المصرية تسمح باعتراض حركة البيانات وإعادة توجيهها بالكامل دون أي مؤشر مرئي.">
+    <meta name="author" content="وحدة الرصد السيبراني">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cmu-wa.github.io/news-data/posts/reports/egypt-vulns-telecom-backbone.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="ثغرة حرجة في العمود الفقري للاتصالات المصري تهدد ملايين المشتركين">
+    <meta property="og:description" content="ثغرة في بروتوكولات BGP للشبكة الوطنية المصرية تسمح باعتراض حركة البيانات وإعادة توجيهها.">
+    <meta property="og:image" content="https://cmu-wa.github.io/news-data/posts/images/egypt-telecom-backbone.jpg">
+    <meta property="og:url" content="https://cmu-wa.github.io/news-data/posts/reports/egypt-vulns-telecom-backbone.html">
+    <meta property="article:published_time" content="2025-06-11T00:00:00+03:00">
+    <meta property="article:section" content="ثغرات">
+    <meta property="article:tag" content="مصر">
+    <meta property="article:tag" content="اتصالات">
+    <meta property="article:tag" content="BGP">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}body{font-family:'Cairo',sans-serif;background:#f8f5ef;color:#171717;line-height:1.7;-webkit-font-smoothing:antialiased;}a{text-decoration:none;color:inherit;}
+        .header{background:#fff;border-bottom:3px solid #c0392b;padding:14px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+        .header-inner{max-width:860px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+        .brand a{font-size:1.1rem;font-weight:900;color:#0c1e35;}.brand a span{color:#c0392b;}
+        .back-link{color:#c0392b;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:6px;}.back-link:hover{gap:10px;}
+        .article-wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px;}
+        .meta-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+        .meta-bar .tag{display:inline-flex;align-items:center;gap:4px;padding:4px 13px;border-radius:50px;font-size:.7rem;font-weight:700;}
+        .tag-c{background:#d4edda;color:#155724;border:1px solid #c3e6cb;}.tag-t{background:#f0ece4;color:#0c1e35;border:1px solid #e5e5e5;}
+        .tag-h{background:#fdd;color:#c0392b;border:1px solid #fcc;animation:blink 2s infinite;}@keyframes blink{0%,100%{opacity:1;}50%{opacity:.55;}}
+        .article-wrap h1{font-size:1.6rem;font-weight:900;line-height:1.4;color:#171717;margin-bottom:16px;}
+        .info{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:#a3a3a3;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #e5e5e5;}.info i{margin-inline-end:5px;color:#0c1e35;}
+        .article-img{width:100%;max-height:420px;object-fit:cover;border-radius:12px;margin-bottom:24px;background:#f0f0f0;}
+        .body{font-size:.95rem;line-height:2.1;color:#525252;}.body p{margin-bottom:16px;}.body img{max-width:100%;border-radius:8px;margin:12px 0;}
+        .body blockquote{border-inline-start:3px solid #c0392b;padding-inline-start:16px;margin:16px 0;color:#a3a3a3;font-style:italic;}
+        .body strong{color:#171717;font-weight:700;}.body h3{font-size:1.1rem;font-weight:900;color:#171717;margin:24px 0 12px;}
+        .body ul{padding-inline-start:20px;margin-bottom:12px;}.body li{margin-bottom:6px;}
+        .share-bar{display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid #e5e5e5;margin-top:32px;flex-wrap:wrap;}
+        .share-bar span{font-size:.82rem;color:#a3a3a3;font-weight:700;}
+        .share-btn{padding:8px 18px;border-radius:50px;border:1.5px solid #e5e5e5;background:#fff;color:#525252;font-family:inherit;font-weight:700;font-size:.8rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;}.share-btn:hover{border-color:#c0392b;color:#c0392b;}
+        .related{margin-top:40px;padding-top:28px;border-top:2px solid #e5e5e5;}.related h3{font-size:1.1rem;font-weight:900;color:#0c1e35;margin-bottom:16px;}
+        .related-link{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1px solid #e5e5e5;border-radius:12px;margin-bottom:10px;transition:all .2s;cursor:pointer;}.related-link:hover{border-color:#c0392b;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);}.related-link h4{font-size:.88rem;font-weight:900;color:#171717;}.related-link span{font-size:.72rem;color:#a3a3a3;}
+        .footer{text-align:center;padding:24px 20px;font-size:.75rem;color:#a3a3a3;border-top:1px solid #e5e5e5;}
+        @media(max-width:768px){.article-wrap h1{font-size:1.25rem;}.article-img{max-height:240px;}}
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": "ثغرة حرجة في العمود الفقري للاتصالات المصري تهدد ملايين المشتركين",
+        "description": "اكتشاف ثغرة في بروتوكولات BGP للشبكة الوطنية المصرية تسمح باعتراض حركة البيانات وإعادة توجيهها بالكامل دون مؤشر مرئي.",
+        "image": "https://cmu-wa.github.io/news-data/posts/images/egypt-telecom-backbone.jpg",
+        "datePublished": "2025-06-11T00:00:00+03:00",
+        "dateModified": "2025-06-11T00:00:00+03:00",
+        "author": {"@type": "Organization", "name": "وحدة الرصد السيبراني", "url": "https://cmu-wa.github.io/news-data/"},
+        "publisher": {"@type": "Organization", "name": "وحدة الرصد السيبراني", "url": "https://cmu-wa.github.io/news-data/"},
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://cmu-wa.github.io/news-data/posts/reports/egypt-vulns-telecom-backbone.html"},
+        "articleSection": "ثغرات",
+        "keywords": ["مصر", "اتصالات", "BGP", "بنية تحتية", "اعتراض بيانات"]
+    }
+    </script>
+</head>
+<body>
+<header class="header"><div class="header-inner"><div class="brand"><a href="../../index.html">وحدة الرصد <span>السيبراني</span></a></div><a href="../../index.html" class="back-link"><i class="fas fa-arrow-right"></i> جميع التقارير</a></div></header>
+<article class="article-wrap">
+    <div class="meta-bar">
+        <span class="tag tag-c"><i class="fas fa-map-marker-alt"></i> مصر</span>
+        <span class="tag tag-t"><i class="fas fa-shield-halved"></i> ثغرة</span>
+        <span class="tag tag-h"><i class="fas fa-exclamation-triangle"></i> حرج</span>
+    </div>
+    <h1>ثغرة حرجة في العمود الفقري للاتصالات المصري تهدد ملايين المشتركين</h1>
+    <div class="info">
+        <span><i class="far fa-clock"></i> 11 يونيو 2025</span>
+        <span><i class="fas fa-building"></i> فريق أمن البنية التحتية الحيوية</span>
+        <span><i class="fas fa-fingerprint"></i> egypt-vulns-telecom-backbone</span>
+    </div>
+    <img class="article-img" src="../images/egypt-telecom-backbone.jpg" alt="مركز بيانات اتصالات" loading="eager">
+    <div class="body">
+        <p>كشف فريق أمن البنية التحتية الحيوية في وحدة الرصد عن ثغرة بنيوية خطيرة في بروتوكولات التوجيه (BGP) المستخدمة في العمود الفقري للشبكة الوطنية المصرية للاتصالات، تُهدد بتعرض حركة بيانات ملايين المشتركين للاعتراض الكامل.</p>
+        <p>الثغرة — المُصنفة بدرجة CVSS 9.8 — ليست في جهاز أو برنامج بعينه، بل في <strong>طريقة تكوين بروتوكول BGP</strong> بين مزودي خدمة الاتصالات الرئيسيين في مصر، مما يجعل إصلاحها يتطلب تنسيقاً بين عدة جهات بشكل متزامن.</p>
+        <h3>آلية الاستغلال</h3>
+        <p>تسمح الثغرة لمهاجم يتحكم في مسار BGP واحد من إعلان مسارات بديلة أكثر جاذبية (بقيمة AS-PATH أقل) مما يجعل حركة البيانات تتجه عبر شبكته بدلاً من المسار الشرعي:</p>
+        <ul>
+            <li>لا تحتاج إلى وصول مادي لأي جهاز شبكة — يكفي مسار BGP مُعلن من أي مكان في العالم</li>
+            <li>المستخدم النهائي لا يلاحظ أي فرق — الموقع يبدو طبيعياً تماماً مع شهادة SSL صالحة</li>
+            <li>أنظمة مراقبة BGP التقليدية لا تُصدر تنبيهاً لأن الإعلان يبدو شرعياً من الناحية التقنية</li>
+            <li>إمكانية اعتراض حركة بيانات كاملة لقطاعات جغرافية أو مزودي خدمة محددين</li>
+        </ul>
+        <img src="../images/egypt-telecom-backbone.jpg" alt="تحليل بروتوكولات BGP المصري">
+        <blockquote>هذه ليست ثغرة برمجية بالمعنى التقليدي — إنها ضعف بنيوي في كيفية تفاعل مزودي خدمة الاتصالات مع بعضهم البعض. إصلاحها يتطلب مراجعة شاملة لسياسات BGP وتطبيق آليات التحقق مثل RPKI على مستوى الوطن بالكامل.</blockquote>
+        <p>تجدر الإشارة إلى أن فريق الرصد لم يرصد أي محاولة استغلال فعلية للثغرة حتى الآن، لكن إمكانية الاستغلال موجودة وتُعد عالية خاصة في ظل عدم تطبيق معايير MANRS من قبل بعض مزودي الخدمة.</p>
+        <p>تم إعداد تقرير تقني مفصل مع خطة إصلاح مرحلية على ثلاث مراحل ومُشاركته مع الجهات المختصة في مصر. المرحلة الأولى يمكن تطبيقها خلال 48 ساعة وتوفر حماية بنسبة 80%.</p>
+    </div>
+    <div class="share-bar"><span>مشاركة:</span><button class="share-btn" onclick="navigator.share({title:document.title,url:location.href}).catch(()=>{})"><i class="fas fa-share-nodes"></i> مشاركة</button><button class="share-btn" onclick="navigator.clipboard.writeText(location.href);this.textContent='تم النسخ'"><i class="fas fa-link"></i> نسخ الرابط</button></div>
+    <div class="related"><h3>تقارير ذات صلة</h3><a class="related-link" href="yemen-intrusions-apt-energy-grid.html"><div><h4>عملية اختراق واسعة تستهدف الشبكة الوطنية للطاقة في اليمن</h4><span>14 يونيو 2025 — اليمن</span></div></a><a class="related-link" href="algeria-intrusions-government-database.html"><div><h4>تسريب ضخم لقواعد بيانات حكومية جزائرية</h4><span>16 يونيو 2025 — الجزائر</span></div></a></div>
+</article>
+<footer class="footer">&copy; 2025 وحدة الرصد السيبراني</footer>
+</body>
+</html>
