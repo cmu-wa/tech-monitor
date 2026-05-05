@@ -3,6 +3,89 @@
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 
     <url>
+        <loc>https://cmu-wa.github.io/news-data/posts/reports/saudi-intrusions-neom-smart-city.html</loc>
+        <lastmod>2025-06-18</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+        <news:news>
+            <news:publication><news:name>وحدة الرصد السيبراني</news:name><news:language>ar</news:language></news:publication>
+            <news:publication_date>2025-06-18T00:00:00+03:00</news:publication_date>
+            <news:title>اختراق متقدم لطبقة IoT في البنية التحتية الذكية لمشروع نيوم</news:title>
+        </news:news>
+    </url>
+
+    <url>
+        <loc>https://cmu-wa.github.io/news-data/posts/reports/israel-intrusions-banking-ddos.html</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+        <news:news>
+            <news:publication><news:name>وحدة الرصد السيبراني</news:name><news:language>ar</news:language></news:publication>
+            <news:publication_date>2025-06-17T00:00:00+03:00</news:publication_date>
+            <news:title>حملة هجومية إيرانية منسقة تستهدف القطاع المصرفي الإسرائيلي</news:title>
+        </news:news>
+    </url>
+
+    <url>
+        <loc>https://cmu-wa.github.io/news-data/posts/reports/algeria-intrusions-government-database.html</loc>
+        <lastmod>2025-06-16</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+        <news:news>
+            <news:publication><news:name>وحدة الرصد السيبراني</news:name><news:language>ar</news:language></news:publication>
+            <news:publication_date>2025-06-16T00:00:00+03:00</news:publication_date>
+            <news:title>تسريب ضخم لقواعد بيانات حكومية جزائرية يكشف عن اختراق طويل الأمد</news:title>
+        </news:news>
+    </url>
+
+    <url>
+        <loc>https://cmu-wa.github.io/news-data/posts/reports/global-vulns-sandstorm-ransomware.html</loc>
+        <lastmod>2025-06-15</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+        <news:news>
+            <news:publication><news:name>وحدة الرصد السيبراني</news:name><news:language>ar</news:language></news:publication>
+            <news:publication_date>2025-06-15T00:00:00+03:00</news:publication_date>
+            <news:title>فايروس فدية جديد عاصفة رملية يستهدف المؤسسات المالية العربية</news:title>
+        </news:news>
+    </url>
+
+    <url>
+        <loc>https://cmu-wa.github.io/news-data/posts/reports/iraq-shadow-oil-ministry-espionage.html</loc>
+        <lastmod>2025-06-13</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+        <news:news>
+            <news:publication><news:name>وحدة الرصد السيبراني</news:name><news:language>ar</news:language></news:publication>
+            <news:publication_date>2025-06-13T00:00:00+03:00</news:publication_date>
+            <news:title>حملة تجسس سيبراني مجهولة تستهدف وزارة النفط العراقية</news:title>
+        </news:news>
+    </url>
+
+    <url>
+        <loc>https://cmu-wa.github.io/news-data/posts/reports/egypt-vulns-telecom-backbone.html</loc>
+        <lastmod>2025-06-11</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+        <news:news>
+            <news:publication><news:name>وحدة الرصد السيبراني</news:name><news:language>ar</news:language></news:publication>
+            <news:publication_date>2025-06-11T00:00:00+03:00</news:publication_date>
+            <news:title>ثغرة حرجة في العمود الفقري للاتصالات المصري تهدد ملايين المشتركين</news:title>
+        </news:news>
+    </url>
+
+    <url>
+        <loc>https://cmu-wa.github.io/news-data/posts/reports/iran-shadow-apt-toolkit-gulf-defense.html</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+        <news:news>
+            <news:publication><news:name>وحدة الرصد السيبراني</news:name><news:language>ar</news:language></news:publication>
+            <news:publication_date>2025-06-09T00:00:00+03:00</news:publication_date>
+            <news:title>طقم أدوات سيبراني إيراني جديد يُستخدم ضد مقاولي دفاع خليجيين</news:title>
+        </news:news>
+    </url>
+    <url>
         <loc>https://cmu-wa.github.io/news-data/</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
