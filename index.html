@@ -14,6 +14,7 @@
     <meta property="og:image" id="ogImg" content="">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="">
+    	<link rel="alternate" type="application/rss+xml" title="وحدة الرصد السيبراني — RSS" href="/feed.xml">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"وحدة الرصد السيبراني","description":"تقارير استخباراتية من مصادر الرصد الخاصة"}
     </script>
@@ -1534,7 +1535,7 @@ async function init() {
     } else {
         document.getElementById('grid').innerHTML = '';
         document.getElementById('noData').style.display = 'block';
-        document.getElementById('noData').querySelector('p').textContent = 'لا توجد تقارير حالياً. تأكد من إعداد ملف index.json في مجلد posts/';
+        document.getElementById('noData').querySelector('p').textContent = 'خطأ';
     }
     handleHash(); Sync.init();
     localStorage.setItem(CFG.keys.lastVisit, Date.now().toString());
