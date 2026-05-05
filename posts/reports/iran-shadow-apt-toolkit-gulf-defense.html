@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طقم أدوات سيبراني إيراني جديد يُستخدم ضد مقاولي دفاع خليجيين — وحدة الرصد السيبراني</title>
+    <meta name="description" content="رصد تحليلي لطقم أدوات Labyrinth-3 المتطور الذي يُستخدم في عمليات تجسس إلكتروني ضد شركات دفاعية خليجية مع قدرات غير مسبوقة على تجاوز أنظمة EDR المتقدمة.">
+    <meta name="author" content="وحدة الرصد السيبراني">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cmu-wa.github.io/news-data/posts/reports/iran-shadow-apt-toolkit-gulf-defense.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="طقم أدوات سيبراني إيراني جديد يُستخدم ضد مقاولي دفاع خليجيين">
+    <meta property="og:description" content="طقم أدوات Labyrinth-3 يُستخدم في عمليات تجسس ضد شركات دفاعية خليجية مع قدرات تجاوز EDR متقدمة.">
+    <meta property="og:image" content="https://cmu-wa.github.io/news-data/posts/images/iran-apt-toolkit.jpg">
+    <meta property="og:url" content="https://cmu-wa.github.io/news-data/posts/reports/iran-shadow-apt-toolkit-gulf-defense.html">
+    <meta property="article:published_time" content="2025-06-09T00:00:00+03:00">
+    <meta property="article:section" content="حروب ظل">
+    <meta property="article:tag" content="إيران">
+    <meta property="article:tag" content="APT">
+    <meta property="article:tag" content="دفاع خليجي">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}body{font-family:'Cairo',sans-serif;background:#f8f5ef;color:#171717;line-height:1.7;-webkit-font-smoothing:antialiased;}a{text-decoration:none;color:inherit;}
+        .header{background:#fff;border-bottom:3px solid #c0392b;padding:14px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+        .header-inner{max-width:860px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+        .brand a{font-size:1.1rem;font-weight:900;color:#0c1e35;}.brand a span{color:#c0392b;}
+        .back-link{color:#c0392b;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:6px;}.back-link:hover{gap:10px;}
+        .article-wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px;}
+        .meta-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+        .meta-bar .tag{display:inline-flex;align-items:center;gap:4px;padding:4px 13px;border-radius:50px;font-size:.7rem;font-weight:700;}
+        .tag-c{background:#d4edda;color:#155724;border:1px solid #c3e6cb;}.tag-t{background:#f0ece4;color:#0c1e35;border:1px solid #e5e5e5;}
+        .tag-h{background:#fdd;color:#c0392b;border:1px solid #fcc;animation:blink 2s infinite;}@keyframes blink{0%,100%{opacity:1;}50%{opacity:.55;}}
+        .article-wrap h1{font-size:1.6rem;font-weight:900;line-height:1.4;color:#171717;margin-bottom:16px;}
+        .info{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:#a3a3a3;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #e5e5e5;}.info i{margin-inline-end:5px;color:#0c1e35;}
+        .article-img{width:100%;max-height:420px;object-fit:cover;border-radius:12px;margin-bottom:24px;background:#f0f0f0;}
+        .body{font-size:.95rem;line-height:2.1;color:#525252;}.body p{margin-bottom:16px;}.body img{max-width:100%;border-radius:8px;margin:12px 0;}
+        .body blockquote{border-inline-start:3px solid #c0392b;padding-inline-start:16px;margin:16px 0;color:#a3a3a3;font-style:italic;}
+        .body strong{color:#171717;font-weight:700;}.body h3{font-size:1.1rem;font-weight:900;color:#171717;margin:24px 0 12px;}
+        .body ul{padding-inline-start:20px;margin-bottom:12px;}.body li{margin-bottom:6px;}
+        .share-bar{display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid #e5e5e5;margin-top:32px;flex-wrap:wrap;}
+        .share-bar span{font-size:.82rem;color:#a3a3a3;font-weight:700;}
+        .share-btn{padding:8px 18px;border-radius:50px;border:1.5px solid #e5e5e5;background:#fff;color:#525252;font-family:inherit;font-weight:700;font-size:.8rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;}.share-btn:hover{border-color:#c0392b;color:#c0392b;}
+        .related{margin-top:40px;padding-top:28px;border-top:2px solid #e5e5e5;}.related h3{font-size:1.1rem;font-weight:900;color:#0c1e35;margin-bottom:16px;}
+        .related-link{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1px solid #e5e5e5;border-radius:12px;margin-bottom:10px;transition:all .2s;cursor:pointer;}.related-link:hover{border-color:#c0392b;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);}.related-link h4{font-size:.88rem;font-weight:900;color:#171717;}.related-link span{font-size:.72rem;color:#a3a3a3;}
+        .footer{text-align:center;padding:24px 20px;font-size:.75rem;color:#a3a3a3;border-top:1px solid #e5e5e5;}
+        @media(max-width:768px){.article-wrap h1{font-size:1.25rem;}.article-img{max-height:240px;}}
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": "طقم أدوات سيبراني إيراني جديد يُستخدم ضد مقاولي دفاع خليجيين",
+        "description": "رصد تحليلي لطقم أدوات Labyrinth-3 المتطور الذي يُستخدم في عمليات تجسس إلكتروني ضد شركات دفاعية خليجية مع قدرات غير مسبوقة على تجاوز أنظمة EDR المتقدمة.",
+        "image": "https://cmu-wa.github.io/news-data/posts/images/iran-apt-toolkit.jpg",
+        "datePublished": "2025-06-09T00:00:00+03:00",
+        "dateModified": "2025-06-09T00:00:00+03:00",
+        "author": {"@type": "Organization", "name": "وحدة الرصد السيبراني", "url": "https://cmu-wa.github.io/news-data/"},
+        "publisher": {"@type": "Organization", "name": "وحدة الرصد السيبراني", "url": "https://cmu-wa.github.io/news-data/"},
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://cmu-wa.github.io/news-data/posts/reports/iran-shadow-apt-toolkit-gulf-defense.html"},
+        "articleSection": "حروب ظل",
+        "keywords": ["إيران", "APT", "Labyrinth", "دفاع", "خليج", "EDR", "تجسس"]
+    }
+    </script>
+</head>
+<body>
+<header class="header"><div class="header-inner"><div class="brand"><a href="../../index.html">وحدة الرصد <span>السيبراني</span></a></div><a href="../../index.html" class="back-link"><i class="fas fa-arrow-right"></i> جميع التقارير</a></div></header>
+<article class="article-wrap">
+    <div class="meta-bar">
+        <span class="tag tag-c"><i class="fas fa-map-marker-alt"></i> إيران</span>
+        <span class="tag tag-t"><i class="fas fa-shield-halved"></i> حرب ظل</span>
+        <span class="tag tag-h"><i class="fas fa-exclamation-triangle"></i> حرج</span>
+    </div>
+    <h1>طقم أدوات سيبراني إيراني جديد يُستخدم ضد مقاولي دفاع خليجيين</h1>
+    <div class="info">
+        <span><i class="far fa-clock"></i> 9 يونيو 2025</span>
+        <span><i class="fas fa-building"></i> مختبر التحليل المتقدم للتهديدات</span>
+        <span><i class="fas fa-fingerprint"></i> iran-shadow-apt-toolkit-gulf-defense</span>
+    </div>
+    <img class="article-img" src="../images/iran-apt-toolkit.jpg" alt="واجهة تحليل طقم أدوات Labyrinth-3" loading="eager">
+    <div class="body">
+        <p>توصل مختبر التحليل المتقدم للتهديدات إلى تحليل كامل لطقم أدوات سيبراني إيراني جديد يُحمل اسم <strong>"Labyrinth-3"</strong>، تم رصد استخدامه الفعلي في ثلاث عمليات تجسس إلكتروني ضد مقاولي دفاع خليجيين خلال الأشهر الأربعة الماضية.</p>
+        <p>الطقم يمثل قفزة نوعية في قدرات المجموعات الإيرانية المرتبطة بوزارة الاستخبارات، حيث يتضمن أدوات لم تُرصد سابقاً في ترسانة أي مجموعة APT إيرانية معروفة.</p>
+        <h3>مكونات الطقم</h3>
+        <p>يتكون Labyrinth-3 من أربع وحدات رئيسية تعمل بشكل متكامل:</p>
+        <ul>
+            <li><strong>"Minotaur" — وحدة الاختراق الأولي:</strong> تستخدم تقنيات استغلال ملفات Office معتمدة على ثغرات يوم-صفر غير مُعلنة في معالج Equation Editor، مع تجاوز كامل لـ Protected View وMacro warnings</li>
+            <li><strong>"Theseus" — وحدة التنقل الأفقي:</strong> أداة fileless تعمل بالكامل في الذاكرة وتستخدم تقنيات process hollowing وmodule stomping للاختباء داخل عمليات شرعية مثل svchost.exe وexplorer.exe</li>
+            <li><strong>"Ariadne" — وحدة الاستخراج:</strong> تبحث عن ملفات محددة بأنماط ذكية (خطط دفاعية، عقود عسكرية، رسومات تقنية) وتُضغطها وتُشفّرها قبل إرسالها عبر قنوات DNS وHTTPS</li>
+            <li><strong>"Daedalus" — وحدة الإخفاء والتنظيف:</strong> تُزيل تلقائياً جميع آثار الاختراق بعد كل عملية مع تعديل سجلات Windows Event Log لتبدو طبيعية</li>
+        </ul>
+        <img src="../images/iran-apt-toolkit.jpg" alt="تحليل عكسي لمكونات الطقم">
+        <blockquote>ما يُميز Labyrinth-3 عن أدوات APT الأخرى هو قدرته على تجاوز أنظمة EDR المتقدمة مثل CrowdStrike Falcon وMicrosoft Defender for Endpoint — وهذا يتطلب اختباراً مسبقاً ضد هذه الأنظمة مما يشير إلى مستوى عالٍ من الموارد والخبرة.</blockquote>
+        <p>كشفت عملية التحليل العكسي للطقم عن:</p>
+        <ul>
+            <li>أكثر من 45,000 سطر برمجي مكتوب بلغة C++ مع تجميع شرطي لـ 7 بيئات مختلفة</li>
+            <li>آلية تحديث ذاتي مشفرة تسمح بإضافة قدرات جديدة دون إعادة نشر الطقم بالكامل</li>
+            <li>استخدام تقنيات anti-analysis متعددة لمنع التحليل في البيئات الافتراضية</li>
+            <li>وجود تعليقات برمجية باللغة الفارسية تُؤكد الأصل الإيراني</li>
+            <li>أرقام إصدارات داخلية تُشير إلى أن التطوير بدأ في أوائل 2024 على الأقل</li>
+        </ul>
+        <h3>عمليات الاستخدام المُرصدة</h3>
+        <ul>
+            <li>شركة دفاعية كبرى في الإمارات (يناير 2025) — استهداف ناجح جزئياً</li>
+            <li>مقاول توريد عسكري في السعودية (مارس 2025) — تم احتواؤه قبل اكتمال الاستخراج</li>
+            <li>شركة تقنية دفاعية في البحرين (مايو 2025) — تحت التحقيق</li>
+        </ul>
+        <p>أُعدت حزمة دفاعية شاملة تتضمن مؤشرات كشف لجميع مكونات الطقم ومُشاركتها مع الجهات المعنية في دول الخليج.</p>
+    </div>
+    <div class="share-bar"><span>مشاركة:</span><button class="share-btn" onclick="navigator.share({title:document.title,url:location.href}).catch(()=>{})"><i class="fas fa-share-nodes"></i> مشاركة</button><button class="share-btn" onclick="navigator.clipboard.writeText(location.href);this.textContent='تم النسخ'"><i class="fas fa-link"></i> نسخ الرابط</button></div>
+    <div class="related"><h3>تقارير ذات صلة</h3><a class="related-link" href="iran-shadow-cyber-espionage-diplomats.html"><div><h4>حملة تجسس إلكتروني إيرانية تستهدف بعثات دبلوماسية في المنطقة</h4><span>10 يونيو 2025 — إيران</span></div></a><a class="related-link" href="iraq-shadow-oil-ministry-espionage.html"><div><h4>حملة تجسس سيبراني مجهولة تستهدف وزارة النفط العراقية</h4><span>13 يونيو 2025 — العراق</span></div></a></div>
+</article>
+<footer class="footer">&copy; 2025 وحدة الرصد السيبراني</footer>
+</body>
+</html>
