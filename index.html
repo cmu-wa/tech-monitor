@@ -848,6 +848,8 @@
 /* ================================================================
        الإعدادات
 ================================================================ */
+/* مسار صفحات التقارير المستقلة (لجوجل نيوز) */
+const REPORTS_BASE = './posts/reports/';
 const CFG = {
     indexUrl: './posts/index.json',
     postsBaseUrl: './posts/',
@@ -1226,8 +1228,12 @@ function renderCard(item) {
     const imgSrc = fixImagePath(item.image);
     const tc = THREAT_CLASSES[item.threat] || '';
     const tl = THREAT_LABELS[item.threat] || '';
-    const fallback = `this.outerHTML='<div style=\\'width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;\\'><i class=\\'fas fa-image\\' style=\\'font-size:1.5rem;margin-inline-end:8px;\\'></i> صورة غير متوفرة</div>'`;
-    return `<article class="card" data-slug="${escapeAttr(item.slug)}" tabindex="0"><div class="card-img-wrap">${imgSrc ? `<img class="card-img" src="${escapeAttr(imgSrc)}" alt="" loading="lazy" onerror="${fallback}">` : '<div style="width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;"><i class="fas fa-image" style="font-size:1.5rem;margin-inline-end:8px;"></i> لا توجد صورة</div>'}<span class="card-country"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[item.country] || 'عالمي'}</span><button class="card-bookmark ${isBm ? 'saved' : ''}" data-bm="${escapeAttr(item.slug)}" aria-label="${isBm ? 'إزالة من المحفوظات' : 'حفظ التقرير'}"><i class="${isBm ? 'fas' : 'far'} fa-bookmark"></i></button></div><div class="card-body"><div class="card-meta"><span class="card-source">${CATEGORIES[item.category] || 'تقرير'}</span><span>${formatDate(item.date)}</span></div><h3 class="card-title">${tH}</h3>${item.excerpt ? `<p class="card-excerpt">${highlightText(item.excerpt, state.searchQuery)}</p>` : ''}<div class="card-footer">${tl ? `<span class="card-threat ${tc}"><i class="fas fa-exclamation-triangle"></i> ${tl}</span>` : '<span></span>'}<button class="card-read" data-open="${escapeAttr(item.slug)}">قراءة التقرير <i class="fas fa-arrow-left"></i></button></div></div></article>`;
+    const fallback = `this.onerror="this.outerHTML='<div style=\\'width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;\\'><i class=\\'fas fa-image\\' style=\\'font-size:1.5rem;margin-inline-end:8px;\\'></i> صورة غير متوفرة</div>'"`;
+    const reportUrl = REPORTS_BASE + item.slug + '.html';
+    return `<a href="${escapeAttr(reportUrl)}" class="card" data-slug="${escapeAttr(item.slug)}" data-bm-click="${escapeAttr(item.slug)}" tabindex="0">
+        <div class="card-img-wrap">${imgSrc ? `<img class="card-img" src="${escapeAttr(imgSrc)}" alt="" loading="lazy" ${fallback}>` : '<div style="width:100%;height:195px;display:flex;align-items:center;justify-content:center;background:var(--t-tag);color:var(--t-text-3);font-size:.8rem;"><i class="fas fa-image" style="font-size:1.5rem;margin-inline-end:8px;"></i> لا توجد صورة</div>'}<span class="card-country"><i class="fas fa-map-marker-alt"></i> ${COUNTRIES[item.country] || 'عالمي'}</span><button class="card-bookmark ${isBm ? 'saved' : ''}" data-bm="${escapeAttr(item.slug)}" aria-label="${isBm ? 'إزالة من المحفوظات' : 'حفظ التقرير'}"><i class="${isBm ? 'fas' : 'far'} fa-bookmark"></i></button></div>
+        <div class="card-body"><div class="card-meta"><span class="card-source">${CATEGORIES[item.category] || 'تقرير'}</span><span>${formatDate(item.date)}</span></div><h3 class="card-title">${tH}</h3>${item.excerpt ? `<p class="card-excerpt">${highlightText(item.excerpt, state.searchQuery)}</p>` : ''}<div class="card-footer">${tl ? `<span class="card-threat ${tc}"><i class="fas fa-exclamation-triangle"></i> ${tl}</span>` : '<span></span>'}<span class="card-read">قراءة التقرير <i class="fas fa-arrow-left"></i></span></div></div>
+    </a>`;
 }
 
 /* ================================================================
@@ -1357,7 +1363,7 @@ function updateModalBookmark(slug) {
 ================================================================ */
 const Share = {
     report(slug) {
-        const url = window.location.origin + window.location.pathname + '#report-' + slug;
+        const url = window.location.origin + window.location.pathname + REPORTS_BASE + slug + '.html';
         const meta = state.allMeta.find(m => m.slug === slug);
         if (navigator.share) navigator.share({ title: meta ? meta.title : 'تقرير سيبراني', url }).catch(() => {});
         else if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => showToast('fa-link', 'تم نسخ الرابط'));
@@ -1470,13 +1476,16 @@ function setupEvents() {
     document.getElementById('loadMoreBtn').addEventListener('click', loadMore);
     const sentinel = document.getElementById('scrollSentinel');
     new IntersectionObserver(entries => { if (entries[0].isIntersecting && state.hasMore && !state.isLoadingMore) loadMore(); }, { rootMargin: '300px' }).observe(sentinel);
+        /* النقر على البطاقات — زر الحفظ يمنع الانتقال للصفحة */
     document.getElementById('grid').addEventListener('click', e => {
-        const bm = e.target.closest('.card-bookmark');
-        if (bm) { e.stopPropagation(); Bookmarks.toggle(bm.dataset.bm); return; }
-        const ob = e.target.closest('[data-open]');
-        const card = e.target.closest('.card');
-        const slug = ob?.dataset.open || card?.dataset.slug;
-        if (slug) openModal(slug);
+        const bmBtn = e.target.closest('.card-bookmark');
+        if (bmBtn) { e.preventDefault(); e.stopPropagation(); Bookmarks.toggle(bmBtn.dataset.bm); return; }
+    });
+    document.getElementById('grid').addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            const bmBtn = e.target.closest('.card-bookmark');
+            if (bmBtn) { e.preventDefault(); Bookmarks.toggle(bmBtn.dataset.bm); return; }
+        }
     });
     document.getElementById('grid').addEventListener('keydown', e => { if (e.key === 'Enter') { const c = e.target.closest('.card'); if (c) openModal(c.dataset.slug); } });
     document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
@@ -1487,12 +1496,10 @@ function setupEvents() {
     window.addEventListener('scroll', () => document.getElementById('backTop').classList.toggle('show', window.scrollY > 400), { passive: true });
 }
 function handleHash() {
-    const h = window.location.hash;
-    if (h.startsWith('#report-')) {
-        const s = h.replace('#report-', '');
-        if (state.allMeta.find(m => m.slug === s)) openModal(s);
-    }
+    /* لا حاجة للتعامل مع #report- بعد الآن
+       لأن كل تقرير أصبح صفحة مستقلة */
 }
+
 function filterBy(f) {
     state.activeFilter = f;
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.f === f));
