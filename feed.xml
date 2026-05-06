@@ -40,5 +40,74 @@
             <pubDate>Tue, 10 Jun 2025 00:00:00 +0300</pubDate>
         </item>
 
+        <item>
+            <title>اختراق متقدم لطبقة IoT في البنية التحتية الذكية لمشروع نيوم</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/saudi-intrusions-neom-smart-city.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/saudi-intrusions-neom-smart-city.html</guid>
+            <description>رصدت وحدة الرصد محاولات اختراق منظمة تستهدف بروتوكولات إنترنت الأشياء في المرحلة التجريبية من البنية الذكية لنيوم.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>اختراقات</category>
+            <pubDate>Wed, 18 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
+
+        <item>
+            <title>حملة هجومية إيرانية منسقة تستهدف القطاع المصرفي الإسرائيلي</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/israel-intrusions-banking-ddos.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/israel-intrusions-banking-ddos.html</guid>
+            <description>حملة DDoS واسعة النطاق بدعم إيراني مباشر تستهدف 5 بنوك إسرائيلية كبرى مع تقنيات الضوضاء الذكية.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>اختراقات</category>
+            <pubDate>Tue, 17 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
+
+        <item>
+            <title>تسريب ضخم لقواعد بيانات حكومية جزائرية يكشف عن اختراق طويل الأمد</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/algeria-intrusions-government-database.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/algeria-intrusions-government-database.html</guid>
+            <description>اختراق استمر 14 شهراً في قواعد بيانات عدة وزارات جزائرية مع تسريب ملايين السجلات الحساسة.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>اختراقات</category>
+            <pubDate>Mon, 16 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
+
+        <item>
+            <title>فايروس فدية جديد عاصفة رملية يستهدف المؤسسات المالية العربية</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/global-vulns-sandstorm-ransomware.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/global-vulns-sandstorm-ransomware.html</guid>
+            <description>سلالة فدية جديدة متطورة تستهدف المؤسسات المالية العربية مع تشفير مزدوج وتدمير النسخ الاحتياطية.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>ثغرات</category>
+            <pubDate>Sun, 15 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
+
+        <item>
+            <title>حملة تجسس سيبراني مجهولة تستهدف وزارة النفط العراقية</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/iraq-shadow-oil-ministry-espionage.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/iraq-shadow-oil-ministry-espionage.html</guid>
+            <description>شبكة اتصالات مشفرة تنقل بيانات مسروقة من خوادم وزارة النفط العراقية عبر مسارات متعددة لتمويه الوجهة.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>حروب ظل</category>
+            <pubDate>Fri, 13 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
+
+        <item>
+            <title>ثغرة حرجة في العمود الفقري للاتصالات المصري تهدد ملايين المشتركين</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/egypt-vulns-telecom-backbone.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/egypt-vulns-telecom-backbone.html</guid>
+            <description>ثغرة في بروتوكولات BGP للشبكة الوطنية المصرية تسمح باعتراض حركة البيانات وإعادة توجيهها بالكامل.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>ثغرات</category>
+            <pubDate>Wed, 11 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
+
+        <item>
+            <title>طقم أدوات سيبراني إيراني جديد يُستخدم ضد مقاولي دفاع خليجيين</title>
+            <link>https://cmu-wa.github.io/news-data/posts/reports/iran-shadow-apt-toolkit-gulf-defense.html</link>
+            <guid isPermaLink="true">https://cmu-wa.github.io/news-data/posts/reports/iran-shadow-apt-toolkit-gulf-defense.html</guid>
+            <description>طقم أدوات Labyrinth-3 يُستخدم في عمليات تجسس ضد شركات دفاعية خليجية مع قدرات تجاوز EDR متقدمة.</description>
+            <dc:creator>وحدة الرصد السيبراني</dc:creator>
+            <category>حروب ظل</category>
+            <pubDate>Mon, 09 Jun 2025 00:00:00 +0300</pubDate>
+        </item>
     </channel>
 </rss>
