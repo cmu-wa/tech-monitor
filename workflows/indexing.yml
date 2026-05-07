@@ -1,0 +1,24 @@
+name: Google Indexing
+on:
+  push:
+    paths:
+      - 'posts/**' # يعمل فقط عند إضافة ملف جديد في مجلد التقارير
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install Dependencies
+        run: |
+          pip install google-api-python-client google-auth httplib2 oauth2client
+          
+      - name: Run Indexing Script
+        env:
+          SERVICE_ACCOUNT_JSON: ${{ secrets.INDEXING_SERVICE_ACCOUNT }}
+        run: python fast_index.py # اسم ملف السكربت الخاص بك
