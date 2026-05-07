@@ -1,0 +1,29 @@
+name: Google Indexing Automation
+on:
+  push:
+    branches:
+      - main # أو master حسب اسم الفرع عندك
+    paths:
+      - 'posts/**'
+
+jobs:
+  google-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2 # ضروري لمعرفة الفرق بين الملفات
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: pip install google-api-python-client google-auth httplib2 oauth2client
+
+      - name: Run Indexing
+        env:
+          SERVICE_ACCOUNT_JSON: ${{ secrets.INDEXING_SERVICE_ACCOUNT }}
+        run: python fast_index.py
