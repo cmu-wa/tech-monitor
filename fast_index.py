@@ -6,7 +6,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 # 1. إعدادات الهوية (سيقرأها السكربت من Secrets التي وضعتها في GitHub)
 service_account_info = json.loads(os.environ['SERVICE_ACCOUNT_JSON'])
 SCOPES = ['https://www.googleapis.com/auth/indexing']
-DOMAIN = "https://your-domain.com" # استبدل هذا برابط موقعك الحقيقي
+DOMAIN = "https://tech-monitor-gamma.vercel.app/" # استبدل هذا برابط موقعك الحقيقي
 
 def get_changed_files():
     # هذا الأمر يجلب قائمة بالملفات التي تمت إضافتها في آخر Push داخل مجلد posts
